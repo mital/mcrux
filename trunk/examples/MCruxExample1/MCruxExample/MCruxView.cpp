@@ -93,6 +93,7 @@ void MCruxView::showWindow(int nCmdShow)
 
 void MCruxView::loadURL(BSTR urlBStr)
 {
+	urlBStr = _T("http://code.mcrux.com");
     IWebFrame* frame = 0;
     IWebMutableURLRequest* request = 0;
     //BSTR methodBStr = SysAllocString(TEXT("GET"));
@@ -124,7 +125,7 @@ void MCruxView::loadURL(BSTR urlBStr)
     if (FAILED(hr))
         goto exit;
 
-    hr = request->initWithURL(urlBStr, WebURLRequestUseProtocolCachePolicy, 0);
+    hr = request->initWithURL(urlBStr, WebURLRequestUseProtocolCachePolicy, 30);
     if (FAILED(hr))
         goto exit;
 

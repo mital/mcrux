@@ -17,9 +17,18 @@ LRESULT CALLBACK AddressBar::AddressBarHandler(HWND hDlg, UINT message, WPARAM w
         case WM_CHAR:
             if (wParam == 13) // Enter Key
 			{
-				navigateToURL(hDlg);
-                return 0;
-            }
+				//navigateToURL(hDlg);
+				wchar_t * str = new wchar_t(MAX_URL_LENGTH);
+				*((wchar_t*) str) = MAX_URL_LENGTH;
+				int len = SendMessage(hDlg, EM_GETLINE, 0, (LPARAM)str);
+				BSTR bstr = SysAllocStringLen(str, len);
+				if (AddressBar::mcruxView)
+				{
+					AddressBar::mcruxView->loadURL(bstr);
+				}
+				SysFreeString(bstr);
+				return 0;
+			}
 			else
 			{
                 return (LRESULT)CallWindowProc((WNDPROC)DefEditProc,hDlg,message,wParam,lParam);
@@ -71,7 +80,7 @@ void AddressBar::navigateToURL(HWND hDlg)
 	*((wchar_t*) str) = MAX_URL_LENGTH;
 	int len = SendMessage(hDlg, EM_GETLINE, 0, (LPARAM)str);
 	BSTR bstr = SysAllocStringLen(str, len);
-	if(AddressBar::mcruxView)
+	if (AddressBar::mcruxView)
 	{
 		AddressBar::mcruxView->loadURL(bstr);
 	}
