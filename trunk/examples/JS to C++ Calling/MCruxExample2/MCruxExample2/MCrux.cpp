@@ -10,7 +10,6 @@
 JSStaticFunction MCrux::mcruxDefaultFunctions[]
 	= {
 		{"someFunction", MCrux::someFunctionCallback, 0},
-		{"initialize", MCrux::initialize, 0},
 		{0, 0, 0}
 	};
 
@@ -56,21 +55,6 @@ JSObjectRef MCrux::createJSWrapper(JSContextRef context)
 JSValueRef MCrux::someFunctionCallback(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef *exception)
 {
 	::MessageBoxA(0, "someFunctionCallback called", "test", MB_OK);
-	JSStringRef myString = JSValueToStringCopy(ctx, arguments[0], 0);
-	
-	string str = getStringValueFrom(myString);
-	::MessageBoxA(0, str.c_str(), "test", MB_OK);
-
-	JSStringRef myRetString = JSStringCreateWithUTF8CString(":My Returned Value From Function:");
-	JSValueRef retRef = JSValueMakeString(ctx, myRetString);
-	JSStringRelease(myRetString);
-	return retRef;
-}
-
-
-JSValueRef MCrux::initialize(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef *exception)
-{
-	::MessageBoxA(0, "initialize called", "test", MB_OK);
 	JSStringRef myString = JSValueToStringCopy(ctx, arguments[0], 0);
 	
 	string str = getStringValueFrom(myString);
