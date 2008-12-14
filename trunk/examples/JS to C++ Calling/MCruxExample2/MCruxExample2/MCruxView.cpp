@@ -107,7 +107,7 @@ bool MCruxView::loadDefaultHTML() const
 		static BSTR defaultHTML = 0;
 		if (!defaultHTML)
 		{
-			defaultHTML = SysAllocString(TEXT("<html><head><title>Mcrux Example2: JavaScript to C++ static calls</title>\n <script type=\"text/javascript\">\n //<!-- \n \n alert(\"Hello World!\"); \n alert(mcrux); \n mcrux.someFunction(); \n alert(\"Hello World! after some functino\"); \n  //-->\n </script></head><body><h1>hi!</h1></body></html>"));
+			defaultHTML = SysAllocString(TEXT("<html><head><title>Mcrux Example2: JavaScript to C++ static calls</title>\n <script type=\"text/javascript\">\n //<!-- \n \n alert(\"Hello World!\"); \n var myString = \"My String In JavaScript\"; \n alert(mcrux); \n var ret = mcrux.someFunction(myString); \n alert(\"Hello World! after returned from someFunction()\"); \n alert(ret); \n  //-->\n </script></head><body><h1>hi!</h1></body></html>"));
 		}
 		frame->loadHTMLString(defaultHTML, 0);
 		frame->Release();

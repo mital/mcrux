@@ -198,15 +198,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxFrameLoadDelegate.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MCruxView.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MCruxWebUIDelegate.cpp"
 				>
 			</File>
 			<File
@@ -248,15 +240,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxFrameLoadDelegate.h"
-				>
-			</File>
-			<File
 				RelativePath=".\MCruxView.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MCruxWebUIDelegate.h"
 				>
 			</File>
 			<File
@@ -285,6 +269,34 @@
 				RelativePath=".\small.ico"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="Delegates"
+			>
+			<Filter
+				Name="Header Files"
+				>
+				<File
+					RelativePath=".\MCruxFrameLoadDelegate.h"
+					>
+				</File>
+				<File
+					RelativePath=".\MCruxWebUIDelegate.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source Files"
+				>
+				<File
+					RelativePath=".\MCruxFrameLoadDelegate.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MCruxWebUIDelegate.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
