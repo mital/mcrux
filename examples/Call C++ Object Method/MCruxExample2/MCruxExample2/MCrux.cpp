@@ -9,12 +9,12 @@
 
 JSStaticFunction MCrux::mcruxDefaultFunctions[]
 	= {
-		{"someFunction", MCrux::someFunctionCallback, 0},
 		{"initialize", MCrux::initialize, 0},
 		{0, 0, 0}
 	};
 
 MCrux::MCrux()
+: mcruxPluginHandler()
 {
 	prepareMCruxClassDefinition();
 }
@@ -32,8 +32,8 @@ void MCrux::prepareMCruxClassDefinition()
 	MCruxNameSpace.parentClass = 0;
 	MCruxNameSpace.staticValues = 0;
 	MCruxNameSpace.staticFunctions = mcruxDefaultFunctions;
-	MCruxNameSpace.initialize = initialize;
-	MCruxNameSpace.finalize = finalize;
+	MCruxNameSpace.initialize = mcruxInitialize;
+	MCruxNameSpace.finalize = mcruxFinalize;
 	MCruxNameSpace.hasProperty = 0;
 	MCruxNameSpace.getProperty = 0;
 	MCruxNameSpace.setProperty = 0;
@@ -52,19 +52,9 @@ JSObjectRef MCrux::createJSWrapper(JSContextRef context)
 	return JSObjectMake(context, mcruxRef, this);
 }
 
-
-JSValueRef MCrux::someFunctionCallback(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef *exception)
+MCruxPluginHandler* MCrux::getPluginHandler()
 {
-	::MessageBoxA(0, "someFunctionCallback called", "test", MB_OK);
-	JSStringRef myString = JSValueToStringCopy(ctx, arguments[0], 0);
-	
-	string str = getStringValueFrom(myString);
-	::MessageBoxA(0, str.c_str(), "test", MB_OK);
-
-	JSStringRef myRetString = JSStringCreateWithUTF8CString(":My Returned Value From Function:");
-	JSValueRef retRef = JSValueMakeString(ctx, myRetString);
-	JSStringRelease(myRetString);
-	return retRef;
+	return &mcruxPluginHandler;
 }
 
 
@@ -74,23 +64,25 @@ JSValueRef MCrux::initialize(JSContextRef ctx, JSObjectRef function, JSObjectRef
 	JSStringRef myString = JSValueToStringCopy(ctx, arguments[0], 0);
 	
 	string str = getStringValueFrom(myString);
-	::MessageBoxA(0, str.c_str(), "test", MB_OK);
+	list<string> plugins;
+	plugins.push_back(str);
 
-	JSStringRef myRetString = JSStringCreateWithUTF8CString(":My Returned Value From Function:");
-	JSValueRef retRef = JSValueMakeString(ctx, myRetString);
-	JSStringRelease(myRetString);
-	return retRef;
+	MCrux * mcruxObj = (MCrux *) JSObjectGetPrivate(thisObject);
+	MCruxPluginHandler* mcruxPluginHandler = mcruxObj->getPluginHandler();
+	mcruxPluginHandler->initialize(plugins);
+
+	return 0;
 }
 
 
-void MCrux::initialize(JSContextRef ctx, JSObjectRef object)
+void MCrux::mcruxInitialize(JSContextRef ctx, JSObjectRef object)
 {
-	::MessageBoxA(0, "initialize called", "test", MB_OK);
 }
 
-void MCrux::finalize(JSObjectRef object)
+void MCrux::mcruxFinalize(JSObjectRef object)
 {
-	::MessageBoxA(0, "finalize called", "test", MB_OK);
+	// TODO: delete the objects at appropriate time
+	::MessageBoxA(0, "mcruxFinalize called", "test", MB_OK);
 }
 
 

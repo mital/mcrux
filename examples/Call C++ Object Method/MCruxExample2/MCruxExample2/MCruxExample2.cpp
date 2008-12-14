@@ -1,23 +1,23 @@
-// MCruxExample.cpp : Defines the entry point for the application.
+// MCruxExample2.cpp : Defines the entry point for the application.
 //
 
 #include "stdafx.h"
-#include "MCruxExample.h"
+#include "MCruxExample2.h"
 
-// My Includes:
-#include "Resources.h"
-#include "AddressBar.h"
-#include "MCruxView.h"
-#include "MCruxException.h"
+#define MAX_LOADSTRING 100
 
 // Global Variables:
 HINSTANCE hInst;								// current instance
 TCHAR szTitle[MAX_LOADSTRING];					// The title bar text
 TCHAR szWindowClass[MAX_LOADSTRING];			// the main window class name
 
-// My Global Variables:
-HWND hMainWnd;
+#include <commctrl.h>
+#include <objbase.h>
 
+#include "MCruxView.h"
+#include "MCruxException.h"
+
+HWND hMainWnd;
 
 // Forward declarations of functions included in this code module:
 ATOM				MyRegisterClass(HINSTANCE hInstance);
@@ -38,7 +38,6 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	MSG msg;
 	HACCEL hAccelTable;
 
-	// Initialize Common controls
     INITCOMMONCONTROLSEX InitCtrlEx;
 
     InitCtrlEx.dwSize = sizeof(INITCOMMONCONTROLSEX);
@@ -47,7 +46,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	// Initialize global strings
 	LoadString(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-	LoadString(hInstance, IDC_MCRUXEXAMPLE, szWindowClass, MAX_LOADSTRING);
+	LoadString(hInstance, IDC_MCRUXEXAMPLE2, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
 
 	// Perform application initialization:
@@ -58,37 +57,34 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 
 	// Init COM
     OleInitialize(NULL);
-
 	try
 	{
-		AddressBar addressBar(hMainWnd, hInstance);
-		MCruxView mcruxView(hMainWnd, &addressBar);
-		addressBar.setMCruxView(&mcruxView);
+		MCruxView mcruxView(hMainWnd);
+	}
+	catch (const MCruxException & exception)
+	{
+		string error = "caught MCruxException";
+		error += exception.what();
+		::MessageBoxA(0, error.c_str(), "test", MB_OK);
+	}
+	catch (...)
+	{
+		::MessageBoxA(0, "caught unknown exception", "test", MB_OK);
+	}
 
-		RECT rcClient;
-		GetClientRect(hMainWnd, &rcClient);
-		addressBar.resize(rcClient);
-		mcruxView.resize(rcClient);
-		mcruxView.showWindow(nCmdShow);
+	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MCRUXEXAMPLE2));
 
-		hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MCRUXEXAMPLE));
-
-		// Main message loop:
-		while (GetMessage(&msg, NULL, 0, 0))
+	// Main message loop:
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
 		{
-			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
 		}
 	}
-	catch (MCruxException & exception)
-	{
-		cout << exception.what();
-	}
 
-    // Shut down COM.
+	// Shut down COM.
     OleUninitialize();
 
 	return (int) msg.wParam;
@@ -120,10 +116,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 	wcex.cbClsExtra		= 0;
 	wcex.cbWndExtra		= 0;
 	wcex.hInstance		= hInstance;
-	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MCRUXEXAMPLE));
+	wcex.hIcon			= LoadIcon(hInstance, MAKEINTRESOURCE(IDI_MCRUXEXAMPLE2));
 	wcex.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	wcex.hbrBackground	= (HBRUSH)(COLOR_WINDOW+1);
-	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_MCRUXEXAMPLE);
+	wcex.lpszMenuName	= MAKEINTRESOURCE(IDC_MCRUXEXAMPLE2);
 	wcex.lpszClassName	= szWindowClass;
 	wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
