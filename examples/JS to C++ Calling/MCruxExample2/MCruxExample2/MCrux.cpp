@@ -11,14 +11,24 @@ JSStaticFunction MCrux::mcruxDefaultFunctions[] = { {"someFunction", MCrux::some
 
 MCrux::MCrux()
 {
+	prepareMCruxClassDefinition();
+}
+
+MCrux::~MCrux()
+{
+}
+
+
+void MCrux::prepareMCruxClassDefinition()
+{
 	MCruxNameSpace.version = 0;
 	MCruxNameSpace.attributes = 0;
 	MCruxNameSpace.className = "mcrux";
 	MCruxNameSpace.parentClass = 0;
 	MCruxNameSpace.staticValues = 0;
 	MCruxNameSpace.staticFunctions = mcruxDefaultFunctions;
-	MCruxNameSpace.initialize = initializeMCrux;
-	MCruxNameSpace.finalize = finalizeMCrux;
+	MCruxNameSpace.initialize = initialize;
+	MCruxNameSpace.finalize = finalize;
 	MCruxNameSpace.hasProperty = 0;
 	MCruxNameSpace.getProperty = 0;
 	MCruxNameSpace.setProperty = 0;
@@ -30,11 +40,6 @@ MCrux::MCrux()
 	MCruxNameSpace.convertToType = 0;
 }
 
-MCrux::~MCrux()
-{
-}
-
-
 JSObjectRef MCrux::createJSWrapper(JSContextRef context)
 {
 	JSClassRef mcruxRef = JSClassCreate(&MCruxNameSpace);
@@ -44,15 +49,34 @@ JSObjectRef MCrux::createJSWrapper(JSContextRef context)
 JSValueRef MCrux::someFunctionCallback(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef *exception)
 {
 	::MessageBoxA(0, "someFunctionCallback called", "test", MB_OK);
-	return (JSValueRef)JSStringCreateWithUTF8CString(":My Returned Value From Function:");
+	JSStringRef myString = JSValueToStringCopy(ctx, arguments[0], 0);
+	
+	string str = getStringValueFrom(myString);
+	::MessageBoxA(0, str.c_str(), "test", MB_OK);
+
+	JSStringRef myRetString = JSStringCreateWithUTF8CString(":My Returned Value From Function:");
+	JSValueRef retRef = JSValueMakeString(ctx, myRetString);
+	JSStringRelease(myRetString);
+	return retRef;
 }
 
-void MCrux::initializeMCrux(JSContextRef ctx, JSObjectRef object)
+void MCrux::initialize(JSContextRef ctx, JSObjectRef object)
 {
-	::MessageBoxA(0, "initializeMCrux called", "test", MB_OK);
+	::MessageBoxA(0, "initialize called", "test", MB_OK);
 }
 
-void MCrux::finalizeMCrux(JSObjectRef object)
+void MCrux::finalize(JSObjectRef object)
 {
-	::MessageBoxA(0, "finalizeMCrux called", "test", MB_OK);
+	::MessageBoxA(0, "finalize called", "test", MB_OK);
+}
+
+
+string MCrux::getStringValueFrom(JSStringRef str)
+{
+	size_t length = JSStringGetMaximumUTF8CStringSize(str);
+	char* buffer = new char[length];
+	JSStringGetUTF8CString(str, buffer, length);
+	string stdStr = buffer;
+	delete[] buffer;
+	return stdStr;
 }

@@ -146,25 +146,16 @@ HRESULT STDMETHODCALLTYPE MCruxFrameLoadDelegate::windowScriptObjectAvailable(
         JSContextRef context,
         JSObjectRef windowScriptObject)
 {
+  	::MessageBoxA(0, "windowscript object avalilable called", "test", MB_OK);
 	
 	JSObjectRef obj = mcrux.createJSWrapper(context);
 	JSObjectRef globalObject = JSContextGetGlobalObject(context);
+
 	JSStringRef fnPropName= JSStringCreateWithUTF8CString("mcrux");
-	//JSChar name = JSChar("mcrux");
 	JSObjectSetProperty(context, globalObject,
 		fnPropName,
 		obj, 0, 0);
 	
-	//JSValueRef fnCtorValue = JSObjectGetProperty(context, globalObject,
-	//	fnPropName, 0);
-	//JSStringRelease(fnPropName);
-	//if (!fnCtorValue)
-	//{
-	//	return JSValueMakeUndefined(jsContext);
-
-	//	context JSContextGetGlobalObject
-	//}
-  	::MessageBoxA(0, "windowscript object avalilable called", "test", MB_OK);
 	return S_OK;
 }
 
