@@ -17,6 +17,8 @@ BOOL				InitInstance(HINSTANCE, int);
 LRESULT CALLBACK	WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK	About(HWND, UINT, WPARAM, LPARAM);
 
+HWND hMainWnd = 0;
+
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,
                      LPTSTR    lpCmdLine,
@@ -40,13 +42,15 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		return FALSE;
 	}
 
+	// Init COM
+    OleInitialize(NULL);
+
 	IMCrux * imcrux = NULL;
 	HRESULT hr = CoCreateInstance(__uuidof(MCruxObject), 0, CLSCTX_ALL, __uuidof(IMCrux), (void**)&imcrux);
 	if (SUCCEEDED(hr))
 	{
-		MCruxObject * mcruxObject = (MCruxObject *) imcrux;
-		mcruxObject->HelloWorld();
-		imcrux->HelloWorld();
+		LONG hMainWndLong = HandleToLong(hMainWnd);
+		imcrux->createWebView(&hMainWndLong);
 	}
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MCHAT));
@@ -60,6 +64,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 			DispatchMessage(&msg);
 		}
 	}
+
+	// Shut down COM.
+    OleUninitialize();
 
 	return (int) msg.wParam;
 }
@@ -112,20 +119,18 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-   HWND hWnd;
-
    hInst = hInstance; // Store instance handle in our global variable
 
-   hWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   hMainWnd = CreateWindow(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
 
-   if (!hWnd)
+   if (!hMainWnd)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(hMainWnd, nCmdShow);
+   UpdateWindow(hMainWnd);
 
    return TRUE;
 }
