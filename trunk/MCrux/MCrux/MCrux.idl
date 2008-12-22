@@ -1,0 +1,40 @@
+// MCrux.idl : IDL source for MCrux
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (MCrux.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(BA9535A9-F60C-4f75-B29F-516A81441A2A),
+	nonextensible,
+	helpstring("IMCrux Interface"),
+	pointer_default(unique)
+]
+interface IMCrux : IDispatch{
+	[id(1), helpstring("method HelloWorld")] HRESULT HelloWorld();
+
+
+};
+
+
+[
+	uuid(D29B854E-E5BE-4222-BC23-50212F0B5F6A),
+	version(1.0),
+	helpstring("MCrux 1.0 Type Library")
+]
+library MCruxLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(B49DE22E-A99F-4d68-BDAC-2939050BDAD4),
+		helpstring("MCruxObject Class")
+	]
+	coclass MCruxObject
+	{
+		[default] interface IMCrux;
+	};
+};
