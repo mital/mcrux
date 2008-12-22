@@ -1,16 +1,19 @@
 #pragma once
 
 #include <WebKit.h>
+#include "IMCruxWebFrameLoadDelegateHandler.h"
 
-
-class MCruxFrameLoadDelegate
+class MCruxWebFrameLoadDelegate
 	: public IWebFrameLoadDelegate
 {
     ULONG m_refCount;
+	IMCruxWebFrameLoadDelegateHandler * handler;
 
 public:
-	MCruxFrameLoadDelegate();
-	~MCruxFrameLoadDelegate();
+	MCruxWebFrameLoadDelegate();
+	virtual ~MCruxWebFrameLoadDelegate();
+
+	void setFrameLoadHandler(IMCruxWebFrameLoadDelegateHandler* _handler);
 
 	// IUnknown
     virtual HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void** ppvObject);

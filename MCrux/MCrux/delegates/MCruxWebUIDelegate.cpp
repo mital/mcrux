@@ -5,11 +5,19 @@
 #include <comdef.h>
 
 MCruxWebUIDelegate::MCruxWebUIDelegate()
+: m_refCount(1),
+  handler(NULL)
 {
 }
 
 MCruxWebUIDelegate::~MCruxWebUIDelegate()
 {
+}
+
+
+void MCruxWebUIDelegate::setUIHandler(IMCruxWebUIDelegateHandler * _handler)
+{
+	handler = _handler;
 }
 
 
@@ -47,35 +55,35 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::createWebViewWithRequest(
 		/* [in] */ IWebURLRequest *request,
 		/* [retval][out] */ IWebView **newWebView)
 {
-	return S_OK;
+	return handler->createWebViewWithRequest(sender, request, newWebView);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewShow( 
 		/* [in] */ IWebView *sender)
 {
-	return S_OK;
+	return handler->webViewShow(sender);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewClose( 
 		/* [in] */ IWebView *sender)
 {
-	return S_OK;
+	return handler->webViewClose(sender);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFocus( 
 		/* [in] */ IWebView *sender)
 {
-	return S_OK;
+	return handler->webViewFocus(sender);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewUnfocus( 
 		/* [in] */ IWebView *sender)
 {
-	return S_OK;
+	return handler->webViewUnfocus(sender);
 }
 
 
@@ -83,7 +91,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFirstResponder(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ OLE_HANDLE *responderHWnd)
 {
-	return S_OK;
+	return handler->webViewFirstResponder(sender, responderHWnd);
 }
 
 
@@ -91,7 +99,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: makeFirstResponder(
 		/* [in] */ IWebView *sender,
 		/* [in] */ OLE_HANDLE responderHWnd)
 {
-	return S_OK;
+	return handler->makeFirstResponder(sender, responderHWnd);
 }
 
 
@@ -99,7 +107,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setStatusText(
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR text)
 {
-	return S_OK;
+	return handler->setStatusText(sender, text);
 }
 
 
@@ -107,7 +115,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewStatusText(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BSTR *text)
 {
-	return S_OK;
+	return handler->webViewStatusText(sender, text);
 }
 
 
@@ -115,7 +123,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewAreToolbarsVisible(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BOOL *visible)
 {
-	return S_OK;
+	return handler->webViewAreToolbarsVisible(sender, visible);
 }
 
 
@@ -123,7 +131,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setToolbarsVisible(
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL visible)
 {
-	return S_OK;
+	return handler->setToolbarsVisible(sender, visible);
 }
 
 
@@ -131,7 +139,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewIsStatusBarVisible(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BOOL *visible)
 {
-	return S_OK;
+	return handler->webViewIsStatusBarVisible(sender, visible);
 }
 
 
@@ -139,7 +147,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setStatusBarVisible(
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL visible)
 {
-	return S_OK;
+	return handler->setStatusBarVisible(sender, visible);
 }
 
 
@@ -147,7 +155,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewIsResizable(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BOOL *resizable)
 {
-	return S_OK;
+	return handler->webViewIsResizable(sender, resizable);
 }
 
 
@@ -155,7 +163,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setResizable(
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL resizable)
 {
-	return S_OK;
+	return handler->setResizable(sender, resizable);
 }
 
 
@@ -163,7 +171,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setFrame(
 		/* [in] */ IWebView *sender,
 		/* [in] */ RECT *frame)
 {
-	return S_OK;
+	return handler->setFrame(sender, frame);
 }
 
 
@@ -171,7 +179,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFrame(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ RECT *frame)
 {
-	return S_OK;
+	return handler->webViewFrame(sender, frame);
 }
 
 
@@ -179,7 +187,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setContentRect(
 		/* [in] */ IWebView *sender,
 		/* [in] */ RECT *contentRect)
 {
-	return S_OK;
+	return handler->setContentRect(sender, contentRect);
 }
 
 
@@ -187,7 +195,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewContentRect(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ RECT *contentRect)
 {
-	return S_OK;
+	return handler->webViewContentRect(sender, contentRect);
 }
 
 
@@ -195,8 +203,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptAlertPanelWithMessag
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR message)
 {
-	::MessageBoxA(0, (CHAR*)_bstr_t(message), "test", MB_OK);
-	return S_OK;
+	return handler->runJavaScriptAlertPanelWithMessage(sender, message);
 }
 
 
@@ -205,7 +212,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptConfirmPanelWithMess
 		/* [in] */ BSTR message,
 		/* [retval][out] */ BOOL *result)
 {
-	return S_OK;
+	return handler->runJavaScriptConfirmPanelWithMessage(sender, message, result);
 }
 
 
@@ -215,7 +222,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptTextInputPanelWithPr
 		/* [in] */ BSTR defaultText,
 		/* [retval][out] */ BSTR *result)
 {
-	return S_OK;
+	return handler->runJavaScriptTextInputPanelWithPrompt(sender, message, defaultText, result);
 }
 
 
@@ -225,7 +232,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runBeforeUnloadConfirmPanelWithMe
 		/* [in] */ IWebFrame *initiatedByFrame,
 		/* [retval][out] */ BOOL *result)
 {
-	return S_OK;
+	return handler->runBeforeUnloadConfirmPanelWithMessage(sender, message, initiatedByFrame, result);
 }
 
 
@@ -233,7 +240,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runOpenPanelForFileButtonWithResu
 		/* [in] */ IWebView *sender,
 		/* [in] */ IWebOpenPanelResultListener *resultListener)
 {
-	return S_OK;
+	return handler->runOpenPanelForFileButtonWithResultListener(sender, resultListener);
 }
 
 
@@ -242,7 +249,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: mouseDidMoveOverElement(
 		/* [in] */ IPropertyBag *elementInformation,
 		/* [in] */ UINT modifierFlags)
 {
-	return S_OK;
+	return handler->mouseDidMoveOverElement(sender, elementInformation, modifierFlags);
 }
 
 
@@ -252,7 +259,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: contextMenuItemsForElement(
 		/* [in] */ OLE_HANDLE defaultItemsHMenu,
 		/* [retval][out] */ OLE_HANDLE *resultHMenu)
 {
-	return S_OK;
+	return handler->contextMenuItemsForElement(sender, element, defaultItemsHMenu, resultHMenu);
 }
 
 
@@ -262,7 +269,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: validateUserInterfaceItem(
 		/* [in] */ BOOL defaultValidation,
 		/* [retval][out] */ BOOL *isValid)
 {
-	return S_OK;
+	return handler->validateUserInterfaceItem(webView, itemCommandID, defaultValidation, isValid);
 }
 
 
@@ -271,7 +278,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: shouldPerformAction(
 		/* [in] */ UINT itemCommandID,
 		/* [in] */ UINT sender)
 {
-	return S_OK;
+	return handler->shouldPerformAction(webView, itemCommandID, sender);
 }
 
 
@@ -280,7 +287,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: dragDestinationActionMaskForDragg
 		/* [in] */ IDataObject *draggingInfo,
 		/* [retval][out] */ WebDragDestinationAction *action)
 {
-	return S_OK;
+	return handler->dragDestinationActionMaskForDraggingInfo(webView, draggingInfo, action);
 }
 
 
@@ -289,7 +296,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragDestinationAction(
 		/* [in] */ WebDragDestinationAction action,
 		/* [in] */ IDataObject *draggingInfo)
 {
-	return S_OK;
+	return handler->willPerformDragDestinationAction(webView, action, draggingInfo);
 }
 
 
@@ -298,7 +305,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: dragSourceActionMaskForPoint(
 		/* [in] */ LPPOINT point,
 		/* [retval][out] */ WebDragSourceAction *action)
 {
-	return S_OK;
+	return handler->dragSourceActionMaskForPoint(webView, point, action);
 }
 
 
@@ -308,7 +315,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragSourceAction(
 		/* [in] */ LPPOINT point,
 		/* [in] */ IDataObject *pasteboard)
 {
-	return S_OK;
+	return handler->willPerformDragSourceAction(webView, action, point, pasteboard);
 }
 
 
@@ -317,14 +324,14 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragSourceAction(
 		/* [in] */ void *item,
 		/* [in] */ IPropertyBag *element)
 {
-	return S_OK;
+	return handler->contextMenuItemSelected(sender, item, element);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: hasCustomMenuImplementation( 
 		/* [retval][out] */ BOOL *hasCustomMenus)
 {
-	return S_OK;
+	return handler->hasCustomMenuImplementation(hasCustomMenus);
 }
 
 
@@ -333,7 +340,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: trackCustomPopupMenu(
 		/* [in] */ OLE_HANDLE hMenu,
 		/* [in] */ LPPOINT point)
 {
-	return S_OK;
+	return handler->trackCustomPopupMenu(sender, hMenu, point);
 }
 
 
@@ -341,7 +348,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: trackCustomPopupMenu(
 		/* [in] */ IWebView *sender,
 		/* [in] */ void *measureItem)
 {
-	return S_OK;
+	return handler->measureCustomMenuItem(sender, measureItem);
 }
 
 
@@ -349,7 +356,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: trackCustomPopupMenu(
 		/* [in] */ IWebView *sender,
 		/* [in] */ void *drawItem)
 {
-	return S_OK;
+	return handler->drawCustomMenuItem(sender, drawItem);
 }
 
 
@@ -357,7 +364,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: addCustomMenuDrawingData(
 		/* [in] */ IWebView *sender,
 		/* [in] */ OLE_HANDLE hMenu)
 {
-	return S_OK;
+	return handler->addCustomMenuDrawingData(sender, hMenu);
 }
 
 
@@ -365,7 +372,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: cleanUpCustomMenuDrawingData(
 		/* [in] */ IWebView *sender,
 		/* [in] */ OLE_HANDLE hMenu)
 {
-	return S_OK;
+	return handler->cleanUpCustomMenuDrawingData(sender, hMenu);
 }
 
 
@@ -374,7 +381,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: canTakeFocus(
 		/* [in] */ BOOL forward,
 		/* [out] */ BOOL *result)
 {
-	return S_OK;
+	return handler->canTakeFocus(sender, forward, result);
 }
 
 
@@ -382,7 +389,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: takeFocus(
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL forward)
 {
-	return S_OK;
+	return handler->takeFocus(sender, forward);
 }
 
 
@@ -391,45 +398,45 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: registerUndoWithTarget(
 		/* [in] */ BSTR actionName,
 		/* [in] */ IUnknown *actionArg)
 {
-	return S_OK;
+	return handler->registerUndoWithTarget(target, actionName, actionArg);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: removeAllActionsWithTarget( 
 		/* [in] */ IWebUndoTarget *target)
 {
-	return S_OK;
+	return handler->removeAllActionsWithTarget(target);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setActionTitle( 
 		/* [in] */ BSTR actionTitle)
 {
-	return S_OK;
+	return handler->setActionTitle(actionTitle);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: undo( void)
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: undo()
 {
-	return S_OK;
+	return handler->undo();
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: redo( void)
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: redo()
 {
-	return S_OK;
+	return handler->redo();
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: canUndo( 
 		/* [retval][out] */ BOOL *result)
 {
-	return S_OK;
+	return handler->canUndo(result);
 }
 
 
 HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::canRedo( 
 		/* [retval][out] */ BOOL *result)
 {
-	return S_OK;
+	return handler->canRedo(result);
 }
