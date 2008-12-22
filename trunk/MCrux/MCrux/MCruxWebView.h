@@ -7,7 +7,7 @@ using namespace std;
 #include <WebKit.h>
 
 #include "delegates/MCruxWebUIDelegate.h"
-#include "delegates/MCruxFrameLoadDelegate.h"
+#include "delegates/MCruxWebFrameLoadDelegate.h"
 
 
 class MCruxWebView
@@ -24,7 +24,7 @@ public:
 	~MCruxWebView();
 
 	bool createWebView();
-	bool setFrameLoadDelegate(MCruxFrameLoadDelegate * frameLoadDelegate);
+	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
 	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
 };

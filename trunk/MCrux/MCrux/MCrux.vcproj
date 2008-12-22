@@ -290,7 +290,19 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath=".\delegates\MCruxFrameLoadDelegate.h"
+					RelativePath=".\delegates\IMCruxWebFrameLoadDelegateHandler.h"
+					>
+				</File>
+				<File
+					RelativePath=".\delegates\IMCruxWebUIDelegateHandler.h"
+					>
+				</File>
+				<File
+					RelativePath=".\delegates\MCruxDelegatesHandler.h"
+					>
+				</File>
+				<File
+					RelativePath=".\delegates\MCruxWebFrameLoadDelegate.h"
 					>
 				</File>
 				<File
@@ -302,7 +314,11 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath=".\delegates\MCruxFrameLoadDelegate.cpp"
+					RelativePath=".\delegates\MCruxDelegatesHandler.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\delegates\MCruxWebFrameLoadDelegate.cpp"
 					>
 				</File>
 				<File

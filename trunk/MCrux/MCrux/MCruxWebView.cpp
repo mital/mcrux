@@ -29,7 +29,7 @@ bool MCruxWebView::createWebView()
 }
 
 
-bool MCruxWebView::setFrameLoadDelegate(MCruxFrameLoadDelegate * frameLoadDelegate)
+bool MCruxWebView::setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate)
 {
 	if(webView)
 	{

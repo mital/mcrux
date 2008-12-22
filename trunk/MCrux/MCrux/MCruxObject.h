@@ -4,12 +4,22 @@
 #include "Resource.h"
 #include "MCruxWebView.h"
 
+#include "delegates/MCruxDelegatesHandler.h"
+#include "delegates/MCruxWebUIDelegate.h"
+#include "delegates/MCruxWebFrameLoadDelegate.h"
+
 class ATL_NO_VTABLE CMCruxObject
 : public CComObjectRootEx<CComSingleThreadModel>,
   public CComCoClass<CMCruxObject, &CLSID_MCruxObject>,
   public IDispatchImpl<IMCrux, &IID_IMCrux, &LIBID_MCruxLib, 1, 0>
 {
+	// webView
 	MCruxWebView webView;
+
+	// delegates
+	MCruxWebUIDelegate webUIDelegate;
+	MCruxWebFrameLoadDelegate webFrameLoadDelegate;
+	MCruxDelegatesHandler delegatesHandler;
 
 public:
 
@@ -35,7 +45,7 @@ public:
 
 	virtual ~CMCruxObject();
 
-	STDMETHOD(createWebView)(LONG* hParent);
+	STDMETHOD(createWebView)(LONG* hParent, BSTR* page);
 
 };
 
