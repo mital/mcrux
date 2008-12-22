@@ -35,7 +35,7 @@ public:
 
 	virtual ~CMCruxObject();
 
-	STDMETHOD(HelloWorld)();
+	STDMETHOD(createWebView)(LONG* hParent);
 
 };
 
