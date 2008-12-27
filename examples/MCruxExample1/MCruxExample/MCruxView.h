@@ -13,7 +13,7 @@ class MCruxView
 	AddressBar* addressBar;
 
 public:
-	MCruxView(HWND hMainWnd, AddressBar * _addressBar);
+	MCruxView(HWND hContainerWindow, AddressBar * _addressBar);
 
 	~MCruxView();
 

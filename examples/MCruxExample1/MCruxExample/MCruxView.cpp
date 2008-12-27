@@ -5,7 +5,7 @@
 #include "MCruxException.h"
 
 
-MCruxView::MCruxView(HWND hMainWnd, AddressBar * _addressBar)
+MCruxView::MCruxView(HWND hContainerWindow, AddressBar * _addressBar)
 : gViewWindow(0),
   gWebView(0),
   gWebHost(0),
@@ -25,14 +25,14 @@ MCruxView::MCruxView(HWND hMainWnd, AddressBar * _addressBar)
 		throw MCruxException("WebView::setFrameLoadDelegate failed.");
 	}
 
-    hr = gWebView->setHostWindow((OLE_HANDLE) hMainWnd);
+    hr = gWebView->setHostWindow((OLE_HANDLE) hContainerWindow);
     if (FAILED(hr))
 	{
 		throw MCruxException("WebView::setHostWindow failed.");
 	}
 
     RECT clientRect;
-    GetClientRect(hMainWnd, &clientRect);
+    GetClientRect(hContainerWindow, &clientRect);
     hr = gWebView->initWithFrame(clientRect, 0, 0);
     if (FAILED(hr))
 	{
@@ -93,19 +93,13 @@ void MCruxView::showWindow(int nCmdShow)
 
 void MCruxView::loadURL(BSTR urlBStr)
 {
-	urlBStr = _T("http://code.mcrux.com");
     IWebFrame* frame = 0;
     IWebMutableURLRequest* request = 0;
-    //BSTR methodBStr = SysAllocString(TEXT("GET"));
-	static BSTR methodBStr = 0;
+    BSTR methodBStr = SysAllocString(TEXT("GET"));
 
-    if (!methodBStr)
-        methodBStr = SysAllocString(TEXT("GET"));
-
-	BSTR url = SysAllocString(urlBStr);
-
-	if (url	&& url[0]
-		&& (PathFileExists(url) || PathIsUNC(url)))
+	if (urlBStr
+		&& urlBStr[0]
+		&& (PathFileExists(urlBStr) || PathIsUNC(urlBStr)))
 	{
         TCHAR fileURL[INTERNET_MAX_URL_LENGTH];
         DWORD fileURLLength = sizeof(fileURL)/sizeof(fileURL[0]);
