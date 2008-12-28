@@ -19,31 +19,28 @@
 
 #pragma once
 
-#include <iostream>
+#include <JavaScriptCore/JSContextRef.h>
 
-using namespace std;
-
-#include <WebKit.h>
-
-#include "delegates/MCruxWebUIDelegate.h"
-#include "delegates/MCruxWebFrameLoadDelegate.h"
+#include "MCrux.h"
+#include "MCruxPluginClassImpl.h"
 
 
-class MCruxWebView
+class CMCruxJSObject
+	: public CComObjectRootEx<CComSingleThreadModel>,
+	  public CComCoClass<CMCruxJSObject, &CLSID_MCruxJSObject>,
+	  public IDispatchImpl<IMCruxPlugin, &IID_IMCruxPlugin, &LIBID_MCruxLib, 1, 0>,
+	  public MCruxPluginClassImpl<CMCruxJSObject>
 {
-	IWebView* webView;
-	HWND hWebViewWindow;
-
-	bool initWithHostWindow(HWND hWnd) const;
-	bool loadPage(const wstring & defaultPageText) const;
-	bool storeViewWindowHandle();
+	JSObjectRef createJSWrapper(JSContextRef context);
 
 public:
-	MCruxWebView();
-	~MCruxWebView();
 
-	bool createWebView();
-	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
-	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
-	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
+	CMCruxJSObject();
+	~CMCruxJSObject();
+
+	bool placeMCruxJSGlobalObject(JSContextRef context);
 };
+
+BEGIN_MCRUX_FUNCTION_MAP(MCruxJSObject)
+//		MCRUX_FUNCTION_MAP_ENTRY(
+END_MCRUX_FUNCTION_MAP()

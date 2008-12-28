@@ -17,33 +17,20 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
 
-#include <iostream>
+import "oaidl.idl";
+import "ocidl.idl";
 
-using namespace std;
+[
+	object,
+	uuid(BA9535A9-F60C-4f75-B29F-516A81441A2A),
+	nonextensible,
+	helpstring("IMCrux Interface"),
+	pointer_default(unique)
+]
+interface IMCrux : IDispatch {
 
-#include <WebKit.h>
+	[id(1), helpstring("method createWebView")]
+	HRESULT createWebView([in] LONG* hParent, [in] BSTR* page);
 
-#include "delegates/MCruxWebUIDelegate.h"
-#include "delegates/MCruxWebFrameLoadDelegate.h"
-
-
-class MCruxWebView
-{
-	IWebView* webView;
-	HWND hWebViewWindow;
-
-	bool initWithHostWindow(HWND hWnd) const;
-	bool loadPage(const wstring & defaultPageText) const;
-	bool storeViewWindowHandle();
-
-public:
-	MCruxWebView();
-	~MCruxWebView();
-
-	bool createWebView();
-	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
-	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
-	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
 };
