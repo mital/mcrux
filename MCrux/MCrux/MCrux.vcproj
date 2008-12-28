@@ -232,6 +232,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\MCruxPluginManager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\MCruxWebView.h"
 				>
 			</File>
@@ -378,6 +382,10 @@
 			</File>
 			<File
 				RelativePath=".\MCruxObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\MCruxPluginManager.cpp"
 				>
 			</File>
 			<File

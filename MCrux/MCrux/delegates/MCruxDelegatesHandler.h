@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include "MCruxPluginManager.h"
 #include "IMCruxWebUIDelegateHandler.h"
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 
@@ -26,6 +27,7 @@ class MCruxDelegatesHandler
 	: public IMCruxWebUIDelegateHandler,
 	public IMCruxWebFrameLoadDelegateHandler
 {
+	MCruxPluginManager * pluginManager;
 public:
 
 	MCruxDelegatesHandler();
@@ -39,4 +41,6 @@ public:
 		/* [in] */ IWebView *webView,
 		/* [in] */ JSContextRef context,
 		/* [in] */ JSObjectRef windowScriptObject);
+
+	void setPluginManager(MCruxPluginManager * _pluginManager);
 };

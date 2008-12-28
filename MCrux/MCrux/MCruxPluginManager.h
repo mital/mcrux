@@ -17,15 +17,34 @@
  * @author: Mital Vora.
  **/
 
-import "oaidl.idl";
-import "ocidl.idl";
 
-[
-	uuid(575A2B8B-9E1B-4079-B89B-F5203FFF58A3),
-	helpstring("IMCrux Interface"),
-]
-interface IMCruxPlugin : IUnknown
+#pragma once
+
+#include <list>
+#include <iostream>
+
+using namespace std;
+
+#include <WebKit.h>
+
+#include "MCrux.h"
+
+
+class MCruxPluginManager
 {
-	[id(1), helpstring("method getStaticFunctions")]
-	HRESULT getStaticFunctions([out, retval] LONG * staticFuncs);
+	list<IMCruxPlugin *> plugins;
+
+	void AddMCruxDefaultPlugins();
+
+	void AddExtensionPlugins(const list<string> extensionPluginNames);
+
+public:
+
+	MCruxPluginManager(const list<string> extensionPluginNames);
+
+	~MCruxPluginManager();
+
+	HRESULT injectPlugins(IWebView *webView,
+        JSContextRef context,
+        JSObjectRef windowScriptObject);
 };
