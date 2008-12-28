@@ -1,38 +1,20 @@
-/**
- * copyright (C) 2008 Mital Vora. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1.  Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- * 2.  Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of MCrux nor the names of its contributors may be 
- *     used to endorse or promote products derived from this software 
- *     without specific prior written permission.
- *
- * @author: Mital Vora.
- **/
+// FileSystem.cpp : Implementation of DLL Exports.
 
-// MCrux.cpp : Implementation of DLL Exports.
 
 #include "stdafx.h"
 #include "resource.h"
-#include "MCrux.h"
+#include "FileSystem.h"
 #include "dlldatax.h"
 
 
-class CMCruxModule : public CAtlDllModuleT< CMCruxModule >
+class CFileSystemModule : public CAtlDllModuleT< CFileSystemModule >
 {
 public :
-	DECLARE_LIBID(LIBID_MCruxLib)
-	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_MCRUX, "{CC54544F-02E6-4BC3-8EA9-A6F1C1EAE184}")
+	DECLARE_LIBID(LIBID_FileSystemLib)
+	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_FILESYSTEM, "{9100798C-F19D-4C8D-8B14-05B63BAE54C2}")
 };
 
-CMCruxModule _AtlModule;
+CFileSystemModule _AtlModule;
 
 
 #ifdef _MANAGED

@@ -17,33 +17,42 @@
  * @author: Mital Vora.
  **/
 
+
 #pragma once
 
+#include <list>
 #include <iostream>
 
 using namespace std;
 
-#include <WebKit.h>
-
-#include "delegates/MCruxWebUIDelegate.h"
-#include "delegates/MCruxWebFrameLoadDelegate.h"
+#include <JavaScriptCore/JSContextRef.h>
 
 
-class MCruxWebView
+#define BEGIN_MCRUX_FUNCTION_MAP(className) \
+	JSStaticFunction MCruxPluginClassImpl<className>::m_staticFuncs[] \
+	= { 
+
+
+#define MCRUX_FUNCTION_MAP_ENTRY(name, callAsFunction, attributes) \
+	{ name, callAsFunction, attributes },
+
+#define END_MCRUX_FUNCTION_MAP() \
+	{ 0, 0, 0 }\
+	};
+
+
+template <class T>
+class MCruxPluginClassImpl
 {
-	IWebView* webView;
-	HWND hWebViewWindow;
+protected:
 
-	bool initWithHostWindow(HWND hWnd) const;
-	bool loadPage(const wstring & defaultPageText) const;
-	bool storeViewWindowHandle();
+	static JSStaticFunction m_staticFuncs[];
 
 public:
-	MCruxWebView();
-	~MCruxWebView();
 
-	bool createWebView();
-	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
-	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
-	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
+	HRESULT getStaticFunctions(LONG * staticFuncs)
+	{
+		staticFuncs = (void*) m_staticFuncs;
+		return S_OK;
+	}
 };

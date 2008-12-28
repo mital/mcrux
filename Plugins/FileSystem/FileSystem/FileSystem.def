@@ -1,0 +1,9 @@
+; FileSystem.def : Declares the module parameters.
+
+LIBRARY      "FileSystem.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE

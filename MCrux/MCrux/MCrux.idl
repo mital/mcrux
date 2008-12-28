@@ -7,19 +7,8 @@
 import "oaidl.idl";
 import "ocidl.idl";
 
-[
-	object,
-	uuid(BA9535A9-F60C-4f75-B29F-516A81441A2A),
-	nonextensible,
-	helpstring("IMCrux Interface"),
-	pointer_default(unique)
-]
-interface IMCrux : IDispatch {
-
-	[id(1), helpstring("method createWebView")] HRESULT createWebView([in] LONG* hParent, [in] BSTR* page);
-
-};
-
+#include "IMCrux.idl"
+#include "IMCruxPlugin.idl"
 
 [
 	uuid(D29B854E-E5BE-4222-BC23-50212F0B5F6A),
@@ -36,5 +25,13 @@ library MCruxLib
 	coclass MCruxObject
 	{
 		[default] interface IMCrux;
+	};
+	[
+		uuid(9377FF58-D267-4ac2-A17F-1897B0FDA3E0),
+		helpstring("MCruxJSObject Class")
+	]
+	coclass MCruxJSObject
+	{
+		[default] interface IMCruxPlugin;
 	};
 };
