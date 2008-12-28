@@ -19,28 +19,18 @@
 
 #pragma once
 
-#include <JavaScriptCore/JSContextRef.h>
-
-#include "MCrux.h"
 #include "MCruxPluginClassImpl.h"
 
 
 class CMCruxJSObject
-	: public CComObjectRootEx<CComSingleThreadModel>,
-	  public CComCoClass<CMCruxJSObject, &CLSID_MCruxJSObject>,
-	  public IDispatchImpl<IMCruxPlugin, &IID_IMCruxPlugin, &LIBID_MCruxLib, 1, 0>,
-	  public MCruxPluginClassImpl<CMCruxJSObject>
+	: public MCruxPluginClassImpl<CMCruxJSObject>
 {
-	JSObjectRef createJSWrapper(JSContextRef context);
-
 public:
 
 	CMCruxJSObject();
 	~CMCruxJSObject();
-
-	bool placeMCruxJSGlobalObject(JSContextRef context);
 };
 
-BEGIN_MCRUX_FUNCTION_MAP(MCruxJSObject)
+BEGIN_MCRUX_FUNCTION_MAP(CMCruxJSObject)
 //		MCRUX_FUNCTION_MAP_ENTRY(
 END_MCRUX_FUNCTION_MAP()

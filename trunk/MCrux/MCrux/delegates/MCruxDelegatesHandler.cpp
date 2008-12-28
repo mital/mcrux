@@ -23,6 +23,7 @@
 #include "MCruxDelegatesHandler.h"
 
 MCruxDelegatesHandler::MCruxDelegatesHandler()
+	: pluginManager(NULL)
 {
 }
 
@@ -45,7 +46,7 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::windowScriptObjectAvailable(
         JSObjectRef windowScriptObject)
 {
   	::MessageBoxA(0, "windowscript object avalilable called", "test", MB_OK);
-	
+	return pluginManager->injectPlugins(webView, context, windowScriptObject);
 	//JSObjectRef obj = mcrux.createJSWrapper(context);
 	//JSObjectRef globalObject = JSContextGetGlobalObject(context);
 
@@ -53,6 +54,10 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::windowScriptObjectAvailable(
 	//JSObjectSetProperty(context, globalObject,
 	//	fnPropName,
 	//	obj, 0, 0);
-	
-	return S_OK;
+}
+
+
+void MCruxDelegatesHandler::setPluginManager(MCruxPluginManager * _pluginManager)
+{
+	pluginManager = _pluginManager;
 }

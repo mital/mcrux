@@ -22,6 +22,7 @@
 
 CMCruxObject::CMCruxObject()
 : webView(),
+  pluginManager(NULL),
   webUIDelegate(),
   webFrameLoadDelegate(),
   delegatesHandler()
@@ -35,6 +36,14 @@ CMCruxObject::~CMCruxObject()
 
 STDMETHODIMP CMCruxObject::createWebView(LONG* hParent, BSTR* page)
 {
+	// creating the pluginManager
+	list <string> plugins;
+	if(!pluginManager)
+	{
+		pluginManager = new MCruxPluginManager(plugins);
+	}
+	delegatesHandler.setPluginManager(pluginManager);
+
 	::MessageBoxA(0, "CMCruxObject::createWebView called", "test", MB_OK);
 	if (!webView.createWebView())
 	{

@@ -28,7 +28,7 @@ import "ocidl.idl";
 	helpstring("IMCrux Interface"),
 	pointer_default(unique)
 ]
-interface IMCrux : IDispatch {
+interface IMCrux : IUnknown {
 
 	[id(1), helpstring("method createWebView")]
 	HRESULT createWebView([in] LONG* hParent, [in] BSTR* page);

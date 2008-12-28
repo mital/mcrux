@@ -20,12 +20,16 @@
 
 #pragma once
 
+#include <assert.h>
+
 #include <list>
 #include <iostream>
 
 using namespace std;
 
 #include <JavaScriptCore/JSContextRef.h>
+
+#include "MCrux.h"
 
 
 #define BEGIN_MCRUX_FUNCTION_MAP(className) \
@@ -43,16 +47,42 @@ using namespace std;
 
 template <class T>
 class MCruxPluginClassImpl
+	: public IMCruxPlugin
 {
-protected:
+private:
+
+	long m_lRefCount;
 
 	static JSStaticFunction m_staticFuncs[];
 
 public:
 
-	HRESULT getStaticFunctions(LONG * staticFuncs)
+	virtual HRESULT STDMETHODCALLTYPE
+		getStaticFunctions(LONG * staticFuncs)
 	{
-		staticFuncs = (void*) m_staticFuncs;
+		staticFuncs = (LONG*) m_staticFuncs;
 		return S_OK;
+	}
+
+	virtual ULONG STDMETHODCALLTYPE AddRef()
+	{
+		return InterlockedIncrement (&m_lRefCount); 
+	}
+
+	virtual ULONG STDMETHODCALLTYPE Release()
+	{
+		LONG res = InterlockedDecrement (&m_lRefCount);
+		if (0 ==  res) delete this;
+		return  res;
+	}
+
+	virtual HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void** ppv)
+	{
+		assert (ppv != 0);
+		if (riid == IID_IMCruxPlugin) *ppv = static_cast <IMCruxPlugin*> (this); 
+		else if (riid == IID_IUnknown) *ppv = static_cast <IMCruxPlugin*> (this); 
+		else { ppv = 0; return E_NOINTERFACE; } 
+		reinterpret_cast <IUnknown*> (*ppv)->AddRef ();
+		return S_OK; 
 	}
 };
