@@ -26,7 +26,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPluginClassImpl.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPluginClassImpl.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -55,7 +55,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL;_MCRUXDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -152,7 +152,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				AdditionalIncludeDirectories="&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL;_MCRUXDLL"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -224,15 +224,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxJSObject.h"
-				>
-			</File>
-			<File
 				RelativePath=".\MCruxObject.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MCruxPluginManager.h"
 				>
 			</File>
 			<File
@@ -250,6 +242,10 @@
 			<Filter
 				Name="export includes"
 				>
+				<File
+					RelativePath=".\MCruxExport.h"
+					>
+				</File>
 				<File
 					RelativePath=".\MCruxPluginClassImpl.h"
 					>
@@ -377,15 +373,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxJSObject.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MCruxObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\MCruxPluginManager.cpp"
 				>
 			</File>
 			<File
@@ -424,6 +412,38 @@
 				RelativePath=".\MCrux.idl"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="plugins"
+			>
+			<Filter
+				Name="Header Files"
+				>
+				<File
+					RelativePath=".\MCruxJSObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\MCruxPluginManager.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source Files"
+				>
+				<File
+					RelativePath=".\MCruxJSObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MCruxPluginClass.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\MCruxPluginManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"

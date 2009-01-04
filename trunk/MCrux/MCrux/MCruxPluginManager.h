@@ -28,11 +28,12 @@ using namespace std;
 #include <WebKit.h>
 
 #include "MCrux.h"
+#include "MCruxPluginClassImpl.h"
 
 
 class MCruxPluginManager
 {
-	list<IMCruxPlugin *> plugins;
+	list<MCruxPluginClass *> plugins;
 
 	void AddMCruxDefaultPlugins();
 

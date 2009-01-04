@@ -23,14 +23,23 @@
 
 
 class CMCruxJSObject
-	: public MCruxPluginClassImpl<CMCruxJSObject>
+	: public MCruxPluginClass
 {
+
+	static JSValueRef someFunction(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception)
+	{
+		::MessageBoxA(0, "MCruxJSObject someFunction called", "test", MB_OK);
+		return 0;
+	}
 public:
 
+	virtual string getName() const;
+	JSStaticFunction * getStaticFunctions() const;
 	CMCruxJSObject();
-	~CMCruxJSObject();
+	virtual ~CMCruxJSObject();
 };
-
-BEGIN_MCRUX_FUNCTION_MAP(CMCruxJSObject)
-//		MCRUX_FUNCTION_MAP_ENTRY(
-END_MCRUX_FUNCTION_MAP()

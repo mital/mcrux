@@ -45,11 +45,20 @@ void MCruxPluginManager::AddExtensionPlugins(const list<string> extensionPluginN
 	// might have to take the path also from user so "const list<string>"  will be changed to "const list<pair<string, string> >"
 }
 
+
 HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
 
 {
 	::MessageBoxA(0, "inject plugins called", "test", MB_OK);
+	for(list<MCruxPluginClass *>::const_iterator
+		oIter = plugins.begin();
+		oIter != plugins.end();
+	oIter++)
+	{
+		(*oIter)->injectPlugin(context);
+	}
+
 	return S_OK;
 }
