@@ -1,5 +1,5 @@
 /**
- * copyright (C) 2008 Mital Vora. All rights reserved.
+ * copyright (C) 2009 Mital Vora. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -17,34 +17,28 @@
  * @author: Mital Vora.
  **/
 
-#include "StdAfx.h"
-#include "MCruxJSObject.h"
 
-#include <list>
+#pragma once
+
+#include <iostream>
+
 using namespace std;
 
-CMCruxJSObject::CMCruxJSObject()
-: MCruxPlugin()
-{
-}
+#include <JavaScriptCore/JSContextRef.h>
 
-CMCruxJSObject::~CMCruxJSObject()
-{
-}
+#include "MCruxExport.h"
 
-
-string CMCruxJSObject::getName() const
+class MCRUX_CLASS_TAG MCruxPlugin
 {
-	static string name = "mcrux";
-	return name;
-}
+public:
 
-JSStaticFunction * CMCruxJSObject::getStaticFunctions() const
-{
-	static JSStaticFunction mcruxJSDefaultFunctions[]
-	= {
-		{"someFunction", CMCruxJSObject::someFunction, 0},
-		{0, 0, 0}
-	};
-	return mcruxJSDefaultFunctions;
-}
+	MCruxPlugin();
+
+	virtual ~MCruxPlugin();
+
+	virtual string getName() const=0;
+
+	virtual JSStaticFunction * getStaticFunctions() const=0;
+
+	bool injectPlugin(JSContextRef ctx);
+};

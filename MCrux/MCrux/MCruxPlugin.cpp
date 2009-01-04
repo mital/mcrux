@@ -19,21 +19,21 @@
 
 
 #include "stdafx.h"
-#include "MCruxPluginClass.h"
+#include "MCruxPlugin.h"
 
 #include <JavaScriptCore/JSStringRef.h>
 
 
-MCruxPluginClass::MCruxPluginClass()
+MCruxPlugin::MCruxPlugin()
 {
 }
 
-MCruxPluginClass::~MCruxPluginClass()
+MCruxPlugin::~MCruxPlugin()
 {
 }
 
 
-bool MCruxPluginClass::injectPlugin(JSContextRef ctx)
+bool MCruxPlugin::injectPlugin(JSContextRef ctx)
 {
 	JSClassDefinition pluginNameSpace;
 
