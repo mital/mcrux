@@ -1,5 +1,5 @@
 /**
- * copyright (C) 2008 Mital Vora. All rights reserved.
+ * copyright (C) 2009 Mital Vora. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -20,69 +20,25 @@
 
 #pragma once
 
-#include <assert.h>
-
-#include <list>
 #include <iostream>
 
 using namespace std;
 
 #include <JavaScriptCore/JSContextRef.h>
 
-#include "MCrux.h"
+#include "MCruxExport.h"
 
-
-#define BEGIN_MCRUX_FUNCTION_MAP(className) \
-	JSStaticFunction MCruxPluginClassImpl<className>::m_staticFuncs[] \
-	= { 
-
-
-#define MCRUX_FUNCTION_MAP_ENTRY(name, callAsFunction, attributes) \
-	{ name, callAsFunction, attributes },
-
-#define END_MCRUX_FUNCTION_MAP() \
-	{ 0, 0, 0 }\
-	};
-
-
-template <class T>
-class MCruxPluginClassImpl
-	: public IMCruxPlugin
+class MCRUX_CLASS_TAG MCruxPluginClass
 {
-private:
-
-	long m_lRefCount;
-
-	static JSStaticFunction m_staticFuncs[];
-
 public:
 
-	virtual HRESULT STDMETHODCALLTYPE
-		getStaticFunctions(LONG * staticFuncs)
-	{
-		staticFuncs = (LONG*) m_staticFuncs;
-		return S_OK;
-	}
+	MCruxPluginClass();
 
-	virtual ULONG STDMETHODCALLTYPE AddRef()
-	{
-		return InterlockedIncrement (&m_lRefCount); 
-	}
+	virtual ~MCruxPluginClass();
 
-	virtual ULONG STDMETHODCALLTYPE Release()
-	{
-		LONG res = InterlockedDecrement (&m_lRefCount);
-		if (0 ==  res) delete this;
-		return  res;
-	}
+	virtual string getName() const=0;
 
-	virtual HRESULT STDMETHODCALLTYPE QueryInterface(REFIID riid, void** ppv)
-	{
-		assert (ppv != 0);
-		if (riid == IID_IMCruxPlugin) *ppv = static_cast <IMCruxPlugin*> (this); 
-		else if (riid == IID_IUnknown) *ppv = static_cast <IMCruxPlugin*> (this); 
-		else { ppv = 0; return E_NOINTERFACE; } 
-		reinterpret_cast <IUnknown*> (*ppv)->AddRef ();
-		return S_OK; 
-	}
+	virtual JSStaticFunction * getStaticFunctions() const=0;
+
+	bool injectPlugin(JSContextRef ctx);
 };

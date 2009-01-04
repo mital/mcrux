@@ -8,7 +8,6 @@ import "oaidl.idl";
 import "ocidl.idl";
 
 #include "IMCrux.idl"
-#include "IMCruxPlugin.idl"
 
 [
 	uuid(D29B854E-E5BE-4222-BC23-50212F0B5F6A),
@@ -26,12 +25,4 @@ library MCruxLib
 	{
 		[default] interface IMCrux;
 	};
-	//[
-	//	uuid(9377FF58-D267-4ac2-A17F-1897B0FDA3E0),
-	//	helpstring("MCruxJSObject Class")
-	//]
-	//coclass MCruxJSObject
-	//{
-	//	[default] interface IMCruxPlugin;
-	//};
 };

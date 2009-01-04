@@ -24,46 +24,27 @@
 using namespace std;
 
 CMCruxJSObject::CMCruxJSObject()
+: MCruxPluginClass()
 {
-	//list<JSStaticFunction> mylist(5);
-	//JSStaticFunction *myfunc;
-	//myfunc = new JSStaticFunction[5];
 }
 
 CMCruxJSObject::~CMCruxJSObject()
 {
 }
 
-//void MCruxJSObject::prepareMCruxClassDefinition()
-//{
-//	static JSStaticFunction mcruxDefaultFunctions[]
-//		= {
-//			{"someFunction", MCruxJSObject::someFunction, 0},
-//			{0, 0, 0}
-//		};
-//
-//	MCruxNameSpace.version = 0;
-//	MCruxNameSpace.attributes = 0;
-//	MCruxNameSpace.className = "mcrux";
-//	MCruxNameSpace.parentClass = 0;
-//	MCruxNameSpace.staticValues = 0;
-//	MCruxNameSpace.staticFunctions = mcruxDefaultFunctions;
-//	MCruxNameSpace.initialize = mcruxInitialize;
-//	MCruxNameSpace.finalize = mcruxFinalize;
-//	MCruxNameSpace.hasProperty = 0;
-//	MCruxNameSpace.getProperty = 0;
-//	MCruxNameSpace.setProperty = 0;
-//	MCruxNameSpace.deleteProperty = 0;
-//	MCruxNameSpace.getPropertyNames = 0;
-//	MCruxNameSpace.callAsFunction = 0;
-//	MCruxNameSpace.callAsConstructor = 0;
-//	MCruxNameSpace.hasInstance = 0;
-//	MCruxNameSpace.convertToType = 0;
-//}
 
-//
-//JSObjectRef MCruxJSObject::createJSWrapper(JSContextRef context)
-//{
-//	JSClassRef mcruxRef = JSClassCreate(&MCruxNameSpace);
-//	return JSObjectMake(context, mcruxRef, this);
-//}
+string CMCruxJSObject::getName() const
+{
+	static string name = "mcrux";
+	return name;
+}
+
+JSStaticFunction * CMCruxJSObject::getStaticFunctions() const
+{
+	static JSStaticFunction mcruxJSDefaultFunctions[]
+	= {
+		{"someFunction", CMCruxJSObject::someFunction, 0},
+		{0, 0, 0}
+	};
+	return mcruxJSDefaultFunctions;
+}
