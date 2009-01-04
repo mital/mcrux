@@ -17,28 +17,26 @@
  * @author: Mital Vora.
  **/
 
-
 #pragma once
 
-#include <iostream>
+#include "MCruxPlugin.h"
 
-using namespace std;
 
-#include <JavaScriptCore/JSContextRef.h>
-
-#include "MCruxExport.h"
-
-class MCRUX_CLASS_TAG MCruxPluginClass
+class FileSystemJSObject
+	: public MCruxPlugin
 {
+	static JSValueRef CopyFile(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
 public:
+	FileSystemJSObject();
+	virtual ~FileSystemJSObject();
 
-	MCruxPluginClass();
+	virtual string getName() const;
+	virtual JSStaticFunction * getStaticFunctions() const;
 
-	virtual ~MCruxPluginClass();
-
-	virtual string getName() const=0;
-
-	virtual JSStaticFunction * getStaticFunctions() const=0;
-
-	bool injectPlugin(JSContextRef ctx);
 };

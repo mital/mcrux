@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			UseOfATL="2"
@@ -26,7 +26,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPluginClassImpl.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPluginClass.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -93,6 +93,8 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
+				TypeLibraryFile=""
+				ComponentFileName=""
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -116,7 +118,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
 			UseOfATL="2"
@@ -190,6 +192,8 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
+				TypeLibraryFile=""
+				ComponentFileName=""
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -247,7 +251,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\MCruxPluginClass.h"
+					RelativePath=".\MCruxPlugin.h"
 					>
 				</File>
 			</Filter>
@@ -420,6 +424,10 @@
 				Name="Header Files"
 				>
 				<File
+					RelativePath=".\FileSystemJSObject.h"
+					>
+				</File>
+				<File
 					RelativePath=".\MCruxJSObject.h"
 					>
 				</File>
@@ -432,11 +440,15 @@
 				Name="Source Files"
 				>
 				<File
+					RelativePath=".\FileSystemJSObject.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\MCruxJSObject.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\MCruxPluginClass.cpp"
+					RelativePath=".\MCruxPlugin.cpp"
 					>
 				</File>
 				<File

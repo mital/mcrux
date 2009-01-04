@@ -52,6 +52,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 		LONG hMainWndLong = HandleToLong(hMainWnd);
 		//BSTR defaultPage = _T("<html><body>Hi</body></html>");
 		BSTR defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Just wanted to say you Hi MCrux User !\"); \n mcrux.someFunction(); \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
+		//BSTR defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"File copy Example!\"); \n filesystem.copyFile(\"c:\\ test.txt\", \"c:\\ test1.txt\"); \n //-->\n </script></head><body><h1>File Copy Example!</h1>Copying file C:\test.txt to c:\test1.txt</body></html>");
 		imcrux->createWebView(&hMainWndLong, &defaultPage);
 	}
 

@@ -19,11 +19,11 @@
 
 #pragma once
 
-#include "MCruxPluginClass.h"
+#include "MCruxPlugin.h"
 
 
 class CMCruxJSObject
-	: public MCruxPluginClass
+	: public MCruxPlugin
 {
 
 	static JSValueRef someFunction(JSContextRef ctx,
@@ -38,8 +38,9 @@ class CMCruxJSObject
 	}
 public:
 
-	virtual string getName() const;
-	JSStaticFunction * getStaticFunctions() const;
 	CMCruxJSObject();
 	virtual ~CMCruxJSObject();
+
+	virtual string getName() const;
+	virtual JSStaticFunction * getStaticFunctions() const;
 };

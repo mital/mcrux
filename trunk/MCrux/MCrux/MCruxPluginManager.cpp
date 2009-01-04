@@ -19,8 +19,10 @@
 
 
 #include "StdAfx.h"
-#include "MCruxJSObject.h"
 #include "MCruxPluginManager.h"
+
+#include "MCruxJSObject.h"
+#include "FileSystemJSObject.h"
 
 
 MCruxPluginManager::MCruxPluginManager(const list<string> extensionPluginNames)
@@ -37,6 +39,7 @@ MCruxPluginManager::~MCruxPluginManager()
 void MCruxPluginManager::AddMCruxDefaultPlugins()
 {
 	plugins.push_back(new CMCruxJSObject());
+	plugins.push_back(new FileSystemJSObject());
 }
 
 void MCruxPluginManager::AddExtensionPlugins(const list<string> extensionPluginNames)
@@ -52,7 +55,7 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 
 {
 	::MessageBoxA(0, "inject plugins called", "test", MB_OK);
-	for(list<MCruxPluginClass *>::const_iterator
+	for(list<MCruxPlugin *>::const_iterator
 		oIter = plugins.begin();
 		oIter != plugins.end();
 	oIter++)
