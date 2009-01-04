@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "MCruxPluginClassImpl.h"
+#include "MCruxPluginClass.h"
 
 
 class CMCruxJSObject

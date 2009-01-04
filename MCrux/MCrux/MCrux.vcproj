@@ -247,7 +247,7 @@
 					>
 				</File>
 				<File
-					RelativePath=".\MCruxPluginClassImpl.h"
+					RelativePath=".\MCruxPluginClass.h"
 					>
 				</File>
 			</Filter>
