@@ -59,6 +59,9 @@ public:
 	virtual HRESULT STDMETHODCALLTYPE
 		createWebView(LONG* hParent, BSTR* page);
 
+	virtual HRESULT STDMETHODCALLTYPE
+		navigateTo(BSTR* url);
+
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(MCruxObject), CMCruxObject)
