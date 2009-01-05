@@ -33,6 +33,7 @@ class MCruxWebView
 {
 	IWebView* webView;
 	HWND hWebViewWindow;
+	const BSTR httpGetMethod;
 
 	bool initWithHostWindow(HWND hWnd) const;
 	bool loadPage(const wstring & defaultPageText) const;
@@ -46,4 +47,6 @@ public:
 	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
 	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
+
+	void navigateTo(BSTR urlBStr);
 };

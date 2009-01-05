@@ -18,11 +18,15 @@
  **/
 
 #include "StdAfx.h"
+#include <wininet.h>
+
 #include "MCruxWebView.h"
+
 
 MCruxWebView::MCruxWebView()
 : webView(NULL),
-  hWebViewWindow(NULL)
+  hWebViewWindow(NULL),
+  httpGetMethod(SysAllocString(TEXT("GET")))
 {
 }
 
@@ -140,4 +144,50 @@ bool MCruxWebView::loadPageInWindow(HWND hWnd, const wstring & defaultPageText)
 		return true;
 	}
 	return false;
+}
+
+void MCruxWebView::navigateTo(BSTR urlBStr)
+{
+	IWebFrame* frame = 0;
+	IWebMutableURLRequest* request = 0;
+
+	if (urlBStr && urlBStr[0] && (PathFileExists(urlBStr) || PathIsUNC(urlBStr)))
+	{
+		TCHAR fileURL[INTERNET_MAX_URL_LENGTH];
+		DWORD fileURLLength = sizeof(fileURL)/sizeof(fileURL[0]);
+		if (SUCCEEDED(UrlCreateFromPath(urlBStr, fileURL, &fileURLLength, 0)))
+			urlBStr = fileURL;
+	}
+
+	HRESULT hr = webView->mainFrame(&frame);
+	if (FAILED(hr))
+		goto exit;
+
+	hr = CoCreateInstance(CLSID_WebMutableURLRequest,
+		0,
+		CLSCTX_ALL,
+		IID_IWebMutableURLRequest,
+		(void**)&request);
+	if (FAILED(hr))
+		goto exit;
+
+	hr = request->initWithURL(urlBStr, WebURLRequestUseProtocolCachePolicy, 0);
+	if (FAILED(hr))
+		goto exit;
+
+	hr = request->setHTTPMethod(httpGetMethod);
+	if (FAILED(hr))
+		goto exit;
+
+	hr = frame->loadRequest(request);
+	if (FAILED(hr))
+		goto exit;
+
+	SetFocus(hWebViewWindow);
+
+exit:
+	if (frame)
+		frame->Release();
+	if (request)
+		request->Release();
 }

@@ -68,3 +68,10 @@ STDMETHODIMP CMCruxObject::createWebView(LONG* hParent, BSTR* page)
 	}
 	return S_OK;
 }
+
+
+STDMETHODIMP CMCruxObject::navigateTo(BSTR* url)
+{
+	webView.navigateTo(*url);
+	return S_OK;
+}
