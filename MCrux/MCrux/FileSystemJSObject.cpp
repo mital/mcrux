@@ -21,6 +21,8 @@
 #include "StdAfx.h"
 #include "FileSystemJSObject.h"
 
+#include "dirent.h"
+
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
@@ -44,6 +46,30 @@ FileSystemJSObject::~FileSystemJSObject()
 {
 }
 
+
+bool FileSystemJSObject::readDirectory(const string& dirName, list<string>& files)
+{
+  DIR* pDir = opendir(dirName.c_str());
+  if (NULL != pDir)
+  {
+    struct dirent * ep = NULL;
+    while ((ep = readdir (pDir)))
+    {
+      if ((string(ep->d_name) != ".") && (string(ep->d_name) != "..") )
+      {
+        files.push_back(ep->d_name);
+      }
+    }
+    closedir (pDir);
+  }
+  else
+  {
+    return false;
+  }
+  return true;
+}
+
+
 string FileSystemJSObject::getName() const
 {
 	static string name = "filesystem";
@@ -54,13 +80,14 @@ JSStaticFunction * FileSystemJSObject::getStaticFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {
-		{"copyFile", FileSystemJSObject::CopyFile, 0},
+		{"copyFile", FileSystemJSObject::copyFile, 0},
+		{"readDir", FileSystemJSObject::readDir, 0},
 		{0, 0, 0}
 	};
 	return JSDefaultFunctions;
 }
 
-JSValueRef FileSystemJSObject::CopyFile(JSContextRef ctx,
+JSValueRef FileSystemJSObject::copyFile(JSContextRef ctx,
 										JSObjectRef function,
 										JSObjectRef thisObject,
 										size_t argumentCount,
@@ -73,5 +100,27 @@ JSValueRef FileSystemJSObject::CopyFile(JSContextRef ctx,
 	JSStringRef jsdestinationFile = JSValueToStringCopy(ctx, arguments[1], 0);
 	string destinationFile = getStringValueFrom(jsdestinationFile);
 
+	return 0;
+}
+
+JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
+										JSObjectRef function,
+										JSObjectRef thisObject,
+										size_t argumentCount,
+										const JSValueRef arguments[],
+										JSValueRef *exception)
+{
+	::MessageBoxA(0, "filesystem.readDir called.", "test", MB_OK);
+	if(argumentCount != 1)
+	{
+		::MessageBoxA(0, "please enter valid Number of Arguments", "error", MB_OK);
+		return 0;
+	}
+	JSStringRef jsDirectory = JSValueToStringCopy(ctx, arguments[0], 0);
+	string dir = getStringValueFrom(jsDirectory);
+	list<string> files;
+	readDirectory(dir, files);
+
+	::MessageBoxA(0, "testfadfj;afja", "error", MB_OK);
 	return 0;
 }

@@ -19,18 +19,34 @@
 
 #pragma once
 
+#include <list>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+
 #include "MCruxPlugin.h"
 
 
 class FileSystemJSObject
 	: public MCruxPlugin
 {
-	static JSValueRef CopyFile(JSContextRef ctx,
+	static JSValueRef copyFile(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
 		const JSValueRef arguments[],
 		JSValueRef *exception);
+
+	static JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
+	static bool readDirectory(const string& dirName, list<string>& files);
 
 public:
 	FileSystemJSObject();
@@ -38,5 +54,4 @@ public:
 
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;
-
 };
