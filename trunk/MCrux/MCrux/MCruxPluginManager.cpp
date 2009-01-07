@@ -52,7 +52,6 @@ void MCruxPluginManager::AddExtensionPlugins(const list<string> extensionPluginN
 HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
-
 {
 	::MessageBoxA(0, "inject plugins called", "test", MB_OK);
 	for(list<MCruxPlugin *>::const_iterator
