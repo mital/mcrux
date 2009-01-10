@@ -37,3 +37,6 @@
 #include <atlcom.h>
 
 using namespace ATL;
+
+// TODO: move this in separate file.
+#define MAX_LOADSTRING 128

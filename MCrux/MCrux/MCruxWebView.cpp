@@ -171,7 +171,7 @@ void MCruxWebView::navigateTo(BSTR urlBStr)
 	if (FAILED(hr))
 		goto exit;
 
-	hr = request->initWithURL(urlBStr, WebURLRequestUseProtocolCachePolicy, 0);
+	hr = request->initWithURL(::SysAllocString(urlBStr), WebURLRequestUseProtocolCachePolicy, 0);
 	if (FAILED(hr))
 		goto exit;
 

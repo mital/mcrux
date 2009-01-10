@@ -17,7 +17,7 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfATL="1"
@@ -71,8 +71,8 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				TypeLibraryFile=""
-				ComponentFileName=""
+				TypeLibraryFile="$(WebKitOutputDir)\lib\WebKit.tlb"
+				ComponentFileName="WebKit"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -95,7 +95,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
 			UseOfATL="1"

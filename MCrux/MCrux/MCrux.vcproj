@@ -26,7 +26,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPluginClass.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -93,8 +93,8 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				TypeLibraryFile=""
-				ComponentFileName=""
+				TypeLibraryFile="$(WebKitOutputDir)\lib\WebKit.tlb"
+				ComponentFileName="WebKit"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -127,6 +127,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
+				CommandLine="rmdir /S /Q  2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;mkdir 2&gt;NUL &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -192,8 +193,8 @@
 			/>
 			<Tool
 				Name="VCManifestTool"
-				TypeLibraryFile=""
-				ComponentFileName=""
+				TypeLibraryFile="$(WebKitOutputDir)\lib\WebKit.tlb"
+				ComponentFileName="WebKit"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"

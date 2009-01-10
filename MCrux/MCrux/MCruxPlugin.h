@@ -28,7 +28,7 @@ using namespace std;
 
 #include "MCruxExport.h"
 
-class MCRUX_CLASS_TAG MCruxPlugin
+class MCRUX_TAG MCruxPlugin
 {
 public:
 
