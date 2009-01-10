@@ -50,13 +50,17 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	if (SUCCEEDED(hr))
 	{
 		LONG hMainWndLong = HandleToLong(hMainWnd);
-		//BSTR defaultPage = _T("<html><body>Hi</body></html>");
+		BSTR defaultPage = _T("<html><body>Hi</body></html>");
 		//BSTR defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Just wanted to say you Hi MCrux User !\"); \n mcrux.someFunction(); \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
 		//BSTR defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"File copy Example!\"); \n filesystem.copyFile(\"c:\\ test.txt\", \"c:\\ test1.txt\"); \n //-->\n </script></head><body><h1>File Copy Example!</h1>Copying file C:\test.txt to c:\test1.txt</body></html>");
-		BSTR defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Read Dir Example!\"); \n filesystem.readDir(\"c:\"); alert(\"Read Dir Example after call!\"); \n \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
+		//BSTR defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Read Dir Example!\"); \n filesystem.readDir(\"c:\"); alert(\"Read Dir Example after call!\"); \n \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
 		imcrux->createWebView(&hMainWndLong, &defaultPage);
+		Sleep(10000);
+		::MessageBoxA(0, "after sleep", "test", MB_OK);
 		//BSTR url = _T("C:\\Users\\mital\\Documents\\test.html");
-		//imcrux->navigateTo(&url);
+		//BSTR url = _T("C:\\Users\\mital\\Documents\\filesysAccess.html");
+		BSTR url = _T("http://www.google.com");
+		imcrux->navigateTo(&url);
 	}
 
 	hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_MCHAT));

@@ -57,6 +57,9 @@ public:
 	virtual ~CMCruxObject();
 
 	virtual HRESULT STDMETHODCALLTYPE
+		Initialize(LONG* hParent);
+
+	virtual HRESULT STDMETHODCALLTYPE
 		createWebView(LONG* hParent, BSTR* page);
 
 	virtual HRESULT STDMETHODCALLTYPE

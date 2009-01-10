@@ -121,6 +121,5 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	list<string> files;
 	readDirectory(dir, files);
 
-	::MessageBoxA(0, "testfadfj;afja", "error", MB_OK);
 	return 0;
 }

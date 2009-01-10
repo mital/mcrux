@@ -24,6 +24,10 @@
 #include "MCrux.h"
 #include "dlldatax.h"
 
+#include <iostream>
+
+using namespace std;
+
 
 class CMCruxModule : public CAtlDllModuleT< CMCruxModule >
 {
@@ -109,3 +113,7 @@ STDAPI DllUnregisterServer(void)
 	return hr;
 }
 
+int RunMCrux(const string & mcruxAppSpecFileName)
+{
+	return 0;
+}

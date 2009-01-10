@@ -34,6 +34,12 @@ CMCruxObject::~CMCruxObject()
 }
 
 
+STDMETHODIMP CMCruxObject::Initialize(LONG* hParent)
+{
+	return S_OK;
+}
+
+
 STDMETHODIMP CMCruxObject::createWebView(LONG* hParent, BSTR* page)
 {
 	// creating the pluginManager
