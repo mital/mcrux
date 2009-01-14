@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include "MCruxPluginManager.h"
+#include "plugin/MCruxPluginManager.h"
 #include "IMCruxWebUIDelegateHandler.h"
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 

@@ -18,6 +18,7 @@
  **/
 
 #include "StdAfx.h"
+#include <shlwapi.h>
 #include <wininet.h>
 
 #include "MCruxWebView.h"
