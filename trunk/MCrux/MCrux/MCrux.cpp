@@ -1,57 +1,35 @@
-/**
- * copyright (C) 2008 Mital Vora. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- * 1.  Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- * 2.  Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- * 3.  Neither the name of MCrux nor the names of its contributors may be 
- *     used to endorse or promote products derived from this software 
- *     without specific prior written permission.
- *
- * @author: Mital Vora.
- **/
-
-// MCrux.cpp : Implementation of DLL Exports.
+// MCrux.cpp : Defines the entry point for the DLL application.
+//
 
 #include "stdafx.h"
-#include "resource.h"
+
+#include <commctrl.h>
+#include <objbase.h>
+#include <shlwapi.h>
+#include <wininet.h>
+
 #include "MCrux.h"
-#include "dlldatax.h"
-
-#include <iostream>
-
-using namespace std;
-
-
-class CMCruxModule : public CAtlDllModuleT< CMCruxModule >
-{
-public :
-	DECLARE_LIBID(LIBID_MCruxLib)
-	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_MCRUX, "{CC54544F-02E6-4BC3-8EA9-A6F1C1EAE184}")
-};
-
-CMCruxModule _AtlModule;
-
+#include "windowsnative/MCruxWindow.h"
+#include "windowsnative/MCruxWindowConfiguration.h"
 
 #ifdef _MANAGED
 #pragma managed(push, off)
 #endif
 
-// DLL Entry Point
-extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
+BOOL APIENTRY DllMain( HMODULE hModule,
+                       DWORD  ul_reason_for_call,
+                       LPVOID lpReserved
+					 )
 {
-#ifdef _MERGE_PROXYSTUB
-    if (!PrxDllMain(hInstance, dwReason, lpReserved))
-        return FALSE;
-#endif
-	hInstance;
-    return _AtlModule.DllMain(dwReason, lpReserved); 
+	switch (ul_reason_for_call)
+	{
+	case DLL_PROCESS_ATTACH:
+	case DLL_THREAD_ATTACH:
+	case DLL_THREAD_DETACH:
+	case DLL_PROCESS_DETACH:
+		break;
+	}
+    return TRUE;
 }
 
 #ifdef _MANAGED
@@ -59,61 +37,61 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpRes
 #endif
 
 
-
-
-// Used to determine whether the DLL can be unloaded by OLE
-STDAPI DllCanUnloadNow(void)
+MCrux::MCrux()
 {
-#ifdef _MERGE_PROXYSTUB
-    HRESULT hr = PrxDllCanUnloadNow();
-    if (hr != S_OK)
-        return hr;
-#endif
-    return _AtlModule.DllCanUnloadNow();
+	::MessageBoxA(0, "MCrux constructor called", "test", MB_OK);
 }
 
 
-// Returns a class factory to create an object of the requested type
-STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
+MCrux::~MCrux()
 {
-#ifdef _MERGE_PROXYSTUB
-    if (PrxDllGetClassObject(rclsid, riid, ppv) == S_OK)
-        return S_OK;
-#endif
-    return _AtlModule.DllGetClassObject(rclsid, riid, ppv);
+	return;
+}
+
+void MCrux::Initialize()
+{
+	// Initialize Common controls
+    INITCOMMONCONTROLSEX InitCtrlEx;
+
+    InitCtrlEx.dwSize = sizeof(INITCOMMONCONTROLSEX);
+    InitCtrlEx.dwICC  = 0x00004000; //ICC_STANDARD_CLASSES;
+    InitCommonControlsEx(&InitCtrlEx);
+
+	HINSTANCE hInstance = GetModuleHandle(NULL);
+	MCruxWindow::initWindowClass(hInstance);
+	MCruxWindowConfiguration mainWindowConfig("http://www.google.com");
+	MCruxWindow * mainWindow = new MCruxWindow(hInstance, &mainWindowConfig);
+	mainWindow->ShowWindow();
+	mainWindow->UpdateWindow();
+
+	// Init COM
+    OleInitialize(NULL);
+}
+
+void MCrux::UnInitialize()
+{
+    // Shut down COM.
+    OleUninitialize();
 }
 
 
-// DllRegisterServer - Adds entries to the system registry
-STDAPI DllRegisterServer(void)
+bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 {
-    // registers object, typelib and all interfaces in typelib
-    HRESULT hr = _AtlModule.DllRegisterServer();
-#ifdef _MERGE_PROXYSTUB
-    if (FAILED(hr))
-        return hr;
-    hr = PrxDllRegisterServer();
-#endif
-	return hr;
-}
+	Initialize();
 
+	HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
 
-// DllUnregisterServer - Removes entries from the system registry
-STDAPI DllUnregisterServer(void)
-{
-	HRESULT hr = _AtlModule.DllUnregisterServer();
-#ifdef _MERGE_PROXYSTUB
-    if (FAILED(hr))
-        return hr;
-    hr = PrxDllRegisterServer();
-    if (FAILED(hr))
-        return hr;
-    hr = PrxDllUnregisterServer();
-#endif
-	return hr;
-}
+	MSG msg;
+	// Main message loop:
+	while (GetMessage(&msg, NULL, 0, 0))
+	{
+		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+	}
 
-int RunMCrux(const string & mcruxAppSpecFileName)
-{
-	return 0;
+	UnInitialize();
+	return false;
 }

@@ -1,5 +1,5 @@
 /**
- * copyright (C) 2008 Mital Vora. All rights reserved.
+ * copyright (C) 2009 Mital Vora. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -18,21 +18,28 @@
  **/
 
 
-import "oaidl.idl";
-import "ocidl.idl";
+#pragma once
 
-[
-	object,
-	uuid(BA9535A9-F60C-4f75-B29F-516A81441A2A),
-	nonextensible,
-	helpstring("IMCrux Interface"),
-	pointer_default(unique)
-]
-interface IMCrux : IUnknown {
+#include <iostream>
 
-	[id(1), helpstring("method createWebView")]
-	HRESULT createWebView([in] LONG* hParent, [in] BSTR* page);
+using namespace std;
 
-	[id(2), helpstring("method navigateTo")]
-	HRESULT navigateTo([in] BSTR* url);
+#include <JavaScriptCore/JSContextRef.h>
+
+#include "MCruxExport.h"
+
+
+class MCRUX_API MCruxPlugin
+{
+public:
+
+	MCruxPlugin();
+
+	virtual ~MCruxPlugin();
+
+	virtual string getName() const=0;
+
+	virtual JSStaticFunction * getStaticFunctions() const=0;
+
+	bool injectPlugin(JSContextRef ctx);
 };
