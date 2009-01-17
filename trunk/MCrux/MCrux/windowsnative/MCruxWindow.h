@@ -5,6 +5,13 @@
 using namespace std;
 
 #include "MCruxWindowConfiguration.h"
+#include "MCruxWebView.h"
+
+//#include "plugin/MCruxPluginManager.h"
+
+#include "delegates/MCruxDelegatesHandler.h"
+#include "delegates/MCruxWebUIDelegate.h"
+#include "delegates/MCruxWebFrameLoadDelegate.h"
 
 
 class MCruxWindow
@@ -12,6 +19,19 @@ class MCruxWindow
 	HINSTANCE hInstance;
 	HWND hWnd;
 	const MCruxWindowConfiguration * config;
+
+	// webView
+	MCruxWebView webView;
+
+	//// plugin Manager
+	//MCruxPluginManager * pluginManager;
+
+	// delegates
+	MCruxWebUIDelegate webUIDelegate;
+	MCruxWebFrameLoadDelegate webFrameLoadDelegate;
+	MCruxDelegatesHandler delegatesHandler;
+
+
 
 	static TCHAR * getWindowClassName();
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

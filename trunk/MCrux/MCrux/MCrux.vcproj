@@ -193,10 +193,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxObject.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\MCruxWebView.cpp"
 				>
 			</File>
@@ -232,10 +228,6 @@
 			</File>
 			<File
 				RelativePath=".\MCruxExport.h"
-				>
-			</File>
-			<File
-				RelativePath=".\MCruxObject.h"
 				>
 			</File>
 			<File
