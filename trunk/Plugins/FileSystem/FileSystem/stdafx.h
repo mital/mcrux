@@ -1,12 +1,9 @@
 // stdafx.h : include file for standard system include files,
-// or project specific include files that are used frequently,
-// but are changed infrequently
+// or project specific include files that are used frequently, but
+// are changed infrequently
+//
 
 #pragma once
-
-#ifndef STRICT
-#define STRICT
-#endif
 
 // Modify the following defines if you have to target a platform prior to the ones specified below.
 // Refer to MSDN for the latest info on corresponding values for different platforms.
@@ -26,16 +23,10 @@
 #define _WIN32_IE 0x0600	// Change this to the appropriate value to target other versions of IE.
 #endif
 
-#define _ATL_APARTMENT_THREADED
-#define _ATL_NO_AUTOMATIC_NAMESPACE
+#define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
+// Windows Header Files:
+#include <windows.h>
 
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS	// some CString constructors will be explicit
 
 
-#include "resource.h"
-#include <atlbase.h>
-#include <atlcom.h>
-
-using namespace ATL;
-
-#import "MCrux.dll"
+// TODO: reference additional headers your program requires here

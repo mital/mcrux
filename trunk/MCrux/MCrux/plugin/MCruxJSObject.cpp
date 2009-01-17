@@ -23,27 +23,27 @@
 #include <list>
 using namespace std;
 
-CMCruxJSObject::CMCruxJSObject()
+MCruxJSObject::MCruxJSObject()
 : MCruxPlugin()
 {
 }
 
-CMCruxJSObject::~CMCruxJSObject()
+MCruxJSObject::~MCruxJSObject()
 {
 }
 
 
-string CMCruxJSObject::getName() const
+string MCruxJSObject::getName() const
 {
 	static string name = "mcrux";
 	return name;
 }
 
-JSStaticFunction * CMCruxJSObject::getStaticFunctions() const
+JSStaticFunction * MCruxJSObject::getStaticFunctions() const
 {
 	static JSStaticFunction mcruxJSDefaultFunctions[]
 	= {
-		{"someFunction", CMCruxJSObject::someFunction, 0},
+		{"someFunction", MCruxJSObject::someFunction, 0},
 		{0, 0, 0}
 	};
 	return mcruxJSDefaultFunctions;

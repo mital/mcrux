@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -107,7 +107,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -304,14 +304,6 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath=".\plugin\dirent.h"
-					>
-				</File>
-				<File
-					RelativePath=".\plugin\FileSystemJSObject.h"
-					>
-				</File>
-				<File
 					RelativePath=".\plugin\MCruxJSObject.h"
 					>
 				</File>
@@ -327,10 +319,6 @@
 			<Filter
 				Name="Source Files"
 				>
-				<File
-					RelativePath=".\plugin\FileSystemJSObject.cpp"
-					>
-				</File>
 				<File
 					RelativePath=".\plugin\MCruxJSObject.cpp"
 					>
