@@ -9,6 +9,7 @@
 #include <wininet.h>
 
 #include "MCrux.h"
+
 #include "windowsnative/MCruxWindow.h"
 #include "windowsnative/MCruxWindowConfiguration.h"
 
@@ -57,12 +58,7 @@ void MCrux::Initialize()
     InitCtrlEx.dwICC  = 0x00004000; //ICC_STANDARD_CLASSES;
     InitCommonControlsEx(&InitCtrlEx);
 
-	HINSTANCE hInstance = GetModuleHandle(NULL);
-	MCruxWindow::initWindowClass(hInstance);
-	MCruxWindowConfiguration mainWindowConfig("http://www.google.com");
-	MCruxWindow * mainWindow = new MCruxWindow(hInstance, &mainWindowConfig);
-	mainWindow->ShowWindow();
-	mainWindow->UpdateWindow();
+	MCruxWindow::initWindowClass(GetModuleHandle(NULL));
 
 	// Init COM
     OleInitialize(NULL);
@@ -78,6 +74,12 @@ void MCrux::UnInitialize()
 bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 {
 	Initialize();
+
+	HINSTANCE hInstance = GetModuleHandle(NULL);
+	MCruxWindowConfiguration mainWindowConfig("http://www.google.com");
+	MCruxWindow * mainWindow = new MCruxWindow(hInstance, &mainWindowConfig);
+	mainWindow->ShowWindow();
+	mainWindow->UpdateWindow();
 
 	HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
 

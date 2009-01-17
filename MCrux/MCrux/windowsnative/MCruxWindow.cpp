@@ -7,12 +7,44 @@
 MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * _config)
 	: hInstance(_hInstance),
 	  hWnd(NULL),
-	  config(_config)
+	  config(_config),
+	  webView(),
+	  //pluginManager(NULL),
+	  webUIDelegate(),
+	  webFrameLoadDelegate(),
+	  delegatesHandler()
 {
 	hWnd = CreateWindow(MCruxWindow::getWindowClassName(),
 		config->getWindowTitle(),
 		WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+
+	if (!webView.createWebView())
+	{
+		::MessageBoxA(0, "createWebView Failed", "error", MB_OK);
+		return;
+	}
+
+	if(!webView.setWebUIDelegate(&webUIDelegate))
+	{
+		::MessageBoxA(0, "setWebUIDelegate Failed", "error", MB_OK);
+		return;
+	}
+	webUIDelegate.setUIHandler(&delegatesHandler);
+
+	if(!webView.setFrameLoadDelegate(&webFrameLoadDelegate))
+	{
+		::MessageBoxA(0, "setFrameLoadDelegate Failed", "error", MB_OK);
+		return;
+	}
+	webFrameLoadDelegate.setFrameLoadHandler(&delegatesHandler);
+
+	wstring defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Just wanted to say you Hi MCrux User !\"); \n mcrux.someFunction(); \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
+	if (!webView.loadPageInWindow(hWnd, defaultPage))
+	{
+		::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
+		return;
+	}
 }
 
 MCruxWindow::~MCruxWindow()
