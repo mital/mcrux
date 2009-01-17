@@ -4,7 +4,7 @@
 #include "MCruxWindowConfiguration.h"
 
 
-MCruxWindowConfiguration::MCruxWindowConfiguration(const string & _url)
+MCruxWindowConfiguration::MCruxWindowConfiguration(const wstring & _url)
 	: url(_url)
 {
 }
@@ -20,7 +20,7 @@ TCHAR * MCruxWindowConfiguration::getWindowTitle() const
 	return windowTitleName;
 }
 
-string MCruxWindowConfiguration::getURL() const
+wstring MCruxWindowConfiguration::getURL() const
 {
 	return url;
 }

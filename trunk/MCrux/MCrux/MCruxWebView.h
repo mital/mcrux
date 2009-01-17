@@ -47,6 +47,7 @@ public:
 	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
 	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
+	bool loadURLInWindow(HWND hWnd, const wstring & url);
 
-	void navigateTo(BSTR urlBStr);
+	bool navigateTo(const wstring & url);
 };

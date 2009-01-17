@@ -40,7 +40,8 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 	webFrameLoadDelegate.setFrameLoadHandler(&delegatesHandler);
 
 	wstring defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Just wanted to say you Hi MCrux User !\"); \n mcrux.someFunction(); \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
-	if (!webView.loadPageInWindow(hWnd, defaultPage))
+	//if (!webView.loadPageInWindow(hWnd, defaultPage))
+	if (!webView.loadURLInWindow(hWnd, config->getURL()))
 	{
 		::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
 		return;

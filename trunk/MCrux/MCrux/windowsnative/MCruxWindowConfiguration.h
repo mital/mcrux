@@ -7,11 +7,11 @@ using namespace std;
 
 class MCruxWindowConfiguration
 {
-	string url;
+	wstring url;
 public:
-	MCruxWindowConfiguration(const string & _url);
+	MCruxWindowConfiguration(const wstring & _url);
 	~MCruxWindowConfiguration();
 
-	string getURL() const;
+	wstring getURL() const;
 	TCHAR * getWindowTitle() const;
 };

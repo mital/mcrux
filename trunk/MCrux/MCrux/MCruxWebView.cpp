@@ -147,17 +147,32 @@ bool MCruxWebView::loadPageInWindow(HWND hWnd, const wstring & defaultPageText)
 	return false;
 }
 
-void MCruxWebView::navigateTo(BSTR urlBStr)
+bool MCruxWebView::loadURLInWindow(HWND hWnd, const wstring & url)
 {
+	if(initWithHostWindow(hWnd)
+		&& navigateTo(url)
+		&& storeViewWindowHandle())
+	{
+		return true;
+	}
+	return false;
+}
+
+bool MCruxWebView::navigateTo(const wstring & url)
+{
+	wstring navigateURL = url;
 	IWebFrame* frame = 0;
 	IWebMutableURLRequest* request = 0;
 
-	if (urlBStr && urlBStr[0] && (PathFileExists(urlBStr) || PathIsUNC(urlBStr)))
+	if ((PathFileExists(navigateURL.c_str()) || PathIsUNC(navigateURL.c_str())))
 	{
 		TCHAR fileURL[INTERNET_MAX_URL_LENGTH];
 		DWORD fileURLLength = sizeof(fileURL)/sizeof(fileURL[0]);
-		if (SUCCEEDED(UrlCreateFromPath(urlBStr, fileURL, &fileURLLength, 0)))
-			urlBStr = fileURL;
+		if (SUCCEEDED(UrlCreateFromPath(navigateURL.c_str(), fileURL, &fileURLLength, 0)))
+		{
+			wstring wfileURL = fileURL;
+			navigateURL = wfileURL;
+		}
 	}
 
 	HRESULT hr = webView->mainFrame(&frame);
@@ -172,7 +187,7 @@ void MCruxWebView::navigateTo(BSTR urlBStr)
 	if (FAILED(hr))
 		goto exit;
 
-	hr = request->initWithURL(::SysAllocString(urlBStr), WebURLRequestUseProtocolCachePolicy, 0);
+	hr = request->initWithURL(::SysAllocString(navigateURL.c_str()), WebURLRequestUseProtocolCachePolicy, 0);
 	if (FAILED(hr))
 		goto exit;
 
@@ -191,4 +206,5 @@ exit:
 		frame->Release();
 	if (request)
 		request->Release();
+	return true;
 }
