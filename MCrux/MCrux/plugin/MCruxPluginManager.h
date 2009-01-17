@@ -30,6 +30,7 @@ using namespace std;
 #include "MCrux.h"
 #include "MCruxPlugin.h"
 
+typedef MCruxPlugin * (*GetPluginFunctionPtr)();
 
 class MCruxPluginManager
 {
@@ -37,11 +38,12 @@ class MCruxPluginManager
 
 	void AddMCruxDefaultPlugins();
 
-	void AddExtensionPlugins(const list<string> extensionPluginNames);
+	bool AddPlugin(const wstring & pluginName);
+	void AddExtensionPlugins(const list<wstring> extensionPluginNames);
 
 public:
 
-	MCruxPluginManager(const list<string> extensionPluginNames);
+	MCruxPluginManager(const list<wstring> extensionPluginNames);
 
 	~MCruxPluginManager();
 

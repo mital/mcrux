@@ -1,93 +1,28 @@
-// FileSystem.cpp : Implementation of DLL Exports.
-
+// FileSystem.cpp : Defines the entry point for the DLL application.
+//
 
 #include "stdafx.h"
-#include "resource.h"
-#include "FileSystem.h"
-#include "dlldatax.h"
-
-
-class CFileSystemModule : public CAtlDllModuleT< CFileSystemModule >
-{
-public :
-	DECLARE_LIBID(LIBID_FileSystemLib)
-	DECLARE_REGISTRY_APPID_RESOURCEID(IDR_FILESYSTEM, "{9100798C-F19D-4C8D-8B14-05B63BAE54C2}")
-};
-
-CFileSystemModule _AtlModule;
+#include "FileSystemJSObject.h"
 
 
 #ifdef _MANAGED
 #pragma managed(push, off)
 #endif
 
-// DLL Entry Point
-extern "C" BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
+BOOL APIENTRY DllMain( HMODULE hModule,
+                       DWORD  ul_reason_for_call,
+                       LPVOID lpReserved
+					 )
 {
-#ifdef _MERGE_PROXYSTUB
-    if (!PrxDllMain(hInstance, dwReason, lpReserved))
-        return FALSE;
-#endif
-	hInstance;
-    return _AtlModule.DllMain(dwReason, lpReserved); 
+    return TRUE;
 }
 
 #ifdef _MANAGED
 #pragma managed(pop)
 #endif
 
-
-
-
-// Used to determine whether the DLL can be unloaded by OLE
-STDAPI DllCanUnloadNow(void)
+__declspec(dllexport) MCruxPlugin * getMCruxPlugin()
 {
-#ifdef _MERGE_PROXYSTUB
-    HRESULT hr = PrxDllCanUnloadNow();
-    if (hr != S_OK)
-        return hr;
-#endif
-    return _AtlModule.DllCanUnloadNow();
-}
-
-
-// Returns a class factory to create an object of the requested type
-STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
-{
-#ifdef _MERGE_PROXYSTUB
-    if (PrxDllGetClassObject(rclsid, riid, ppv) == S_OK)
-        return S_OK;
-#endif
-    return _AtlModule.DllGetClassObject(rclsid, riid, ppv);
-}
-
-
-// DllRegisterServer - Adds entries to the system registry
-STDAPI DllRegisterServer(void)
-{
-    // registers object, typelib and all interfaces in typelib
-    HRESULT hr = _AtlModule.DllRegisterServer();
-#ifdef _MERGE_PROXYSTUB
-    if (FAILED(hr))
-        return hr;
-    hr = PrxDllRegisterServer();
-#endif
-	return hr;
-}
-
-
-// DllUnregisterServer - Removes entries from the system registry
-STDAPI DllUnregisterServer(void)
-{
-	HRESULT hr = _AtlModule.DllUnregisterServer();
-#ifdef _MERGE_PROXYSTUB
-    if (FAILED(hr))
-        return hr;
-    hr = PrxDllRegisterServer();
-    if (FAILED(hr))
-        return hr;
-    hr = PrxDllUnregisterServer();
-#endif
-	return hr;
+	return new FileSystemJSObject();
 }
 

@@ -9,11 +9,21 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 	  hWnd(NULL),
 	  config(_config),
 	  webView(),
-	  //pluginManager(NULL),
+	  pluginManager(NULL),
 	  webUIDelegate(),
 	  webFrameLoadDelegate(),
 	  delegatesHandler()
 {
+	// creating the pluginManager
+	list <wstring> plugins;
+	plugins.push_back(TEXT("FileSystem"));
+	if(!pluginManager)
+	{
+		pluginManager = new MCruxPluginManager(plugins);
+	}
+
+	delegatesHandler.setPluginManager(pluginManager);
+
 	hWnd = CreateWindow(MCruxWindow::getWindowClassName(),
 		config->getWindowTitle(),
 		WS_OVERLAPPEDWINDOW,

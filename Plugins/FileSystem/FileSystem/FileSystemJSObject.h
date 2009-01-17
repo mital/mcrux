@@ -1,5 +1,5 @@
 /**
- * copyright (C) 2008 Mital Vora. All rights reserved.
+ * copyright (C) 2009 Mital Vora. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -19,27 +19,38 @@
 
 #pragma once
 
-#include "MCruxPlugin.h"
+#include <list>
+#include <string>
+#include <iostream>
+
+using namespace std;
 
 
-class MCruxJSObject
+#include "mcrux/MCruxPlugin.h"
+
+
+class FileSystemJSObject
 	: public MCruxPlugin
 {
-
-	static JSValueRef someFunction(JSContextRef ctx,
+	static JSValueRef copyFile(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
 		const JSValueRef arguments[],
-		JSValueRef *exception)
-	{
-		::MessageBoxA(0, "MCruxJSObject someFunction called", "test", MB_OK);
-		return 0;
-	}
-public:
+		JSValueRef *exception);
 
-	MCruxJSObject();
-	virtual ~MCruxJSObject();
+	static JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
+	static bool readDirectory(const string& dirName, list<string>& files);
+
+public:
+	FileSystemJSObject();
+	virtual ~FileSystemJSObject();
 
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;

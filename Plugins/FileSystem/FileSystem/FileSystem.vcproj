@@ -3,9 +3,9 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="FileSystem"
-	ProjectGUID="{C260D7C3-461C-4185-9D54-9275782FBEBD}"
+	ProjectGUID="{267D131E-6E4B-42F6-BEAC-33EA134E82F7}"
 	RootNamespace="FileSystem"
-	Keyword="AtlProj"
+	Keyword="Win32Proj"
 	>
 	<Platforms>
 		<Platform
@@ -17,11 +17,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			UseOfATL="2"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
 			>
 			<Tool
@@ -38,22 +36,12 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="_DEBUG"
-				MkTypLibCompatible="false"
-				TargetEnvironment="1"
-				GenerateStublessProxies="true"
-				TypeLibraryName="$(IntDir)/FileSystem.tlb"
-				HeaderFileName="FileSystem.h"
-				DLLDataFileName=""
-				InterfaceIdentifierFileName="FileSystem_i.c"
-				ProxyFileName="FileSystem_p.c"
-				ValidateParameters="false"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(MCruxOutputDir)\include;&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;FILESYSTEM_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -67,19 +55,16 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="_DEBUG"
-				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				RegisterOutput="true"
-				IgnoreImportLibrary="true"
+				AdditionalDependencies="MCrux.lib WebKit.lib"
 				LinkIncremental="2"
-				ModuleDefinitionFile=".\FileSystem.def"
+				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
+				ModuleDefinitionFile="FileSystem.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -111,12 +96,11 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			UseOfATL="2"
-			ATLMinimizesCRunTimeLibraryUsage="false"
 			CharacterSet="1"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -132,22 +116,10 @@
 			/>
 			<Tool
 				Name="VCMIDLTool"
-				PreprocessorDefinitions="NDEBUG"
-				MkTypLibCompatible="false"
-				TargetEnvironment="1"
-				GenerateStublessProxies="true"
-				TypeLibraryName="$(IntDir)/FileSystem.tlb"
-				HeaderFileName="FileSystem.h"
-				DLLDataFileName=""
-				InterfaceIdentifierFileName="FileSystem_i.c"
-				ProxyFileName="FileSystem_p.c"
-				ValidateParameters="false"
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				Optimization="2"
-				AdditionalIncludeDirectories="$(MCruxOutputDir)\include;&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;"
-				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FILESYSTEM_EXPORTS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -159,19 +131,16 @@
 			/>
 			<Tool
 				Name="VCResourceCompilerTool"
-				PreprocessorDefinitions="NDEBUG"
-				Culture="1033"
-				AdditionalIncludeDirectories="$(IntDir)"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				RegisterOutput="true"
-				IgnoreImportLibrary="true"
+				AdditionalDependencies="MCrux.lib WebKit.lib"
 				LinkIncremental="1"
-				ModuleDefinitionFile=".\FileSystem.def"
+				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
+				ModuleDefinitionFile="FileSystem.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -213,26 +182,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\dlldatax.c"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
 				RelativePath=".\FileSystem.cpp"
 				>
 			</File>
@@ -241,11 +190,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\FileSystem.idl"
-				>
-			</File>
-			<File
-				RelativePath=".\FileSystemPlugin.cpp"
+				RelativePath=".\FileSystemJSObject.cpp"
 				>
 			</File>
 			<File
@@ -275,15 +220,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\dlldatax.h"
+				RelativePath=".\dirent.h"
 				>
 			</File>
 			<File
-				RelativePath=".\FileSystemPlugin.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Resource.h"
+				RelativePath=".\FileSystemJSObject.h"
 				>
 			</File>
 			<File
@@ -296,43 +237,6 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath=".\FileSystem.rc"
-				>
-			</File>
-			<File
-				RelativePath=".\FileSystem.rgs"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Generated Files"
-			SourceControlFiles="false"
-			>
-			<File
-				RelativePath=".\FileSystem.h"
-				>
-			</File>
-			<File
-				RelativePath=".\FileSystem_i.c"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-				<FileConfiguration
-					Name="Release|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						UsePrecompiledHeader="0"
-					/>
-				</FileConfiguration>
-			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"

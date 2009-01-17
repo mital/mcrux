@@ -22,10 +22,9 @@
 #include "MCruxPluginManager.h"
 
 #include "MCruxJSObject.h"
-#include "FileSystemJSObject.h"
 
 
-MCruxPluginManager::MCruxPluginManager(const list<string> extensionPluginNames)
+MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
 {
 	AddMCruxDefaultPlugins();
 	AddExtensionPlugins(extensionPluginNames);
@@ -38,14 +37,42 @@ MCruxPluginManager::~MCruxPluginManager()
 
 void MCruxPluginManager::AddMCruxDefaultPlugins()
 {
-	plugins.push_back(new CMCruxJSObject());
-	plugins.push_back(new FileSystemJSObject());
+	plugins.push_back(new MCruxJSObject());
 }
 
-void MCruxPluginManager::AddExtensionPlugins(const list<string> extensionPluginNames)
+bool MCruxPluginManager::AddPlugin(const wstring & pluginName)
+{
+	wstring pluginDll = TEXT("plugins/");
+	pluginDll += pluginName;
+	pluginDll += TEXT(".dll");
+	HINSTANCE hHookDll = ::LoadLibrary(pluginDll.c_str());
+	if( hHookDll==NULL || hHookDll == INVALID_HANDLE_VALUE)
+	{
+		//throw std::exception("Failed to load library");
+		return false;
+	}
+	GetPluginFunctionPtr myFunction = (GetPluginFunctionPtr) ::GetProcAddress(hHookDll, "getMCruxPlugin");
+	if (myFunction == NULL)
+	{
+		//throw(std::exception("Entry point not found"));
+		return false;
+	}
+	plugins.push_back(myFunction());
+	return true;
+}
+
+void MCruxPluginManager::AddExtensionPlugins(const list<wstring> extensionPluginNames)
 {
 	// TODO: search for the dlls from specific path and add those as extension plugins.
 	// might have to take the path also from user so "const list<string>"  will be changed to "const list<pair<string, string> >"
+	for (list<wstring>::const_iterator
+		oIter = extensionPluginNames.begin();
+		oIter != extensionPluginNames.end();
+	oIter++)
+	{
+		AddPlugin(*oIter);
+	}
+
 }
 
 

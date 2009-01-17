@@ -1,9 +1,5 @@
 ; FileSystem.def : Declares the module parameters.
-
-LIBRARY      "FileSystem.DLL"
+LIBRARY	"FileSystem"
 
 EXPORTS
-	DllCanUnloadNow		PRIVATE
-	DllGetClassObject	PRIVATE
-	DllRegisterServer	PRIVATE
-	DllUnregisterServer	PRIVATE
+	getMCruxPlugin		PRIVATE
