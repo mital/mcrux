@@ -1,0 +1,11 @@
+; MCrux.def : Declares the module parameters.
+
+LIBRARY      "MCrux.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+	
+	RunMCrux			PRIVATE

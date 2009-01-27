@@ -1,0 +1,11 @@
+; DemoPlugin.def : Declares the module parameters.
+
+LIBRARY      "DemoPlugin.DLL"
+
+EXPORTS
+	DllCanUnloadNow		PRIVATE
+	DllGetClassObject	PRIVATE
+	DllRegisterServer	PRIVATE
+	DllUnregisterServer	PRIVATE
+
+	MyDemoPluginMethod	PRIVATE
