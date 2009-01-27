@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <list>
+#include <vector>
 #include <string>
 #include <iostream>
 
@@ -46,7 +46,7 @@ class FileSystemJSObject
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-	static bool readDirectory(const string& dirName, list<string>& files);
+	static bool readDirectory(const string& dirName, vector<string>& files);
 
 public:
 	FileSystemJSObject();
