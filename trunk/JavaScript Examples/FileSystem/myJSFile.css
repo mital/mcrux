@@ -1,0 +1,29 @@
+ul.fileBrowser
+{
+	margin: 0;
+	padding: 0;
+	
+}
+ul.fileBrowser li
+{
+	list-style-type: none;
+	padding: 3px 0 3px 20px;
+	margin: 0; 
+	font-size: 11px;
+	font-family: Tahoma;
+}
+
+.folderNode
+{
+	list-style-image: url(img/openFolder.png);
+}
+
+.fileNode
+{
+}
+
+.hidden
+{
+	display: none;
+	list-style-image: url(img/closeFolder.png);
+}
