@@ -76,7 +76,8 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 	//MCruxWindowConfiguration mainWindowConfig(TEXT("http://www.google.com"));
-	MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/main.html"));
+	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/main.html"));
+	MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/Projects/MCrux/trunk/JavaScript Examples/FileSystem/filesysAccess.html"));
 	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/main.html"));
 	MCruxWindow * mainWindow = new MCruxWindow(hInstance, &mainWindowConfig);
 	mainWindow->ShowWindow();
