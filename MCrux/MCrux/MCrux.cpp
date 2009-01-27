@@ -40,7 +40,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 MCrux::MCrux()
 {
-	::MessageBoxA(0, "MCrux constructor called", "test", MB_OK);
 }
 
 
@@ -77,7 +76,7 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 	//MCruxWindowConfiguration mainWindowConfig(TEXT("http://www.google.com"));
-	MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/test.html"));
+	MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/main.html"));
 	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/main.html"));
 	MCruxWindow * mainWindow = new MCruxWindow(hInstance, &mainWindowConfig);
 	mainWindow->ShowWindow();

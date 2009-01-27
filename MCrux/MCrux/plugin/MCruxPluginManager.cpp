@@ -80,7 +80,6 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
 {
-	::MessageBoxA(0, "inject plugins called", "test", MB_OK);
 	for(list<MCruxPlugin *>::const_iterator
 		oIter = plugins.begin();
 		oIter != plugins.end();

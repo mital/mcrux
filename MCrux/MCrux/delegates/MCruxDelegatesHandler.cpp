@@ -45,15 +45,7 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::windowScriptObjectAvailable(
         JSContextRef context,
         JSObjectRef windowScriptObject)
 {
-  	::MessageBoxA(0, "windowscript object avalilable called", "test", MB_OK);
 	return pluginManager->injectPlugins(webView, context, windowScriptObject);
-	//JSObjectRef obj = mcrux.createJSWrapper(context);
-	//JSObjectRef globalObject = JSContextGetGlobalObject(context);
-
-	//JSStringRef fnPropName= JSStringCreateWithUTF8CString("mcrux");
-	//JSObjectSetProperty(context, globalObject,
-	//	fnPropName,
-	//	obj, 0, 0);
 }
 
 

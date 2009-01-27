@@ -25,6 +25,7 @@
 
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
+#include <JavaScriptCore/JSStringRef.h>
 #include <JavaScriptCore/JSStringRefCF.h>
 #include <JavaScriptCore/RetainPtr.h>
 
@@ -47,7 +48,7 @@ FileSystemJSObject::~FileSystemJSObject()
 }
 
 
-bool FileSystemJSObject::readDirectory(const string& dirName, list<string>& files)
+bool FileSystemJSObject::readDirectory(const string& dirName, vector<string>& files)
 {
   DIR* pDir = opendir(dirName.c_str());
   if (NULL != pDir)
@@ -95,7 +96,7 @@ JSValueRef FileSystemJSObject::copyFile(JSContextRef ctx,
 										JSValueRef *exception)
 {
 	::MessageBoxA(0, "filesystem.copyFile called.", "test", MB_OK);
-	JSStringRef jssourceFile      = JSValueToStringCopy(ctx, arguments[0], 0);
+	JSStringRef jssourceFile = JSValueToStringCopy(ctx, arguments[0], 0);
 	string sourceFile = getStringValueFrom(jssourceFile);
 	JSStringRef jsdestinationFile = JSValueToStringCopy(ctx, arguments[1], 0);
 	string destinationFile = getStringValueFrom(jsdestinationFile);
@@ -118,8 +119,18 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	}
 	JSStringRef jsDirectory = JSValueToStringCopy(ctx, arguments[0], 0);
 	string dir = getStringValueFrom(jsDirectory);
-	list<string> files;
+	vector<string> files;
 	readDirectory(dir, files);
 
+	if(files.size() > 0)
+	{
+		JSValueRef * fileJSStrings = new JSValueRef[files.size()];
+		for(unsigned int i = 0; i < files.size(); i++)
+		{
+			fileJSStrings[i] = JSValueMakeString(ctx,
+				JSStringCreateWithUTF8CString(files[i].c_str()));
+		}
+		return JSObjectMakeArray(ctx, files.size(), fileJSStrings, NULL);
+	}	
 	return 0;
 }
