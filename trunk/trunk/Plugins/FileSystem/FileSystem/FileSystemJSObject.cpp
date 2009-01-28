@@ -20,8 +20,7 @@
 
 #include "StdAfx.h"
 #include "FileSystemJSObject.h"
-
-#include "dirent.h"
+#include "FileUtils.h"
 
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
@@ -48,29 +47,6 @@ FileSystemJSObject::~FileSystemJSObject()
 }
 
 
-bool FileSystemJSObject::readDirectory(const string& dirName, vector<string>& files)
-{
-  DIR* pDir = opendir(dirName.c_str());
-  if (NULL != pDir)
-  {
-    struct dirent * ep = NULL;
-    while ((ep = readdir (pDir)))
-    {
-      if ((string(ep->d_name) != ".") && (string(ep->d_name) != "..") )
-      {
-        files.push_back(ep->d_name);
-      }
-    }
-    closedir (pDir);
-  }
-  else
-  {
-    return false;
-  }
-  return true;
-}
-
-
 string FileSystemJSObject::getName() const
 {
 	static string name = "filesystem";
@@ -83,6 +59,7 @@ JSStaticFunction * FileSystemJSObject::getStaticFunctions() const
 	= {
 		{"copyFile", FileSystemJSObject::copyFile, 0},
 		{"readDir", FileSystemJSObject::readDir, 0},
+		{"getFileInfo", FileSystemJSObject::getFileInfo, 0},
 		{0, 0, 0}
 	};
 	return JSDefaultFunctions;
@@ -119,8 +96,24 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	}
 	JSStringRef jsDirectory = JSValueToStringCopy(ctx, arguments[0], 0);
 	string dir = getStringValueFrom(jsDirectory);
+	FileInfo * info = FileUtils::getFileInfo(dir);
+	if(!info)
+	{
+		::MessageBoxA(0, "Path does not exist", "error", MB_OK);
+		return 0;
+	}
+
+	if(info->fileType != FILETYPE_DIRECTORY)
+	{
+		MessageBoxA(0, "this is not a directory.", "error", MB_OK);
+		delete info;
+		return 0;
+	}
+	delete info;
+
+
 	vector<string> files;
-	readDirectory(dir, files);
+	FileUtils::readDirectory(dir, files);
 
 	if(files.size() > 0)
 	{
@@ -133,4 +126,29 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 		return JSObjectMakeArray(ctx, files.size(), fileJSStrings, NULL);
 	}	
 	return 0;
+}
+
+JSValueRef FileSystemJSObject::getFileInfo(JSContextRef ctx,
+										JSObjectRef function,
+										JSObjectRef thisObject,
+										size_t argumentCount,
+										const JSValueRef arguments[],
+										JSValueRef *exception)
+{
+	::MessageBoxA(0, "filesystem.getFileSize called.", "test", MB_OK);
+	JSStringRef jsFile = JSValueToStringCopy(ctx, arguments[0], 0);
+	string fileName = getStringValueFrom(jsFile);
+	FileInfo * info = FileUtils::getFileInfo(fileName);
+
+	JSValueRef * fileJSStrings = new JSValueRef[3];
+
+	string fileType = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
+	fileJSStrings[0] = JSValueMakeString(ctx,
+		JSStringCreateWithUTF8CString(fileType.c_str()));
+
+	fileJSStrings[1] = JSValueMakeNumber(ctx, info->fileSize);
+	fileJSStrings[2] = JSValueMakeNumber(ctx, (double)info->lastModifiedTime);
+
+	delete info;
+	return JSObjectMakeArray(ctx, 3, fileJSStrings, NULL);
 }
