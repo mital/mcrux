@@ -19,13 +19,6 @@
 
 #pragma once
 
-#include <vector>
-#include <string>
-#include <iostream>
-
-using namespace std;
-
-
 #include "mcrux/MCruxPlugin.h"
 
 
@@ -46,7 +39,12 @@ class FileSystemJSObject
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-	static bool readDirectory(const string& dirName, vector<string>& files);
+	static JSValueRef getFileInfo(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
 
 public:
 	FileSystemJSObject();

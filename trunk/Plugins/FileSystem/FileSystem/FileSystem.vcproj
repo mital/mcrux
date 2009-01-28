@@ -194,6 +194,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\FileUtils.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -225,6 +229,10 @@
 			</File>
 			<File
 				RelativePath=".\FileSystemJSObject.h"
+				>
+			</File>
+			<File
+				RelativePath=".\FileUtils.h"
 				>
 			</File>
 			<File
