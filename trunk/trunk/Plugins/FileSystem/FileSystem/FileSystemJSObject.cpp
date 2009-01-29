@@ -78,7 +78,11 @@ JSValueRef FileSystemJSObject::copyFile(JSContextRef ctx,
 	JSStringRef jsdestinationFile = JSValueToStringCopy(ctx, arguments[1], 0);
 	string destinationFile = getStringValueFrom(jsdestinationFile);
 
-	return 0;
+	if(FileUtils::Copy(sourceFile, destinationFile))
+	{
+		return JSValueMakeBoolean(ctx, true);
+	}
+	return JSValueMakeBoolean(ctx, false);
 }
 
 JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
@@ -140,7 +144,8 @@ JSValueRef FileSystemJSObject::getFileInfo(JSContextRef ctx,
 	string fileName = getStringValueFrom(jsFile);
 	FileInfo * info = FileUtils::getFileInfo(fileName);
 
-	JSValueRef * fileJSStrings = new JSValueRef[3];
+	int arraySize = 4;
+	JSValueRef * fileJSStrings = new JSValueRef[arraySize];
 
 	string fileType = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
 	fileJSStrings[0] = JSValueMakeString(ctx,
@@ -148,7 +153,8 @@ JSValueRef FileSystemJSObject::getFileInfo(JSContextRef ctx,
 
 	fileJSStrings[1] = JSValueMakeNumber(ctx, info->fileSize);
 	fileJSStrings[2] = JSValueMakeNumber(ctx, (double)info->lastModifiedTime);
+	fileJSStrings[3] = JSValueMakeNumber(ctx, (double)info->permissionMode);
 
 	delete info;
-	return JSObjectMakeArray(ctx, 3, fileJSStrings, NULL);
+	return JSObjectMakeArray(ctx, arraySize, fileJSStrings, NULL);
 }
