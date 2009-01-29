@@ -129,7 +129,7 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 		}
 		return JSObjectMakeArray(ctx, files.size(), fileJSStrings, NULL);
 	}	
-	return 0;
+	return JSValueMakeNull(ctx);
 }
 
 JSValueRef FileSystemJSObject::getFileInfo(JSContextRef ctx,
