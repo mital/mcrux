@@ -29,43 +29,51 @@ function addTree(parentElement, childrenArray, blnShow)
 	parentElement.appendChild(rootElement);
 	$(".folderNode span:first").unbind();
 	$(".folderNode span:first").click(
-		function ()
+		function (event)
 		{
-			folderClicked(this)
+			folderClicked(this, event)
 		}
 	);
 //	alert(parentElement.innerHTML);
 }
 
 $(".folderNode span:first").click(
-	function ()
+	function (event)
 	{
-		folderClicked(this)
+		folderClicked(this, event)
 	}
 );
 
-function folderClicked(jFolder)
+function folderClicked(jFolder, event)
 {
 //	alert("folderNode Clicked");
 //	alert($(jFolder).get(0).innerHTML);
-	if($(jFolder).parent(".folderNode").find("ul:first").size())
+//	alert($(jFolder).get(0).offsetTop + " . " + $(jFolder).get(0).offsetLeft + " . " + event.pageY + " . " +  event.pageX);
+	if( event.pageX - $(jFolder).get(0).offsetLeft > 10)
 	{
-		if($(jFolder).parent(".folderNode").find("ul:first").hasClass("hidden"))
-		{
-			$(jFolder).parent(".folderNode").find("ul:first").removeClass("hidden");
-			$(jFolder).parent(".folderNode").css("list-style-image","url(img/closeFolder.png)");
-		}
-		else
-		{
-			$(jFolder).parent(".folderNode").find("ul:first").addClass("hidden");
-			$(jFolder).parent(".folderNode").css("list-style-image","url(img/openFolder.png)");
-		}
+		//alert($(jFolder).parent(".folderNode").get(0).filePath);
 	}
 	else
 	{
-//			alert("loading directory");
-		$(jFolder).parent(".folderNode").css("list-style-image","url(img/closeFolder.png)");
-		loadDirectory($(jFolder).parent(".folderNode").get(0));
+		if($(jFolder).parent(".folderNode").find("ul:first").size())
+		{
+			if($(jFolder).parent(".folderNode").find("ul:first").hasClass("hidden"))
+			{
+				$(jFolder).parent(".folderNode").find("ul:first").removeClass("hidden");
+				$(jFolder).css("background-image","url(img/closeFolder.png)");
+			}
+			else
+			{
+				$(jFolder).parent(".folderNode").find("ul:first").addClass("hidden");
+				$(jFolder).css("background-image","url(img/openFolder.png)");
+			}
+		}
+		else
+		{
+	//			alert("loading directory");
+			$(jFolder).css("background-image","url(img/closeFolder.png)");
+			loadDirectory($(jFolder).parent(".folderNode").get(0));
+		}
 	}
 }
 
@@ -74,7 +82,7 @@ function loadDirectory(folder)
 	var rootElement = folder;
 	//alert(folder.filePath);
 	//alert(folder.innerHTML);
-	files = filesystem.readDir(folder.filePath); 
+	files = filesystem.readDir(folder.filePath + "\\"); 
 	//files = new Array("A","B","C","D","E","F");
 	addTree(rootElement, files, true);
 }
