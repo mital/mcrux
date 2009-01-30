@@ -96,7 +96,7 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	if(argumentCount != 1)
 	{
 		::MessageBoxA(0, "please enter valid Number of Arguments", "error", MB_OK);
-		return 0;
+		return JSValueMakeNull(ctx);
 	}
 	JSStringRef jsDirectory = JSValueToStringCopy(ctx, arguments[0], 0);
 	string dir = getStringValueFrom(jsDirectory);
@@ -104,14 +104,14 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	if(!info)
 	{
 		::MessageBoxA(0, "Path does not exist", "error", MB_OK);
-		return 0;
+		return JSValueMakeNull(ctx);
 	}
 
 	if(info->fileType != FILETYPE_DIRECTORY)
 	{
 		MessageBoxA(0, "this is not a directory.", "error", MB_OK);
 		delete info;
-		return 0;
+		return JSValueMakeNull(ctx);
 	}
 	delete info;
 
