@@ -35,7 +35,7 @@ MCruxPlugin::~MCruxPlugin()
 
 bool MCruxPlugin::injectPlugin(JSContextRef ctx)
 {
-	JSClassDefinition pluginNameSpace;
+	JSClassDefinition pluginNameSpace;// = kJSClassDefinitionEmpty;
 
 	pluginNameSpace.version = 0;
 	pluginNameSpace.attributes = 0;
@@ -51,7 +51,7 @@ bool MCruxPlugin::injectPlugin(JSContextRef ctx)
 	pluginNameSpace.deleteProperty = 0;
 	pluginNameSpace.getPropertyNames = 0;
 	pluginNameSpace.callAsFunction = 0;
-	pluginNameSpace.callAsConstructor = 0;
+	pluginNameSpace.callAsConstructor = getConstructor();
 	pluginNameSpace.hasInstance = 0;
 	pluginNameSpace.convertToType = 0;
 
@@ -66,4 +66,9 @@ bool MCruxPlugin::injectPlugin(JSContextRef ctx)
 		pluginObj, 0, 0);
 
 	return true;
+}
+
+JSObjectCallAsConstructorCallback MCruxPlugin::getConstructor() const
+{
+	return 0;
 }

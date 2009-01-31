@@ -1,0 +1,5 @@
+; SQLiteDatabase.def : Declares the module parameters.
+LIBRARY	"SQLiteDatabase"
+
+EXPORTS
+	getMCruxPlugin		PRIVATE

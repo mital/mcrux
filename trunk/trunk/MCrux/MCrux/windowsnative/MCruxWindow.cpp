@@ -17,6 +17,7 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 	// creating the pluginManager
 	list <wstring> plugins;
 	plugins.push_back(TEXT("FileSystem"));
+	plugins.push_back(TEXT("SQLiteDatabase"));
 	if(!pluginManager)
 	{
 		pluginManager = new MCruxPluginManager(plugins);

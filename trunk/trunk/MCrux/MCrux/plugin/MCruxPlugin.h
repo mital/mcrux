@@ -41,5 +41,7 @@ public:
 
 	virtual JSStaticFunction * getStaticFunctions() const=0;
 
+	virtual JSObjectCallAsConstructorCallback getConstructor() const;
+
 	bool injectPlugin(JSContextRef ctx);
 };

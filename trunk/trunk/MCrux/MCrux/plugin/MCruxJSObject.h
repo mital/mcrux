@@ -36,6 +36,17 @@ class MCruxJSObject
 		::MessageBoxA(0, "MCruxJSObject someFunction called", "test", MB_OK);
 		return 0;
 	}
+
+	static JSObjectRef ConstructorCallback(JSContextRef ctx,
+		JSObjectRef constructor,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef* exception)
+	{
+		//JSObjectMakeConstructor(
+		return 0;
+	}
+
 public:
 
 	MCruxJSObject();
@@ -43,4 +54,5 @@ public:
 
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;
+	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 };
