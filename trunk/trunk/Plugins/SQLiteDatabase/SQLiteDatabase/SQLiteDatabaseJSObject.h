@@ -1,11 +1,15 @@
 #pragma once
 
+#include <list>
+using namespace std;
+
 #include "mcrux/MCruxPlugin.h"
 
 
 class SQLiteDatabaseJSObject :
 	public MCruxPlugin
 {
+	static list<SQLiteDatabaseJSObject *> sqliteObjects;
 
 	static JSValueRef someFunction(JSContextRef ctx,
 		JSObjectRef function,
@@ -18,10 +22,27 @@ class SQLiteDatabaseJSObject :
 		return 0;
 	}
 
+	static JSObjectRef ConstructorCallback(JSContextRef ctx,
+		JSObjectRef constructor,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef* exception);
+
 public:
+
+	SQLiteDatabaseJSObject(JSContextRef ctx,
+		JSObjectRef constructor,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef* exception);
+
 	SQLiteDatabaseJSObject();
 	virtual ~SQLiteDatabaseJSObject();
 
 	virtual string getName() const;
+
 	virtual JSStaticFunction * getStaticFunctions() const;
+
+	virtual JSObjectCallAsConstructorCallback getConstructor() const;
+	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
 };
