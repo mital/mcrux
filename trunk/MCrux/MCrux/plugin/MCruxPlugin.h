@@ -39,9 +39,15 @@ public:
 
 	virtual string getName() const=0;
 
-	virtual JSStaticFunction * getStaticFunctions() const=0;
+	// static namespace related methods
+	virtual JSStaticFunction * getStaticFunctions() const;
 
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 
 	bool injectPlugin(JSContextRef ctx);
+
+	// object creation related methods
+	JSObjectRef createJSObject(JSContextRef ctx);
+
+	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
 };
