@@ -9,14 +9,14 @@ using namespace std;
 
 class MCRUX_API MCrux
 {
+	void Initialize();
+
+	void UnInitialize();
+
 public:
 
 	MCrux();
 	~MCrux();
-
-	void Initialize();
-
-	void UnInitialize();
 
 	bool InitializeAndRunWith(const string & mcruxAppConfigFileName);
 };

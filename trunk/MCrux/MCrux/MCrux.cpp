@@ -9,9 +9,11 @@
 #include <wininet.h>
 
 #include "MCrux.h"
+#include "MCruxSpecParser.h"
 
 #include "windowsnative/MCruxWindow.h"
 #include "windowsnative/MCruxWindowConfiguration.h"
+
 
 #ifdef _MANAGED
 #pragma managed(push, off)
@@ -72,32 +74,46 @@ void MCrux::UnInitialize()
 
 bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 {
+	bool bRet = false;
 	Initialize();
 
+	// parse the given configuration file
+	MCruxSpecParser parser;
+	parser.parse(mcruxAppConfigFileName);
+	list<MCruxWindowConfiguration*> mcruxWindowConfigs;
+	parser.getWindowConfigList(mcruxWindowConfigs);
+
 	HINSTANCE hInstance = GetModuleHandle(NULL);
-	//MCruxWindowConfiguration mainWindowConfig(TEXT("http://www.google.com"));
-	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/main.html"));
-	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/Projects/MCrux/trunk/JavaScript Examples/FileSystem/filesysAccess.html"));
-	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/game/main.html"));
-	MCruxWindowConfiguration mainWindowConfig(TEXT("C:/game/sqlite.html"));
-	//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/main.html"));
-	MCruxWindow * mainWindow = new MCruxWindow(hInstance, &mainWindowConfig);
-	mainWindow->ShowWindow();
-	mainWindow->UpdateWindow();
 
-	HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
-
-	MSG msg;
-	// Main message loop:
-	while (GetMessage(&msg, NULL, 0, 0))
+	if(mcruxWindowConfigs.size())
 	{
-		if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+		MCruxWindowConfiguration * mainWindowConfig = mcruxWindowConfigs.back();
+		MCruxWindow * mainWindow = new MCruxWindow(hInstance, mainWindowConfig);
+		mainWindow->ShowWindow();
+		mainWindow->UpdateWindow();
+
+		HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
+
+		MSG msg;
+		// Main message loop:
+		while (GetMessage(&msg, NULL, 0, 0))
 		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+			{
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
 		}
+		bRet = true;
 	}
 
 	UnInitialize();
-	return false;
+	return bRet;
 }
+
+//MCruxWindowConfiguration mainWindowConfig(TEXT("http://www.google.com"));
+//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/main.html"));
+//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/Projects/MCrux/trunk/JavaScript Examples/FileSystem/filesysAccess.html"));
+//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/game/main.html"));
+//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/game/sqlite.html"));
+//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/main.html"));
