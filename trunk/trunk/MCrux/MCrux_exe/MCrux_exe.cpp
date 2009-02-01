@@ -12,7 +12,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(nCmdShow);
 
 	MCrux mcrux;
-	string appConfigFileWithFullPath = "c:\\mcrux\\fileSystem.mcruxspec";
+	string appConfigFileWithFullPath = "c:\\mcrux\\sqlite.mcruxspec";
 	mcrux.InitializeAndRunWith(appConfigFileWithFullPath);
 
 	return 0;

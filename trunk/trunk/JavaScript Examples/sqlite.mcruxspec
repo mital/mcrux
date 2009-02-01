@@ -3,4 +3,8 @@
 	<mcruxwindow>
 		<url>C:/game/sqlite.html</url>
 	</mcruxwindow>
+	<plugins>
+		<plugin name="FileSystem"/>
+		<plugin name="SQLiteDatabase"/>
+	</plugins>
 </mcrux>
