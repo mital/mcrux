@@ -14,7 +14,7 @@ MCruxSpecParser::~MCruxSpecParser()
 wstring MCruxSpecParser::getURL(xmlNode *child_prop) const
 {
 	xmlChar * text = xmlCharStrdup("text");
-	if(child_prop->children->name, text)
+	if (0 == xmlStrcmp(child_prop->children->name, text))
 	{
 		string url8 = (char*)child_prop->children->content;
 		wstring url(url8.begin(), url8.end());
@@ -24,31 +24,66 @@ wstring MCruxSpecParser::getURL(xmlNode *child_prop) const
 	return url;
 }
 
+
+wstring MCruxSpecParser::getPlugin(xmlNode *child_prop) const
+{
+	xmlChar * name = xmlCharStrdup("name");
+	xmlChar * text = xmlCharStrdup("text");
+	if ((child_prop->properties)
+		&& (child_prop->properties->children)
+		&& (0 == xmlStrcmp(child_prop->properties->children->name, text)))
+	{
+		string plugin8 = (char*)child_prop->properties->children->content;
+		wstring plugin(plugin8.begin(), plugin8.end());
+		return plugin;			
+	}
+	wstring plugin;
+	return plugin;
+}
+
+
 bool MCruxSpecParser::parseMCruxSpecXMLNSVersion1(xmlNode *root_child)
 {
 	xmlChar * mCruxSpecWindowName = xmlCharStrdup(MCRUXSPEC_WINDOW_NAME);
+	xmlChar * mCruxSpecPluginsName = xmlCharStrdup(MCRUXSPEC_PLUGINS_NAME);
 
 	for (xmlNode *cur_node = root_child;
 		cur_node != NULL;
 		cur_node = cur_node->next)
 	{
-		if ((cur_node->type == XML_ELEMENT_NODE)
-			&& (0 == xmlStrcmp(cur_node->name, mCruxSpecWindowName)))
+		if (cur_node->type == XML_ELEMENT_NODE)
 		{
-			wstring url;
-			xmlChar * urlName = xmlCharStrdup(MCRUXSPEC_WINDOW_URL_NAME);
-			for(xmlNode * child_prop = cur_node->children;
-				child_prop;
-				child_prop = child_prop->next)
+			if (0 == xmlStrcmp(cur_node->name, mCruxSpecWindowName))
 			{
-				if (0 == xmlStrcmp(child_prop->name, urlName))
+				wstring url;
+				xmlChar * urlName = xmlCharStrdup(MCRUXSPEC_WINDOW_URL_NAME);
+				for(xmlNode * child_prop = cur_node->children;
+					child_prop;
+					child_prop = child_prop->next)
 				{
-					url = getURL(child_prop);
+					if (0 == xmlStrcmp(child_prop->name, urlName))
+					{
+						url = getURL(child_prop);
+					}
+				}
+				MCruxWindowConfiguration * winConf = new MCruxWindowConfiguration(url);
+				windowConfigs.push_back(winConf);
+			}
+			else if (0 == xmlStrcmp(cur_node->name, mCruxSpecPluginsName))
+			{
+				xmlChar * pluginName = xmlCharStrdup(MCRUXSPEC_PLUGIN_NAME);
+				for(xmlNode * child_prop = cur_node->children;
+					child_prop;
+					child_prop = child_prop->next)
+				{
+					if (0 == xmlStrcmp(child_prop->name, pluginName))
+					{
+						plugins.push_back(getPlugin(child_prop));
+					}
 				}
 			}
-			MCruxWindowConfiguration * winConf = new MCruxWindowConfiguration(url);
-			windowConfigs.push_back(winConf);
 		}
+		
 	}
 
 	return true;
@@ -106,4 +141,20 @@ bool MCruxSpecParser::getWindowConfigList(list <MCruxWindowConfiguration *> & mc
 	}
 	return false;
 	
+}
+
+bool MCruxSpecParser::getPlugins(list <wstring> & _plugins) const
+{
+	if(plugins.size())
+	{
+		for(list <wstring>::const_iterator
+			oIter = plugins.begin();
+			oIter != plugins.end();
+		oIter++)
+		{
+			_plugins.push_back(*oIter);
+		}
+		return true;
+	}
+	return false;
 }

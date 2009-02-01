@@ -80,8 +80,12 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 	// parse the given configuration file
 	MCruxSpecParser parser;
 	parser.parse(mcruxAppConfigFileName);
+
 	list<MCruxWindowConfiguration*> mcruxWindowConfigs;
 	parser.getWindowConfigList(mcruxWindowConfigs);
+
+	list<wstring> plugins;
+	parser.getPlugins(plugins);
 
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 
@@ -105,6 +109,10 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 			}
 		}
 		bRet = true;
+	}
+	else
+	{
+		::MessageBoxA(0, "mcruxspec file not found", "error", MB_OK);
 	}
 
 	UnInitialize();
