@@ -4,6 +4,8 @@
 
 #include "MCruxWindow.h"
 
+map<HWND, MCruxWindow *> MCruxWindow::mcruxWindows;
+
 MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * _config)
 	: hInstance(_hInstance),
 	  hWnd(NULL),
@@ -57,10 +59,16 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 		::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
 		return;
 	}
+	MCruxWindow::mcruxWindows[hWnd] = this;
 }
+
 
 MCruxWindow::~MCruxWindow()
 {
+	if(MCruxWindow::mcruxWindows[hWnd])
+	{
+		MCruxWindow::mcruxWindows.erase(MCruxWindow::mcruxWindows.find(hWnd));
+	}
 }
 
 int MCruxWindow::ShowWindow() const
@@ -78,6 +86,12 @@ int MCruxWindow::HideWindow() const
 int MCruxWindow::UpdateWindow() const
 {
 	return ::UpdateWindow(hWnd);
+}
+
+
+void MCruxWindow::resize() const
+{
+	webView.resizeSubView();
 }
 
 
@@ -154,6 +168,12 @@ LRESULT CALLBACK MCruxWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LP
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+    case WM_SIZE:
+		if(MCruxWindow::mcruxWindows[hWnd])
+		{
+			MCruxWindow::mcruxWindows[hWnd]->resize();
+		}
+        break; 
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
