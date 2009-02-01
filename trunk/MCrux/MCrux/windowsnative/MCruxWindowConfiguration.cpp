@@ -4,8 +4,14 @@
 #include "MCruxWindowConfiguration.h"
 
 
-MCruxWindowConfiguration::MCruxWindowConfiguration(const wstring & _url)
-	: url(_url)
+MCruxWindowConfiguration::MCruxWindowConfiguration(const wstring _windowTitle,
+												   unsigned int _width,
+												   unsigned int _height,
+												   const wstring & _url)
+: windowTitle(_windowTitle),
+  width(_width),
+  height(_height),
+  url(_url)
 {
 }
 
@@ -14,13 +20,22 @@ MCruxWindowConfiguration::~MCruxWindowConfiguration()
 }
 
 
-TCHAR * MCruxWindowConfiguration::getWindowTitle() const
+wstring MCruxWindowConfiguration::getWindowTitle() const
 {
-	static TCHAR windowTitleName[MAX_LOADSTRING] = _T("MCruxWindowTitleName");
-	return windowTitleName;
+	return windowTitle;
 }
 
 wstring MCruxWindowConfiguration::getURL() const
 {
 	return url;
+}
+
+unsigned int MCruxWindowConfiguration::getWidth() const
+{
+	return width;
+}
+
+unsigned int MCruxWindowConfiguration::getHeight() const
+{
+	return height;
 }

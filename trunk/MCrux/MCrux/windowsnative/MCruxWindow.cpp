@@ -28,9 +28,9 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 	delegatesHandler.setPluginManager(pluginManager);
 
 	hWnd = CreateWindow(MCruxWindow::getWindowClassName(),
-		config->getWindowTitle(),
+		config->getWindowTitle().c_str(),
 		WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);
+		CW_USEDEFAULT, 0, config->getWidth(), config->getHeight(), NULL, NULL, hInstance, NULL);
 
 	if (!webView.createWebView())
 	{
@@ -69,6 +69,7 @@ MCruxWindow::~MCruxWindow()
 	{
 		MCruxWindow::mcruxWindows.erase(MCruxWindow::mcruxWindows.find(hWnd));
 	}
+	delete config;
 }
 
 int MCruxWindow::ShowWindow() const
