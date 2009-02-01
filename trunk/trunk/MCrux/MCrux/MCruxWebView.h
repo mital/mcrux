@@ -31,11 +31,12 @@ using namespace std;
 
 class MCruxWebView
 {
+	HWND hParentWindow;
 	IWebView* webView;
 	HWND hWebViewWindow;
 	const BSTR httpGetMethod;
 
-	bool initWithHostWindow(HWND hWnd) const;
+	bool initWithHostWindow(HWND hWnd);
 	bool loadPage(const wstring & defaultPageText) const;
 	bool storeViewWindowHandle();
 
@@ -46,8 +47,9 @@ public:
 	bool createWebView();
 	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
 	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
+	void resizeSubView() const;
+
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
 	bool loadURLInWindow(HWND hWnd, const wstring & url);
-
 	bool navigateTo(const wstring & url);
 };

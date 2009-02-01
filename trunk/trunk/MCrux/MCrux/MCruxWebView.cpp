@@ -25,7 +25,8 @@
 
 
 MCruxWebView::MCruxWebView()
-: webView(NULL),
+: hParentWindow(NULL),
+  webView(NULL),
   hWebViewWindow(NULL),
   httpGetMethod(SysAllocString(TEXT("GET")))
 {
@@ -79,7 +80,7 @@ bool MCruxWebView::setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate)
 	return false;
 }
 
-bool MCruxWebView::initWithHostWindow(HWND hWnd) const
+bool MCruxWebView::initWithHostWindow(HWND hWnd)
 {
 	if(webView)
 	{
@@ -91,6 +92,7 @@ bool MCruxWebView::initWithHostWindow(HWND hWnd) const
 			hr = webView->initWithFrame(clientRect, 0, 0);
 			if (SUCCEEDED(hr))
 			{
+				hParentWindow = hWnd;
 				return true;
 			}
 		}
@@ -131,8 +133,16 @@ bool MCruxWebView::storeViewWindowHandle()
 				return true;
 			}
 		}
+
 	}
 	return false;
+}
+
+void MCruxWebView::resizeSubView() const
+{
+    RECT rcClient;
+    GetClientRect(hParentWindow, &rcClient);
+	MoveWindow(hWebViewWindow, 0, 0, rcClient.right, rcClient.bottom, TRUE);
 }
 
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include <iostream>
 
 using namespace std;
@@ -34,6 +35,8 @@ class MCruxWindow
 	static TCHAR * getWindowClassName();
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
+	static map<HWND, MCruxWindow *> mcruxWindows;
+
 public:
 	MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * _config);
 	~MCruxWindow();
@@ -41,6 +44,7 @@ public:
 	int ShowWindow() const;
 	int HideWindow() const;
 	int UpdateWindow() const;
+	void resize() const;
 
 
 	static void initWindowClass(HINSTANCE hInstance);
