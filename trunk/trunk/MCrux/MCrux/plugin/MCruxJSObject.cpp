@@ -77,7 +77,7 @@ JSValueRef MCruxJSObject::callJavaScriptFunction(JSContextRef ctx,
 {
 	::MessageBoxA(0, "MCruxJSObject callJavaScriptFunction called", "test", MB_OK);
 
-	if (argumentCount == 1)
+	if (argumentCount == 2)
 	{
 		JSStringRef myJSMethodName = JSValueToStringCopy(ctx, arguments[0], 0);
 		JSObjectRef global = JSContextGetGlobalObject(ctx);
@@ -88,6 +88,9 @@ JSValueRef MCruxJSObject::callJavaScriptFunction(JSContextRef ctx,
 		}
 		JSObjectRef function = JSValueToObject(ctx, myJSMethod, 0);
 		JSValueRef result = JSObjectCallAsFunction (ctx, function, global, 0, 0, 0);
+
+		JSObjectRef funcPassed = JSValueToObject(ctx, arguments[1], 0);
+		JSValueRef result1 = JSObjectCallAsFunction (ctx, funcPassed, global, 0, 0, 0);
 	}
 	return JSValueMakeNull(ctx);
 }
