@@ -105,6 +105,7 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	{
 		::MessageBoxA(0, "Path does not exist", "error", MB_OK);
 		return JSValueMakeNull(ctx);
+		JSValueMakeUndefined(ctx);
 	}
 
 	if(info->fileType != FILETYPE_DIRECTORY)

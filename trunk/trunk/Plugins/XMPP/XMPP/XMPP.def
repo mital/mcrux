@@ -1,0 +1,6 @@
+; XMPP.def : Declares the module parameters.
+
+LIBRARY	"XMPP"
+
+EXPORTS
+	getMCruxPlugin		PRIVATE
