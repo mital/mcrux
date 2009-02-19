@@ -10,6 +10,7 @@
 list<XMPPJSObject *> XMPPJSObject::xmppObjects;
 
 XMPPJSObject::XMPPJSObject()
+: socket()
 {
 }
 
@@ -45,7 +46,6 @@ JSStaticFunction * XMPPJSObject::getStaticFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {
-		{"dummy", XMPPJSObject::dummyFunc, 0},
 		{0, 0, 0}
 	};
 	return JSDefaultFunctions;
@@ -57,6 +57,7 @@ JSStaticFunction * XMPPJSObject::getJSObjectStaticFunctions() const
 	static JSStaticFunction JSDefaultFunctions[]
 	= {
 		{"Connect", XMPPJSObject::Connect, 0},
+		{"setStanzaHandler", XMPPJSObject::setStanzaHandler, 0},
 		{"Disconnect", XMPPJSObject::Disconnect, 0},
 		{"Send", XMPPJSObject::Send, 0},
 		{0, 0, 0}
@@ -96,7 +97,7 @@ JSValueRef XMPPJSObject::Connect(JSContextRef ctx,
 	if(argumentCount == 2) // server, port
 	{
 		string server = JSStringUtils::getStringValueFrom(ctx, arguments[0]);
-		int port = (int) JSStringUtils::getDoubleValueFrom(ctx, arguments[1]);
+		string port = JSStringUtils::getStringValueFrom(ctx, arguments[1]);
 		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
 		if(xmppObj)
 		{
@@ -151,29 +152,55 @@ JSValueRef XMPPJSObject::Send(JSContextRef ctx,
 }
 
 
-bool XMPPJSObject::Connect(const string & server, unsigned short port)
+JSValueRef XMPPJSObject::setStanzaHandler(JSContextRef ctx,
+										  JSObjectRef function,
+										  JSObjectRef thisObject,
+										  size_t argumentCount,
+										  const JSValueRef arguments[],
+										  JSValueRef *exception)
 {
-	::MessageBoxA(0, "xmpp actual connect called", "awesome", MB_OK);
-	return false;
+	::MessageBoxA(0, "dummy called", "dummy", MB_OK);
+	if(argumentCount == 1) // handler function
+	{
+		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
+		if(xmppObj)
+		{
+			bool bResult = xmppObj->setStanzaHandler(JSValueToObject(ctx, arguments[0], exception));
+			return JSValueMakeBoolean(ctx, bResult);
+		}
+	}
+	return JSValueMakeBoolean(ctx, false);
+}
+
+
+bool XMPPJSObject::Connect(const string & hostname, const string & port)
+{
+	socket.Connect(hostname, port);
+	return true;
+}
+
+bool XMPPJSObject::setStanzaHandler(JSObjectRef _stanzaHandler)
+{
+	stanzaHandler = _stanzaHandler;
+	return true;
 }
 bool XMPPJSObject::Disconnect()
 {
+	//socket.disconnect();
 	return false;
 }
 
 
 bool XMPPJSObject::Send(const string & data)
 {
+	socket.Write(data);
 	return false;
 }
 
 /*
 
-HRESULT Connect( [in] BSTR server, [in] USHORT port, [in,defaultvalue(FALSE)] BOOL useSSL,
-[in,defaultvalue(0)] DWORD ProxyMethod );
 HRESULT StartTLS();
 HRESULT StartSC();
 HRESULT Disconnect();
-HRESULT SendText( [in] BSTR strText );
 
 */

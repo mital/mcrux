@@ -5,10 +5,14 @@ using namespace std;
 
 #include "mcrux/MCruxPlugin.h"
 
+#include "Socket.h"
+
 
 class XMPPJSObject :
 	public MCruxPlugin
 {
+	JSObjectRef stanzaHandler;
+	Socket socket;
 	static list<XMPPJSObject *> xmppObjects;
 
 	static JSObjectRef ConstructorCallback(JSContextRef ctx,
@@ -39,18 +43,15 @@ class XMPPJSObject :
 		JSValueRef *exception);
 
 
-	static JSValueRef XMPPJSObject::dummyFunc(JSContextRef ctx,
+	static JSValueRef setStanzaHandler(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
 		const JSValueRef arguments[],
-		JSValueRef *exception)
-	{
-		::MessageBoxA(0, "dummy called", "dummy", MB_OK);
-		return JSValueMakeNull(ctx);
-	}
+		JSValueRef *exception);
 
-	bool Connect(const string & server, unsigned short port);
+	bool Connect(const string & hostname, const string & port);
+	bool setStanzaHandler(JSObjectRef _stanzaHandler);
 	bool Disconnect();
 	bool Send(const string & data);
 

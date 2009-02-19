@@ -61,6 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="libeay32.lib ssleay32.lib"
 				LinkIncremental="2"
 				ModuleDefinitionFile="XMPP.def"
 				GenerateDebugInformation="true"
@@ -136,6 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="libeay32.lib ssleay32.lib"
 				LinkIncremental="1"
 				ModuleDefinitionFile="XMPP.def"
 				GenerateDebugInformation="true"
@@ -183,6 +185,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Socket.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -222,6 +228,10 @@
 			>
 			<File
 				RelativePath=".\JSStringUtils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Socket.h"
 				>
 			</File>
 			<File
