@@ -12,6 +12,7 @@ class XMPPJSObject :
 	public MCruxPlugin
 {
 	JSObjectRef stanzaHandler;
+	JSContextRef ctx;
 	Socket socket;
 	static list<XMPPJSObject *> xmppObjects;
 
@@ -51,7 +52,7 @@ class XMPPJSObject :
 		JSValueRef *exception);
 
 	bool Connect(const string & hostname, const string & port);
-	bool setStanzaHandler(JSObjectRef _stanzaHandler);
+	bool setStanzaHandler(JSContextRef _sctx, JSObjectRef _stanzaHandler);
 	bool Disconnect();
 	bool Send(const string & data);
 
@@ -70,4 +71,6 @@ public:
 	virtual JSStaticFunction * getStaticFunctions() const;;
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
+
+	bool callStanzaHandler(const string &data);
 };

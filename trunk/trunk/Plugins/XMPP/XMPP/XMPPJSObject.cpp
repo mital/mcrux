@@ -10,7 +10,9 @@
 list<XMPPJSObject *> XMPPJSObject::xmppObjects;
 
 XMPPJSObject::XMPPJSObject()
-: socket()
+: stanzaHandler(NULL),
+  ctx(NULL),
+  socket(this)
 {
 }
 
@@ -25,6 +27,9 @@ XMPPJSObject::XMPPJSObject(JSContextRef ctx,
 						   size_t argumentCount,
 						   const JSValueRef arguments[],
 						   JSValueRef* exception)
+						   : stanzaHandler(NULL),
+						     ctx(NULL),
+							 socket(this)
 {
 }
 
@@ -159,13 +164,13 @@ JSValueRef XMPPJSObject::setStanzaHandler(JSContextRef ctx,
 										  const JSValueRef arguments[],
 										  JSValueRef *exception)
 {
-	::MessageBoxA(0, "dummy called", "dummy", MB_OK);
+	::MessageBoxA(0, "setStanzaHandler called", "setStanzaHandler", MB_OK);
 	if(argumentCount == 1) // handler function
 	{
 		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
 		if(xmppObj)
 		{
-			bool bResult = xmppObj->setStanzaHandler(JSValueToObject(ctx, arguments[0], exception));
+			bool bResult = xmppObj->setStanzaHandler(ctx, JSValueToObject(ctx, arguments[0], exception));
 			return JSValueMakeBoolean(ctx, bResult);
 		}
 	}
@@ -179,8 +184,9 @@ bool XMPPJSObject::Connect(const string & hostname, const string & port)
 	return true;
 }
 
-bool XMPPJSObject::setStanzaHandler(JSObjectRef _stanzaHandler)
+bool XMPPJSObject::setStanzaHandler(JSContextRef _ctx, JSObjectRef _stanzaHandler)
 {
+	ctx = _ctx;
 	stanzaHandler = _stanzaHandler;
 	return true;
 }
@@ -204,3 +210,21 @@ HRESULT StartSC();
 HRESULT Disconnect();
 
 */
+
+bool XMPPJSObject::callStanzaHandler(const string &data)
+{
+	if(ctx && stanzaHandler)
+	{
+		JSValueRef dataValue[1];
+		dataValue[0] = JSValueMakeString(ctx, JSStringCreateWithUTF8CString(data.c_str()));
+
+		JSObjectRef global = JSContextGetGlobalObject(ctx);
+		::JSObjectCallAsFunction(ctx,
+			stanzaHandler,
+			global,
+			1,
+			dataValue,
+			0);
+	}
+	return true;
+}

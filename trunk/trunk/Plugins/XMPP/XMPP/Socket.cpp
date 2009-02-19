@@ -1,12 +1,37 @@
 #include "StdAfx.h"
 #include "Socket.h"
+#include <process.h>
 
 #include <sys/types.h>
 
+#include "XMPPJSObject.h"
+
+
 bool Socket::notInitialized = true;
 
-Socket::Socket()
-: bio(NULL),
+void StartSocketThread(void * socketVoid)
+{
+	try
+	{
+		Socket * socket = (Socket *) socketVoid;
+		if(socket->Run())
+		{
+			//::MessageBoxA(0, "Run returned true", "socket thread", MB_OK);
+		}
+		else
+		{
+			//::MessageBoxA(0, "Run returned false", "socket thread", MB_OK);
+		}
+	}
+	catch(...)
+	{
+	}
+}
+
+Socket::Socket(XMPPJSObject* _jsObjectContainer)
+: jsObjectContainer(_jsObjectContainer),
+  shouldBeRunning(false),
+  bio(NULL),
   ssl(NULL),
   ctx(NULL),
   ssl_bio(NULL)
@@ -22,6 +47,7 @@ Socket::Socket()
 
 Socket::~Socket()
 {
+	shouldBeRunning = false;
 }
 
 bool Socket::Connect(const string& hostname, const string & port)
@@ -49,17 +75,15 @@ bool Socket::Connect(const string& hostname, const string & port)
 		BIO_free_all(bio);
 		return false;
 	}
+	shouldBeRunning = true;
+
+	_beginthread(StartSocketThread, 0, this);
 	return true;
 }
 
 
 void Socket::Write(const string & data)
 {
-	//BIO* bio_to_write = bio;
-	//if(ssl_bio)
-	//{
-	//	bio_to_write = ssl_bio;
-	//}
 	int writtenByteCount = BIO_write(bio, data.c_str(), (int)data.size());
 }
 
@@ -99,7 +123,7 @@ bool Socket::startTLS_SSL()
 			ssl = SSL_new(ctx);
 			ssl_bio = BIO_new_ssl_connect(ctx);
 			int i = BIO_do_handshake(bio);
-			bio = BIO_push(ssl_bio, bio);
+			bio = BIO_push(bio, ssl_bio);
 		}
 	}
 
@@ -115,5 +139,26 @@ bool startCompression()
 
 void Socket::Disconnect()
 {
-	
+	shouldBeRunning = false;
+	// TODO: cleanup the BIOs
+	BIO_free_all(bio);
+	// store thread id and wait for thread to exit.
+}
+
+bool Socket::Run()
+{
+	string readBuffer;
+	while(shouldBeRunning)
+	{
+		readBuffer = "";
+		Read(readBuffer);
+		if (!readBuffer.empty()
+			//&& (stanzaHandler)
+			)
+		{
+			jsObjectContainer->callStanzaHandler(readBuffer);
+			readBuffer = "";
+		}
+	}
+	return false;
 }
