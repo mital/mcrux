@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib shlwapi.lib libxml2.lib WebKitGUID_debug.lib WebKit.lib"
+				AdditionalDependencies="comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(SolutionDir)\..\..\MCruxLibraries\lib&quot;"
 				TypeLibraryFile="$(IntDir)/MCrux.tlb"
@@ -142,7 +142,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib shlwapi.lib libxml2.lib WebKitGUID_debug.lib WebKit.lib"
+				AdditionalDependencies="comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(SolutionDir)\..\..\MCruxLibraries\lib&quot;"
 				TypeLibraryFile="$(IntDir)/MCrux.tlb"
