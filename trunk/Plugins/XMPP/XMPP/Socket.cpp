@@ -1,7 +1,7 @@
 #include "StdAfx.h"
 #include "Socket.h"
 #include <process.h>
-
+#include <winsock.h>
 #include <sys/types.h>
 
 #include "XMPPJSObject.h"
@@ -58,33 +58,53 @@ bool Socket::Connect(const string& hostname, const string & port)
 		bio = NULL;
 	}
 
-
 	bio = BIO_new_connect((char*)hostname.c_str());
-	BIO_set_nbio(bio, 1);
+	
 	if (!bio)
 	{
 		return false;
 	}
 
-	BIO_set_conn_port(bio, port.c_str());
+	BIO_set_nbio(bio, 1);
 
-	if(BIO_do_connect(bio) <= 0)
+	if(!BIO_set_conn_port(bio, port.c_str()))
 	{
-		//TODO: implement some way of error message showing
-		//ERR_print_errors_fp(stderr);
-		BIO_free_all(bio);
 		return false;
+	}
+
+	long retVal = BIO_do_connect(bio);
+
+	if(retVal <= 0)
+	{
+		struct sockaddr sad;
+		int l = sizeof(sad);
+		if(getpeername(bio->num, &sad, &l) != 0)
+		{
+			if (!BIO_should_retry(bio))
+			{
+				return false;
+			}
+
+			//TODO: implement some way of error message showing
+			//const char * error = ERR_func_error_string(ERR_get_error());
+			BIO_free_all(bio);
+			return false;
+		}
 	}
 	shouldBeRunning = true;
 
 	_beginthread(StartSocketThread, 0, this);
 	return true;
+
 }
 
 
 void Socket::Write(const string & data)
 {
 	int writtenByteCount = BIO_write(bio, data.c_str(), (int)data.size());
+	char buf[10];
+	_itoa_s(writtenByteCount, buf, 10, 10);
+	::MessageBoxA(0, buf, "Bytes written", MB_OK);
 }
 
 void Socket::Read(string & readBuffer)
@@ -98,8 +118,11 @@ void Socket::Read(string & readBuffer)
 		{
 			break;
 		}
+		::MessageBoxA(0, "readbuffer data mil gaya", "test", MB_OK);
+		
 		buf[readBytes] = 0;
 		readBuffer += buf;
+		::MessageBoxA(0, readBuffer.c_str(), "test", MB_OK);
 	}
 }
 
@@ -156,6 +179,7 @@ bool Socket::Run()
 			//&& (stanzaHandler)
 			)
 		{
+			::MessageBoxA(0, "readbuffer called", "test", MB_OK);
 			jsObjectContainer->callStanzaHandler(readBuffer);
 			readBuffer = "";
 		}
