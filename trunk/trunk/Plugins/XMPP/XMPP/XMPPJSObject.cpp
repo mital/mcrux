@@ -65,6 +65,7 @@ JSStaticFunction * XMPPJSObject::getJSObjectStaticFunctions() const
 		{"setStanzaHandler", XMPPJSObject::setStanzaHandler, 0},
 		{"Disconnect", XMPPJSObject::Disconnect, 0},
 		{"Send", XMPPJSObject::Send, 0},
+		{"startTLS", XMPPJSObject::startTLS, 0},
 		{0, 0, 0}
 	};
 	return JSDefaultFunctions;
@@ -178,6 +179,27 @@ JSValueRef XMPPJSObject::setStanzaHandler(JSContextRef ctx,
 }
 
 
+JSValueRef XMPPJSObject::startTLS(JSContextRef ctx,
+							  JSObjectRef function,
+							  JSObjectRef thisObject,
+							  size_t argumentCount,
+							  const JSValueRef arguments[],
+							  JSValueRef *exception)
+{
+	::MessageBoxA(0, "XMPPJSObject.startTLS called.", "test", MB_OK);
+	if(argumentCount == 0) // data
+	{
+		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
+		if(xmppObj)
+		{
+			bool bResult = xmppObj->startTLS();
+			return JSValueMakeBoolean(ctx, bResult);
+		}
+	}
+	return JSValueMakeBoolean(ctx, false);
+}
+
+
 bool XMPPJSObject::Connect(const string & hostname, const string & port)
 {
 	socket.Connect(hostname, port);
@@ -203,6 +225,11 @@ bool XMPPJSObject::Send(const string & data)
 	return false;
 }
 
+
+bool XMPPJSObject::startTLS()
+{
+	return socket.startTLS();
+}
 /*
 
 HRESULT StartTLS();

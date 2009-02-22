@@ -49,6 +49,7 @@ MCruxSpecParser::MCruxSpecParser()
 
 MCruxSpecParser::~MCruxSpecParser()
 {
+	xmlCleanupParser();
 }
 
 wstring MCruxSpecParser::getURL(xmlNode *child_prop) const
@@ -180,7 +181,6 @@ bool MCruxSpecParser::parse(const string & mcruxAppConfigFileName)
 		parseMCruxSpecRootElement(xmlDocGetRootElement(doc));
 
 		xmlFreeDoc(doc);
-		xmlCleanupParser();
 		return true;
 	}
 	return false;

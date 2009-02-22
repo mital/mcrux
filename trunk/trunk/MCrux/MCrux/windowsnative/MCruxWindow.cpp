@@ -40,6 +40,7 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 	plugins.push_back(TEXT("FileSystem"));
 	plugins.push_back(TEXT("SQLiteDatabase"));
 	plugins.push_back(TEXT("XMPP"));
+	plugins.push_back(TEXT("LIBXMLSAXParser"));
 	if(!pluginManager)
 	{
 		pluginManager = new MCruxPluginManager(plugins);
