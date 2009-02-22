@@ -127,7 +127,7 @@ void Socket::Read(string & readBuffer)
 }
 
 
-bool Socket::startTLS_SSL()
+bool Socket::startTLS()
 {
 	if(bio && !ssl && !ctx)
 	{

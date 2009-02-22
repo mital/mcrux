@@ -22,21 +22,21 @@ class XMPPJSObject :
 		const JSValueRef arguments[],
 		JSValueRef* exception);
 
-	static JSValueRef XMPPJSObject::Connect(JSContextRef ctx,
+	static JSValueRef Connect(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-	static JSValueRef XMPPJSObject::Disconnect(JSContextRef ctx,
+	static JSValueRef Disconnect(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-	static JSValueRef XMPPJSObject::Send(JSContextRef ctx,
+	static JSValueRef Send(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
@@ -51,10 +51,18 @@ class XMPPJSObject :
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
+	static JSValueRef startTLS(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
 	bool Connect(const string & hostname, const string & port);
 	bool setStanzaHandler(JSContextRef _sctx, JSObjectRef _stanzaHandler);
 	bool Disconnect();
 	bool Send(const string & data);
+	bool startTLS();
 
 public:
 

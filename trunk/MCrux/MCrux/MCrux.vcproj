@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib"
+				AdditionalDependencies="comctl32.lib shlwapi.lib libxml2.lib WebKitGUID_debug.lib WebKit.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(SolutionDir)\..\..\MCruxLibraries\lib&quot;"
 				TypeLibraryFile="$(IntDir)/MCrux.tlb"
@@ -107,7 +107,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -189,6 +189,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\JSStringUtils.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\MCrux.cpp"
 				>
 			</File>
@@ -226,6 +230,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\JSStringUtils.h"
+				>
+			</File>
 			<File
 				RelativePath=".\MCrux.h"
 				>

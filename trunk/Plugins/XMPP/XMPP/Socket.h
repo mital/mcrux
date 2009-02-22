@@ -30,7 +30,7 @@ public:
 
 	bool Connect(const string& hostname, const string & port);
 
-	bool startTLS_SSL();
+	bool startTLS();
 
 	void Write(const string & data);
 
