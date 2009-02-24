@@ -1,6 +1,8 @@
 #pragma once
 
+#include <map>
 #include <list>
+#include <string>
 
 using namespace std;
 
@@ -11,6 +13,7 @@ class LIBXMLSAXJSObject :
 	public MCruxPlugin
 {
 	SAXParser parser;
+	map<string, JSObjectRef> eventMap;
 	JSObjectRef startElementHandler;
 	JSObjectRef endElementHandler;
 	JSObjectRef charactersElementHandler;
@@ -30,7 +33,7 @@ class LIBXMLSAXJSObject :
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-	static JSValueRef setSAXParserCallBacks(JSContextRef ctx,
+	static JSValueRef addEventListener(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
 		size_t argumentCount,
@@ -42,6 +45,8 @@ class LIBXMLSAXJSObject :
 	bool setSAXParserCallBacks(JSObjectRef _startElementHandler,
 		JSObjectRef _endElementHandler,
 		JSObjectRef _charactersElementHandler);
+	bool addEventListener(const string & eventName, JSObjectRef eventHandler);
+	JSObjectRef getEventListener(const string & eventName) const;
 
 public:
 
