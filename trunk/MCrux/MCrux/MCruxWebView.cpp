@@ -218,3 +218,8 @@ exit:
 		request->Release();
 	return true;
 }
+
+IWebView * MCruxWebView::getWebView()
+{
+	return webView;
+}

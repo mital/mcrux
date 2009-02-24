@@ -30,10 +30,13 @@ using namespace std;
 #include "MCrux.h"
 #include "MCruxPlugin.h"
 
+class MCruxWindow;
+
 typedef MCruxPlugin * (*GetPluginFunctionPtr)();
 
 class MCruxPluginManager
 {
+	MCruxWindow * mainWindow;
 	list<MCruxPlugin *> plugins;
 
 	void AddMCruxDefaultPlugins();
@@ -50,4 +53,6 @@ public:
 	HRESULT injectPlugins(IWebView *webView,
         JSContextRef context,
         JSObjectRef windowScriptObject);
+
+	void setMainWindow(MCruxWindow * _mainWindow);
 };

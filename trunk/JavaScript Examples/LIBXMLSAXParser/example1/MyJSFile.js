@@ -1,18 +1,24 @@
-function startElementHandler()
+function startElementHandler(element)
 {
-	alert("startelement called");
-	//alert(element);
-	//alert(element.tag);
+	alert("startelement called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
+	alert(element);
+	alert(element.tag);
 }
 
 
-function endElementHandler()
+function endElementHandler(element)
 {
+	alert("endelement called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
+	alert(element);
+	alert(element.tag);
 }
 
 
-function charactersHandler()
+function charactersHandler(element)
 {
+	alert("charactersHandler called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
+	alert(element);
+	alert(element.characters);
 }
 
 

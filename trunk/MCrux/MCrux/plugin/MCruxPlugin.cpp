@@ -20,9 +20,11 @@
 
 #include "stdafx.h"
 #include "MCruxPlugin.h"
+#include "windowsnative/MCruxWindow.h"
 
 #include <JavaScriptCore/JSStringRef.h>
 
+IWebView * MCruxPlugin::webView = NULL;
 
 MCruxPlugin::MCruxPlugin()
 {
@@ -33,8 +35,9 @@ MCruxPlugin::~MCruxPlugin()
 }
 
 
-bool MCruxPlugin::injectPlugin(JSContextRef ctx)
+bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView)
 {
+	MCruxPlugin::webView = _webView;
 	JSClassDefinition pluginNameSpace;// = kJSClassDefinitionEmpty;
 
 	pluginNameSpace.version = 0;

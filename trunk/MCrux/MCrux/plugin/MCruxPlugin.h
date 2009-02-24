@@ -24,6 +24,7 @@
 
 using namespace std;
 
+#include <WebKit.h>
 #include <JavaScriptCore/JSContextRef.h>
 
 #include "MCruxExport.h"
@@ -31,6 +32,10 @@ using namespace std;
 
 class MCRUX_API MCruxPlugin
 {
+protected:
+
+	static IWebView* webView;
+
 public:
 
 	MCruxPlugin();
@@ -44,7 +49,7 @@ public:
 
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 
-	bool injectPlugin(JSContextRef ctx);
+	bool injectPlugin(JSContextRef ctx, IWebView * _webView);
 
 	// object creation related methods
 	JSObjectRef createJSObject(JSContextRef ctx);

@@ -11,7 +11,6 @@ class LIBXMLSAXJSObject :
 	public MCruxPlugin
 {
 	SAXParser parser;
-	JSContextRef ctx;
 	JSObjectRef startElementHandler;
 	JSObjectRef endElementHandler;
 	JSObjectRef charactersElementHandler;
@@ -40,8 +39,7 @@ class LIBXMLSAXJSObject :
 
 	int xmlParseChunk(const string & data);
 
-	bool setSAXParserCallBacks(JSContextRef _ctx,
-		JSObjectRef _startElementHandler,
+	bool setSAXParserCallBacks(JSObjectRef _startElementHandler,
 		JSObjectRef _endElementHandler,
 		JSObjectRef _charactersElementHandler);
 

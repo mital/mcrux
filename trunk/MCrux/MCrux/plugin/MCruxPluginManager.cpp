@@ -19,12 +19,13 @@
 
 
 #include "StdAfx.h"
-#include "MCruxPluginManager.h"
+#include "windowsnative/MCruxWindow.h"
 
 #include "MCruxJSObject.h"
 
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
+: mainWindow(NULL)
 {
 	AddMCruxDefaultPlugins();
 	AddExtensionPlugins(extensionPluginNames);
@@ -80,13 +81,19 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
 {
+	MCruxWebView * mcruxWebView = mainWindow->getMCruxWebView();
 	for(list<MCruxPlugin *>::const_iterator
 		oIter = plugins.begin();
 		oIter != plugins.end();
 	oIter++)
 	{
-		(*oIter)->injectPlugin(context);
+		(*oIter)->injectPlugin(context, mcruxWebView->getWebView());
 	}
 
 	return S_OK;
+}
+
+void MCruxPluginManager::setMainWindow(MCruxWindow * _mainWindow)
+{
+	mainWindow = _mainWindow;
 }

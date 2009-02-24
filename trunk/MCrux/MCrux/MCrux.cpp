@@ -106,12 +106,14 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 	list<wstring> plugins;
 	parser.getPlugins(plugins);
 
+	MCruxPluginManager pluginManager(plugins);
+
 	HINSTANCE hInstance = GetModuleHandle(NULL);
 
 	if(mcruxWindowConfigs.size())
 	{
 		MCruxWindowConfiguration * mainWindowConfig = mcruxWindowConfigs.back();
-		MCruxWindow * mainWindow = new MCruxWindow(hInstance, mainWindowConfig);
+		MCruxWindow * mainWindow = new MCruxWindow(hInstance, mainWindowConfig, &pluginManager, true);
 		mainWindow->ShowWindow();
 		mainWindow->UpdateWindow();
 

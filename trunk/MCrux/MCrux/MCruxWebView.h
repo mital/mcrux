@@ -52,4 +52,5 @@ public:
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
 	bool loadURLInWindow(HWND hWnd, const wstring & url);
 	bool navigateTo(const wstring & url);
+	IWebView * getWebView();
 };
