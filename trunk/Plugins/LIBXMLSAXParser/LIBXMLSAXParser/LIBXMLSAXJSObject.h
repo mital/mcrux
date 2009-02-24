@@ -40,12 +40,18 @@ class LIBXMLSAXJSObject :
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
+	static JSValueRef removeEventListener(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
 	int xmlParseChunk(const string & data);
 
-	bool setSAXParserCallBacks(JSObjectRef _startElementHandler,
-		JSObjectRef _endElementHandler,
-		JSObjectRef _charactersElementHandler);
+	// event listener related methods
 	bool addEventListener(const string & eventName, JSObjectRef eventHandler);
+	bool removeEventListener(const string & eventName, JSObjectRef eventHandler);
 	JSObjectRef getEventListener(const string & eventName) const;
 
 public:

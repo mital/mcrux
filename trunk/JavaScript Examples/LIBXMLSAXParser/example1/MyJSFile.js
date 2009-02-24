@@ -33,4 +33,21 @@ function myFunction()
 	saxParserObj.addEventListener("CharactersHandler", charactersHandler);
 
 	saxParserObj.xmlParseChunk('<array:foobar size="5">mydata</array:foobar>');
+
+	var ret = saxParserObj.removeEventListener("StartElementHandler", startElementHandler);
+	if(ret)
+	{
+		alert("remove success");
+	}
+	var ret = saxParserObj.removeEventListener("EndElementHandler", endElementHandler);
+	if(ret)
+	{
+		alert("remove success");
+	}
+	var ret = saxParserObj.removeEventListener("CharactersHandler", charactersHandler);
+	if(ret)
+	{
+		alert("remove success");
+	}
+
 }
