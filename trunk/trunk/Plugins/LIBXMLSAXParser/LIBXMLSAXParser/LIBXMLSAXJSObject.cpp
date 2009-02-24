@@ -10,7 +10,6 @@ list<LIBXMLSAXJSObject *> LIBXMLSAXJSObject::saxParserObjects;
 
 LIBXMLSAXJSObject::LIBXMLSAXJSObject()
 : parser(this),
-  ctx(NULL),
   startElementHandler(NULL),
   endElementHandler(NULL),
   charactersElementHandler(NULL)
@@ -24,7 +23,6 @@ LIBXMLSAXJSObject::LIBXMLSAXJSObject(JSContextRef ctx,
 									 const JSValueRef arguments[],
 									 JSValueRef* exception)
 									 : parser(this),
-									   ctx(NULL),
 									   startElementHandler(NULL),
 									   endElementHandler(NULL),
 									   charactersElementHandler(NULL)
@@ -43,7 +41,6 @@ JSObjectRef LIBXMLSAXJSObject::ConstructorCallback(JSContextRef ctx,
 												   const JSValueRef arguments[],
 												   JSValueRef* exception)
 {
-	::MessageBoxA(0, "libxml_saxparser constructor called", "test", MB_OK);
 	// check for required arguments before creating the object
 	if(argumentCount == 0)
 	{
@@ -99,7 +96,6 @@ JSValueRef LIBXMLSAXJSObject::xmlParseChunk(JSContextRef ctx,
 											JSValueRef *exception)
 {
 	int ret = -1;
-	::MessageBoxA(0, "LIBXMLSAXJSObject.xmlparsechunk called.", "test", MB_OK);
 	if(argumentCount == 1) // data
 	{
 		string data = getStringValueFrom(ctx, arguments[0]);
@@ -120,13 +116,12 @@ JSValueRef LIBXMLSAXJSObject::setSAXParserCallBacks(JSContextRef ctx,
 													const JSValueRef arguments[],
 													JSValueRef *exception)
 {
-	::MessageBoxA(0, "LIBXMLSAXJSObject.setSAXParserCallBacks called.", "test", MB_OK);
 	if(argumentCount == 3) // startElementHandler, endElementHandler, charactersHandler
 	{
 		LIBXMLSAXJSObject * saxObj = (LIBXMLSAXJSObject*) JSObjectGetPrivate(thisObject);
 		if(saxObj)
 		{
-			bool bRet = saxObj->setSAXParserCallBacks(ctx,
+			bool bRet = saxObj->setSAXParserCallBacks(
 				JSValueToObject(ctx, arguments[0], exception),
 				JSValueToObject(ctx, arguments[1], exception),
 				JSValueToObject(ctx, arguments[2], exception));
@@ -137,12 +132,10 @@ JSValueRef LIBXMLSAXJSObject::setSAXParserCallBacks(JSContextRef ctx,
 }
 
 
-bool LIBXMLSAXJSObject::setSAXParserCallBacks(JSContextRef _ctx,
-											  JSObjectRef _startElementHandler,
+bool LIBXMLSAXJSObject::setSAXParserCallBacks(JSObjectRef _startElementHandler,
 											  JSObjectRef _endElementHandler,
 											  JSObjectRef _charactersElementHandler)
 {
-	ctx = _ctx;
 	startElementHandler = _startElementHandler;
 	endElementHandler = _endElementHandler;
 	charactersElementHandler = _charactersElementHandler;
@@ -157,29 +150,84 @@ int LIBXMLSAXJSObject::xmlParseChunk(const string & data)
 
 void LIBXMLSAXJSObject::handleStartElement(const xmlChar * name, const xmlChar ** atts)
 {
-	::MessageBoxA(0, "startElementHandler called", "saxparser", MB_OK);
-	if(ctx)
+	if (!MCruxPlugin::webView)
 	{
-		//JSObjectRef global = JSContextGetGlobalObject(ctx);
-		//JSObjectRef startElement = JSObjectMake(ctx, NULL, NULL);
-		//JSStringRef tagName = JSStringCreateWithUTF8CString((const char *)name);
-		//JSStringRef tag = JSStringCreateWithUTF8CString("tag");
-		//JSObjectSetProperty(ctx, startElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
+		::MessageBoxA(0, "startElementHandler webview not set", "saxparser", MB_OK);
+		// TODO: return error
+		return;
+	}
+	IWebFrame * frame;
+	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
+	if(SUCCEEDED(hr))
+	{
+		JSContextRef ctx = frame->globalContext();
+		if(ctx)
+		{
+			JSObjectRef global = JSContextGetGlobalObject(ctx);
+			JSObjectRef startElement = JSObjectMake(ctx, NULL, NULL);
+			JSStringRef tagName = JSStringCreateWithUTF8CString((const char *)name);
+			JSStringRef tag = JSStringCreateWithUTF8CString("tag");
+			JSObjectSetProperty(ctx, startElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
 
-		//JSObjectCallAsFunction(ctx, startElementHandler, global, 0, &startElement, 0);
-		//JSObjectCallAsFunction(ctx, startElementHandler, global, 0, 0, 0);
+			JSObjectCallAsFunction(ctx, startElementHandler, global, 1, &startElement, 0);
 
+		}
 	}
 }
 
 
 void LIBXMLSAXJSObject::handleEndElement(const xmlChar * name)
 {
-	::MessageBoxA(0, "endElementHandler called", "saxparser", MB_OK);
+	if (!MCruxPlugin::webView)
+	{
+		::MessageBoxA(0, "endElementHandler webview not set", "saxparser", MB_OK);
+		// TODO: return error
+		return;
+	}
+	IWebFrame * frame;
+	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
+	if(SUCCEEDED(hr))
+	{
+		JSContextRef ctx = frame->globalContext();
+		if(ctx)
+		{
+			JSObjectRef global = JSContextGetGlobalObject(ctx);
+			JSObjectRef endElement = JSObjectMake(ctx, NULL, NULL);
+			JSStringRef tagName = JSStringCreateWithUTF8CString((const char *)name);
+			JSStringRef tag = JSStringCreateWithUTF8CString("tag");
+			JSObjectSetProperty(ctx, endElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
+
+			JSObjectCallAsFunction(ctx, endElementHandler, global, 1, &endElement, 0);
+
+		}
+	}
 }
 
 
 void LIBXMLSAXJSObject::handleCharacters(const xmlChar * ch, int len)
 {
-	::MessageBoxA(0, "charactersHandler called", "saxparser", MB_OK);
+	if (!MCruxPlugin::webView)
+	{
+		::MessageBoxA(0, "endElementHandler webview not set", "saxparser", MB_OK);
+		// TODO: return error
+		return;
+	}
+	IWebFrame * frame;
+	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
+	if(SUCCEEDED(hr))
+	{
+		JSContextRef ctx = frame->globalContext();
+		if(ctx)
+		{
+			string c((char *)ch, len);
+			JSObjectRef global = JSContextGetGlobalObject(ctx);
+			JSObjectRef charElement = JSObjectMake(ctx, NULL, NULL);
+			JSStringRef charactersString = JSStringCreateWithUTF8CString((const char *)c.c_str());
+			JSStringRef characters = JSStringCreateWithUTF8CString("characters");
+			JSObjectSetProperty(ctx, charElement, characters, JSValueMakeString(ctx, charactersString), 0, 0);
+
+			JSObjectCallAsFunction(ctx, charactersElementHandler, global, 1, &charElement, 0);
+
+		}
+	}
 }

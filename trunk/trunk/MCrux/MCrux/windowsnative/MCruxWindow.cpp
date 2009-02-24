@@ -25,29 +25,19 @@
 
 map<HWND, MCruxWindow *> MCruxWindow::mcruxWindows;
 
-MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * _config)
+MCruxWindow::MCruxWindow(HINSTANCE _hInstance,
+						 const MCruxWindowConfiguration * _config,
+						 MCruxPluginManager * pluginManager,
+						 bool _isMainWindow)
 	: hInstance(_hInstance),
 	  hWnd(NULL),
 	  config(_config),
+	  isMainWindow(_isMainWindow),
 	  webView(),
-	  pluginManager(NULL),
 	  webUIDelegate(),
 	  webFrameLoadDelegate(),
 	  delegatesHandler()
 {
-	// creating the pluginManager
-	list <wstring> plugins;
-	plugins.push_back(TEXT("FileSystem"));
-	plugins.push_back(TEXT("SQLiteDatabase"));
-	plugins.push_back(TEXT("XMPP"));
-	plugins.push_back(TEXT("LIBXMLSAXParser"));
-	if(!pluginManager)
-	{
-		pluginManager = new MCruxPluginManager(plugins);
-	}
-
-	delegatesHandler.setPluginManager(pluginManager);
-
 	hWnd = CreateWindow(MCruxWindow::getWindowClassName(),
 		config->getWindowTitle().c_str(),
 		WS_OVERLAPPEDWINDOW,
@@ -73,8 +63,12 @@ MCruxWindow::MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * 
 	}
 	webFrameLoadDelegate.setFrameLoadHandler(&delegatesHandler);
 
-	wstring defaultPage = _T("<html><head><title>Hi !</title>\n <script type=\"text/javascript\">\n //<!-- \n alert(\"Just wanted to say you Hi MCrux User !\"); \n mcrux.someFunction(); \n //-->\n </script></head><body><h1>hi!</h1></body></html>");
-	//if (!webView.loadPageInWindow(hWnd, defaultPage))
+	if(isMainWindow)
+	{
+		pluginManager->setMainWindow(this);
+	}
+	delegatesHandler.setPluginManager(pluginManager);
+
 	if (!webView.loadURLInWindow(hWnd, config->getURL()))
 	{
 		::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
@@ -202,3 +196,7 @@ LRESULT CALLBACK MCruxWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LP
 	return 0;
 }
 
+MCruxWebView * MCruxWindow::getMCruxWebView()
+{
+	return &webView;
+}

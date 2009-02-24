@@ -39,12 +39,10 @@ class MCruxWindow
 	HINSTANCE hInstance;
 	HWND hWnd;
 	const MCruxWindowConfiguration * config;
+	const bool isMainWindow;
 
 	// webView
 	MCruxWebView webView;
-
-	//// plugin Manager
-	MCruxPluginManager * pluginManager;
 
 	// delegates
 	MCruxWebUIDelegate webUIDelegate;
@@ -57,14 +55,17 @@ class MCruxWindow
 	static map<HWND, MCruxWindow *> mcruxWindows;
 
 public:
-	MCruxWindow(HINSTANCE _hInstance, const MCruxWindowConfiguration * _config);
+	MCruxWindow(HINSTANCE _hInstance,
+		const MCruxWindowConfiguration * _config,
+		MCruxPluginManager * pluginManager,
+		const bool _isMainWindow = false);
 	~MCruxWindow();
 
 	int ShowWindow() const;
 	int HideWindow() const;
 	int UpdateWindow() const;
 	void resize() const;
-
+	MCruxWebView * getMCruxWebView();
 
 	static void initWindowClass(HINSTANCE hInstance);
 	static void unInitWindowClass(HINSTANCE hInstance);
