@@ -83,6 +83,7 @@ JSStaticFunction * LIBXMLSAXJSObject::getJSObjectStaticFunctions() const
 	= {
 		{"xmlParseChunk", LIBXMLSAXJSObject::xmlParseChunk, 0},
 		{"addEventListener", LIBXMLSAXJSObject::addEventListener, 0},
+		{"removeEventListener", LIBXMLSAXJSObject::removeEventListener, 0},
 		{0, 0, 0}
 	};
 	return JSDefaultFunctions;
@@ -131,14 +132,25 @@ JSValueRef LIBXMLSAXJSObject::addEventListener(JSContextRef ctx,
 }
 
 
-bool LIBXMLSAXJSObject::setSAXParserCallBacks(JSObjectRef _startElementHandler,
-											  JSObjectRef _endElementHandler,
-											  JSObjectRef _charactersElementHandler)
+JSValueRef LIBXMLSAXJSObject::removeEventListener(JSContextRef ctx,
+													JSObjectRef function,
+													JSObjectRef thisObject,
+													size_t argumentCount,
+													const JSValueRef arguments[],
+													JSValueRef *exception)
 {
-	startElementHandler = _startElementHandler;
-	endElementHandler = _endElementHandler;
-	charactersElementHandler = _charactersElementHandler;
-	return true;
+	if(argumentCount == 2) // eventName, eventHandlerFunction
+	{
+		LIBXMLSAXJSObject * saxObj = (LIBXMLSAXJSObject*) JSObjectGetPrivate(thisObject);
+		if(saxObj)
+		{
+			string eventName = getStringValueFrom(ctx, arguments[0]);
+			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
+			bool bRet = saxObj->removeEventListener(eventName, eventHandler);
+			return JSValueMakeBoolean(ctx, bRet);
+		}
+	}
+	return JSValueMakeBoolean(ctx, false);
 }
 
 
@@ -146,6 +158,7 @@ int LIBXMLSAXJSObject::xmlParseChunk(const string & data)
 {
 	return parser.xmlParseChunk(data);
 }
+
 
 void LIBXMLSAXJSObject::handleStartElement(const xmlChar * name, const xmlChar ** atts)
 {
@@ -249,6 +262,7 @@ bool LIBXMLSAXJSObject::addEventListener(const string & eventName, JSObjectRef e
 	return true;
 }
 
+
 JSObjectRef LIBXMLSAXJSObject::getEventListener(const string & eventName) const
 {
 	map<string, JSObjectRef>::const_iterator iter = eventMap.find(eventName);
@@ -257,4 +271,16 @@ JSObjectRef LIBXMLSAXJSObject::getEventListener(const string & eventName) const
 		return iter->second;
 	}
 	return NULL;
+}
+
+
+bool LIBXMLSAXJSObject::removeEventListener(const string & eventName, JSObjectRef eventHandler)
+{
+	map<string, JSObjectRef>::iterator iter = eventMap.find(eventName);
+	if (iter != eventMap.end() && iter->second == eventHandler)
+	{
+		eventMap.erase(iter);
+		return true;
+	}
+	return false;
 }
