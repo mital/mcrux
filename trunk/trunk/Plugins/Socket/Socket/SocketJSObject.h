@@ -1,6 +1,8 @@
 #pragma once
 
+#include <map>
 #include <list>
+#include <string>
 using namespace std;
 
 #include "mcrux/MCruxPlugin.h"
@@ -11,9 +13,9 @@ using namespace std;
 class SocketJSObject :
 	public MCruxPlugin
 {
-	JSObjectRef stanzaHandler;
-	JSContextRef ctx;
+	map<string, JSObjectRef> eventMap;
 	Socket socket;
+
 	static list<SocketJSObject *> socketObjects;
 
 	static JSObjectRef ConstructorCallback(JSContextRef ctx,
@@ -21,6 +23,20 @@ class SocketJSObject :
 		size_t argumentCount,
 		const JSValueRef arguments[],
 		JSValueRef* exception);
+
+	static JSValueRef addEventListener(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
+	static JSValueRef removeEventListener(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
 
 	static JSValueRef Connect(JSContextRef ctx,
 		JSObjectRef function,
@@ -43,14 +59,6 @@ class SocketJSObject :
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-
-	static JSValueRef setStanzaHandler(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
-
 	static JSValueRef startTLS(JSContextRef ctx,
 		JSObjectRef function,
 		JSObjectRef thisObject,
@@ -58,8 +66,12 @@ class SocketJSObject :
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
+	// event listener related methods
+	bool addEventListener(const string & eventName, JSObjectRef eventHandler);
+	bool removeEventListener(const string & eventName, JSObjectRef eventHandler);
+	JSObjectRef getEventListener(const string & eventName) const;
+
 	bool Connect(const string & hostname, const string & port);
-	bool setStanzaHandler(JSContextRef _sctx, JSObjectRef _stanzaHandler);
 	bool Disconnect();
 	bool Send(const string & data);
 	bool startTLS();
@@ -80,5 +92,5 @@ public:
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
 
-	bool callStanzaHandler(const string &data);
+	void handleReadData(const string &data);
 };

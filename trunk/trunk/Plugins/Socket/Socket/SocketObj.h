@@ -32,7 +32,7 @@ public:
 
 	bool startTLS();
 
-	void Write(const string & data);
+	bool Write(const string & data);
 
 	void Read(string & readBuffer);
 

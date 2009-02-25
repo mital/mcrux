@@ -10,9 +10,7 @@
 list<SocketJSObject *> SocketJSObject::socketObjects;
 
 SocketJSObject::SocketJSObject()
-: stanzaHandler(NULL),
-  ctx(NULL),
-  socket(this)
+: socket(this)
 {
 }
 
@@ -27,9 +25,7 @@ SocketJSObject::SocketJSObject(JSContextRef ctx,
 						   size_t argumentCount,
 						   const JSValueRef arguments[],
 						   JSValueRef* exception)
-						   : stanzaHandler(NULL),
-						     ctx(NULL),
-							 socket(this)
+						   : socket(this)
 {
 }
 
@@ -61,8 +57,9 @@ JSStaticFunction * SocketJSObject::getJSObjectStaticFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {
+		{"addEventListener", SocketJSObject::addEventListener, 0},
+		{"removeEventListener", SocketJSObject::removeEventListener, 0},
 		{"Connect", SocketJSObject::Connect, 0},
-		{"setStanzaHandler", SocketJSObject::setStanzaHandler, 0},
 		{"Disconnect", SocketJSObject::Disconnect, 0},
 		{"Send", SocketJSObject::Send, 0},
 		{"startTLS", SocketJSObject::startTLS, 0},
@@ -89,6 +86,50 @@ JSObjectRef SocketJSObject::ConstructorCallback(JSContextRef ctx,
 	}
 	// TODO: throw exception.
 	return JSValueToObject(ctx, JSValueMakeUndefined(ctx), exception);
+}
+
+
+JSValueRef SocketJSObject::addEventListener(JSContextRef ctx,
+													JSObjectRef function,
+													JSObjectRef thisObject,
+													size_t argumentCount,
+													const JSValueRef arguments[],
+													JSValueRef *exception)
+{
+	if(argumentCount == 2) // eventName, eventHandlerFunction
+	{
+		SocketJSObject * saxObj = (SocketJSObject*) JSObjectGetPrivate(thisObject);
+		if(saxObj)
+		{
+			string eventName = getStringValueFrom(ctx, arguments[0]);
+			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
+			bool bRet = saxObj->addEventListener(eventName, eventHandler);
+			return JSValueMakeBoolean(ctx, bRet);
+		}
+	}
+	return JSValueMakeBoolean(ctx, false);
+}
+
+
+JSValueRef SocketJSObject::removeEventListener(JSContextRef ctx,
+													JSObjectRef function,
+													JSObjectRef thisObject,
+													size_t argumentCount,
+													const JSValueRef arguments[],
+													JSValueRef *exception)
+{
+	if(argumentCount == 2) // eventName, eventHandlerFunction
+	{
+		SocketJSObject * saxObj = (SocketJSObject*) JSObjectGetPrivate(thisObject);
+		if(saxObj)
+		{
+			string eventName = getStringValueFrom(ctx, arguments[0]);
+			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
+			bool bRet = saxObj->removeEventListener(eventName, eventHandler);
+			return JSValueMakeBoolean(ctx, bRet);
+		}
+	}
+	return JSValueMakeBoolean(ctx, false);
 }
 
 
@@ -143,6 +184,7 @@ JSValueRef SocketJSObject::Send(JSContextRef ctx,
 							  const JSValueRef arguments[],
 							  JSValueRef *exception)
 {
+	bool bResult = false;
 	::MessageBoxA(0, "SocketJSObject.Send called.", "test", MB_OK);
 	if(argumentCount == 1) // data
 	{
@@ -150,32 +192,10 @@ JSValueRef SocketJSObject::Send(JSContextRef ctx,
 		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
 		if(socketObj)
 		{
-			bool bResult = socketObj->Send(data);
-			return JSValueMakeBoolean(ctx, bResult);
+			bResult = socketObj->Send(data);
 		}
 	}
-	return JSValueMakeBoolean(ctx, false);
-}
-
-
-JSValueRef SocketJSObject::setStanzaHandler(JSContextRef ctx,
-										  JSObjectRef function,
-										  JSObjectRef thisObject,
-										  size_t argumentCount,
-										  const JSValueRef arguments[],
-										  JSValueRef *exception)
-{
-	::MessageBoxA(0, "setStanzaHandler called", "setStanzaHandler", MB_OK);
-	if(argumentCount == 1) // handler function
-	{
-		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
-		if(socketObj)
-		{
-			bool bResult = socketObj->setStanzaHandler(ctx, JSValueToObject(ctx, arguments[0], exception));
-			return JSValueMakeBoolean(ctx, bResult);
-		}
-	}
-	return JSValueMakeBoolean(ctx, false);
+	return JSValueMakeBoolean(ctx, bResult);
 }
 
 
@@ -206,12 +226,6 @@ bool SocketJSObject::Connect(const string & hostname, const string & port)
 	return true;
 }
 
-bool SocketJSObject::setStanzaHandler(JSContextRef _ctx, JSObjectRef _stanzaHandler)
-{
-	ctx = _ctx;
-	stanzaHandler = _stanzaHandler;
-	return true;
-}
 bool SocketJSObject::Disconnect()
 {
 	//socket.disconnect();
@@ -221,8 +235,7 @@ bool SocketJSObject::Disconnect()
 
 bool SocketJSObject::Send(const string & data)
 {
-	socket.Write(data);
-	return false;
+	return socket.Write(data);
 }
 
 
@@ -230,28 +243,64 @@ bool SocketJSObject::startTLS()
 {
 	return socket.startTLS();
 }
-/*
 
-HRESULT StartTLS();
-HRESULT StartSC();
-HRESULT Disconnect();
 
-*/
-
-bool SocketJSObject::callStanzaHandler(const string &data)
+bool SocketJSObject::addEventListener(const string & eventName, JSObjectRef eventHandler)
 {
-	if(ctx && stanzaHandler)
-	{
-		JSValueRef dataValue[1];
-		dataValue[0] = JSValueMakeString(ctx, JSStringCreateWithUTF8CString(data.c_str()));
-
-		JSObjectRef global = JSContextGetGlobalObject(ctx);
-		::JSObjectCallAsFunction(ctx,
-			stanzaHandler,
-			global,
-			1,
-			dataValue,
-			0);
-	}
+	eventMap[eventName] = eventHandler;
 	return true;
+}
+
+
+JSObjectRef SocketJSObject::getEventListener(const string & eventName) const
+{
+	map<string, JSObjectRef>::const_iterator iter = eventMap.find(eventName);
+	if (iter != eventMap.end())
+	{
+		return iter->second;
+	}
+	return NULL;
+}
+
+
+bool SocketJSObject::removeEventListener(const string & eventName, JSObjectRef eventHandler)
+{
+	map<string, JSObjectRef>::iterator iter = eventMap.find(eventName);
+	if (iter != eventMap.end() && iter->second == eventHandler)
+	{
+		eventMap.erase(iter);
+		return true;
+	}
+	return false;
+}
+
+
+void SocketJSObject::handleReadData(const string &data)
+{
+	if (!MCruxPlugin::webView)
+	{
+		::MessageBoxA(0, "endElementHandler webview not set", "saxparser", MB_OK);
+		// TODO: return error
+		return;
+	}
+	IWebFrame * frame;
+	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
+	if(SUCCEEDED(hr))
+	{
+		JSContextRef ctx = frame->globalContext();
+		if(ctx)
+		{
+			JSObjectRef global = JSContextGetGlobalObject(ctx);
+			JSObjectRef endElement = JSObjectMake(ctx, NULL, NULL);
+			JSStringRef tagName = JSStringCreateWithUTF8CString((const char *)data.c_str());
+			JSStringRef tag = JSStringCreateWithUTF8CString("data");
+			JSObjectSetProperty(ctx, endElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
+
+			JSObjectRef handler = getEventListener("ReadDataHandler");
+			if(handler)
+			{
+				JSObjectCallAsFunction(ctx, handler, global, 1, &endElement, 0);
+			}
+		}
+	}
 }
