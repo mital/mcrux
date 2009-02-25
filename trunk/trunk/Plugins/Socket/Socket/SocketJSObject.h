@@ -8,13 +8,13 @@ using namespace std;
 #include "SocketObj.h"
 
 
-class XMPPJSObject :
+class SocketJSObject :
 	public MCruxPlugin
 {
 	JSObjectRef stanzaHandler;
 	JSContextRef ctx;
 	Socket socket;
-	static list<XMPPJSObject *> xmppObjects;
+	static list<SocketJSObject *> socketObjects;
 
 	static JSObjectRef ConstructorCallback(JSContextRef ctx,
 		JSObjectRef constructor,
@@ -66,14 +66,14 @@ class XMPPJSObject :
 
 public:
 
-	XMPPJSObject(JSContextRef ctx,
+	SocketJSObject(JSContextRef ctx,
 		JSObjectRef constructor,
 		size_t argumentCount,
 		const JSValueRef arguments[],
 		JSValueRef* exception);
 
-	XMPPJSObject();
-	virtual ~XMPPJSObject();
+	SocketJSObject();
+	virtual ~SocketJSObject();
 
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;;

@@ -1,5 +1,5 @@
 // stdafx.cpp : source file that includes just the standard includes
-// XMPP.pch will be the pre-compiled header
+// Socket.pch will be the pre-compiled header
 // stdafx.obj will contain the pre-compiled type information
 
 #include "stdafx.h"

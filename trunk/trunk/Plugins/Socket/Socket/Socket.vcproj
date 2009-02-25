@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;XMPP_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;XMPP_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -183,7 +183,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\JSStringUtils.cpp"
+				RelativePath=".\Socket.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Socket.def"
 				>
 			</File>
 			<File
@@ -211,15 +215,7 @@
 				</FileConfiguration>
 			</File>
 			<File
-				RelativePath=".\XMPP.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Socket.def"
-				>
-			</File>
-			<File
-				RelativePath=".\XMPPJSObject.cpp"
+				RelativePath=".\SocketJSObject.cpp"
 				>
 			</File>
 		</Filter>
@@ -229,10 +225,6 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\JSStringUtils.h"
-				>
-			</File>
-			<File
 				RelativePath=".\SocketObj.h"
 				>
 			</File>
@@ -241,11 +233,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\XMPP.h"
-				>
-			</File>
-			<File
-				RelativePath=".\XMPPJSObject.h"
+				RelativePath=".\SocketJSObject.h"
 				>
 			</File>
 		</Filter>

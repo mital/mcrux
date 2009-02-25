@@ -1,20 +1,20 @@
 ========================================================================
-    DYNAMIC LINK LIBRARY : XMPP Project Overview
+    DYNAMIC LINK LIBRARY : Socket Project Overview
 ========================================================================
 
-AppWizard has created this XMPP DLL for you.  
+AppWizard has created this Socket DLL for you.  
 
 This file contains a summary of what you will find in each of the files that
-make up your XMPP application.
+make up your Socket application.
 
 
-XMPP.vcproj
+Socket.vcproj
     This is the main project file for VC++ projects generated using an Application Wizard. 
     It contains information about the version of Visual C++ that generated the file, and 
     information about the platforms, configurations, and project features selected with the
     Application Wizard.
 
-XMPP.cpp
+Socket.cpp
     This is the main DLL source file.
 
 /////////////////////////////////////////////////////////////////////////////
@@ -22,7 +22,7 @@ Other standard files:
 
 StdAfx.h, StdAfx.cpp
     These files are used to build a precompiled header (PCH) file
-    named XMPP.pch and a precompiled types file named StdAfx.obj.
+    named Socket.pch and a precompiled types file named StdAfx.obj.
 
 /////////////////////////////////////////////////////////////////////////////
 Other notes:

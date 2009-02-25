@@ -4,7 +4,7 @@
 #include <winsock.h>
 #include <sys/types.h>
 
-#include "XMPPJSObject.h"
+#include "SocketJSObject.h"
 
 
 bool Socket::notInitialized = true;
@@ -28,7 +28,7 @@ void StartSocketThread(void * socketVoid)
 	}
 }
 
-Socket::Socket(XMPPJSObject* _jsObjectContainer)
+Socket::Socket(SocketJSObject* _jsObjectContainer)
 : jsObjectContainer(_jsObjectContainer),
   shouldBeRunning(false),
   bio(NULL),

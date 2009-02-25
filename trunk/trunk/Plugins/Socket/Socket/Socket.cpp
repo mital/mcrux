@@ -1,9 +1,8 @@
-// XMPP.cpp : Defines the entry point for the DLL application.
+// Socket.cpp : Defines the entry point for the DLL application.
 //
 
 #include "stdafx.h"
-#include "XMPP.h"
-#include "XMPPJSObject.h"
+#include "SocketJSObject.h"
 
 #ifdef _MANAGED
 #pragma managed(push, off)
@@ -31,6 +30,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 __declspec(dllexport) MCruxPlugin * getMCruxPlugin()
 {
-	return new XMPPJSObject();
+	return new SocketJSObject();
 }
 
