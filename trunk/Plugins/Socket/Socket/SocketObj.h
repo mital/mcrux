@@ -8,12 +8,12 @@ using namespace std;
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 
-class XMPPJSObject;
+class SocketJSObject;
 
 class Socket
 {
 	static bool notInitialized;
-	XMPPJSObject* jsObjectContainer;
+	SocketJSObject* jsObjectContainer;
 	bool shouldBeRunning;
 	BIO * bio;
 	SSL* ssl;
@@ -22,7 +22,7 @@ class Socket
 
 public:
 
-	Socket(XMPPJSObject* _jsObjectContainer);
+	Socket(SocketJSObject* _jsObjectContainer);
 
 	~Socket();
 

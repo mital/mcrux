@@ -1,15 +1,15 @@
 #include "StdAfx.h"
-#include "XMPPJSObject.h"
+#include "SocketJSObject.h"
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
 #include <JavaScriptCore/RetainPtr.h>
-#include "JSStringUtils.h"
+#include "mcrux/JSStringUtils.h"
 
 
-list<XMPPJSObject *> XMPPJSObject::xmppObjects;
+list<SocketJSObject *> SocketJSObject::socketObjects;
 
-XMPPJSObject::XMPPJSObject()
+SocketJSObject::SocketJSObject()
 : stanzaHandler(NULL),
   ctx(NULL),
   socket(this)
@@ -17,12 +17,12 @@ XMPPJSObject::XMPPJSObject()
 }
 
 
-XMPPJSObject::~XMPPJSObject()
+SocketJSObject::~SocketJSObject()
 {
 }
 
 
-XMPPJSObject::XMPPJSObject(JSContextRef ctx,
+SocketJSObject::SocketJSObject(JSContextRef ctx,
 						   JSObjectRef constructor,
 						   size_t argumentCount,
 						   const JSValueRef arguments[],
@@ -34,20 +34,20 @@ XMPPJSObject::XMPPJSObject(JSContextRef ctx,
 }
 
 
-string XMPPJSObject::getName() const
+string SocketJSObject::getName() const
 {
-	static string name = "xmpp";
+	static string name = "socket";
 	return name;
 }
 
-JSObjectCallAsConstructorCallback XMPPJSObject::getConstructor() const
+JSObjectCallAsConstructorCallback SocketJSObject::getConstructor() const
 {
-	return XMPPJSObject::ConstructorCallback;
+	return SocketJSObject::ConstructorCallback;
 }
 
 
 
-JSStaticFunction * XMPPJSObject::getStaticFunctions() const
+JSStaticFunction * SocketJSObject::getStaticFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {
@@ -57,34 +57,34 @@ JSStaticFunction * XMPPJSObject::getStaticFunctions() const
 }
 
 
-JSStaticFunction * XMPPJSObject::getJSObjectStaticFunctions() const
+JSStaticFunction * SocketJSObject::getJSObjectStaticFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {
-		{"Connect", XMPPJSObject::Connect, 0},
-		{"setStanzaHandler", XMPPJSObject::setStanzaHandler, 0},
-		{"Disconnect", XMPPJSObject::Disconnect, 0},
-		{"Send", XMPPJSObject::Send, 0},
-		{"startTLS", XMPPJSObject::startTLS, 0},
+		{"Connect", SocketJSObject::Connect, 0},
+		{"setStanzaHandler", SocketJSObject::setStanzaHandler, 0},
+		{"Disconnect", SocketJSObject::Disconnect, 0},
+		{"Send", SocketJSObject::Send, 0},
+		{"startTLS", SocketJSObject::startTLS, 0},
 		{0, 0, 0}
 	};
 	return JSDefaultFunctions;
 }
 
 
-JSObjectRef XMPPJSObject::ConstructorCallback(JSContextRef ctx,
+JSObjectRef SocketJSObject::ConstructorCallback(JSContextRef ctx,
 											  JSObjectRef constructor,
 											  size_t argumentCount,
 											  const JSValueRef arguments[],
 											  JSValueRef* exception)
 {
-	::MessageBoxA(0, "xmpp constructor called", "test", MB_OK);
+	::MessageBoxA(0, "socket constructor called", "test", MB_OK);
 	// check for required arguments before creating the object
 	if(argumentCount == 0)
 	{
-		XMPPJSObject * newObj
-			= new XMPPJSObject(ctx, constructor, argumentCount, arguments, exception);
-		xmppObjects.push_back(newObj);
+		SocketJSObject * newObj
+			= new SocketJSObject(ctx, constructor, argumentCount, arguments, exception);
+		socketObjects.push_back(newObj);
 		return newObj->createJSObject(ctx);
 	}
 	// TODO: throw exception.
@@ -92,22 +92,22 @@ JSObjectRef XMPPJSObject::ConstructorCallback(JSContextRef ctx,
 }
 
 
-JSValueRef XMPPJSObject::Connect(JSContextRef ctx,
+JSValueRef SocketJSObject::Connect(JSContextRef ctx,
 								 JSObjectRef function,
 								 JSObjectRef thisObject,
 								 size_t argumentCount,
 								 const JSValueRef arguments[],
 								 JSValueRef *exception)
 {
-	::MessageBoxA(0, "XMPPJSObject.Connect called.", "test", MB_OK);
+	::MessageBoxA(0, "SocketJSObject.Connect called.", "test", MB_OK);
 	if(argumentCount == 2) // server, port
 	{
-		string server = JSStringUtils::getStringValueFrom(ctx, arguments[0]);
-		string port = JSStringUtils::getStringValueFrom(ctx, arguments[1]);
-		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
-		if(xmppObj)
+		string server = getStringValueFrom(ctx, arguments[0]);
+		string port = getStringValueFrom(ctx, arguments[1]);
+		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
+		if(socketObj)
 		{
-			bool bResult = xmppObj->Connect(server, port);
+			bool bResult = socketObj->Connect(server, port);
 			return JSValueMakeBoolean(ctx, bResult);
 		}
 	}
@@ -115,20 +115,20 @@ JSValueRef XMPPJSObject::Connect(JSContextRef ctx,
 }
 
 
-JSValueRef XMPPJSObject::Disconnect(JSContextRef ctx,
+JSValueRef SocketJSObject::Disconnect(JSContextRef ctx,
 									JSObjectRef function,
 									JSObjectRef thisObject,
 									size_t argumentCount,
 									const JSValueRef arguments[],
 									JSValueRef *exception)
 {
-	::MessageBoxA(0, "XMPPJSObject.Disconnect called.", "test", MB_OK);
+	::MessageBoxA(0, "SocketJSObject.Disconnect called.", "test", MB_OK);
 	if(argumentCount == 0) // No Arguments
 	{
-		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
-		if(xmppObj)
+		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
+		if(socketObj)
 		{
-			bool bResult = xmppObj->Disconnect();
+			bool bResult = socketObj->Disconnect();
 			return JSValueMakeBoolean(ctx, bResult);
 		}
 	}
@@ -136,21 +136,21 @@ JSValueRef XMPPJSObject::Disconnect(JSContextRef ctx,
 }
 
 
-JSValueRef XMPPJSObject::Send(JSContextRef ctx,
+JSValueRef SocketJSObject::Send(JSContextRef ctx,
 							  JSObjectRef function,
 							  JSObjectRef thisObject,
 							  size_t argumentCount,
 							  const JSValueRef arguments[],
 							  JSValueRef *exception)
 {
-	::MessageBoxA(0, "XMPPJSObject.Send called.", "test", MB_OK);
+	::MessageBoxA(0, "SocketJSObject.Send called.", "test", MB_OK);
 	if(argumentCount == 1) // data
 	{
-		string data = JSStringUtils::getStringValueFrom(ctx, arguments[0]);
-		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
-		if(xmppObj)
+		string data = getStringValueFrom(ctx, arguments[0]);
+		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
+		if(socketObj)
 		{
-			bool bResult = xmppObj->Send(data);
+			bool bResult = socketObj->Send(data);
 			return JSValueMakeBoolean(ctx, bResult);
 		}
 	}
@@ -158,7 +158,7 @@ JSValueRef XMPPJSObject::Send(JSContextRef ctx,
 }
 
 
-JSValueRef XMPPJSObject::setStanzaHandler(JSContextRef ctx,
+JSValueRef SocketJSObject::setStanzaHandler(JSContextRef ctx,
 										  JSObjectRef function,
 										  JSObjectRef thisObject,
 										  size_t argumentCount,
@@ -168,10 +168,10 @@ JSValueRef XMPPJSObject::setStanzaHandler(JSContextRef ctx,
 	::MessageBoxA(0, "setStanzaHandler called", "setStanzaHandler", MB_OK);
 	if(argumentCount == 1) // handler function
 	{
-		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
-		if(xmppObj)
+		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
+		if(socketObj)
 		{
-			bool bResult = xmppObj->setStanzaHandler(ctx, JSValueToObject(ctx, arguments[0], exception));
+			bool bResult = socketObj->setStanzaHandler(ctx, JSValueToObject(ctx, arguments[0], exception));
 			return JSValueMakeBoolean(ctx, bResult);
 		}
 	}
@@ -179,20 +179,20 @@ JSValueRef XMPPJSObject::setStanzaHandler(JSContextRef ctx,
 }
 
 
-JSValueRef XMPPJSObject::startTLS(JSContextRef ctx,
+JSValueRef SocketJSObject::startTLS(JSContextRef ctx,
 							  JSObjectRef function,
 							  JSObjectRef thisObject,
 							  size_t argumentCount,
 							  const JSValueRef arguments[],
 							  JSValueRef *exception)
 {
-	::MessageBoxA(0, "XMPPJSObject.startTLS called.", "test", MB_OK);
+	::MessageBoxA(0, "SocketJSObject.startTLS called.", "test", MB_OK);
 	if(argumentCount == 0) // data
 	{
-		XMPPJSObject * xmppObj = (XMPPJSObject *) JSObjectGetPrivate(thisObject);
-		if(xmppObj)
+		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
+		if(socketObj)
 		{
-			bool bResult = xmppObj->startTLS();
+			bool bResult = socketObj->startTLS();
 			return JSValueMakeBoolean(ctx, bResult);
 		}
 	}
@@ -200,33 +200,33 @@ JSValueRef XMPPJSObject::startTLS(JSContextRef ctx,
 }
 
 
-bool XMPPJSObject::Connect(const string & hostname, const string & port)
+bool SocketJSObject::Connect(const string & hostname, const string & port)
 {
 	socket.Connect(hostname, port);
 	return true;
 }
 
-bool XMPPJSObject::setStanzaHandler(JSContextRef _ctx, JSObjectRef _stanzaHandler)
+bool SocketJSObject::setStanzaHandler(JSContextRef _ctx, JSObjectRef _stanzaHandler)
 {
 	ctx = _ctx;
 	stanzaHandler = _stanzaHandler;
 	return true;
 }
-bool XMPPJSObject::Disconnect()
+bool SocketJSObject::Disconnect()
 {
 	//socket.disconnect();
 	return false;
 }
 
 
-bool XMPPJSObject::Send(const string & data)
+bool SocketJSObject::Send(const string & data)
 {
 	socket.Write(data);
 	return false;
 }
 
 
-bool XMPPJSObject::startTLS()
+bool SocketJSObject::startTLS()
 {
 	return socket.startTLS();
 }
@@ -238,7 +238,7 @@ HRESULT Disconnect();
 
 */
 
-bool XMPPJSObject::callStanzaHandler(const string &data)
+bool SocketJSObject::callStanzaHandler(const string &data)
 {
 	if(ctx && stanzaHandler)
 	{
