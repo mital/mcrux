@@ -5,7 +5,7 @@ using namespace std;
 
 #include "mcrux/MCruxPlugin.h"
 
-#include "Socket.h"
+#include "SocketObj.h"
 
 
 class XMPPJSObject :
