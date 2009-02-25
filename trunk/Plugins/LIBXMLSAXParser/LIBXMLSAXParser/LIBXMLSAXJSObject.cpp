@@ -9,10 +9,7 @@ list<LIBXMLSAXJSObject *> LIBXMLSAXJSObject::saxParserObjects;
 
 
 LIBXMLSAXJSObject::LIBXMLSAXJSObject()
-: parser(this),
-  startElementHandler(NULL),
-  endElementHandler(NULL),
-  charactersElementHandler(NULL)
+: parser(this)
 {
 }
 
@@ -22,10 +19,7 @@ LIBXMLSAXJSObject::LIBXMLSAXJSObject(JSContextRef ctx,
 									 size_t argumentCount,
 									 const JSValueRef arguments[],
 									 JSValueRef* exception)
-									 : parser(this),
-									   startElementHandler(NULL),
-									   endElementHandler(NULL),
-									   charactersElementHandler(NULL)
+									 : parser(this)
 {
 }
 
@@ -218,7 +212,6 @@ void LIBXMLSAXJSObject::handleEndElement(const xmlChar * name)
 			{
 				JSObjectCallAsFunction(ctx, handler, global, 1, &endElement, 0);
 			}
-
 		}
 	}
 }

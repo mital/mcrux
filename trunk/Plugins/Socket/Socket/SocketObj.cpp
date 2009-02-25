@@ -99,12 +99,13 @@ bool Socket::Connect(const string& hostname, const string & port)
 }
 
 
-void Socket::Write(const string & data)
+bool Socket::Write(const string & data)
 {
 	int writtenByteCount = BIO_write(bio, data.c_str(), (int)data.size());
 	char buf[10];
 	_itoa_s(writtenByteCount, buf, 10, 10);
 	::MessageBoxA(0, buf, "Bytes written", MB_OK);
+	return true;
 }
 
 void Socket::Read(string & readBuffer)
@@ -175,12 +176,10 @@ bool Socket::Run()
 	{
 		readBuffer = "";
 		Read(readBuffer);
-		if (!readBuffer.empty()
-			//&& (stanzaHandler)
-			)
+		if (!readBuffer.empty())
 		{
 			::MessageBoxA(0, "readbuffer called", "test", MB_OK);
-			jsObjectContainer->callStanzaHandler(readBuffer);
+			jsObjectContainer->handleReadData(readBuffer);
 			readBuffer = "";
 		}
 	}

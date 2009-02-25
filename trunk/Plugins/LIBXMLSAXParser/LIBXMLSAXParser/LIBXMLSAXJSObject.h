@@ -14,9 +14,6 @@ class LIBXMLSAXJSObject :
 {
 	SAXParser parser;
 	map<string, JSObjectRef> eventMap;
-	JSObjectRef startElementHandler;
-	JSObjectRef endElementHandler;
-	JSObjectRef charactersElementHandler;
 
 	static list<LIBXMLSAXJSObject *> saxParserObjects;
 
