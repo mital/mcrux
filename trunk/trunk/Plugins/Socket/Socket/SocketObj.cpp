@@ -1,5 +1,5 @@
 #include "StdAfx.h"
-#include "Socket.h"
+#include "SocketObj.h"
 #include <process.h>
 #include <winsock.h>
 #include <sys/types.h>

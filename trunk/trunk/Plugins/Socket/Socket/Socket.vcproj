@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="XMPP"
+	Name="Socket"
 	ProjectGUID="{87442247-5BB4-49A0-8F86-AB172B5B72FB}"
-	RootNamespace="XMPP"
+	RootNamespace="Socket"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -64,7 +64,7 @@
 				AdditionalDependencies="libcmtd.lib libcpmtd.lib version.lib wsock32.lib libeay32.lib ssleay32.lib oldnames.lib "
 				LinkIncremental="2"
 				IgnoreAllDefaultLibraries="true"
-				ModuleDefinitionFile="XMPP.def"
+				ModuleDefinitionFile="Socket.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -141,7 +141,7 @@
 				AdditionalDependencies="libeay32.lib ssleay32.lib libcmt.lib libcpmt.lib version.lib wsock32.lib oldnames.lib "
 				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="true"
-				ModuleDefinitionFile="XMPP.def"
+				ModuleDefinitionFile="Socket.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -187,7 +187,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Socket.cpp"
+				RelativePath=".\SocketObj.cpp"
 				>
 			</File>
 			<File
@@ -215,7 +215,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\XMPP.def"
+				RelativePath=".\Socket.def"
 				>
 			</File>
 			<File
@@ -233,7 +233,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Socket.h"
+				RelativePath=".\SocketObj.h"
 				>
 			</File>
 			<File
