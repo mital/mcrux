@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="Socket"
-	ProjectGUID="{87442247-5BB4-49A0-8F86-AB172B5B72FB}"
+	ProjectGUID="{C84D31A1-1A84-4CC7-8608-3E8C29101259}"
 	RootNamespace="Socket"
 	Keyword="Win32Proj"
 	>
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SOCKET_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -64,7 +64,6 @@
 				AdditionalDependencies="libcmtd.lib libcpmtd.lib version.lib wsock32.lib libeay32.lib ssleay32.lib oldnames.lib "
 				LinkIncremental="2"
 				IgnoreAllDefaultLibraries="true"
-				ModuleDefinitionFile="Socket.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -120,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SOCKET_EXPORTS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -141,7 +140,6 @@
 				AdditionalDependencies="libeay32.lib ssleay32.lib libcmt.lib libcpmt.lib version.lib wsock32.lib oldnames.lib "
 				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="true"
-				ModuleDefinitionFile="Socket.def"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -183,11 +181,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\JSStringUtils.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Socket.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Socket.def"
+				RelativePath=".\SocketJSObject.cpp"
 				>
 			</File>
 			<File
@@ -214,10 +216,6 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<File
-				RelativePath=".\SocketJSObject.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -225,15 +223,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\JSStringUtils.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SocketJSObject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\SocketObj.h"
 				>
 			</File>
 			<File
 				RelativePath=".\stdafx.h"
-				>
-			</File>
-			<File
-				RelativePath=".\SocketJSObject.h"
 				>
 			</File>
 		</Filter>
