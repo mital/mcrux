@@ -17,5 +17,5 @@ function myFunction()
 		alert("Connect call returned true");
 		socketObj.Send("<?xml version=\"1.0\"?>");
 		socketObj.Send("<stream:stream to=\"mital-lappy\" xml:lang=\"en\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">");
-	}
+	}	
 }
