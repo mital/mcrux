@@ -194,11 +194,9 @@ JSValueRef SocketJSObject::Send(JSContextRef ctx,
 		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
 		if(socketObj)
 		{
-			::MessageBoxA(0, "Inside SocketObj called.", "test", MB_OK);
 			bResult = socketObj->Send(data);
 		}
 	}
-	::MessageBoxA(0, "SocketJSObject.Send returning.", "test", MB_OK);
 	return JSValueMakeBoolean(ctx, bResult);
 }
 
