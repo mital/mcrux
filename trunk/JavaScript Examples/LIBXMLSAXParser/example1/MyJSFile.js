@@ -1,24 +1,23 @@
-function startElementHandler(element)
+function startElementHandler(event)
 {
 	alert("startelement called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
-	alert(element);
-	alert(element.tag);
+	alert(event.tag);
+	alert(event.attributes);
+	alert(event.attributes.size);
 }
 
 
-function endElementHandler(element)
+function endElementHandler(event)
 {
 	alert("endelement called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
-	alert(element);
-	alert(element.tag);
+	alert(event.tag);
 }
 
 
-function charactersHandler(element)
+function charactersHandler(event)
 {
 	alert("charactersHandler called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
-	alert(element);
-	alert(element.characters);
+	alert(event.characters);
 }
 
 
