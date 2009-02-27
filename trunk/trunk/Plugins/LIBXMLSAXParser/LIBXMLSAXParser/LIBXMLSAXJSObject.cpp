@@ -154,6 +154,21 @@ int LIBXMLSAXJSObject::xmlParseChunk(const string & data)
 }
 
 
+void getAttributesFrom(const xmlChar ** atts, map<string, string>& attributes)
+{
+	for(int i=0; ; i+=2)
+	{
+		if(atts[i] == NULL)
+		{
+			break;
+		}
+		string key = (char*)atts[i];
+		string value = (char*)atts[i+1];
+		attributes[key] = value;
+	}
+}
+
+
 void LIBXMLSAXJSObject::handleStartElement(const xmlChar * name, const xmlChar ** atts)
 {
 	if (!MCruxPlugin::webView)
@@ -162,6 +177,8 @@ void LIBXMLSAXJSObject::handleStartElement(const xmlChar * name, const xmlChar *
 		// TODO: return error
 		return;
 	}
+	map<string, string> attributes;
+	getAttributesFrom(atts, attributes);
 	IWebFrame * frame;
 	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
 	if(SUCCEEDED(hr))
@@ -174,6 +191,20 @@ void LIBXMLSAXJSObject::handleStartElement(const xmlChar * name, const xmlChar *
 			JSStringRef tagName = JSStringCreateWithUTF8CString((const char *)name);
 			JSStringRef tag = JSStringCreateWithUTF8CString("tag");
 			JSObjectSetProperty(ctx, startElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
+
+			JSObjectRef jsAttrs = JSObjectMake(ctx, NULL, NULL);
+			for(map<string, string>::const_iterator
+				oIter = attributes.begin();
+				oIter != attributes.end();
+			oIter++)
+			{
+				JSStringRef key = JSStringCreateWithUTF8CString(oIter->first.c_str());
+				JSStringRef value = JSStringCreateWithUTF8CString(oIter->second.c_str());
+				JSObjectSetProperty(ctx, jsAttrs, key, JSValueMakeString(ctx, value), 0, 0);
+			}
+
+			JSStringRef attributesJS = JSStringCreateWithUTF8CString("attributes");
+			JSObjectSetProperty(ctx, startElement, attributesJS, jsAttrs, 0, 0);
 
 			JSObjectRef handler = getEventListener("StartElementHandler");
 			if(handler)
