@@ -119,11 +119,8 @@ void Socket::Read(string & readBuffer)
 		{
 			break;
 		}
-		::MessageBoxA(0, "readbuffer data mil gaya", "test", MB_OK);
-		
 		buf[readBytes] = 0;
 		readBuffer += buf;
-		::MessageBoxA(0, readBuffer.c_str(), "test", MB_OK);
 	}
 }
 
@@ -176,12 +173,10 @@ bool Socket::Run()
 	{
 		readBuffer = "";
 		Read(readBuffer);
-		if (!readBuffer.empty())
+		if (readBuffer.size() > 0)
 		{
-			::MessageBoxA(0, "readbuffer called", "test", MB_OK);
 			jsObjectContainer->handleReadData(readBuffer);
-			readBuffer = "";
 		}
 	}
-	return false;
+	return true;
 }
