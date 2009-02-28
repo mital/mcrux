@@ -50,10 +50,6 @@ JSStaticFunction * MCruxJSObject::getStaticFunctions() const
 	return mcruxJSDefaultFunctions;
 }
 
-JSObjectCallAsConstructorCallback MCruxJSObject::getConstructor() const
-{
-	return MCruxJSObject::ConstructorCallback;
-}
 
 JSValueRef MCruxJSObject::someFunction(JSContextRef ctx,
 									   JSObjectRef function,

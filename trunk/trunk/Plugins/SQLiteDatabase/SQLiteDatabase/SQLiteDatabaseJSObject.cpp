@@ -64,7 +64,7 @@ JSObjectRef SQLiteDatabaseJSObject::ConstructorCallback(JSContextRef ctx,
 }
 
 
-JSStaticFunction * SQLiteDatabaseJSObject::getJSObjectStaticFunctions() const
+JSStaticFunction * SQLiteDatabaseJSObject::getJSObjectFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {

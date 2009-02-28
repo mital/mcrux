@@ -8,7 +8,7 @@ function myFunction()
 {
 	alert("xmpp Example ! creating xmppObj object with new operator");
 
-	var socketObj = new socket();
+	var socketObj = new mcrux.socket();
 	var ret = socketObj.Connect("localhost", 5222);
 	socketObj.addEventListener("ReadDataHandler", ReadDataHandler);
 

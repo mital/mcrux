@@ -44,5 +44,5 @@ public:
 	virtual JSStaticFunction * getStaticFunctions() const;
 
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
-	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
+	virtual JSStaticFunction * getJSObjectFunctions() const;
 };

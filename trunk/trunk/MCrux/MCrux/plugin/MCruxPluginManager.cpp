@@ -19,13 +19,16 @@
 
 
 #include "StdAfx.h"
+#include <JavaScriptCore/JSStringRef.h>
+
 #include "windowsnative/MCruxWindow.h"
 
 #include "MCruxJSObject.h"
 
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
-: mainWindow(NULL)
+: mainWindow(NULL),
+  mcruxObject(NULL)
 {
 	AddMCruxDefaultPlugins();
 	AddExtensionPlugins(extensionPluginNames);
@@ -81,14 +84,25 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
 {
-	MCruxWebView * mcruxWebView = mainWindow->getMCruxWebView();
-	for(list<MCruxPlugin *>::const_iterator
-		oIter = plugins.begin();
-		oIter != plugins.end();
-	oIter++)
+	if(!mcruxObject)
 	{
-		(*oIter)->injectPlugin(context, mcruxWebView->getWebView());
+		mcruxObject = JSObjectMake(context, NULL, NULL);
+		MCruxWebView * mcruxWebView = mainWindow->getMCruxWebView();
+
+		for(list<MCruxPlugin *>::const_iterator
+			oIter = plugins.begin();
+			oIter != plugins.end();
+		oIter++)
+		{
+			(*oIter)->injectPlugin(context, mcruxWebView->getWebView(), mcruxObject);
+		}
 	}
+	JSObjectRef globalObject = JSContextGetGlobalObject(context);
+	JSStringRef name = JSStringCreateWithUTF8CString("mcrux");
+	JSObjectSetProperty(context,
+		globalObject,
+		name,
+		mcruxObject, 0, 0);
 
 	return S_OK;
 }
