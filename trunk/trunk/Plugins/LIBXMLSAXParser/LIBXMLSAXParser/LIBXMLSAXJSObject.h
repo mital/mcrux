@@ -6,6 +6,10 @@
 
 using namespace std;
 
+#define START_ELEMENT_EVENT_NAME "onStartElement"
+#define END_ELEMENT_EVENT_NAME "onEndElement"
+#define CHARACTERS_EVENT_NAME "onCharacters"
+
 #include "mcrux/MCruxPlugin.h"
 #include "SAXParser.h"
 

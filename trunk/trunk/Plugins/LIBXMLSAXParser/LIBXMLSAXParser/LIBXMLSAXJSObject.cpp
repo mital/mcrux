@@ -207,7 +207,7 @@ void LIBXMLSAXJSObject::handleStartElement(const xmlChar * name, const xmlChar *
 			JSStringRef attributesJS = JSStringCreateWithUTF8CString("attributes");
 			JSObjectSetProperty(ctx, startElement, attributesJS, jsAttrs, 0, 0);
 
-			JSObjectRef handler = getEventListener("StartElementHandler");
+			JSObjectRef handler = getEventListener(START_ELEMENT_EVENT_NAME);
 			if(handler)
 			{
 				JSObjectCallAsFunction(ctx, handler, global, 1, &startElement, 0);
@@ -239,7 +239,7 @@ void LIBXMLSAXJSObject::handleEndElement(const xmlChar * name)
 			JSStringRef tag = JSStringCreateWithUTF8CString("tag");
 			JSObjectSetProperty(ctx, endElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
 
-			JSObjectRef handler = getEventListener("EndElementHandler");
+			JSObjectRef handler = getEventListener(END_ELEMENT_EVENT_NAME);
 			if(handler)
 			{
 				JSObjectCallAsFunction(ctx, handler, global, 1, &endElement, 0);
@@ -271,7 +271,7 @@ void LIBXMLSAXJSObject::handleCharacters(const xmlChar * ch, int len)
 			JSStringRef characters = JSStringCreateWithUTF8CString("characters");
 			JSObjectSetProperty(ctx, charElement, characters, JSValueMakeString(ctx, charactersString), 0, 0);
 
-			JSObjectRef handler = getEventListener("CharactersHandler");
+			JSObjectRef handler = getEventListener(CHARACTERS_EVENT_NAME);
 			if(handler)
 			{
 				JSObjectCallAsFunction(ctx, handler, global, 1, &charElement, 0);

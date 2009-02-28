@@ -1,21 +1,27 @@
+function onConnected(event)
+{
+	alert("onConnected Handler Called");
+	alert(event.hostname);
+	alert(event.port);
+	socketObj.Send("<?xml version=\"1.0\"?>");
+	socketObj.Send("<stream:stream to=\"mital-lappy\" xml:lang=\"en\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">");
+}
+
+
 function ReadDataHandler(event)
 {
-	alert("stanza Handler Called");
+	alert("ReadDataHandler Handler Called");
 	alert(event.data);
 }
 
+var socketObj;
+
 function myFunction()
 {
-	alert("xmpp Example ! creating xmppObj object with new operator");
+	alert("socket Example ! creating socketObj object with new operator");
 
-	var socketObj = new mcrux.socket();
+	socketObj = new mcrux.socket();
+	socketObj.addEventListener("onConnected", onConnected);
 	var ret = socketObj.Connect("localhost", 5222);
-	socketObj.addEventListener("ReadDataHandler", ReadDataHandler);
-
-	if (ret == true)
-	{
-		alert("Connect call returned true");
-		socketObj.Send("<?xml version=\"1.0\"?>");
-		socketObj.Send("<stream:stream to=\"mital-lappy\" xml:lang=\"en\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">");
-	}	
+	socketObj.addEventListener("onRead", ReadDataHandler);
 }
