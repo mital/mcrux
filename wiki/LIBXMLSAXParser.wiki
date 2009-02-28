@@ -10,7 +10,7 @@
 
   * steps to follow while using *LIBXMLSAXParser*
 
-  * you need to get the *LIBXMLSAXParser.dll* and place it in a 
+  * you need to get the *LIBXMLSAXParser.dll* and put it at appropriate place.
   * add {{{'<plugin name="LIBXMLSAXParser"/>' in the '<plugins></plugins>' section of MCruxSpecFile }}}
   * here you go now you have a LIBXMLSAXParser plugin ready to work with MCrux.
 
@@ -18,7 +18,13 @@
 
   * you can create an object of LIBXMLSAXParser plugin in JavaScript using following code block
 
-  *  {{{ var saxParserObj = new mcrux.libxml_saxparser();  }}}
+{{{ var saxParserObj = new mcrux.libxml_saxparser();  }}}
+  * this creates a new libxml_saxparser object. you can call various methods which are provided.
+
+{{{ saxParserObj.xmlParseChunk(data);}}}
+  * data :String: the data to be parsed
+  * you can parse your xml file chunk by chunk by calling this method in loop.
+  * data will be parsed by the Plugin and Events are raised appropriately.
 
 == Event Listeners ==
 
@@ -40,19 +46,12 @@ onEndElement(event)
   * parameters:event
   * event.tag :String: the tag name of the end-element
 
-you can call following methods on saxParserObj.
-
-xmlParseChunk(data)
-  * data :String: the data to be parsed
-  * you can parse your xml file chunk by chunk by calling this method in loop.
-  * data will be parsed by the Plugin and Events are raised appropriately.
-
-== How To Register Event Handlers ==
+== How To Register Event Listeners ==
 
 addEventListener(eventName, HandlerFunction)
-  * *EventName* is the name of the event which you want to handle.
-  * *HandlerFunction* is the function which you want to be called.
+  * *EventName* :String: name of the event which you want to handle.
+  * *HandlerFunction* :function: function which you want to be called.
 
 removeEventListener(eventName, HandlerFunction)
-  * *EventName* is the name of the event which you want to handle.
-  * *HandlerFunction* is the function which you want to remove from the call list.
+  * *EventName* :String: name of the event which you want to handle.
+  * *HandlerFunction* :function: function which you want to remove from the call list.
