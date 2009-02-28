@@ -1,0 +1,57 @@
+#labels MCruxPlugin,libxml,saxparser
+= *LIBXMLSAXParser* Plugin is a SAX parsing library=
+
+== Introduction ==
+
+* LIBXMLSAXParser is a SAX parsing library provided as a plugin of MCrux.
+* It uses libxml as the backend parsing library.
+
+== Details ==
+
+  * steps to follow while using *LIBXMLSAXParser*
+
+  * you need to get the *LIBXMLSAXParser.dll* and place it in a 
+  * add {{{'<plugin name="LIBXMLSAXParser"/>' in the '<plugins></plugins>' section of MCruxSpecFile }}}
+  * here you go now you have a LIBXMLSAXParser plugin ready to work with MCrux.
+
+== APIs ==
+
+  * you can create an object of LIBXMLSAXParser plugin in JavaScript using following code block
+
+*  {{{ 	var saxParserObj = new mcrux.libxml_saxparser();  }}}
+
+* Event Listeners
+
+there are following event listeners available.
+
+StartElementHandler(event)
+  * This Event is raised when an XML start tag is found.
+  * parameters:event
+  * event.tag : the tag name of the start-element
+  * event.attributes : various attributes available in the tag.
+
+CharactersHandler(event)
+  * This Event is raised when an XML start tag is found.
+  * parameters:event
+  * event.characters : the characters which are found in between the start and end elements.
+
+EndElementHandler(event)
+  * This Event is raised when an XML end tag is found.
+  * parameters:event
+  * event.tag : the tag name of the end-element
+
+you can call following methods on saxParserObj.
+
+xmlParseChunk(data)
+  * you can parse your xml file chunk by chunk by calling this method in loop.
+  * data will be parsed by the Plugin and Events are raised appropriately.
+
+== How To Register Event Handlers ==
+
+addEventListener(eventName, HandlerFunction)
+  * *EventName* is the name of the event which you want to handle.
+  * *HandlerFunction* is the function which you want to be called.
+
+removeEventListener(eventName, HandlerFunction)
+  * *EventName* is the name of the event which you want to handle.
+  * *HandlerFunction* is the function which you want to remove from the call list.
