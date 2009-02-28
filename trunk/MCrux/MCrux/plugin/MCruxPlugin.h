@@ -49,10 +49,10 @@ public:
 
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 
-	bool injectPlugin(JSContextRef ctx, IWebView * _webView);
+	bool injectPlugin(JSContextRef ctx, IWebView * _webView, JSObjectRef parentObject);
 
 	// object creation related methods
 	JSObjectRef createJSObject(JSContextRef ctx);
 
-	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
+	virtual JSStaticFunction * getJSObjectFunctions() const;
 };

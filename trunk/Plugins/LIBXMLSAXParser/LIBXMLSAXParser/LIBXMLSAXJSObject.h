@@ -66,7 +66,7 @@ public:
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;;
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
-	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
+	virtual JSStaticFunction * getJSObjectFunctions() const;
 
 	void handleStartElement(const xmlChar * name, const xmlChar ** atts);
 	void handleEndElement(const xmlChar * name);

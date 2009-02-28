@@ -82,7 +82,7 @@ function loadDirectory(folder)
 	var rootElement = folder;
 	//alert(folder.filePath);
 	//alert(folder.innerHTML);
-	files = filesystem.readDir(folder.filePath + "\\"); 
+	files = mcrux.filesystem.readDir(folder.filePath + "\\"); 
 	//files = new Array("A","B","C","D","E","F");
 	addTree(rootElement, files, true);
 }

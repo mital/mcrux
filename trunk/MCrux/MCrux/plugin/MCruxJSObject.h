@@ -40,17 +40,6 @@ class MCruxJSObject
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
-
-	static JSObjectRef ConstructorCallback(JSContextRef ctx,
-		JSObjectRef constructor,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef* exception)
-	{
-		//JSObjectMakeConstructor(
-		return 0;
-	}
-
 public:
 
 	MCruxJSObject();
@@ -58,5 +47,4 @@ public:
 
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;
-	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 };

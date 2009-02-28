@@ -36,6 +36,7 @@ JSObjectRef LIBXMLSAXJSObject::ConstructorCallback(JSContextRef ctx,
 												   JSValueRef* exception)
 {
 	// check for required arguments before creating the object
+	::MessageBoxA(0, "constructor called", "test", MB_OK);
 	if(argumentCount == 0)
 	{
 		LIBXMLSAXJSObject * newObj
@@ -71,7 +72,7 @@ JSStaticFunction * LIBXMLSAXJSObject::getStaticFunctions() const
 }
 
 
-JSStaticFunction * LIBXMLSAXJSObject::getJSObjectStaticFunctions() const
+JSStaticFunction * LIBXMLSAXJSObject::getJSObjectFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {

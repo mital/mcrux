@@ -24,9 +24,10 @@ function charactersHandler(event)
 function myFunction()
 {
 	alert("libxml saxparser Example !");
-	var saxParserObj = new libxml_saxparser();
+	var saxParserObj = new mcrux.libxml_saxparser();
 	alert("saxparser created successfully now calling xmlParseChunk() over it");
 
+	alert(saxParserObj);
 	saxParserObj.addEventListener("StartElementHandler", startElementHandler);
 	saxParserObj.addEventListener("EndElementHandler", endElementHandler);
 	saxParserObj.addEventListener("CharactersHandler", charactersHandler);
@@ -34,19 +35,18 @@ function myFunction()
 	saxParserObj.xmlParseChunk('<array:foobar size="5">mydata</array:foobar>');
 
 	var ret = saxParserObj.removeEventListener("StartElementHandler", startElementHandler);
-	if(ret)
+	if(ret == false)
 	{
-		alert("remove success");
+		alert("remove failed");
 	}
 	var ret = saxParserObj.removeEventListener("EndElementHandler", endElementHandler);
-	if(ret)
+	if(ret == false)
 	{
-		alert("remove success");
+		alert("remove failed");
 	}
 	var ret = saxParserObj.removeEventListener("CharactersHandler", charactersHandler);
-	if(ret)
+	if(ret == false)
 	{
-		alert("remove success");
+		alert("remove failed");
 	}
-
 }

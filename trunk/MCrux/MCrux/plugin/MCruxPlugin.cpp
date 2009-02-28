@@ -35,7 +35,7 @@ MCruxPlugin::~MCruxPlugin()
 }
 
 
-bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView)
+bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView, JSObjectRef parentObject)
 {
 	MCruxPlugin::webView = _webView;
 	JSClassDefinition pluginNameSpace;// = kJSClassDefinitionEmpty;
@@ -60,11 +60,9 @@ bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView)
 
 	JSClassRef pluginRef = JSClassCreate(&pluginNameSpace);
 	JSObjectRef pluginObj = JSObjectMake(ctx, pluginRef, this);
-
-	JSObjectRef globalObject = JSContextGetGlobalObject(ctx);
-
 	JSStringRef fnPropName = JSStringCreateWithUTF8CString(getName().c_str());
-	JSObjectSetProperty(ctx, globalObject,
+	JSObjectSetProperty(ctx,
+		parentObject,
 		fnPropName,
 		pluginObj, 0, 0);
 
@@ -93,7 +91,7 @@ JSObjectRef MCruxPlugin::createJSObject(JSContextRef ctx)
 	pluginNameSpace.className = 0;
 	pluginNameSpace.parentClass = 0;
 	pluginNameSpace.staticValues = 0;
-	pluginNameSpace.staticFunctions = getJSObjectStaticFunctions();
+	pluginNameSpace.staticFunctions = getJSObjectFunctions();
 	pluginNameSpace.initialize = 0;
 	pluginNameSpace.finalize = 0;
 	pluginNameSpace.hasProperty = 0;
@@ -110,7 +108,7 @@ JSObjectRef MCruxPlugin::createJSObject(JSContextRef ctx)
 	return JSObjectMake(ctx, pluginRef, this);
 }
 
-JSStaticFunction * MCruxPlugin::getJSObjectStaticFunctions() const
+JSStaticFunction * MCruxPlugin::getJSObjectFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {	{0, 0, 0} };

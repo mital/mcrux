@@ -37,6 +37,7 @@ typedef MCruxPlugin * (*GetPluginFunctionPtr)();
 class MCruxPluginManager
 {
 	MCruxWindow * mainWindow;
+	JSObjectRef mcruxObject;
 	list<MCruxPlugin *> plugins;
 
 	void AddMCruxDefaultPlugins();

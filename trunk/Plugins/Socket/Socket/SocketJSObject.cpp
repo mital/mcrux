@@ -55,7 +55,7 @@ JSStaticFunction * SocketJSObject::getStaticFunctions() const
 }
 
 
-JSStaticFunction * SocketJSObject::getJSObjectStaticFunctions() const
+JSStaticFunction * SocketJSObject::getJSObjectFunctions() const
 {
 	static JSStaticFunction JSDefaultFunctions[]
 	= {

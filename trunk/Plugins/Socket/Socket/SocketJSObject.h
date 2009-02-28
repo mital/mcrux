@@ -90,7 +90,7 @@ public:
 	virtual string getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;;
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
-	virtual JSStaticFunction * getJSObjectStaticFunctions() const;
+	virtual JSStaticFunction * getJSObjectFunctions() const;
 
 	void handleReadData(const string &data);
 };
