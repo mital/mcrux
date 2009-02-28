@@ -27,22 +27,23 @@ there are following event listeners available.
 onStartElement(event)
   * This Event is raised when an XML start tag is found.
   * parameters:event
-  * event.tag : the tag name of the start-element
-  * event.attributes : various attributes available in the tag.
+  * event.tag :String: the tag name of the start-element
+  * event.attributes :key value pairs of Strings: various attributes available in the tag.
 
 onCharacters(event)
   * This Event is raised when an XML start tag is found.
   * parameters:event
-  * event.characters : the characters which are found in between the start and end elements.
+  * event.characters :String: the characters which are found in between the start and end elements.
 
 onEndElement(event)
   * This Event is raised when an XML end tag is found.
   * parameters:event
-  * event.tag : the tag name of the end-element
+  * event.tag :String: the tag name of the end-element
 
 you can call following methods on saxParserObj.
 
 xmlParseChunk(data)
+  * data :String: the data to be parsed
   * you can parse your xml file chunk by chunk by calling this method in loop.
   * data will be parsed by the Plugin and Events are raised appropriately.
 
