@@ -6,14 +6,9 @@
   * Socket is a TCPSocket library provided as a plugin of MCrux.
   * It uses openssl as the backend library.
 
-== Details ==
+== How To Inject Plugin Into MCrux ==
 
-  * steps to follow while using *Socket*
-
-  * you need to get the *Socket.dll* and put it at appropriate place. 
-  * add {{{'<plugin name="Socket"/>' in the '<plugins></plugins>' section of MCruxSpecFile }}}
-
-  * here you go now you have a Socket plugin ready to work with MCrux.
+* refer [http://code.google.com/p/mcrux/wiki/Plugins Plugins] for more detail.
 
 == APIs ==
 
