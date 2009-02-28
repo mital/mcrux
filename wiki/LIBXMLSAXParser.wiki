@@ -8,11 +8,7 @@
 
 == Details ==
 
-  * steps to follow while using *LIBXMLSAXParser*
-
-  * you need to get the *LIBXMLSAXParser.dll* and put it at appropriate place.
-  * add {{{'<plugin name="LIBXMLSAXParser"/>' in the '<plugins></plugins>' section of MCruxSpecFile }}}
-  * here you go now you have a LIBXMLSAXParser plugin ready to work with MCrux.
+* refer [http://code.google.com/p/mcrux/wiki/Plugins Plugins] for more detail.
 
 == APIs ==
 
