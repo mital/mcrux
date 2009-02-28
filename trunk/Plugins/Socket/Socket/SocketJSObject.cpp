@@ -1,4 +1,6 @@
 #include "StdAfx.h"
+#include <process.h>
+
 #include "SocketJSObject.h"
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
@@ -224,7 +226,10 @@ JSValueRef SocketJSObject::startTLS(JSContextRef ctx,
 
 bool SocketJSObject::Connect(const string & hostname, const string & port)
 {
-	socket.Connect(hostname, port);
+	socket.setConnectParams(hostname, port);
+	_beginthread(StartSocketThread, 0, &socket);
+
+//	socket.Connect(hostname, port);
 	return true;
 }
 
@@ -298,10 +303,47 @@ void SocketJSObject::handleReadData(const string &data)
 			JSStringRef tag = JSStringCreateWithUTF8CString("data");
 			JSObjectSetProperty(ctx, endElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
 
-			JSObjectRef handler = getEventListener("ReadDataHandler");
+			JSObjectRef handler = getEventListener(READ_DATA_EVENT_NAME);
 			if(handler)
 			{
 				JSObjectCallAsFunction(ctx, handler, global, 1, &endElement, 0);
+			}
+		}
+	}
+}
+
+
+void SocketJSObject::onConnected(const string & hostname, const string & port)
+{
+	if (!MCruxPlugin::webView)
+	{
+		::MessageBoxA(0, "endElementHandler webview not set", "saxparser", MB_OK);
+		// TODO: return error
+		return;
+	}
+	IWebFrame * frame;
+	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
+	if(SUCCEEDED(hr))
+	{
+		JSContextRef ctx = frame->globalContext();
+		if(ctx)
+		{
+			JSObjectRef global = JSContextGetGlobalObject(ctx);
+			JSObjectRef eventObj = JSObjectMake(ctx, NULL, NULL);
+
+			JSStringRef hostName = JSStringCreateWithUTF8CString((const char *)hostname.c_str());
+			JSStringRef host = JSStringCreateWithUTF8CString("hostname");
+
+			JSStringRef portName = JSStringCreateWithUTF8CString((const char *)port.c_str());
+			JSStringRef port = JSStringCreateWithUTF8CString("port");
+
+			JSObjectSetProperty(ctx, eventObj, host, JSValueMakeString(ctx, hostName), 0, 0);
+			JSObjectSetProperty(ctx, eventObj, port, JSValueMakeString(ctx, portName), 0, 0);
+
+			JSObjectRef handler = getEventListener(CONNECTED_EVENT_NAME);
+			if(handler)
+			{
+				JSObjectCallAsFunction(ctx, handler, global, 1, &eventObj, 0);
 			}
 		}
 	}

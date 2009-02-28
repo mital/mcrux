@@ -9,12 +9,15 @@ using namespace std;
 #include <openssl/err.h>
 
 class SocketJSObject;
+void StartSocketThread(void * socketVoid);
 
 class Socket
 {
 	static bool notInitialized;
 	SocketJSObject* jsObjectContainer;
 	bool shouldBeRunning;
+	string hostname;
+	string port;
 	BIO * bio;
 	SSL* ssl;
 	SSL_CTX * ctx;
@@ -27,14 +30,12 @@ public:
 	~Socket();
 
 	bool Run();
-
-	bool Connect(const string& hostname, const string & port);
+	void setConnectParams(const string& _hostname, const string& _port);
+	bool Connect();
+	void Connected();
 
 	bool startTLS();
-
 	bool Write(const string & data);
-
 	void Read(string & readBuffer);
-
 	void Disconnect();
 };

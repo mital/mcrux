@@ -5,6 +5,9 @@
 #include <string>
 using namespace std;
 
+#define CONNECTED_EVENT_NAME "onConnected"
+#define READ_DATA_EVENT_NAME "onRead"
+
 #include "mcrux/MCruxPlugin.h"
 
 #include "SocketObj.h"
@@ -93,4 +96,5 @@ public:
 	virtual JSStaticFunction * getJSObjectFunctions() const;
 
 	void handleReadData(const string &data);
+	void onConnected(const string & hostname, const string & port);
 };

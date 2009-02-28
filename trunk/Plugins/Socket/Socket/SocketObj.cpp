@@ -14,13 +14,17 @@ void StartSocketThread(void * socketVoid)
 	try
 	{
 		Socket * socket = (Socket *) socketVoid;
-		if(socket->Run())
+		if(socket->Connect())
 		{
-			//::MessageBoxA(0, "Run returned true", "socket thread", MB_OK);
-		}
-		else
-		{
-			//::MessageBoxA(0, "Run returned false", "socket thread", MB_OK);
+			socket->Connected();
+			if(socket->Run())
+			{
+				//::MessageBoxA(0, "Run returned true", "socket thread", MB_OK);
+			}
+			else
+			{
+				//::MessageBoxA(0, "Run returned false", "socket thread", MB_OK);
+			}
 		}
 	}
 	catch(...)
@@ -31,6 +35,8 @@ void StartSocketThread(void * socketVoid)
 Socket::Socket(SocketJSObject* _jsObjectContainer)
 : jsObjectContainer(_jsObjectContainer),
   shouldBeRunning(false),
+  hostname(""),
+  port(""),
   bio(NULL),
   ssl(NULL),
   ctx(NULL),
@@ -50,8 +56,21 @@ Socket::~Socket()
 	shouldBeRunning = false;
 }
 
-bool Socket::Connect(const string& hostname, const string & port)
+
+void Socket::setConnectParams(const string& _hostname, const string& _port)
 {
+	hostname = _hostname;
+	port = _port;
+}
+
+
+bool Socket::Connect()
+{
+	if (hostname.size() < 0)
+	{
+		return false;
+	}
+
 	if(bio)
 	{
 		BIO_free_all(bio);
@@ -92,10 +111,12 @@ bool Socket::Connect(const string& hostname, const string & port)
 		}
 	}
 	shouldBeRunning = true;
-
-	_beginthread(StartSocketThread, 0, this);
 	return true;
+}
 
+void Socket::Connected()
+{
+	jsObjectContainer->onConnected(hostname, port);
 }
 
 
@@ -107,6 +128,7 @@ bool Socket::Write(const string & data)
 	::MessageBoxA(0, buf, "Bytes written", MB_OK);
 	return true;
 }
+
 
 void Socket::Read(string & readBuffer)
 {
@@ -151,12 +173,14 @@ bool Socket::startTLS()
 	return false;
 }
 
+
 bool startCompression()
 {
 	BIO * sbio = BIO_new(BIO_f_ssl());
 	BIO * bbio = BIO_new(BIO_f_base64());
 	return true;
 }
+
 
 void Socket::Disconnect()
 {
@@ -165,6 +189,7 @@ void Socket::Disconnect()
 	BIO_free_all(bio);
 	// store thread id and wait for thread to exit.
 }
+
 
 bool Socket::Run()
 {
