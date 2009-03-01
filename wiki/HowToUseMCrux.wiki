@@ -14,7 +14,7 @@
 == Creating MCruxSpec File ==
 
   * for creating an application the very first thing you need to do is to create a MCruxSpec File
-  * checkout [mcruxspeclink mcruxspec File] section for more details on ".mcruxspec" files.
+  * checkout [http://code.google.com/p/mcrux/wiki/MCruxSpecFile mcruxspec File] section for more details on ".mcruxspec" files.
   * *Important*: for the current version of MCrux Binaries assumes that the ".mcruxspec" file is placed at location [c:\mcrux\myApplication.mcruxspec]. In future versions this dependency will be removed.
 
 == Getting Various Plugins ==
