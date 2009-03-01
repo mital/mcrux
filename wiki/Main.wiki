@@ -4,27 +4,35 @@
 = Introduction =
 
 MCrux is a framework which provides rapid development of desktop Applications using JavaScript/CSS/HTML as front-end.
+
 It provides "Plugin Architecture" such that one can extend the MCrux functionalities very easily.
 
 = How To =
 
 == How to use MCrux ==
 
-  * for using MCrux download binary packages from the featured download.
-  * refer [http://code.google.com/p/mcrux/wiki/HowToUseMCrux HowToUseMCrux] for more detail.
+for using MCrux download binary packages from the featured download.
+
+refer [http://code.google.com/p/mcrux/wiki/HowToUseMCrux HowToUseMCrux] for more detail.
 
 == Architecture of MCrux ==
-  * MCrux uses WebKit as a Browser cum JavaScript Engine in the back-end.
-  * It allows Developers to extend MCrux easily and add various functionalities they want.
-  * There are some of the basic functionalities like filesystem, socket, sqlite database etc.. are in current development phase.
-  * see the [architecturelink Architecture of MCrux] 
+MCrux uses WebKit as a Browser cum JavaScript Engine in the back-end.
+
+It allows Developers to extend MCrux easily and add various functionalities they want.
+There are some of the basic functionalities like filesystem, socket, sqlite database etc.. are in current development phase.
+
+see the [architecturelink Architecture of MCrux] 
 
 == Development Updates ==
-  * we are posting various development updates at [http://groups.google.com/group/mcrux-dev MCrux Dev Mailing List]
-  * you can subscribe to RSS Feeds of various issues open.
+we are posting various development updates at [http://groups.google.com/group/mcrux-dev MCrux Dev Mailing List]
+
+you can subscribe to RSS Feeds of various issues open.
 
 == Contact us ==
-  * there are following ways through which you can contact us.
+
+Mital Vora. <mital@mcrux.com> is the founder of MCrux Project.
+
+you can contact me by any of the following means.
 
   * *mailing list*: you can connect us via email to our mailing list [http://groups.google.com/group/mcrux-dev MCrux Dev Mailing List]
   * *IRC Channel*: we are available through the IRC channel irc.freenode.net #mcrux (available for only limited hours) 
@@ -32,4 +40,4 @@ It provides "Plugin Architecture" such that one can extend the MCrux functionali
 
 == Licensing ==
 
-  * MCrux is an opensource project available under GPLv3. It is also available under custom licenses. For more details contact mital@mcrux.com
+MCrux is an opensource project available under GPLv3. It is also available under custom licenses. For more details contact mital@mcrux.com
