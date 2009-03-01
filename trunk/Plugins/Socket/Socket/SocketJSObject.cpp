@@ -63,9 +63,9 @@ JSStaticFunction * SocketJSObject::getJSObjectFunctions() const
 	= {
 		{"addEventListener", SocketJSObject::addEventListener, 0},
 		{"removeEventListener", SocketJSObject::removeEventListener, 0},
-		{"Connect", SocketJSObject::Connect, 0},
-		{"Disconnect", SocketJSObject::Disconnect, 0},
-		{"Send", SocketJSObject::Send, 0},
+		{"connect", SocketJSObject::Connect, 0},
+		{"disconnect", SocketJSObject::Disconnect, 0},
+		{"send", SocketJSObject::Send, 0},
 		{"startTLS", SocketJSObject::startTLS, 0},
 		{0, 0, 0}
 	};
@@ -313,7 +313,7 @@ void SocketJSObject::handleReadData(const string &data)
 }
 
 
-void SocketJSObject::onConnected(const string & hostname, const string & port)
+void SocketJSObject::onConnectComplete(const string & hostname, const string & port, bool bConnected)
 {
 	if (!MCruxPlugin::webView)
 	{
@@ -335,10 +335,12 @@ void SocketJSObject::onConnected(const string & hostname, const string & port)
 			JSStringRef host = JSStringCreateWithUTF8CString("hostname");
 
 			JSStringRef portName = JSStringCreateWithUTF8CString((const char *)port.c_str());
-			JSStringRef port = JSStringCreateWithUTF8CString("port");
+			JSStringRef portStr = JSStringCreateWithUTF8CString("port");
+			JSStringRef connected = JSStringCreateWithUTF8CString("connected");
 
 			JSObjectSetProperty(ctx, eventObj, host, JSValueMakeString(ctx, hostName), 0, 0);
-			JSObjectSetProperty(ctx, eventObj, port, JSValueMakeString(ctx, portName), 0, 0);
+			JSObjectSetProperty(ctx, eventObj, portStr, JSValueMakeNumber(ctx, atof(port.c_str())), 0, 0);
+			JSObjectSetProperty(ctx, eventObj, connected, JSValueMakeBoolean(ctx, bConnected), 0, 0);
 
 			JSObjectRef handler = getEventListener(CONNECTED_EVENT_NAME);
 			if(handler)

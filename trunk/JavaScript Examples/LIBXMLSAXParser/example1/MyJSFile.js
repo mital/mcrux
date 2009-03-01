@@ -34,7 +34,7 @@ function myFunction()
 
 	saxParserObj.xmlParseChunk('<array:foobar size="5">mydata</array:foobar>');
 
-	saxParserObj.removeEventListener("StartElementHandler", startElementHandler);
-	saxParserObj.removeEventListener("EndElementHandler", endElementHandler);
-	saxParserObj.removeEventListener("CharactersHandler", charactersHandler);
+	saxParserObj.removeEventListener("onStartElement", startElementHandler);
+	saxParserObj.removeEventListener("onEndElement", endElementHandler);
+	saxParserObj.removeEventListener("onCharacters", charactersHandler);
 }
