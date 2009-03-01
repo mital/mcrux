@@ -40,4 +40,4 @@ you can contact me by any of the following means.
 
 == Licensing ==
 
-MCrux is an opensource project available under GPLv3. It is also available under custom licenses. For more details contact mital@mcrux.com
+MCrux is an opensource project available under GPLv3. It is also available under commercial licenses. For more details contact mital@mcrux.com
