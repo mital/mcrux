@@ -11,7 +11,7 @@ It provides "Plugin Architecture" such that one can extend the MCrux functionali
 == How to use MCrux ==
 
   * for using MCrux download binary packages from the featured download.
-  * refer [howtolink HowToUseMCrux] for more detail.
+  * refer [http://code.google.com/p/mcrux/wiki/HowToUseMCrux HowToUseMCrux] for more detail.
 
 == Architecture of MCrux ==
   * MCrux uses WebKit as a Browser cum JavaScript Engine in the back-end.
