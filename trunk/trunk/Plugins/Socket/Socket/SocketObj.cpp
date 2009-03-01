@@ -16,7 +16,7 @@ void StartSocketThread(void * socketVoid)
 		Socket * socket = (Socket *) socketVoid;
 		if(socket->Connect())
 		{
-			socket->Connected();
+			socket->onConnectComplete(true);
 			if(socket->Run())
 			{
 				//::MessageBoxA(0, "Run returned true", "socket thread", MB_OK);
@@ -25,6 +25,10 @@ void StartSocketThread(void * socketVoid)
 			{
 				//::MessageBoxA(0, "Run returned false", "socket thread", MB_OK);
 			}
+		}
+		else
+		{
+			socket->onConnectComplete(false);
 		}
 	}
 	catch(...)
@@ -114,9 +118,9 @@ bool Socket::Connect()
 	return true;
 }
 
-void Socket::Connected()
+void Socket::onConnectComplete(bool bConnected)
 {
-	jsObjectContainer->onConnected(hostname, port);
+	jsObjectContainer->onConnectComplete(hostname, port, bConnected);
 }
 
 

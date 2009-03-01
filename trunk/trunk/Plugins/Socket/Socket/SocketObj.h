@@ -32,7 +32,7 @@ public:
 	bool Run();
 	void setConnectParams(const string& _hostname, const string& _port);
 	bool Connect();
-	void Connected();
+	void onConnectComplete(bool bConnected);
 
 	bool startTLS();
 	bool Write(const string & data);
