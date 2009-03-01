@@ -27,7 +27,7 @@ It provides "Plugin Architecture" such that one can extend the MCrux functionali
   * there are following ways through which you can contact us.
 
   * *mailing list*: you can connect us via email to our mailing list [http://groups.google.com/group/mcrux-dev MCrux Dev Mailing List]
-  * *IRC Channel*: we are available through the IRC channel irc.freenode.net #mcrux
+  * *IRC Channel*: we are available through the IRC channel irc.freenode.net #mcrux (available for only limited hours) 
   * you can contact me directly by dropping a mail at mital@mcrux.com
 
 == Licensing ==
