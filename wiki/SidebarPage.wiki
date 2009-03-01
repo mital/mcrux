@@ -1,1 +1,5 @@
 [http://code.google.com/p/mcrux/wiki/Main MCrux Documentation]
+
+  * [http://code.google.com/p/mcrux/wiki/HowToUseMCrux How To use MCrux]
+  * [http://code.google.com/p/mcrux/wiki/MCruxSpecFile MCruxSpec File]
+  * [http://code.google.com/p/mcrux/wiki/Plugins Plugins]
