@@ -1,0 +1,22 @@
+#summary This page describes how to use MCrux as an application development framework.
+#labels Phase-Design
+
+== Getting Started ==
+
+  * This article will be useful for JavaScript / HTML / CSS Programmer who are willing to write desktop applications using their same set of skills.
+  * This article describes step by step procedure for getting started with MCrux.
+
+== Getting The Binaries ==
+
+  * you can get the binaries of MCrux in the featured download section shown on the Right corner of the "Project Home" page.
+  * you can get various plugin binaries also from the same section.
+
+== Creating MCruxSpec File ==
+
+  * for creating an application the very first thing you need to do is to create a MCruxSpec File
+  * checkout [mcruxspeclink mcruxspec File] section for more details on ".mcruxspec" files.
+  * *Important*: for the current version of MCrux Binaries assumes that the ".mcruxspec" file is placed at location [c:\mcrux\myApplication.mcruxspec]. In future versions this dependency will be removed.
+
+== Getting Various Plugins ==
+  * for MCrux users we have developed a set of plugins you can download them and use it in your application.
+  * please refer [http://code.google.com/p/mcrux/wiki/Plugins Plugins] section for more detail.
