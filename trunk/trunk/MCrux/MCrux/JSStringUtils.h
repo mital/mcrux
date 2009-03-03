@@ -8,5 +8,5 @@ using namespace std;
 #include "MCruxExport.h"
 
 
-string MCRUX_API getStringValueFrom(JSContextRef ctx, JSValueRef strValue);
-double MCRUX_API getDoubleValueFrom(JSContextRef ctx, JSValueRef strValue);
+MCRUX_API char * getStringValueFrom(JSContextRef ctx, JSValueRef strValue);
+MCRUX_API double getDoubleValueFrom(JSContextRef ctx, JSValueRef strValue);

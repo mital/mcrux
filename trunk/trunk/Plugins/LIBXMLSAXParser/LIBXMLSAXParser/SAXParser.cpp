@@ -52,6 +52,7 @@ void SAXParser::charactersHandler(void * ctx, const xmlChar * ch, int len)
 	if(parser)
 	{
 		parser->handleCharacters(ch, len);
+
 	}
 }
 

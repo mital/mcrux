@@ -8,6 +8,6 @@ EXPORTS
 	DllRegisterServer	PRIVATE
 	DllUnregisterServer	PRIVATE
 	
-	RunMCrux			PRIVATE
+	RunMCrux		PRIVATE
 	getStringValueFrom	PRIVATE
 	getDoubleValueFrom	PRIVATE
