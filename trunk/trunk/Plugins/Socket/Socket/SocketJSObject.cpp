@@ -34,10 +34,10 @@ SocketJSObject::SocketJSObject(JSContextRef ctx,
 }
 
 
-string SocketJSObject::getName() const
+const char * SocketJSObject::getName() const
 {
 	static string name = "socket";
-	return name;
+	return name.c_str();
 }
 
 JSObjectCallAsConstructorCallback SocketJSObject::getConstructor() const

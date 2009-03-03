@@ -20,10 +20,10 @@ SQLiteDatabaseJSObject::~SQLiteDatabaseJSObject()
 {
 }
 
-string SQLiteDatabaseJSObject::getName() const
+const char * SQLiteDatabaseJSObject::getName() const
 {
 	static string name = "sqlite_database";
-	return name;
+	return name.c_str();
 }
 
 JSObjectCallAsConstructorCallback SQLiteDatabaseJSObject::getConstructor() const

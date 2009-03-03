@@ -49,10 +49,10 @@ JSObjectRef LIBXMLSAXJSObject::ConstructorCallback(JSContextRef ctx,
 
 }
 
-string LIBXMLSAXJSObject::getName() const
+const char * LIBXMLSAXJSObject::getName() const
 {
-	static string name = "libxml_saxparser";
-	return name;
+	static string name("libxml_saxparser");
+	return name.c_str();
 }
 
 JSObjectCallAsConstructorCallback LIBXMLSAXJSObject::getConstructor() const

@@ -46,6 +46,9 @@ Socket::Socket(SocketJSObject* _jsObjectContainer)
   ctx(NULL),
   ssl_bio(NULL)
 {
+	InitializeCriticalSection( &m_csReading );
+	InitializeCriticalSection( &m_csWriting );
+
 	if(notInitialized)
 	{
 		ERR_load_BIO_strings();
@@ -58,6 +61,8 @@ Socket::Socket(SocketJSObject* _jsObjectContainer)
 Socket::~Socket()
 {
 	shouldBeRunning = false;
+	DeleteCriticalSection( &m_csReading );
+	DeleteCriticalSection( &m_csWriting );
 }
 
 
@@ -70,8 +75,13 @@ void Socket::setConnectParams(const string& _hostname, const string& _port)
 
 bool Socket::Connect()
 {
+	EnterCriticalSection( &m_csReading );
+	EnterCriticalSection( &m_csWriting );
+
 	if (hostname.size() < 0)
 	{
+		LeaveCriticalSection( &m_csReading );
+		LeaveCriticalSection( &m_csWriting );
 		return false;
 	}
 
@@ -85,6 +95,8 @@ bool Socket::Connect()
 	
 	if (!bio)
 	{
+		LeaveCriticalSection( &m_csReading );
+		LeaveCriticalSection( &m_csWriting );
 		return false;
 	}
 
@@ -92,6 +104,8 @@ bool Socket::Connect()
 
 	if(!BIO_set_conn_port(bio, port.c_str()))
 	{
+		LeaveCriticalSection( &m_csReading );
+		LeaveCriticalSection( &m_csWriting );
 		return false;
 	}
 
@@ -105,16 +119,24 @@ bool Socket::Connect()
 		{
 			if (!BIO_should_retry(bio))
 			{
+				LeaveCriticalSection( &m_csReading );
+				LeaveCriticalSection( &m_csWriting );
 				return false;
 			}
 
 			//TODO: implement some way of error message showing
 			//const char * error = ERR_func_error_string(ERR_get_error());
 			BIO_free_all(bio);
+
+			LeaveCriticalSection( &m_csReading );
+			LeaveCriticalSection( &m_csWriting );
 			return false;
 		}
 	}
 	shouldBeRunning = true;
+
+	LeaveCriticalSection( &m_csReading );
+	LeaveCriticalSection( &m_csWriting );
 	return true;
 }
 
@@ -126,16 +148,22 @@ void Socket::onConnectComplete(bool bConnected)
 
 bool Socket::Write(const string & data)
 {
+	EnterCriticalSection( &m_csWriting );
+
 	int writtenByteCount = BIO_write(bio, data.c_str(), (int)data.size());
 	char buf[10];
 	_itoa_s(writtenByteCount, buf, 10, 10);
 	::MessageBoxA(0, buf, "Bytes written", MB_OK);
+
+	LeaveCriticalSection( &m_csWriting );
 	return true;
 }
 
 
 void Socket::Read(string & readBuffer)
 {
+	EnterCriticalSection( &m_csReading );
+
 	char buf[1024];
 	int readBytes;
 	for(;;)
@@ -148,6 +176,8 @@ void Socket::Read(string & readBuffer)
 		buf[readBytes] = 0;
 		readBuffer += buf;
 	}
+
+	LeaveCriticalSection( &m_csReading );
 }
 
 

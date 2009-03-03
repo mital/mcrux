@@ -47,10 +47,10 @@ FileSystemJSObject::~FileSystemJSObject()
 }
 
 
-string FileSystemJSObject::getName() const
+const char * FileSystemJSObject::getName() const
 {
 	static string name = "filesystem";
-	return name;
+	return name.c_str();
 }
 
 JSStaticFunction * FileSystemJSObject::getStaticFunctions() const

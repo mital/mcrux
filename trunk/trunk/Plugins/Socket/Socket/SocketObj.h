@@ -13,6 +13,9 @@ void StartSocketThread(void * socketVoid);
 
 class Socket
 {
+	CRITICAL_SECTION m_csReading;
+	CRITICAL_SECTION m_csWriting;
+
 	static bool notInitialized;
 	SocketJSObject* jsObjectContainer;
 	bool shouldBeRunning;
@@ -26,7 +29,6 @@ class Socket
 public:
 
 	Socket(SocketJSObject* _jsObjectContainer);
-
 	~Socket();
 
 	bool Run();

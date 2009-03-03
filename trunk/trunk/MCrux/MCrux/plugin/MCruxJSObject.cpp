@@ -33,10 +33,10 @@ MCruxJSObject::~MCruxJSObject()
 }
 
 
-string MCruxJSObject::getName() const
+const char * MCruxJSObject::getName() const
 {
 	static string name = "mcrux";
-	return name;
+	return name.c_str();
 }
 
 JSStaticFunction * MCruxJSObject::getStaticFunctions() const
