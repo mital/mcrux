@@ -50,6 +50,6 @@ public:
 	FileSystemJSObject();
 	virtual ~FileSystemJSObject();
 
-	virtual string getName() const;
+	virtual const char * getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;
 };

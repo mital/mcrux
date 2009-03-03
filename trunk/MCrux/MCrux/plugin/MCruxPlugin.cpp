@@ -42,7 +42,7 @@ bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView, JSObjectRe
 
 	pluginNameSpace.version = 0;
 	pluginNameSpace.attributes = 0;
-	pluginNameSpace.className = getName().c_str();
+	pluginNameSpace.className = getName();
 	pluginNameSpace.parentClass = 0;
 	pluginNameSpace.staticValues = 0;
 	pluginNameSpace.staticFunctions = getStaticFunctions();
@@ -60,7 +60,7 @@ bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView, JSObjectRe
 
 	JSClassRef pluginRef = JSClassCreate(&pluginNameSpace);
 	JSObjectRef pluginObj = JSObjectMake(ctx, pluginRef, this);
-	JSStringRef fnPropName = JSStringCreateWithUTF8CString(getName().c_str());
+	JSStringRef fnPropName = JSStringCreateWithUTF8CString(getName());
 	JSObjectSetProperty(ctx,
 		parentObject,
 		fnPropName,

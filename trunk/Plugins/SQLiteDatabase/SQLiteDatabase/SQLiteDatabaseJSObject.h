@@ -39,7 +39,7 @@ public:
 	SQLiteDatabaseJSObject();
 	virtual ~SQLiteDatabaseJSObject();
 
-	virtual string getName() const;
+	virtual const char * getName() const;
 
 	virtual JSStaticFunction * getStaticFunctions() const;
 

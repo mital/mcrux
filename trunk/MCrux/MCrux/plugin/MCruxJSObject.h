@@ -45,6 +45,6 @@ public:
 	MCruxJSObject();
 	virtual ~MCruxJSObject();
 
-	virtual string getName() const;
+	virtual const char * getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;
 };

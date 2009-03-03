@@ -90,7 +90,7 @@ public:
 	SocketJSObject();
 	virtual ~SocketJSObject();
 
-	virtual string getName() const;
+	virtual const char * getName() const;
 	virtual JSStaticFunction * getStaticFunctions() const;;
 	virtual JSObjectCallAsConstructorCallback getConstructor() const;
 	virtual JSStaticFunction * getJSObjectFunctions() const;

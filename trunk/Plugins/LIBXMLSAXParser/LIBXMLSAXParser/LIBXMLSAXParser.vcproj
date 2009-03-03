@@ -44,7 +44,7 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBXMLSAXPARSER_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -61,8 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libxml2.lib"
+				AdditionalDependencies="comsuppw.lib libcmtd.lib libcpmtd.lib version.lib oldnames.lib comctl32.lib shlwapi.lib libxml2.lib "
 				LinkIncremental="2"
+				IgnoreAllDefaultLibraries="true"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -119,7 +120,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBXMLSAXPARSER_EXPORTS"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -136,8 +137,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libxml2.lib"
+				AdditionalDependencies="libxml2.lib libcmt.lib libcpmt.lib version.lib oldnames.lib "
 				LinkIncremental="1"
+				IgnoreAllDefaultLibraries="true"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
