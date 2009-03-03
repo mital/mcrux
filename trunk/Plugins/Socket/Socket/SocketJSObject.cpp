@@ -6,9 +6,7 @@
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
 #include <JavaScriptCore/RetainPtr.h>
-#include "JSStringUtils.h"
-
-using namespace JSStringUtils;
+#include "mcrux/JSStringUtils.h"
 
 
 list<SocketJSObject *> SocketJSObject::socketObjects;
