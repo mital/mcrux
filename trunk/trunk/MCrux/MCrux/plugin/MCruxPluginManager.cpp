@@ -27,8 +27,7 @@
 
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
-: mainWindow(NULL),
-  mcruxObject(NULL)
+: mcruxObject(NULL)
 {
 	AddMCruxDefaultPlugins();
 	AddExtensionPlugins(extensionPluginNames);
@@ -84,30 +83,35 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
 {
-	if(!mcruxObject)
-	{
-		mcruxObject = JSObjectMake(context, NULL, NULL);
-		MCruxWebView * mcruxWebView = mainWindow->getMCruxWebView();
+	//MCruxWindow * mcruxWindow = MCruxWindow::getMCruxWindowFrom(webView);
+	//MCruxWebView * mcruxWebView = mcruxWindow->getMCruxWebView();
 
-		for(list<MCruxPlugin *>::const_iterator
-			oIter = plugins.begin();
-			oIter != plugins.end();
-		oIter++)
-		{
-			(*oIter)->injectPlugin(context, mcruxWebView->getWebView(), mcruxObject);
-		}
-	}
 	JSObjectRef globalObject = JSContextGetGlobalObject(context);
 	JSStringRef name = JSStringCreateWithUTF8CString("mcrux");
 	JSObjectSetProperty(context,
 		globalObject,
 		name,
-		mcruxObject, 0, 0);
+		getMCruxJSObject(webView, context), 0, 0);
+
+	// TODO: inject a new object called currentWindow
+	// this object will be responsible for handling various events of currentwindow.
 
 	return S_OK;
 }
 
-void MCruxPluginManager::setMainWindow(MCruxWindow * _mainWindow)
+
+JSObjectRef MCruxPluginManager::getMCruxJSObject(IWebView* webView, JSContextRef context)
 {
-	mainWindow = _mainWindow;
+	if(!mcruxObject)
+	{
+		mcruxObject = JSObjectMake(context, NULL, NULL);
+		for(list<MCruxPlugin *>::const_iterator
+			oIter = plugins.begin();
+			oIter != plugins.end();
+		oIter++)
+		{
+			(*oIter)->injectPlugin(context, webView, mcruxObject);
+		}
+	}
+	return mcruxObject;
 }

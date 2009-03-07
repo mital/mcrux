@@ -39,7 +39,6 @@ class MCruxWindow
 	HINSTANCE hInstance;
 	HWND hWnd;
 	const MCruxWindowConfiguration * config;
-	const bool isMainWindow;
 
 	// webView
 	MCruxWebView webView;
@@ -53,11 +52,11 @@ class MCruxWindow
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 	static map<HWND, MCruxWindow *> mcruxWindows;
+	static map<IWebView *, MCruxWindow *> mcruxWindowsFromViews;
 
 public:
 	MCruxWindow(const MCruxWindowConfiguration * _config,
-		MCruxPluginManager * pluginManager,
-		const bool _isMainWindow = false);
+		MCruxPluginManager * pluginManager);
 	~MCruxWindow();
 
 	int ShowWindow() const;
@@ -68,4 +67,5 @@ public:
 
 	static void initWindowClass(HINSTANCE hInstance);
 	static void unInitWindowClass(HINSTANCE hInstance);
+	static MCruxWindow * getMCruxWindowFrom(IWebView * webView);
 };

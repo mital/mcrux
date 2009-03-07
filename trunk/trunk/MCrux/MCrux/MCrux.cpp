@@ -108,7 +108,6 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 	MCruxPluginManager pluginManager(plugins);
 	MCruxWindowManager windowManager(mcruxWindowConfigs, &pluginManager);
 
-
 	if(mcruxWindowConfigs.size())
 	{
 		HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
