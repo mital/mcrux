@@ -24,14 +24,14 @@
 #include "MCruxWindow.h"
 
 map<HWND, MCruxWindow *> MCruxWindow::mcruxWindows;
+map<IWebView *, MCruxWindow *> MCruxWindow::mcruxWindowsFromViews;
+
 
 MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
-						 MCruxPluginManager * pluginManager,
-						 bool _isMainWindow)
+						 MCruxPluginManager * pluginManager)
 	: hInstance(GetModuleHandle(NULL)),
 	  hWnd(NULL),
 	  config(_config),
-	  isMainWindow(_isMainWindow),
 	  webView(),
 	  webUIDelegate(),
 	  webFrameLoadDelegate(),
@@ -62,10 +62,6 @@ MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
 	}
 	webFrameLoadDelegate.setFrameLoadHandler(&delegatesHandler);
 
-	if(isMainWindow)
-	{
-		pluginManager->setMainWindow(this);
-	}
 	delegatesHandler.setPluginManager(pluginManager);
 
 	if (!webView.loadURLInWindow(hWnd, config->getURL()))
@@ -74,6 +70,7 @@ MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
 		return;
 	}
 	MCruxWindow::mcruxWindows[hWnd] = this;
+	MCruxWindow::mcruxWindowsFromViews[webView.getWebView()] = this;
 }
 
 
@@ -139,7 +136,7 @@ void MCruxWindow::initWindowClass(HINSTANCE hInstance)
 		wcex.hIconSm		= LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
 		RegisterClassEx(&wcex);
-		
+
 		bInit = true;
 	}
 }
@@ -198,4 +195,10 @@ LRESULT CALLBACK MCruxWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LP
 MCruxWebView * MCruxWindow::getMCruxWebView()
 {
 	return &webView;
+}
+
+
+MCruxWindow * MCruxWindow::getMCruxWindowFrom(IWebView * webView)
+{
+	return MCruxWindow::mcruxWindowsFromViews[webView];
 }

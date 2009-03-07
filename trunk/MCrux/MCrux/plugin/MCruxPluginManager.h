@@ -36,7 +36,6 @@ typedef MCruxPlugin * (*GetPluginFunctionPtr)();
 
 class MCruxPluginManager
 {
-	MCruxWindow * mainWindow;
 	JSObjectRef mcruxObject;
 	list<MCruxPlugin *> plugins;
 
@@ -44,6 +43,7 @@ class MCruxPluginManager
 
 	bool AddPlugin(const wstring & pluginName);
 	void AddExtensionPlugins(const list<wstring> extensionPluginNames);
+	JSObjectRef getMCruxJSObject(IWebView* webView, JSContextRef context);
 
 public:
 
@@ -54,6 +54,4 @@ public:
 	HRESULT injectPlugins(IWebView *webView,
         JSContextRef context,
         JSObjectRef windowScriptObject);
-
-	void setMainWindow(MCruxWindow * _mainWindow);
 };
