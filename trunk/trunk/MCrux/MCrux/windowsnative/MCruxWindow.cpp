@@ -25,11 +25,10 @@
 
 map<HWND, MCruxWindow *> MCruxWindow::mcruxWindows;
 
-MCruxWindow::MCruxWindow(HINSTANCE _hInstance,
-						 const MCruxWindowConfiguration * _config,
+MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
 						 MCruxPluginManager * pluginManager,
 						 bool _isMainWindow)
-	: hInstance(_hInstance),
+	: hInstance(GetModuleHandle(NULL)),
 	  hWnd(NULL),
 	  config(_config),
 	  isMainWindow(_isMainWindow),

@@ -365,6 +365,10 @@
 					RelativePath=".\windowsnative\MCruxWindowConfiguration.h"
 					>
 				</File>
+				<File
+					RelativePath=".\windowsnative\MCruxWindowManager.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Source Files"
@@ -375,6 +379,10 @@
 				</File>
 				<File
 					RelativePath=".\windowsnative\MCruxWindowConfiguration.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\windowsnative\MCruxWindowManager.cpp"
 					>
 				</File>
 			</Filter>

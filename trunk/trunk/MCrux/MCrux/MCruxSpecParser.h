@@ -22,7 +22,8 @@
 #define MCRUXSPEC_ROOT_NAME "mcrux"
 #define MCRUXSPEC_PLUGINS_NAME "plugins"
 #define MCRUXSPEC_PLUGIN_NAME "plugin"
-#define MCRUXSPEC_WINDOW_NAME "mcruxwindow"
+#define MCRUXSPEC_WINDOWS_NAME "windows"
+#define MCRUXSPEC_WINDOW_NAME "window"
 #define MCRUXSPEC_WINDOW_TITLE_NAME "title"
 #define MCRUXSPEC_WINDOW_URL_NAME "url"
 #define MCRUXSPEC_XMLNS_VERSION_1 "http://www.mcrux.com/2009/mcruxspec-version-1"
@@ -53,6 +54,7 @@ class MCruxSpecParser
 	wstring getURL(xmlNode *child_prop) const;
 	
 	bool parseWindowElement(xmlNode *windowNode);
+	bool parseWindowsElement(xmlNode *windowsNode);
 	bool parsePluginsElement(xmlNode *pluginsNode);
 
 	/**
