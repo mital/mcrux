@@ -55,8 +55,7 @@ class MCruxWindow
 	static map<HWND, MCruxWindow *> mcruxWindows;
 
 public:
-	MCruxWindow(HINSTANCE _hInstance,
-		const MCruxWindowConfiguration * _config,
+	MCruxWindow(const MCruxWindowConfiguration * _config,
 		MCruxPluginManager * pluginManager,
 		const bool _isMainWindow = false);
 	~MCruxWindow();

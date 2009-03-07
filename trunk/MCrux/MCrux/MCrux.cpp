@@ -30,8 +30,7 @@
 #include "MCrux.h"
 #include "MCruxSpecParser.h"
 
-#include "windowsnative/MCruxWindow.h"
-#include "windowsnative/MCruxWindowConfiguration.h"
+#include "windowsnative/MCruxWindowManager.h"
 
 
 #ifdef _MANAGED
@@ -107,16 +106,11 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 	parser.getPlugins(plugins);
 
 	MCruxPluginManager pluginManager(plugins);
+	MCruxWindowManager windowManager(mcruxWindowConfigs, &pluginManager);
 
-	HINSTANCE hInstance = GetModuleHandle(NULL);
 
 	if(mcruxWindowConfigs.size())
 	{
-		MCruxWindowConfiguration * mainWindowConfig = mcruxWindowConfigs.back();
-		MCruxWindow * mainWindow = new MCruxWindow(hInstance, mainWindowConfig, &pluginManager, true);
-		mainWindow->ShowWindow();
-		mainWindow->UpdateWindow();
-
 		HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
 
 		MSG msg;
@@ -133,7 +127,7 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 	}
 	else
 	{
-		::MessageBoxA(0, "mcruxspec file not found", "error", MB_OK);
+		::MessageBoxA(0, "mcruxspec file does not have any windows", "error", MB_OK);
 	}
 
 	UnInitialize();

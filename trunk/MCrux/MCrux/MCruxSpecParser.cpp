@@ -107,6 +107,21 @@ bool MCruxSpecParser::parseWindowElement(xmlNode *windowNode)
 	return true;
 }
 
+bool MCruxSpecParser::parseWindowsElement(xmlNode *windowsNode)
+{
+	const xmlChar * windowName = xmlCharStrdup(MCRUXSPEC_WINDOW_NAME);
+	for(xmlNode * child_prop = windowsNode->children;
+		child_prop;
+		child_prop = child_prop->next)
+	{
+		if (0 == xmlStrcmp(child_prop->name, windowName))
+		{
+			parseWindowElement(child_prop);
+		}
+	}
+	return true;
+}
+
 bool MCruxSpecParser::parsePluginsElement(xmlNode *pluginsNode)
 {
 	xmlChar * pluginName = xmlCharStrdup(MCRUXSPEC_PLUGIN_NAME);
@@ -126,8 +141,9 @@ bool MCruxSpecParser::parsePluginsElement(xmlNode *pluginsNode)
 
 bool MCruxSpecParser::parseMCruxSpecXMLNSVersion1(xmlNode *root_child)
 {
-	xmlChar * mCruxSpecWindowName = xmlCharStrdup(MCRUXSPEC_WINDOW_NAME);
-	xmlChar * mCruxSpecPluginsName = xmlCharStrdup(MCRUXSPEC_PLUGINS_NAME);
+	const xmlChar * mCruxSpecWindowsName = xmlCharStrdup(MCRUXSPEC_WINDOWS_NAME);
+	const xmlChar * mCruxSpecWindowName = xmlCharStrdup(MCRUXSPEC_WINDOW_NAME);
+	const xmlChar * mCruxSpecPluginsName = xmlCharStrdup(MCRUXSPEC_PLUGINS_NAME);
 
 	for (xmlNode *cur_node = root_child;
 		cur_node != NULL;
@@ -135,9 +151,9 @@ bool MCruxSpecParser::parseMCruxSpecXMLNSVersion1(xmlNode *root_child)
 	{
 		if (cur_node->type == XML_ELEMENT_NODE)
 		{
-			if (0 == xmlStrcmp(cur_node->name, mCruxSpecWindowName))
+			if (0 == xmlStrcmp(cur_node->name, mCruxSpecWindowsName))
 			{
-				parseWindowElement(cur_node);
+				parseWindowsElement(cur_node);
 			}
 			else if (0 == xmlStrcmp(cur_node->name, mCruxSpecPluginsName))
 			{
