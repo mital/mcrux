@@ -46,6 +46,13 @@ class FileSystemJSObject
 		const JSValueRef arguments[],
 		JSValueRef *exception);
 
+	static JSValueRef readFile(JSContextRef ctx,
+		JSObjectRef function,
+		JSObjectRef thisObject,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef *exception);
+
 public:
 	FileSystemJSObject();
 	virtual ~FileSystemJSObject();

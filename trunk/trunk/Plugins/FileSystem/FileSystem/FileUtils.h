@@ -46,5 +46,6 @@ namespace FileUtils
 	bool readDirectory(const string& dirName, vector<string>& files);
 	FileInfo * getFileInfo(const string& fileName);
 	bool Copy(const string& sourceFileName, const string& destFileName);
+    bool ReadFile(const string& filename, string& str);
 
 };

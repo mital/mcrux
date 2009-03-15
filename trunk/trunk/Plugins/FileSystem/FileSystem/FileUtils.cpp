@@ -101,25 +101,25 @@ bool FileUtils::Copy(const string& sourceFileName, const string& destFileName)
 			if (srcFileStream.is_open())
 			{
 				srcFileStream.seekg (0, ios::end);
-				int iLength = srcFileStream.tellg();
+				int length = srcFileStream.tellg();
 				srcFileStream.seekg (0, ios::beg);
 
 				ofstream destFileStream(destFileName.c_str(), ios::out|ios::binary);
 
-				int iBread=0;
+				int readBytes=0;
 				while (srcFileStream)
 				{
 					srcFileStream.read(buffer, sourceFileInfo->fileSize);
-					iBread = srcFileStream.gcount();
+					readBytes = srcFileStream.gcount();
 
-					if (iBread > 0)
+					if (readBytes > 0)
 					{
-						destFileStream.write(buffer, iBread);
+						destFileStream.write(buffer, readBytes);
 					}
 
-					iLength -= iBread;
+					length -= readBytes;
 
-					if (iLength <= 0)
+					if (length <= 0)
 					{
 						break;
 					}
@@ -148,4 +148,64 @@ bool FileUtils::Copy(const string& sourceFileName, const string& destFileName)
 	}
 
 	return bRet;
+}
+
+
+bool FileUtils::ReadFile(const string & fileName, string & str)
+{
+	struct stat st;
+	int bufSize;
+	char * pcBuf = NULL;
+	str = "";
+	try
+	{
+		if ((stat(fileName.c_str(), &st)) == -1)
+		{
+			return false;
+		}
+
+		bufSize = st.st_size;
+		pcBuf = new char[bufSize];
+
+		ifstream streamFile(fileName.c_str(), ios::in | ios::binary);
+		if (!streamFile.is_open())
+		{
+			delete []  pcBuf;
+			return false;
+		}
+		streamFile.seekg(0, ios::end);
+		int length = streamFile.tellg();
+		streamFile.seekg(0, ios::beg);
+
+		int readBytes = 0;
+		while (streamFile)
+		{
+			streamFile.read(pcBuf, bufSize);
+			readBytes = streamFile.gcount();
+
+			if (readBytes > 0)
+			{
+				copy(pcBuf, pcBuf + readBytes, back_inserter<string>(str));
+			}
+
+			length -= readBytes;
+
+			if (length <= 0)
+			{
+				break;
+			}
+		}
+
+		streamFile.close();
+		delete [] pcBuf;
+	}
+	catch(exception &)
+	{
+		if (pcBuf)
+		{
+			delete [] pcBuf;
+		}
+		return false;
+	}
+	return true;
 }
