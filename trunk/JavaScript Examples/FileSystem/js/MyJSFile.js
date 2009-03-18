@@ -1,7 +1,7 @@
 function myFunction()
 {
-//	alert("Read Dir Example!"); 
-	addTree(document.getElementById("body"), new Array("C:"), true);
+	alert("Read Dir Example!"); 
+	addTree(document.getElementById("body"), new Array({name:"C:", type:"dir"}), true);
 }
 
 function addTree(parentElement, childrenArray, blnShow)
@@ -16,11 +16,20 @@ function addTree(parentElement, childrenArray, blnShow)
 	{		
 		var childElm =  document.createElement("li");
 		var spanElm =  document.createElement("span");
-		spanElm.innerHTML = childrenArray[childKey];
-		childElm.className = "folderNode";
+		spanElm.innerHTML = childrenArray[childKey].name;// + " " +childrenArray[childKey].type;
+		if(childrenArray[childKey].type=="dir")
+		{
+			childElm.className = "folderNode";
+		//	alert(childrenArray[childKey].name + "dir");
+		}
+		else
+		{
+			childElm.className = "fileNode";
+		//	alert(childrenArray[childKey].name + "file");
+		}
 		childElm.appendChild(spanElm);			
-		childElm.filePath = rPath + childrenArray[childKey];
-		rootElement.appendChild(childElm);			
+		childElm.filePath = rPath + childrenArray[childKey].name;
+		rootElement.appendChild(childElm);
 	}	
 	if(!blnShow)
 	{
@@ -77,12 +86,15 @@ function folderClicked(jFolder, event)
 	}
 }
 
+var tempCounter=0;
 function loadDirectory(folder)
 {
 	var rootElement = folder;
-	//alert(folder.filePath);
+	alert("path: " + folder.filePath);
 	//alert(folder.innerHTML);
 	files = mcrux.filesystem.readDir(folder.filePath + "\\"); 
-	//files = new Array("A","B","C","D","E","F");
+	//files = new Array({name:"A"+tempCounter++},{name:"B"+tempCounter++, type:"dir"},{name:"C"+tempCounter++},{name:"D"+tempCounter++},{name:"E"+tempCounter++},{name:"F"+tempCounter++});
+	//alert(files.length);
+	//alert(files[0].name);
 	addTree(rootElement, files, true);
 }

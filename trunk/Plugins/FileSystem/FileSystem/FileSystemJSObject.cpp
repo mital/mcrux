@@ -105,7 +105,6 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 	}
 	delete info;
 
-
 	vector<string> files;
 	FileUtils::readDirectory(dir, files);
 
@@ -120,18 +119,21 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 			JSStringRef fileName = JSStringCreateWithUTF8CString(files[i].c_str());
 			JSObjectSetProperty(ctx, fileJSStrings[i], fileNameTag, JSValueMakeString(ctx, fileName), 0, 0);
 
-			FileInfo * info = FileUtils::getFileInfo(files[i]);
+			info = FileUtils::getFileInfo(dir + files[i]);
+			if(info)
+			{
+				string fileTypeStr = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
+				JSStringRef fileTypeTag = JSStringCreateWithUTF8CString((const char *)"type");
+				JSStringRef fileType = JSStringCreateWithUTF8CString(fileTypeStr.c_str());
+				JSObjectSetProperty(ctx, fileJSStrings[i], fileTypeTag, JSValueMakeString(ctx, fileType), 0, 0);
 
-			string fileTypeStr = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
-			JSStringRef fileTypeTag = JSStringCreateWithUTF8CString((const char *)"type");
-			JSStringRef fileType = JSStringCreateWithUTF8CString(fileTypeStr.c_str());
-			JSObjectSetProperty(ctx, fileJSStrings[i], fileTypeTag, JSValueMakeString(ctx, fileType), 0, 0);
+				JSStringRef fileSizeTag = JSStringCreateWithUTF8CString((const char *)"size");
+				JSObjectSetProperty(ctx, fileJSStrings[i], fileSizeTag, JSValueMakeNumber(ctx, info->fileSize), 0, 0);
 
-			JSStringRef fileSizeTag = JSStringCreateWithUTF8CString((const char *)"size");
-			JSObjectSetProperty(ctx, fileJSStrings[i], fileSizeTag, JSValueMakeNumber(ctx, info->fileSize), 0, 0);
-
-			JSStringRef fileModTimeTag = JSStringCreateWithUTF8CString((const char *)"last_modified_time");
-			JSObjectSetProperty(ctx, fileJSStrings[i], fileModTimeTag, JSValueMakeNumber(ctx, (double)info->lastModifiedTime), 0, 0);
+				JSStringRef fileModTimeTag = JSStringCreateWithUTF8CString((const char *)"last_modified_time");
+				JSObjectSetProperty(ctx, fileJSStrings[i], fileModTimeTag, JSValueMakeNumber(ctx, (double)info->lastModifiedTime), 0, 0);
+			}
+			delete info;
 		}
 		return JSObjectMakeArray(ctx, files.size(), fileJSStrings, NULL);
 	}	
