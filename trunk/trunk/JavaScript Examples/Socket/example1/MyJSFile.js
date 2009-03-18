@@ -20,8 +20,9 @@ function myFunction()
 {
 	alert("socket Example ! creating socketObj object with new operator");
 
-	socketObj = new mcrux.socket();
-	socketObj.addEventListener("onConnectComplete", onConnectComplete);
-	var ret = socketObj.connect("localhost", 5222);
-	socketObj.addEventListener("onRead", ReadDataHandler);
+    window.open("http://www.google.com");
+//	socketObj = new mcrux.socket();
+//	socketObj.addEventListener("onConnectComplete", onConnectComplete);
+//	var ret = socketObj.connect("localhost", 5222);
+//	socketObj.addEventListener("onRead", ReadDataHandler);
 }

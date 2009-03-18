@@ -13,7 +13,7 @@ ul.fileBrowser li
 	font-family: Tahoma;
 }
 
-.folderNode span
+.folderNode>span
 {
 	margin: 0;
 	padding-left: 15px;
@@ -26,7 +26,7 @@ ul.fileBrowser li
 {
 }
 
-.fileNode
+.fileNode>span
 {
 	margin: 0;
 	padding-left: 15px;
