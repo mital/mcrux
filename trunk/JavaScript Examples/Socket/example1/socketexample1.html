@@ -3,8 +3,15 @@
 		<script type="text/javascript" src="myJSFile.js"></script>
 	</head>
 	<body id="body" onload="myFunction();">
-		<h1>Sqlite example1</h1>
-		<h4>JavaScript should create sqlite_database's instance using new operator</h4>
-		<h4>var xmppObj = new xmpp();</h4>
+		<h1>Socket Example</h1>
+	<code>
+		{ </br>
+			socketObj = new mcrux.socket();</br>
+			socketObj.addEventListener("onConnectComplete", onConnectComplete);</br>
+			socketObj.addEventListener("onRead", ReadDataHandler);</br>
+			var ret = socketObj.connect("localhost", 5222);</br>
+		}
+	</code>
+	
 	</body>
 </html>
