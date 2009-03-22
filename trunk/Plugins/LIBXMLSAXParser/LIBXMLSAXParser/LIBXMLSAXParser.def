@@ -1,6 +1,0 @@
-; LIBXMLSAXParser.def : Declares the module parameters.
-
-LIBRARY	"LIBXMLSAXParser"
-
-EXPORTS
-	getMCruxPlugin		PRIVATE
