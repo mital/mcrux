@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="Socket"
+	Name="OpenSSLSocket"
 	ProjectGUID="{C84D31A1-1A84-4CC7-8608-3E8C29101259}"
-	RootNamespace="Socket"
+	RootNamespace="OpenSSLSocket"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -181,7 +181,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Socket.cpp"
+				RelativePath=".\OpenSSLSocket.cpp"
 				>
 			</File>
 			<File
