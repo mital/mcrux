@@ -34,7 +34,7 @@ SocketJSObject::SocketJSObject(JSContextRef ctx,
 
 const char * SocketJSObject::getName() const
 {
-	static string name = "socket";
+	static string name = "openssl_socket";
 	return name.c_str();
 }
 
