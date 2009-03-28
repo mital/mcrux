@@ -18,6 +18,7 @@ function ReadDataHandler(event)
 {
 	alert("ReadDataHandler Handler Called");
 	alert(event.data);
+	socketObj.disconnect();
 }
 
 function myFunction()
@@ -27,5 +28,5 @@ function myFunction()
 	socketObj = new mcrux.socket();
 	socketObj.addEventListener("onConnectComplete", onConnectComplete);
 	socketObj.addEventListener("onRead", ReadDataHandler);
-	var ret = socketObj.connect("localhost", 5222);
+	var ret = socketObj.connect("mital-lappy", "5222");
 }
