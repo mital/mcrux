@@ -103,7 +103,7 @@ JSValueRef SocketJSObject::addEventListener(JSContextRef ctx,
 		{
 			string eventName = getStringValueFrom(ctx, arguments[0]);
 			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
-			bool bRet = saxObj->addEventListener(eventName, eventHandler);
+			bool bRet = saxObj->addEventListener(ctx, eventName, eventHandler);
 			return JSValueMakeBoolean(ctx, bRet);
 		}
 	}
@@ -125,7 +125,7 @@ JSValueRef SocketJSObject::removeEventListener(JSContextRef ctx,
 		{
 			string eventName = getStringValueFrom(ctx, arguments[0]);
 			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
-			bool bRet = saxObj->removeEventListener(eventName, eventHandler);
+			bool bRet = saxObj->removeEventListener(ctx, eventName, eventHandler);
 			return JSValueMakeBoolean(ctx, bRet);
 		}
 	}
@@ -220,9 +220,10 @@ bool SocketJSObject::Send(const string & data)
 
 
 
-bool SocketJSObject::addEventListener(const string & eventName, JSObjectRef eventHandler)
+bool SocketJSObject::addEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler)
 {
 	eventMap[eventName] = eventHandler;
+	JSValueProtect(ctx, eventMap[eventName]);
 	return true;
 }
 
@@ -238,11 +239,12 @@ JSObjectRef SocketJSObject::getEventListener(const string & eventName) const
 }
 
 
-bool SocketJSObject::removeEventListener(const string & eventName, JSObjectRef eventHandler)
+bool SocketJSObject::removeEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler)
 {
 	map<string, JSObjectRef>::iterator iter = eventMap.find(eventName);
 	if (iter != eventMap.end() && iter->second == eventHandler)
 	{
+		JSValueUnprotect(ctx, iter->second);
 		eventMap.erase(iter);
 		return true;
 	}

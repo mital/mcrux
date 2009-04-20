@@ -36,7 +36,6 @@ JSObjectRef LIBXMLSAXJSObject::ConstructorCallback(JSContextRef ctx,
 												   JSValueRef* exception)
 {
 	// check for required arguments before creating the object
-	::MessageBoxA(0, "constructor called", "test", MB_OK);
 	if(argumentCount == 0)
 	{
 		LIBXMLSAXJSObject * newObj
@@ -119,7 +118,7 @@ JSValueRef LIBXMLSAXJSObject::addEventListener(JSContextRef ctx,
 		{
 			string eventName = getStringValueFrom(ctx, arguments[0]);
 			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
-			bool bRet = saxObj->addEventListener(eventName, eventHandler);
+			bool bRet = saxObj->addEventListener(ctx, eventName, eventHandler);
 			return JSValueMakeBoolean(ctx, bRet);
 		}
 	}
@@ -141,7 +140,7 @@ JSValueRef LIBXMLSAXJSObject::removeEventListener(JSContextRef ctx,
 		{
 			string eventName = getStringValueFrom(ctx, arguments[0]);
 			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
-			bool bRet = saxObj->removeEventListener(eventName, eventHandler);
+			bool bRet = saxObj->removeEventListener(ctx, eventName, eventHandler);
 			return JSValueMakeBoolean(ctx, bRet);
 		}
 	}
@@ -157,15 +156,18 @@ int LIBXMLSAXJSObject::xmlParseChunk(const string & data)
 
 void getAttributesFrom(const xmlChar ** atts, map<string, string>& attributes)
 {
-	for(int i=0; ; i+=2)
+	if(atts)
 	{
-		if(atts[i] == NULL)
+		for(int i=0; ; i+=2)
 		{
-			break;
+			if(atts[i] == NULL)
+			{
+				break;
+			}
+			string key = (char*)atts[i];
+			string value = (char*)atts[i+1];
+			attributes[key] = value;
 		}
-		string key = (char*)atts[i];
-		string value = (char*)atts[i+1];
-		attributes[key] = value;
 	}
 }
 
@@ -281,9 +283,10 @@ void LIBXMLSAXJSObject::handleCharacters(const xmlChar * ch, int len)
 	}
 }
 
-bool LIBXMLSAXJSObject::addEventListener(const string & eventName, JSObjectRef eventHandler)
+bool LIBXMLSAXJSObject::addEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler)
 {
 	eventMap[eventName] = eventHandler;
+	JSValueProtect(ctx, eventMap[eventName]);
 	return true;
 }
 
@@ -299,11 +302,12 @@ JSObjectRef LIBXMLSAXJSObject::getEventListener(const string & eventName) const
 }
 
 
-bool LIBXMLSAXJSObject::removeEventListener(const string & eventName, JSObjectRef eventHandler)
+bool LIBXMLSAXJSObject::removeEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler)
 {
 	map<string, JSObjectRef>::iterator iter = eventMap.find(eventName);
 	if (iter != eventMap.end() && iter->second == eventHandler)
 	{
+		JSValueUnprotect(ctx, iter->second);
 		eventMap.erase(iter);
 		return true;
 	}

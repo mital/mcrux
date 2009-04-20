@@ -63,8 +63,8 @@ class SocketJSObject :
 		JSValueRef *exception);
 
 	// event listener related methods
-	bool addEventListener(const string & eventName, JSObjectRef eventHandler);
-	bool removeEventListener(const string & eventName, JSObjectRef eventHandler);
+	bool addEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler);
+	bool removeEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler);
 	JSObjectRef getEventListener(const string & eventName) const;
 
 	bool Connect(const string & hostname, const string & port);
