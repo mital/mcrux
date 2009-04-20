@@ -83,8 +83,7 @@ JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
 										const JSValueRef arguments[],
 										JSValueRef *exception)
 {
-	::MessageBoxA(0, "filesystem.readDir called.", "test", MB_OK);
-	if(argumentCount != 1)
+	if(argumentCount != 1) // directory Name
 	{
 		::MessageBoxA(0, "please enter valid Number of Arguments", "error", MB_OK);
 		return JSValueMakeNull(ctx);
