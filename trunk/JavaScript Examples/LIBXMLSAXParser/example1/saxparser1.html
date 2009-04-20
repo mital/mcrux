@@ -3,14 +3,15 @@
 		<script type="text/javascript" src="myJSFile.js"></script>
 	</head>
 	<body id="body" onload="myFunction();">
-		<h1>LIBXMLSAXParser example1</h1>
+		<h1>LIBXMLSAXParser Example</h1>
+		<h1>parsing XML Stream </h1>
+		<h1>'< array:foobar size="5" > mydata < / array:foobar >'</h1>
 		<code>
 		{</br>
 			var saxParserObj = new mcrux.libxml_saxparser(); </br>
-			alert("saxparser created successfully now calling xmlParseChunk() over it");</br>
+			alert("calling xmlParseChunk()");</br>
 
 			</br>
-			alert(saxParserObj);</br>
 			saxParserObj.addEventListener("onStartElement", startElementHandler);</br>
 			saxParserObj.addEventListener("onEndElement", endElementHandler);</br>
 			saxParserObj.addEventListener("onCharacters", charactersHandler);</br>
