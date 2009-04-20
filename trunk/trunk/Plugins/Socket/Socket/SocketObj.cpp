@@ -181,7 +181,7 @@ bool Socket::Run()
 	return true;
 }
 
-bool Socket::Select(bool read, bool write, timeval * tv)
+int Socket::Select(bool read, bool write, timeval * tv)
 {
 	fd_set fdSet;
 	FD_ZERO(&fdSet);

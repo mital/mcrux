@@ -23,7 +23,7 @@ class Socket
 	string port;
 	SOCKET  socketObj;
 
-	bool Select(bool read, bool write, timeval * tv);
+	int Select(bool read, bool write, timeval * tv);
 
 public:
 
