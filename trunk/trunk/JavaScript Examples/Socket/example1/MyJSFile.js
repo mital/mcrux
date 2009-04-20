@@ -9,7 +9,7 @@ function onConnectComplete(event)
 	{
 		alert("we are connected... now opeining a stream:stream");
 		socketObj.send("<?xml version=\"1.0\"?>");
-		socketObj.send("<stream:stream to=\"mital-lappy\" xml:lang=\"en\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">");
+		socketObj.send("<stream:stream to=\"localhost\" xml:lang=\"en\" xmlns=\"jabber:client\" xmlns:stream=\"http://etherx.jabber.org/streams\" version=\"1.0\">");
 	}
 }
 
@@ -28,5 +28,5 @@ function myFunction()
 	socketObj = new mcrux.socket();
 	socketObj.addEventListener("onConnectComplete", onConnectComplete);
 	socketObj.addEventListener("onRead", ReadDataHandler);
-	var ret = socketObj.connect("mital-lappy", "5222");
+	var ret = socketObj.connect("localhost", "5222");
 }

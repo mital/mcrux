@@ -1,23 +1,18 @@
 function startElementHandler(event)
 {
-	alert("startelement called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
-	alert(event.tag);
-	alert(event.attributes);
-	alert(event.attributes.size);
+	alert("START ELEMENT Found with TAG: [" + event.tag + "] and attribute SIZE: [" +  event.attributes.size + "]");
 }
 
 
 function endElementHandler(event)
 {
-	alert("endelement called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
-	alert(event.tag);
+	alert("END ELEMENT Found with TAG: [" + event.tag + "]");
 }
 
 
 function charactersHandler(event)
 {
-	alert("charactersHandler called yepppppppppppppppppppppieeeeeeeeeeeeeeeeeeee");
-	alert(event.characters);
+	alert("CHARACTERS FOUND : [" + event.characters + "]");
 }
 
 
@@ -25,9 +20,8 @@ function myFunction()
 {
 	alert("libxml saxparser Example !");
 	var saxParserObj = new mcrux.libxml_saxparser();
-	alert("saxparser created successfully now calling xmlParseChunk() over it");
+	alert("calling xmlParseChunk()");
 
-	alert(saxParserObj);
 	saxParserObj.addEventListener("onStartElement", startElementHandler);
 	saxParserObj.addEventListener("onEndElement", endElementHandler);
 	saxParserObj.addEventListener("onCharacters", charactersHandler);
