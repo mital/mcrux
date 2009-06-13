@@ -88,4 +88,10 @@ public:
         /* [in] */ IWebView *webView,
         /* [in] */ JSContextRef context,
         /* [in] */ JSObjectRef windowScriptObject) { return S_OK; }
+
+    virtual /* [local] */ HRESULT STDMETHODCALLTYPE didClearWindowObject( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ JSContextRef context,
+        /* [in] */ JSObjectRef windowScriptObject,
+		/* [in] */ IWebFrame *frame) { ::MessageBoxA(0, "did clearhahah ", "test", MB_OK); return S_OK; }
 };

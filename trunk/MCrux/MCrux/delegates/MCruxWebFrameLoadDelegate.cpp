@@ -23,6 +23,7 @@
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
+//#include <JavaScriptCore/RetainPtr.h>
 
 MCruxWebFrameLoadDelegate::MCruxWebFrameLoadDelegate()
 : m_refCount(1),
@@ -173,4 +174,15 @@ HRESULT STDMETHODCALLTYPE MCruxWebFrameLoadDelegate::windowScriptObjectAvailable
         JSObjectRef windowScriptObject)
 {
 	return handler->windowScriptObjectAvailable(webView, context, windowScriptObject);
+}
+
+
+HRESULT STDMETHODCALLTYPE MCruxWebFrameLoadDelegate::didClearWindowObject(
+        IWebView *webView,
+        JSContextRef context,
+        JSObjectRef windowScriptObject,
+        IWebFrame *frame)
+{
+	::MessageBoxA(0, "did clear d.afa", "test", MB_OK);
+	return handler->didClearWindowObject(webView, context, windowScriptObject, frame);
 }

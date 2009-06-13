@@ -28,7 +28,8 @@ map<IWebView *, MCruxWindow *> MCruxWindow::mcruxWindowsFromViews;
 
 
 MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
-						 MCruxPluginManager * pluginManager)
+						 MCruxPluginManager * pluginManager,
+						 MCruxWindowManager * windowManager)
 	: hInstance(GetModuleHandle(NULL)),
 	  hWnd(NULL),
 	  config(_config),
@@ -63,11 +64,27 @@ MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
 	webFrameLoadDelegate.setFrameLoadHandler(&delegatesHandler);
 
 	delegatesHandler.setPluginManager(pluginManager);
+	delegatesHandler.setWindowManager(windowManager);
 
-	if (!webView.loadURLInWindow(hWnd, config->getURL()))
+	IWebURLRequest * request = config->getRequest();
+	if(request)
 	{
-		::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
+		if(!webView.loadURLRequestInWindow(hWnd, request))
+		{
+			::MessageBoxA(0, "loadURLRequestInWindow Failed", "error", MB_OK);
+			return;
+		}
+	}
+	else
+	{
 		return;
+		// TODO: remove the crash.
+		// commeting the code as its crashing.
+		if (!webView.loadURLInWindow(hWnd, config->getURL()))
+		{
+			::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
+			return;
+		}
 	}
 	MCruxWindow::mcruxWindows[hWnd] = this;
 	MCruxWindow::mcruxWindowsFromViews[webView.getWebView()] = this;

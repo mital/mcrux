@@ -23,7 +23,7 @@
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 
 class MCruxWebFrameLoadDelegate
-	: public IWebFrameLoadDelegate
+	: public IWebFrameLoadDelegate2
 {
     ULONG m_refCount;
 	IMCruxWebFrameLoadDelegateHandler * handler;
@@ -99,4 +99,11 @@ public:
         /* [in] */ IWebView *webView,
         /* [in] */ JSContextRef context,
         /* [in] */ JSObjectRef windowScriptObject);
+
+    virtual /* [local] */ HRESULT STDMETHODCALLTYPE didClearWindowObject( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ JSContextRef context,
+        /* [in] */ JSObjectRef windowScriptObject,
+        /* [in] */ IWebFrame *frame);
+
 };

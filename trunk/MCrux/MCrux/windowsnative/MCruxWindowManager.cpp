@@ -33,7 +33,7 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 		oIter++)
 		{
 			MCruxWindowConfiguration * mainWindowConfig = *oIter;
-			MCruxWindow * newWindow = new MCruxWindow(mainWindowConfig, pluginManager);
+			MCruxWindow * newWindow = new MCruxWindow(mainWindowConfig, pluginManager, this);
 			newWindow->ShowWindow();
 			newWindow->UpdateWindow();
 			windows.push_back(newWindow);
@@ -44,4 +44,15 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 
 MCruxWindowManager::~MCruxWindowManager()
 {
+}
+
+
+IWebView * MCruxWindowManager::createWindow(IWebURLRequest *request)
+{
+	MCruxWindowConfiguration * mainWindowConfig = new MCruxWindowConfiguration(L"title", 200, 200, request);
+	MCruxWindow * newWindow = new MCruxWindow(mainWindowConfig, pluginManager, this);
+	//newWindow->ShowWindow();
+	//newWindow->UpdateWindow();
+	windows.push_back(newWindow);
+	return newWindow->getMCruxWebView()->getWebView();
 }
