@@ -23,7 +23,6 @@
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
-#include <JavaScriptCore/RetainPtr.h>
 
 MCruxWebFrameLoadDelegate::MCruxWebFrameLoadDelegate()
 : m_refCount(1),

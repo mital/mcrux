@@ -21,6 +21,8 @@
 #include <shlwapi.h>
 #include <wininet.h>
 
+#include <WebKit/WebKitCOMAPI.h>
+
 #include "MCruxWebView.h"
 
 
@@ -45,7 +47,7 @@ bool MCruxWebView::createWebView()
 	}
 	hWebViewWindow = NULL;
 
-	HRESULT hr = CoCreateInstance(CLSID_WebView, 0, CLSCTX_ALL, IID_IWebView, (void**)&webView);
+	HRESULT hr = WebKitCreateInstance(CLSID_WebView, 0, IID_IWebView, (void**)&webView);
 	if (SUCCEEDED(hr))
 	{
       return true;
@@ -189,9 +191,8 @@ bool MCruxWebView::navigateTo(const wstring & url)
 	if (FAILED(hr))
 		goto exit;
 
-	hr = CoCreateInstance(CLSID_WebMutableURLRequest,
+	hr = WebKitCreateInstance(CLSID_WebMutableURLRequest,
 		0,
-		CLSCTX_ALL,
 		IID_IWebMutableURLRequest,
 		(void**)&request);
 	if (FAILED(hr))
