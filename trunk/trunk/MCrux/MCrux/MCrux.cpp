@@ -87,6 +87,7 @@ void MCrux::UnInitialize()
 {
     // Shut down COM.
     OleUninitialize();
+	MCruxWindow::unInitWindowClass(GetModuleHandle(NULL));
 }
 
 

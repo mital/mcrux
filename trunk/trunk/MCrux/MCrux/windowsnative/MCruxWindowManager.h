@@ -35,4 +35,6 @@ public:
 		MCruxPluginManager * _pluginManager);
 
 	~MCruxWindowManager();
+
+	IWebView * createWindow(IWebURLRequest *request);
 };

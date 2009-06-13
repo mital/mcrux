@@ -23,11 +23,14 @@
 #include "IMCruxWebUIDelegateHandler.h"
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 
+class MCruxWindowManager;
+
 class MCruxDelegatesHandler
 	: public IMCruxWebUIDelegateHandler,
 	public IMCruxWebFrameLoadDelegateHandler
 {
 	MCruxPluginManager * pluginManager;
+	MCruxWindowManager * windowManager;
 public:
 
 	MCruxDelegatesHandler();
@@ -42,5 +45,18 @@ public:
 		/* [in] */ JSContextRef context,
 		/* [in] */ JSObjectRef windowScriptObject);
 
+	HRESULT STDMETHODCALLTYPE didClearWindowObject( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ JSContextRef context,
+        /* [in] */ JSObjectRef windowScriptObject,
+        /* [in] */ IWebFrame *frame);
+
+	HRESULT STDMETHODCALLTYPE createWebViewWithRequest( 
+		/* [in] */ IWebView *sender,
+		/* [in] */ IWebURLRequest *request,
+		/* [retval][out] */ IWebView **newWebView);
+
 	void setPluginManager(MCruxPluginManager * _pluginManager);
+
+	void setWindowManager(MCruxWindowManager * _windowManager);
 };

@@ -51,6 +51,9 @@ public:
 
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
 	bool loadURLInWindow(HWND hWnd, const wstring & url);
+	bool loadURLRequestInWindow(HWND hWnd, IWebURLRequest *request);
+
 	bool navigateTo(const wstring & url);
+	bool navigateTo(IWebURLRequest *request);
 	IWebView * getWebView();
 };

@@ -33,6 +33,7 @@ using namespace std;
 #include "delegates/MCruxWebUIDelegate.h"
 #include "delegates/MCruxWebFrameLoadDelegate.h"
 
+class MCruxWindowManager;
 
 class MCruxWindow
 {
@@ -56,7 +57,8 @@ class MCruxWindow
 
 public:
 	MCruxWindow(const MCruxWindowConfiguration * _config,
-		MCruxPluginManager * pluginManager);
+		MCruxPluginManager * pluginManager,
+		MCruxWindowManager * windowManager);
 	~MCruxWindow();
 
 	int ShowWindow() const;

@@ -21,9 +21,11 @@
 #include <comdef.h>
 
 #include "MCruxDelegatesHandler.h"
+#include "windowsnative/MCruxWindowManager.h"
 
 MCruxDelegatesHandler::MCruxDelegatesHandler()
-	: pluginManager(NULL)
+	: pluginManager(NULL),
+	windowManager(NULL)
 {
 }
 
@@ -52,4 +54,35 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::windowScriptObjectAvailable(
 void MCruxDelegatesHandler::setPluginManager(MCruxPluginManager * _pluginManager)
 {
 	pluginManager = _pluginManager;
+}
+
+void MCruxDelegatesHandler::setWindowManager(MCruxWindowManager * _windowManager)
+{
+	windowManager = _windowManager;
+}
+
+
+HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::didClearWindowObject(
+        IWebView *webView,
+        JSContextRef context,
+        JSObjectRef windowScriptObject,
+        IWebFrame *frame)
+{
+	::MessageBoxA(0, "did clear", "test", MB_OK);
+	return pluginManager->injectPlugins(webView, context, windowScriptObject);
+
+	//return S_OK;
+}
+
+HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::createWebViewWithRequest( 
+		/* [in] */ IWebView *sender,
+		/* [in] */ IWebURLRequest *request,
+		/* [retval][out] */ IWebView **newWebView)
+{
+	::MessageBoxA(0, "create webview with request called", "test", MB_OK);
+	if(windowManager)
+	{
+		*newWebView = windowManager->createWindow(request);
+	}
+	return S_OK;
 }

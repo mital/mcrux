@@ -170,6 +170,18 @@ bool MCruxWebView::loadURLInWindow(HWND hWnd, const wstring & url)
 	return false;
 }
 
+bool MCruxWebView::loadURLRequestInWindow(HWND hWnd, IWebURLRequest *request)
+{
+	if(initWithHostWindow(hWnd)
+		&& navigateTo(request)
+		&& storeViewWindowHandle())
+	{
+		return true;
+	}
+	return false;
+}
+
+
 bool MCruxWebView::navigateTo(const wstring & url)
 {
 	wstring navigateURL = url;
@@ -219,6 +231,26 @@ exit:
 		request->Release();
 	return true;
 }
+
+
+bool MCruxWebView::navigateTo(IWebURLRequest *request)
+{
+	IWebFrame* frame = 0;
+	HRESULT hr = webView->mainFrame(&frame);
+	if (SUCCEEDED(hr))
+	{
+		hr = frame->loadRequest(request);
+		if (SUCCEEDED(hr))
+		{
+			SetFocus(hWebViewWindow);
+			request->Release();
+		}
+		frame->Release();
+		return true;
+	}
+	return false;
+}
+
 
 IWebView * MCruxWebView::getWebView()
 {

@@ -30,9 +30,23 @@ MCruxWindowConfiguration::MCruxWindowConfiguration(const wstring _windowTitle,
 : windowTitle(_windowTitle),
   width(_width),
   height(_height),
-  url(_url)
+  url(_url),
+  request(NULL)
 {
 }
+
+MCruxWindowConfiguration::MCruxWindowConfiguration(const wstring _windowTitle,
+		unsigned int _width,
+		unsigned int _height,
+		IWebURLRequest *_request)
+: windowTitle(_windowTitle),
+  width(_width),
+  height(_height),
+  url(_T("")),
+  request(_request)
+{
+}
+
 
 MCruxWindowConfiguration::~MCruxWindowConfiguration()
 {
@@ -57,4 +71,9 @@ unsigned int MCruxWindowConfiguration::getWidth() const
 unsigned int MCruxWindowConfiguration::getHeight() const
 {
 	return height;
+}
+
+IWebURLRequest * MCruxWindowConfiguration::getRequest() const
+{
+	return request;
 }
