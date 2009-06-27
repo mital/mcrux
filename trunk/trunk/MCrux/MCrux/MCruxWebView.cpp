@@ -173,7 +173,7 @@ bool MCruxWebView::loadURLInWindow(HWND hWnd, const wstring & url)
 bool MCruxWebView::loadURLRequestInWindow(HWND hWnd, IWebURLRequest *request)
 {
 	if(initWithHostWindow(hWnd)
-		&& navigateTo(request)
+		//&& navigateTo(request)
 		&& storeViewWindowHandle())
 	{
 		return true;

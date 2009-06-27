@@ -183,6 +183,6 @@ HRESULT STDMETHODCALLTYPE MCruxWebFrameLoadDelegate::didClearWindowObject(
         JSObjectRef windowScriptObject,
         IWebFrame *frame)
 {
-	::MessageBoxA(0, "did clear d.afa", "test", MB_OK);
+	::MessageBoxA(0, "did clear window object", "test", MB_OK);
 	return handler->didClearWindowObject(webView, context, windowScriptObject, frame);
 }

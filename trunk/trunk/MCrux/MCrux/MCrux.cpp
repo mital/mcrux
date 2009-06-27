@@ -127,16 +127,9 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 	}
 	else
 	{
-		::MessageBoxA(0, "mcruxspec file does not have any windows", "error", MB_OK);
+		::MessageBoxA(0, "mcruxspec file does not have any windows\n you can refer documentation at http://code.google.com/p/mcrux/wiki/MCruxSpecFile", "error", MB_OK);
 	}
 
 	UnInitialize();
 	return bRet;
 }
-
-//MCruxWindowConfiguration mainWindowConfig(TEXT("http://www.google.com"));
-//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/main.html"));
-//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/Users/mital/Documents/Projects/MCrux/trunk/JavaScript Examples/FileSystem/filesysAccess.html"));
-//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/game/main.html"));
-//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/game/sqlite.html"));
-//MCruxWindowConfiguration mainWindowConfig(TEXT("C:/main.html"));
