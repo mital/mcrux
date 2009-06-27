@@ -77,9 +77,6 @@ MCruxWindow::MCruxWindow(const MCruxWindowConfiguration * _config,
 	}
 	else
 	{
-		return;
-		// TODO: remove the crash.
-		// commeting the code as its crashing.
 		if (!webView.loadURLInWindow(hWnd, config->getURL()))
 		{
 			::MessageBoxA(0, "Loadpageinwindow Failed", "error", MB_OK);
