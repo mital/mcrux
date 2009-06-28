@@ -5,7 +5,6 @@
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
-#include <JavaScriptCore/RetainPtr.h>
 #include "mcrux/JSStringUtils.h"
 
 

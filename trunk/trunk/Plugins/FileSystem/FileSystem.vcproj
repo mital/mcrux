@@ -20,7 +20,7 @@
 			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="..\..\mcrux_plugin.vsprops"
+			InheritedPropertySheets="..\mcrux_plugin.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -97,7 +97,7 @@
 			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="..\..\mcrux_plugin.vsprops"
+			InheritedPropertySheets="..\mcrux_plugin.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -244,7 +244,7 @@
 			>
 		</Filter>
 		<File
-			RelativePath="..\..\mcrux_plugin.vsprops"
+			RelativePath="..\mcrux_plugin.vsprops"
 			>
 		</File>
 		<File

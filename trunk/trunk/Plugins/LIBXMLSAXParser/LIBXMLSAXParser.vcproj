@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="Socket"
-	ProjectGUID="{C84D31A1-1A84-4CC7-8608-3E8C29101259}"
-	RootNamespace="Socket"
+	Name="LIBXMLSAXParser"
+	ProjectGUID="{8A619D01-90C3-4492-B151-90900EE4B799}"
+	RootNamespace="LIBXMLSAXParser"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -20,7 +20,7 @@
 			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="..\..\mcrux_plugin.vsprops"
+			InheritedPropertySheets="..\mcrux_plugin.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SOCKET_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBXMLSAXPARSER_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libcmtd.lib libcpmtd.lib version.lib wsock32.lib libeay32.lib ssleay32.lib oldnames.lib "
+				AdditionalDependencies="comsuppw.lib libcmtd.lib libcpmtd.lib version.lib oldnames.lib comctl32.lib shlwapi.lib libxml2.lib "
 				LinkIncremental="2"
 				IgnoreAllDefaultLibraries="true"
 				GenerateDebugInformation="true"
@@ -98,7 +98,7 @@
 			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="..\..\mcrux_plugin.vsprops"
+			InheritedPropertySheets="..\mcrux_plugin.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SOCKET_EXPORTS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBXMLSAXPARSER_EXPORTS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
@@ -137,7 +137,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="libeay32.lib ssleay32.lib libcmt.lib libcpmt.lib version.lib wsock32.lib oldnames.lib "
+				AdditionalDependencies="libxml2.lib libcmt.lib libcpmt.lib version.lib oldnames.lib "
 				LinkIncremental="1"
 				IgnoreAllDefaultLibraries="true"
 				GenerateDebugInformation="true"
@@ -181,15 +181,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\Socket.cpp"
+				RelativePath=".\LIBXMLSAXJSObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SocketJSObject.cpp"
+				RelativePath=".\LIBXMLSAXParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SocketObj.cpp"
+				RelativePath=".\LIBXMLSAXParser.def"
+				>
+			</File>
+			<File
+				RelativePath=".\SAXParser.cpp"
 				>
 			</File>
 			<File
@@ -219,11 +223,15 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\SocketJSObject.h"
+				RelativePath=".\LIBXMLSAXJSObject.h"
 				>
 			</File>
 			<File
-				RelativePath=".\SocketObj.h"
+				RelativePath=".\LIBXMLSAXParser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SAXParser.h"
 				>
 			</File>
 			<File
@@ -237,6 +245,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<File
+			RelativePath="..\mcrux_plugin.vsprops"
+			>
+		</File>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>
