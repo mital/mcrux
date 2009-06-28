@@ -26,7 +26,6 @@
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRef.h>
 #include <JavaScriptCore/JSStringRefCF.h>
-#include <JavaScriptCore/RetainPtr.h>
 #include "mcrux/JSStringUtils.h"
 
 
