@@ -253,7 +253,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\lib\resource.h"
+				RelativePath=".\resource.h"
 				>
 			</File>
 			<File

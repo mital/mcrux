@@ -185,11 +185,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\MCrux_exe.cpp"
+				RelativePath="..\..\src\bin\MCrux_exe.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp"
+				RelativePath="..\..\src\bin\stdafx.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -219,7 +219,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h"
+				RelativePath="..\..\src\bin\stdafx.h"
 				>
 			</File>
 		</Filter>
@@ -229,7 +229,7 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 			<File
-				RelativePath=".\MCrux_exe.ico"
+				RelativePath="..\..\src\bin\MCrux_exe.ico"
 				>
 			</File>
 			<File
@@ -237,14 +237,10 @@
 				>
 			</File>
 			<File
-				RelativePath=".\small.ico"
+				RelativePath="..\..\src\bin\small.ico"
 				>
 			</File>
 		</Filter>
-		<File
-			RelativePath=".\ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
