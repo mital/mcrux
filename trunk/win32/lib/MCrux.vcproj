@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;;&quot;$(SolutionDir)\..\..\&quot;$(WebKitOutputDir)\lib&quot;&quot;;&quot;$(SolutionDir)\..\MCruxLibraries\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;;&quot;$(SolutionDir)\..\..\&quot;$(WebKitOutputDir)\lib&quot;&quot;;&quot;$(SolutionDir)\..\src\lib\&quot;;&quot;$(SolutionDir)\..\MCruxLibraries\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;MCRUX_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -108,7 +108,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(ProjectDir)JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCrux.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCruxExport.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\include\MCrux&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -124,7 +124,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;;&quot;$(SolutionDir)\..\..\&quot;$(WebKitOutputDir)\lib&quot;&quot;;&quot;$(SolutionDir)\..\MCruxLibraries\include&quot;"
+				AdditionalIncludeDirectories="&quot;$(WebKitOutputDir)\include\WebKit&quot;;&quot;$(WebKitOutputDir)\Include&quot;;&quot;$(WebKitLibrariesDir)\Include&quot;;&quot;$(WebKitOutputDir)\Include\WebCore&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore&quot;;&quot;$(WebKitOutputDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\WebCore\ForwardingHeaders&quot;;&quot;$(WebKitOutputDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitLibrariesDir)\Include\JavaScriptCore&quot;;&quot;$(WebKitOutputDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\Include\icu&quot;;&quot;$(WebKitLibrariesDir)\include\pthreads&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders&quot;;&quot;$(WebKitOutputDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(WebKitLibrariesDir)\Include\CoreFoundation\OSXCompatibilityHeaders\GNUCompatibility&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;;&quot;$(WebKitOutputDir)\obj\WebKit\DerivedSources&quot;;&quot;$(SolutionDir)\..\..\&quot;$(WebKitOutputDir)\lib&quot;&quot;;&quot;$(SolutionDir)\..\src\lib\&quot;;&quot;$(SolutionDir)\..\MCruxLibraries\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;MCRUX_EXPORTS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
@@ -191,23 +191,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\JSStringUtils.cpp"
+				RelativePath="..\..\src\lib\JSStringUtils.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MCrux.cpp"
+				RelativePath="..\..\src\lib\MCrux.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxSpecParser.cpp"
+				RelativePath="..\..\src\lib\MCruxSpecParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxWebView.cpp"
+				RelativePath="..\..\src\lib\MCruxWebView.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.cpp"
+				RelativePath="..\..\src\lib\stdafx.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -233,31 +233,31 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\JSStringUtils.h"
+				RelativePath="..\..\src\lib\JSStringUtils.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MCrux.h"
+				RelativePath="..\..\src\lib\MCrux.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxExport.h"
+				RelativePath="..\..\src\lib\MCruxExport.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxSpecParser.h"
+				RelativePath="..\..\src\lib\MCruxSpecParser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\MCruxWebView.h"
+				RelativePath="..\..\src\lib\MCruxWebView.h"
 				>
 			</File>
 			<File
-				RelativePath=".\resource.h"
+				RelativePath="..\..\src\lib\resource.h"
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h"
+				RelativePath="..\..\src\lib\stdafx.h"
 				>
 			</File>
 		</Filter>
@@ -278,23 +278,23 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath=".\delegates\IMCruxWebFrameLoadDelegateHandler.h"
+					RelativePath="..\..\src\lib\delegates\IMCruxWebFrameLoadDelegateHandler.h"
 					>
 				</File>
 				<File
-					RelativePath=".\delegates\IMCruxWebUIDelegateHandler.h"
+					RelativePath="..\..\src\lib\delegates\IMCruxWebUIDelegateHandler.h"
 					>
 				</File>
 				<File
-					RelativePath=".\delegates\MCruxDelegatesHandler.h"
+					RelativePath="..\..\src\lib\delegates\MCruxDelegatesHandler.h"
 					>
 				</File>
 				<File
-					RelativePath=".\delegates\MCruxWebFrameLoadDelegate.h"
+					RelativePath="..\..\src\lib\delegates\MCruxWebFrameLoadDelegate.h"
 					>
 				</File>
 				<File
-					RelativePath=".\delegates\MCruxWebUIDelegate.h"
+					RelativePath="..\..\src\lib\delegates\MCruxWebUIDelegate.h"
 					>
 				</File>
 			</Filter>
@@ -302,15 +302,15 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath=".\delegates\MCruxDelegatesHandler.cpp"
+					RelativePath="..\..\src\lib\delegates\MCruxDelegatesHandler.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\delegates\MCruxWebFrameLoadDelegate.cpp"
+					RelativePath="..\..\src\lib\delegates\MCruxWebFrameLoadDelegate.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\delegates\MCruxWebUIDelegate.cpp"
+					RelativePath="..\..\src\lib\delegates\MCruxWebUIDelegate.cpp"
 					>
 				</File>
 			</Filter>
@@ -322,15 +322,15 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath=".\plugin\MCruxJSObject.h"
+					RelativePath="..\..\src\lib\plugin\MCruxJSObject.h"
 					>
 				</File>
 				<File
-					RelativePath=".\plugin\MCruxPlugin.h"
+					RelativePath="..\..\src\lib\plugin\MCruxPlugin.h"
 					>
 				</File>
 				<File
-					RelativePath=".\plugin\MCruxPluginManager.h"
+					RelativePath="..\..\src\lib\plugin\MCruxPluginManager.h"
 					>
 				</File>
 			</Filter>
@@ -338,15 +338,15 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath=".\plugin\MCruxJSObject.cpp"
+					RelativePath="..\..\src\lib\plugin\MCruxJSObject.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\plugin\MCruxPlugin.cpp"
+					RelativePath="..\..\src\lib\plugin\MCruxPlugin.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\plugin\MCruxPluginManager.cpp"
+					RelativePath="..\..\src\lib\plugin\MCruxPluginManager.cpp"
 					>
 				</File>
 			</Filter>
@@ -358,15 +358,15 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath=".\windowsnative\MCruxWindow.h"
+					RelativePath="..\..\src\lib\windowsnative\MCruxWindow.h"
 					>
 				</File>
 				<File
-					RelativePath=".\windowsnative\MCruxWindowConfiguration.h"
+					RelativePath="..\..\src\lib\windowsnative\MCruxWindowConfiguration.h"
 					>
 				</File>
 				<File
-					RelativePath=".\windowsnative\MCruxWindowManager.h"
+					RelativePath="..\..\src\lib\windowsnative\MCruxWindowManager.h"
 					>
 				</File>
 			</Filter>
@@ -374,23 +374,19 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath=".\windowsnative\MCruxWindow.cpp"
+					RelativePath="..\..\src\lib\windowsnative\MCruxWindow.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\windowsnative\MCruxWindowConfiguration.cpp"
+					RelativePath="..\..\src\lib\windowsnative\MCruxWindowConfiguration.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\windowsnative\MCruxWindowManager.cpp"
+					RelativePath="..\..\src\lib\windowsnative\MCruxWindowManager.cpp"
 					>
 				</File>
 			</Filter>
 		</Filter>
-		<File
-			RelativePath=".\ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
