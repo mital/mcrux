@@ -18,7 +18,7 @@
  **/
 
 #include "stdafx.h"
-#include "MCrux.h"
+#include <MCrux/MCrux.h>
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,
                      HINSTANCE hPrevInstance,

@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin&quot;"
+			IntermediateDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\obj\$(ProjectName)&quot;"
 			ConfigurationType="1"
 			CharacterSet="1"
 			>
@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(SolutionDir)/../src/lib/"
+				AdditionalIncludeDirectories="&quot;$(MCruxOutputDir)\$(ConfigurationName)\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="MCrux.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -97,8 +97,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin&quot;"
+			IntermediateDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\obj\$(ProjectName)&quot;"
 			ConfigurationType="1"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="$(SolutionDir)/../src/lib/"
+				AdditionalIncludeDirectories="&quot;$(MCruxOutputDir)\$(ConfigurationName)\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="2"
@@ -141,7 +141,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="MCrux.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)&quot;"
+				AdditionalLibraryDirectories="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
