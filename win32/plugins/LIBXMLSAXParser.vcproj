@@ -181,23 +181,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\LIBXMLSAXJSObject.cpp"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\LIBXMLSAXJSObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\LIBXMLSAXParser.cpp"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\LIBXMLSAXParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\LIBXMLSAXParser.def"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\SAXParser.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\SAXParser.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.cpp"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\stdafx.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -223,22 +219,26 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\LIBXMLSAXJSObject.h"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\LIBXMLSAXJSObject.h"
 				>
 			</File>
 			<File
-				RelativePath=".\LIBXMLSAXParser.h"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\LIBXMLSAXParser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\SAXParser.h"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\SAXParser.h"
 				>
 			</File>
 			<File
-				RelativePath=".\stdafx.h"
+				RelativePath="..\..\src\plugins\LIBXMLSAXParser\stdafx.h"
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\LIBXMLSAXParser.def"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="FileSystem"
-	ProjectGUID="{267D131E-6E4B-42F6-BEAC-33EA134E82F7}"
-	RootNamespace="FileSystem"
+	Name="OpenSSLSocket"
+	ProjectGUID="{C84D31A1-1A84-4CC7-8608-3E8C29101259}"
+	RootNamespace="OpenSSLSocket"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -41,10 +41,10 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;FILESYSTEM_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;SOCKET_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -61,8 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="libcmtd.lib libcpmtd.lib version.lib wsock32.lib libeay32.lib ssleay32.lib oldnames.lib "
 				LinkIncremental="2"
-				ModuleDefinitionFile="FileSystem.def"
+				IgnoreAllDefaultLibraries="true"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -118,8 +119,8 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;FILESYSTEM_EXPORTS"
-				RuntimeLibrary="2"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;SOCKET_EXPORTS"
+				RuntimeLibrary="0"
 				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -136,8 +137,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="libeay32.lib ssleay32.lib libcmt.lib libcpmt.lib version.lib wsock32.lib oldnames.lib "
 				LinkIncremental="1"
-				ModuleDefinitionFile="FileSystem.def"
+				IgnoreAllDefaultLibraries="true"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -179,23 +181,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\FileSystem.cpp"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\OpenSSLSocket.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\FileSystem.def"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\SocketJSObject.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\FileSystemJSObject.cpp"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\SocketObj.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\FileUtils.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.cpp"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\stdafx.cpp"
 				>
 				<FileConfiguration
 					Name="Debug|Win32"
@@ -221,22 +219,22 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\dirent.h"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\SocketJSObject.h"
 				>
 			</File>
 			<File
-				RelativePath=".\FileSystemJSObject.h"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\SocketObj.h"
 				>
 			</File>
 			<File
-				RelativePath=".\FileUtils.h"
-				>
-			</File>
-			<File
-				RelativePath=".\stdafx.h"
+				RelativePath="..\..\src\plugins\OpenSSLSocket\stdafx.h"
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\OpenSSLSocket.def"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
