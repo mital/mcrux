@@ -17,8 +17,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin\Plugins&quot;"
+			IntermediateDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\obj\Plugins\$(ProjectName)&quot;"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(SolutionDir)\mcrux_plugin.vsprops"
 			CharacterSet="1"
@@ -94,8 +94,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin\Plugins&quot;"
+			IntermediateDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\obj\Plugins\$(ProjectName)&quot;"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(SolutionDir)\mcrux_plugin.vsprops"
 			CharacterSet="1"
@@ -183,10 +183,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SQLiteDatabase.def"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\plugins\SQLiteDatabase\SQLiteDatabaseJSObject.cpp"
 				>
 			</File>
@@ -229,6 +225,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\SQLiteDatabase.def"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
