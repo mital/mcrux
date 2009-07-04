@@ -20,7 +20,7 @@
 			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="..\mcrux_plugin.vsprops;$(SolutionDir)\mcrux_plugin.vsprops"
+			InheritedPropertySheets="$(SolutionDir)\mcrux_plugin.vsprops"
 			CharacterSet="1"
 			>
 			<Tool
@@ -98,7 +98,7 @@
 			OutputDirectory="&quot;$(MCruxOutputDir)\bin\$(ConfigurationName)\Plugins&quot;"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			InheritedPropertySheets="..\mcrux_plugin.vsprops;$(SolutionDir)\mcrux_plugin.vsprops"
+			InheritedPropertySheets="$(SolutionDir)\mcrux_plugin.vsprops"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -231,20 +231,6 @@
 				>
 			</File>
 		</Filter>
-		<Filter
-			Name="Resource Files"
-			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
-			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
-			>
-		</Filter>
-		<File
-			RelativePath="..\mcrux_plugin.vsprops"
-			>
-		</File>
-		<File
-			RelativePath=".\ReadMe.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>
