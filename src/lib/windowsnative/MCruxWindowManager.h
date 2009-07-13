@@ -37,4 +37,6 @@ public:
 	~MCruxWindowManager();
 
 	IWebView * createWindow(IWebURLRequest *request);
+
+	void showWindow(IWebView * sender);
 };

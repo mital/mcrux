@@ -23,7 +23,7 @@
 
 using namespace std;
 
-#include <WebKit.h>
+#include <WebKit/WebKit.h>
 
 #include "delegates/MCruxWebUIDelegate.h"
 #include "delegates/MCruxWebFrameLoadDelegate.h"

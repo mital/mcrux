@@ -86,3 +86,10 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::createWebViewWithRequest(
 	}
 	return S_OK;
 }
+
+HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::webViewShow(
+		/* [in] */ IWebView *sender)
+{
+	//windowManager->showWindow(sender);
+	return E_NOTIMPL;
+}

@@ -19,8 +19,6 @@
 
 #pragma once
 
-#include <WebKit.h>
-
 #include "IMCruxWebUIDelegateHandler.h"
 
 

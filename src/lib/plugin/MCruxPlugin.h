@@ -24,7 +24,7 @@
 
 using namespace std;
 
-#include <WebKit.h>
+#include <WebKit/WebKit.h>
 #include <JavaScriptCore/JSContextRef.h>
 
 #include "MCruxExport.h"
