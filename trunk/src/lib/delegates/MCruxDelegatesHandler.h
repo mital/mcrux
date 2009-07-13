@@ -56,6 +56,9 @@ public:
 		/* [in] */ IWebURLRequest *request,
 		/* [retval][out] */ IWebView **newWebView);
 
+	HRESULT STDMETHODCALLTYPE webViewShow(
+		/* [in] */ IWebView *sender);
+
 	void setPluginManager(MCruxPluginManager * _pluginManager);
 
 	void setWindowManager(MCruxWindowManager * _windowManager);

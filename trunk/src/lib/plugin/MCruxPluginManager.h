@@ -25,8 +25,6 @@
 
 using namespace std;
 
-#include <WebKit.h>
-
 #include "MCrux.h"
 #include "MCruxPlugin.h"
 

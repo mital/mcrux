@@ -19,7 +19,6 @@
 
 #pragma once
 
-#include <WebKit.h>
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 
 class MCruxWebFrameLoadDelegate

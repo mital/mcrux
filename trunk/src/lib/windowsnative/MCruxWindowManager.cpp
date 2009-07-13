@@ -56,3 +56,7 @@ IWebView * MCruxWindowManager::createWindow(IWebURLRequest *request)
 	windows.push_back(newWindow);
 	return newWindow->getMCruxWebView()->getWebView();
 }
+
+void MCruxWindowManager::showWindow(IWebView * sender)
+{
+}

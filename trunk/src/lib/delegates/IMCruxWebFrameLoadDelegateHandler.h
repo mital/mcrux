@@ -19,7 +19,7 @@
 
 #pragma once
 
-#include <WebKit.h>
+#include <WebKit/WebKit.h>
 
 
 class IMCruxWebFrameLoadDelegateHandler
