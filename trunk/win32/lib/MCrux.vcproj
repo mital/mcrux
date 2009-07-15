@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comsuppw.lib libcmtd.lib libcpmtd.lib version.lib oldnames.lib comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib "
+				AdditionalDependencies="comsuppw.lib libcmtd.lib libcpmtd.lib version.lib oldnames.lib comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib JavaScriptCore.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(SolutionDir)\..\MCruxLibraries\lib&quot;"
 				IgnoreAllDefaultLibraries="true"
@@ -143,7 +143,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="comsuppw.lib libcmt.lib libcpmt.lib comsupp.lib version.lib oldnames.lib shell32.lib comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib"
+				AdditionalDependencies="comsuppw.lib libcmt.lib libcpmt.lib comsupp.lib version.lib oldnames.lib shell32.lib comctl32.lib shlwapi.lib libxml2.lib WebKitGUID.lib WebKit.lib JavaScriptCore.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(SolutionDir)\..\..\MCruxLibraries\lib&quot;"
 				IgnoreAllDefaultLibraries="true"
@@ -333,10 +333,6 @@
 					RelativePath="..\..\src\lib\plugin\MCruxPluginManager.h"
 					>
 				</File>
-				<File
-					RelativePath="..\..\src\lib\plugin\MObject.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="Source Files"
@@ -351,10 +347,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\lib\plugin\MCruxPluginManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\lib\plugin\MObject.cpp"
 					>
 				</File>
 			</Filter>
@@ -391,6 +383,46 @@
 				</File>
 				<File
 					RelativePath="..\..\src\lib\windowsnative\MCruxWindowManager.cpp"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="abstract"
+			>
+			<Filter
+				Name="Header Files"
+				>
+				<File
+					RelativePath="..\..\src\lib\abstract\MObject.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source files"
+				>
+				<File
+					RelativePath="..\..\src\lib\abstract\MObject.cpp"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="JSCore"
+			>
+			<Filter
+				Name="Header Files"
+				>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreObject.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Source Files"
+				>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreObject.cpp"
 					>
 				</File>
 			</Filter>
