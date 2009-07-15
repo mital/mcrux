@@ -38,7 +38,7 @@ MCruxPlugin::~MCruxPlugin()
 bool MCruxPlugin::injectPlugin(JSContextRef ctx, IWebView * _webView, JSObjectRef parentObject)
 {
 	MCruxPlugin::webView = _webView;
-	JSClassDefinition pluginNameSpace;// = kJSClassDefinitionEmpty;
+	JSClassDefinition pluginNameSpace = kJSClassDefinitionEmpty;
 
 	pluginNameSpace.version = 0;
 	pluginNameSpace.attributes = 0;
@@ -84,25 +84,25 @@ JSStaticFunction * MCruxPlugin::getStaticFunctions() const
 
 JSObjectRef MCruxPlugin::createJSObject(JSContextRef ctx)
 {
-	JSClassDefinition pluginNameSpace;// = kJSClassDefinitionEmpty;
+	JSClassDefinition pluginNameSpace = kJSClassDefinitionEmpty;
 
-	pluginNameSpace.version = 0;
-	pluginNameSpace.attributes = 0;
-	pluginNameSpace.className = 0;
-	pluginNameSpace.parentClass = 0;
-	pluginNameSpace.staticValues = 0;
+	//pluginNameSpace.version = 0;
+	//pluginNameSpace.attributes = 0;
+	//pluginNameSpace.className = 0;
+	//pluginNameSpace.parentClass = 0;
+	//pluginNameSpace.staticValues = 0;
 	pluginNameSpace.staticFunctions = getJSObjectFunctions();
-	pluginNameSpace.initialize = 0;
-	pluginNameSpace.finalize = 0;
-	pluginNameSpace.hasProperty = 0;
-	pluginNameSpace.getProperty = 0;
-	pluginNameSpace.setProperty = 0;
-	pluginNameSpace.deleteProperty = 0;
-	pluginNameSpace.getPropertyNames = 0;
-	pluginNameSpace.callAsFunction = 0;
-	pluginNameSpace.callAsConstructor = 0;
-	pluginNameSpace.hasInstance = 0;
-	pluginNameSpace.convertToType = 0;
+	//pluginNameSpace.initialize = 0;
+	//pluginNameSpace.finalize = 0;
+	//pluginNameSpace.hasProperty = 0;
+	//pluginNameSpace.getProperty = 0;
+	//pluginNameSpace.setProperty = 0;
+	//pluginNameSpace.deleteProperty = 0;
+	//pluginNameSpace.getPropertyNames = 0;
+	//pluginNameSpace.callAsFunction = 0;
+	//pluginNameSpace.callAsConstructor = 0;
+	//pluginNameSpace.hasInstance = 0;
+	//pluginNameSpace.convertToType = 0;
 
 	JSClassRef pluginRef = JSClassCreate(&pluginNameSpace);
 	return JSObjectMake(ctx, pluginRef, this);
