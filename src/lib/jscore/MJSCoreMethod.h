@@ -1,5 +1,5 @@
 /**
-* copyright (C) 2008 Mital Vora. All rights reserved.
+* copyright (C) 2009 Mital Vora. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
@@ -17,22 +17,25 @@
 * @author: Mital Vora.
 **/
 
-#include "StdAfx.h"
-#include "MCruxJSObject.h"
+#pragma once
 
-#include <list>
-using namespace std;
+#include "jscore/MJSCoreObjectAbstract.h"
 
-MCruxJSObject::MCruxJSObject(JSContextRef context)
-: MJSCoreObject(context, JSContextGetGlobalObject(context))
+
+class MJSCoreMethod
+	: public MJSCoreObjectAbstract
 {
-	setProperty(context, "my_some_function", &MCruxJSObject::myFunction);
-}
+	MCruxMethodCallback * method;
 
-MCruxJSObject::~MCruxJSObject()
-{
-}
+public:
 
-void MCruxJSObject::myFunction(const MObjectArray& args, MObject * result)
-{
-}
+	MJSCoreMethod(JSContextRef _ctx, MCruxMethodCallback * _method);
+	virtual ~MJSCoreMethod();
+
+	JSValueRef getJSValue();
+	JSObjectRef getJSObject();
+
+	MCruxMethodCallback * getMethod();
+
+	MJSCoreObjectAbstract * invoke(const MObjectArray& args);
+};

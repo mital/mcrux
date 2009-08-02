@@ -19,13 +19,17 @@
 
 #pragma once
 
+#include "abstract/callback.h"
+
+class MObject;
+class MObjectArray;
+
+typedef Callback2<const MObjectArray&, MObject *>::Type MCruxMethodCallback;
+
 
 class MObject
 {
 public:
 	MObject();
 	virtual ~MObject();
-
-	virtual void setProperty(const char * name, MObject * obj)=0;
-	virtual MObject * getProperty(const char * name)=0;
 };

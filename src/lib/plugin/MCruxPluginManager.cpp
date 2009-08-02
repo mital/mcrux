@@ -24,6 +24,7 @@
 #include "windowsnative/MCruxWindow.h"
 
 #include "MCruxJSObject.h"
+#include "jscore/MJSCoreObject.h"
 
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
@@ -40,7 +41,8 @@ MCruxPluginManager::~MCruxPluginManager()
 
 void MCruxPluginManager::AddMCruxDefaultPlugins()
 {
-	plugins.push_back(new MCruxJSObject());
+	// TODO: refine this
+	//plugins.push_back(new MCruxJSObject());
 }
 
 bool MCruxPluginManager::AddPlugin(const wstring & pluginName)
@@ -86,15 +88,19 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 	//MCruxWindow * mcruxWindow = MCruxWindow::getMCruxWindowFrom(webView);
 	//MCruxWebView * mcruxWebView = mcruxWindow->getMCruxWebView();
 
-	JSObjectRef globalObject = JSContextGetGlobalObject(context);
-	JSStringRef name = JSStringCreateWithUTF8CString("mcrux");
-	JSObjectSetProperty(context,
-		globalObject,
-		name,
-		getMCruxJSObject(webView, context), 0, 0);
+	//JSObjectRef globalObject = JSContextGetGlobalObject(context);
+	//JSStringRef name = JSStringCreateWithUTF8CString("mcrux");
+	//JSObjectSetProperty(context,
+	//	globalObject,
+	//	name,
+	//	getMCruxJSObject(webView, context), 0, 0);
 
 	// TODO: inject a new object called currentWindow
 	// this object will be responsible for handling various events of currentwindow.
+
+	MJSCoreObject * globalObject = new MJSCoreObject(context, JSContextGetGlobalObject(context));
+	MCruxJSObject * myobj = new MCruxJSObject(context);
+	globalObject->setProperty("myobj", myobj);
 
 	return S_OK;
 }

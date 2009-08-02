@@ -1,5 +1,5 @@
 /**
-* copyright (C) 2008 Mital Vora. All rights reserved.
+* copyright (C) 2009 Mital Vora. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
@@ -17,22 +17,45 @@
 * @author: Mital Vora.
 **/
 
-#include "StdAfx.h"
-#include "MCruxJSObject.h"
 
-#include <list>
-using namespace std;
+#include <stdafx.h>
 
-MCruxJSObject::MCruxJSObject(JSContextRef context)
-: MJSCoreObject(context, JSContextGetGlobalObject(context))
-{
-	setProperty(context, "my_some_function", &MCruxJSObject::myFunction);
-}
+#include "MJSCoreUtils.h"
+#include "MJSCoreMethod.h"
 
-MCruxJSObject::~MCruxJSObject()
+
+
+MJSCoreMethod::MJSCoreMethod(JSContextRef _ctx, MCruxMethodCallback * _method)
+: MJSCoreObjectAbstract(_ctx, TYPE_JSMETHOD),
+  method(_method)
 {
 }
 
-void MCruxJSObject::myFunction(const MObjectArray& args, MObject * result)
+
+MJSCoreMethod::~MJSCoreMethod()
 {
+}
+
+
+JSValueRef MJSCoreMethod::getJSValue()
+{
+	return toJSValue(ctx, this);
+}
+
+
+JSObjectRef MJSCoreMethod::getJSObject()
+{
+	return ::JSValueToObject(ctx, getJSValue(), 0);
+}
+
+MCruxMethodCallback * MJSCoreMethod::getMethod()
+{
+	return method;
+}
+
+MJSCoreObjectAbstract * MJSCoreMethod::invoke(const MObjectArray& args)
+{
+	MJSCoreObjectAbstract * result = NULL;
+	method->Run(args, result);
+	return result;
 }
