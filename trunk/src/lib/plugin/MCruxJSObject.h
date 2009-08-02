@@ -19,32 +19,16 @@
 
 #pragma once
 
-#include "MCruxPlugin.h"
+#include "jscore/MJSCoreObject.h"
 
 
 class MCruxJSObject
-	: public MCruxPlugin
+	: public MJSCoreObject
 {
-
-	static JSValueRef someFunction(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
-
-	static JSValueRef callJavaScriptFunction(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
-
 public:
 
-	MCruxJSObject();
+	MCruxJSObject(JSContextRef context);
 	virtual ~MCruxJSObject();
 
-	virtual const char * getName() const;
-	virtual JSStaticFunction * getStaticFunctions() const;
+	void myFunction(const MObjectArray& args, MObject * result);
 };

@@ -1,5 +1,5 @@
 /**
-* copyright (C) 2008 Mital Vora. All rights reserved.
+* copyright (C) 2009 Mital Vora. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
@@ -16,23 +16,39 @@
 *
 * @author: Mital Vora.
 **/
+#include "stdafx.h"
+#include "MObjectArray.h"
 
-#include "StdAfx.h"
-#include "MCruxJSObject.h"
-
-#include <list>
-using namespace std;
-
-MCruxJSObject::MCruxJSObject(JSContextRef context)
-: MJSCoreObject(context, JSContextGetGlobalObject(context))
-{
-	setProperty(context, "my_some_function", &MCruxJSObject::myFunction);
-}
-
-MCruxJSObject::~MCruxJSObject()
+MObjectArray::MObjectArray()
 {
 }
 
-void MCruxJSObject::myFunction(const MObjectArray& args, MObject * result)
+
+MObjectArray::MObjectArray(const vector<MObject *> & _mArray)
 {
+}
+
+
+MObjectArray::~MObjectArray()
+{
+}
+
+
+void MObjectArray::setAt(size_t index, MObject* object)
+{
+	if (mArray.size() < index + 1)
+	{
+		mArray.resize(index + 1);
+	}
+	mArray[index] = object;
+}
+
+
+MObject* MObjectArray::getAt(size_t index)
+{
+	if (mArray.size() > index)
+	{
+		return mArray[index];
+	}
+	return NULL;
 }

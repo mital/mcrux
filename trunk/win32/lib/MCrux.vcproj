@@ -24,7 +24,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCrux.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCruxExport.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCrux.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCruxExport.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\jscore\JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -108,7 +108,7 @@
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
-				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCrux.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCruxExport.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;"
+				CommandLine="rmdir /S /Q  &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;mkdir &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCrux.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\plugin\MCruxPlugin.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\MCruxExport.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;xcopy /y /d &quot;$(SolutionDir)\..\src\lib\jscore\JSStringUtils.h&quot; &quot;$(MCruxOutputDir)\$(ConfigurationName)\include\$(ProjectName)&quot;&#x0D;&#x0A;"
 			/>
 			<Tool
 				Name="VCCustomBuildTool"
@@ -191,10 +191,6 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\..\src\lib\JSStringUtils.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\lib\MCrux.cpp"
 				>
 			</File>
@@ -232,10 +228,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\..\src\lib\JSStringUtils.h"
-				>
-			</File>
 			<File
 				RelativePath="..\..\src\lib\MCrux.h"
 				>
@@ -394,7 +386,15 @@
 				Name="Header Files"
 				>
 				<File
+					RelativePath="..\..\src\lib\abstract\callback.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\lib\abstract\MObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\abstract\MObjectArray.h"
 					>
 				</File>
 			</Filter>
@@ -403,6 +403,10 @@
 				>
 				<File
 					RelativePath="..\..\src\lib\abstract\MObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\abstract\MObjectArray.cpp"
 					>
 				</File>
 			</Filter>
@@ -414,7 +418,39 @@
 				Name="Header Files"
 				>
 				<File
+					RelativePath="..\..\src\lib\jscore\JSStringUtils.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreBool.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreMethod.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreNumber.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\lib\jscore\MJSCoreObject.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreObjectAbstract.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreObjectFactory.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreString.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreUtils.h"
 					>
 				</File>
 			</Filter>
@@ -422,7 +458,39 @@
 				Name="Source Files"
 				>
 				<File
+					RelativePath="..\..\src\lib\jscore\JSStringUtils.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreBool.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreMethod.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreNumber.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\lib\jscore\MJSCoreObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreObjectAbstract.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreObjectFactory.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreString.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\jscore\MJSCoreUtils.cpp"
 					>
 				</File>
 			</Filter>
