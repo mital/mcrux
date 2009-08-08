@@ -168,7 +168,7 @@ bool set_property_cb(
 		std::string name = getStringValueFrom(js_context, js_property);
 		try
 		{
-			MObject * mProperty = MJSCoreObjectFactory::getMObject(js_context, js_value);
+			MObject * mProperty = MJSCoreObjectFactory::getMObject(js_value);
 			mJSCoreObject->setProperty(name, mProperty);
 			success = true;
 		}
@@ -204,7 +204,7 @@ JSValueRef call_as_function_cb(
 			MObjectArray args;
 
 			for (size_t i = 0; i < num_args; i++) {
-				args.setAt(i, MJSCoreObjectFactory::getMObject(js_context, js_args[i]));
+				args.setAt(i, MJSCoreObjectFactory::getMObject(js_args[i]));
 			}
 
 			MJSCoreObjectAbstract * result = NULL;

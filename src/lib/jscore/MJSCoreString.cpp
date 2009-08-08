@@ -44,3 +44,8 @@ JSObjectRef MJSCoreString::getJSObject()
 {
 	return ::JSValueToObject(ctx, getJSValue(), 0);
 }
+
+const char * MJSCoreString::getString() const
+{
+	return str.c_str();
+}

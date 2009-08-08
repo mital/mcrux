@@ -24,77 +24,98 @@
 #include "MJSCoreObjectFactory.h"
 #include "JSStringUtils.h"
 
+JSContextRef MJSCoreObjectFactory::context = NULL;
 
-
-MJSCoreObjectFactory::MJSCoreObjectFactory()
+void MJSCoreObjectFactory::Initialize(JSContextRef _context)
 {
+	context = _context;
 }
 
 
-MJSCoreObjectFactory::~MJSCoreObjectFactory()
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject()
 {
+	if (context)
+	{
+		return new MJSCoreObject(context);
+	}
+	return NULL;
 }
 
 
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context)
+
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSObjectRef _object)
 {
-	return new MJSCoreObject(_context);
+	if (context)
+	{
+		return new MJSCoreObject(context, _object);
+	}
+	return NULL;
 }
 
 
-
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context, JSObjectRef _object)
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(double number)
 {
-	return new MJSCoreObject(_context, _object);
+	if (context)
+	{
+		return new MJSCoreNumber(context, number);
+	}
+	return NULL;
+	
 }
 
 
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context, double number)
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(const std::string & _str)
 {
-	return new MJSCoreNumber(_context, number);
+	if (context)
+	{
+		return new MJSCoreString(context, _str);
+	}
+	return NULL;
 }
 
-
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context, const std::string & _str)
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(bool bValue)
 {
-	return new MJSCoreString(_context, _str);
+	if (context)
+	{
+		return new MJSCoreBool(context, bValue);
+	}
+	return NULL;
 }
 
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context, bool bValue)
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(MCruxMethodCallback * _method)
 {
-	return new MJSCoreBool(_context, bValue);
+	if (context)
+	{
+		return new MJSCoreMethod(context, _method);
+	}
+	return NULL;
 }
 
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context, MCruxMethodCallback * _method)
-{
-	return new MJSCoreMethod(_context, _method);
-}
-
-MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSContextRef _context, JSValueRef _value)
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSValueRef _value)
 {
 	// TODO: handle custom JavaScript object.
 	// TODO: handle for Method passing.
 	MJSCoreObjectAbstract * mObj = NULL;
 
-	if (_value)
+	if (context && _value)
 	{
-		if (JSValueIsNumber(_context, _value))
+		if (JSValueIsNumber(context, _value))
 		{
-			double number = JSValueToNumber(_context, _value, 0);
-			mObj = getMObject(_context, number);
+			double number = JSValueToNumber(context, _value, 0);
+			mObj = getMObject(number);
 		}
-		else if (JSValueIsString(_context, _value))
+		else if (JSValueIsString(context, _value))
 		{
-			std::string str = getStringValueFrom(_context, _value);
-			mObj = getMObject(_context, str);
+			std::string str = getStringValueFrom(context, _value);
+			mObj = getMObject(str);
 		}
-		else if (JSValueIsBoolean(_context, _value))
+		else if (JSValueIsBoolean(context, _value))
 		{
-			mObj = getMObject(_context, JSValueToBoolean(_context, _value));
+			mObj = getMObject(JSValueToBoolean(context, _value));
 		}
-		else if (JSValueIsNull(_context, _value))
+		else if (JSValueIsNull(context, _value))
 		{
-			mObj = getMObject(_context, ::JSValueToObject(_context, _value, 0));
+			mObj = getMObject(JSValueToObject(context, _value, 0));
 		}
 		else
 		{

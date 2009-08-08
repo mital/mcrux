@@ -83,7 +83,7 @@ MObject * MJSCoreObject::getProperty(const std::string & name)
 
 	if(oProperty)
 	{
-		obj = MJSCoreObjectFactory::getMObject(ctx, oProperty);
+		obj = MJSCoreObjectFactory::getMObject(oProperty);
 	}
 	return obj;
 }
