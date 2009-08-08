@@ -19,44 +19,43 @@
 
 #pragma once
 
-#include "mcrux/MCruxPlugin.h"
+#include "jscore/MJSCoreObject.h"
 
 
 class FileSystemJSObject
-	: public MCruxPlugin
+	: public MJSCoreObject
 {
-	static JSValueRef copyFile(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
+	//static JSValueRef copyFile(JSContextRef ctx,
+	//	JSObjectRef function,
+	//	JSObjectRef thisObject,
+	//	size_t argumentCount,
+	//	const JSValueRef arguments[],
+	//	JSValueRef *exception);
 
-	static JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
+	//static JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
+	//	JSObjectRef function,
+	//	JSObjectRef thisObject,
+	//	size_t argumentCount,
+	//	const JSValueRef arguments[],
+	//	JSValueRef *exception);
 
-	static JSValueRef getFileInfo(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
+	//static JSValueRef getFileInfo(JSContextRef ctx,
+	//	JSObjectRef function,
+	//	JSObjectRef thisObject,
+	//	size_t argumentCount,
+	//	const JSValueRef arguments[],
+	//	JSValueRef *exception);
 
-	static JSValueRef readFile(JSContextRef ctx,
-		JSObjectRef function,
-		JSObjectRef thisObject,
-		size_t argumentCount,
-		const JSValueRef arguments[],
-		JSValueRef *exception);
+	//static JSValueRef readFile(JSContextRef ctx,
+	//	JSObjectRef function,
+	//	JSObjectRef thisObject,
+	//	size_t argumentCount,
+	//	const JSValueRef arguments[],
+	//	JSValueRef *exception);
 
 public:
-	FileSystemJSObject();
+	FileSystemJSObject(JSContextRef ctx);
 	virtual ~FileSystemJSObject();
 
-	virtual const char * getName() const;
-	virtual JSStaticFunction * getStaticFunctions() const;
+	//virtual JSStaticFunction * getStaticFunctions() const;
 };

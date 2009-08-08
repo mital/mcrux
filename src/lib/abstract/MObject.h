@@ -20,6 +20,7 @@
 #pragma once
 
 #include "abstract/callback.h"
+#include <abstract/MCruxExport.h>
 
 class MObject;
 class MObjectArray;
@@ -27,7 +28,7 @@ class MObjectArray;
 typedef Callback2<const MObjectArray&, MObject *>::Type MCruxMethodCallback;
 
 
-class MObject
+class MCRUX_API MObject
 {
 public:
 	MObject();

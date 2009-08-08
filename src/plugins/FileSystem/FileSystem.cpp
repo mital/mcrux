@@ -21,8 +21,9 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 #pragma managed(pop)
 #endif
 
-__declspec(dllexport) MCruxPlugin * getMCruxPlugin()
-{
-	return new FileSystemJSObject();
-}
 
+__declspec(dllexport) MObject * getMCruxPlugin(JSContextRef context)
+{
+	return new FileSystemJSObject(context);
+	//return NULL;
+}

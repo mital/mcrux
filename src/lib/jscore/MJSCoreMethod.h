@@ -22,7 +22,7 @@
 #include "jscore/MJSCoreObjectAbstract.h"
 
 
-class MJSCoreMethod
+class MCRUX_API MJSCoreMethod
 	: public MJSCoreObjectAbstract
 {
 	MCruxMethodCallback * method;

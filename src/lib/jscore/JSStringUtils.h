@@ -24,7 +24,8 @@
 using namespace std;
 
 #include <JavaScriptCore/JSStringRef.h>
-#include "MCruxExport.h"
+
+#include <abstract/MCruxExport.h>
 
 
 MCRUX_API char * getStringValueFrom(JSContextRef ctx, JSValueRef strValue);

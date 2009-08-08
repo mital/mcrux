@@ -22,7 +22,7 @@
 #include "jscore/MJSCoreObjectAbstract.h"
 
 
-class MJSCoreNumber
+class MCRUX_API MJSCoreNumber
 	: public MJSCoreObjectAbstract
 {
 protected:

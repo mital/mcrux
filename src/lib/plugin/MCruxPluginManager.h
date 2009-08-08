@@ -20,29 +20,33 @@
 
 #pragma once
 
+#include <map>
 #include <list>
+#include <string>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 #include "MCrux.h"
 #include "MCruxPlugin.h"
 
+#include "MCruxJSObject.h"
+
 class MCruxWindow;
 
-typedef MCruxPlugin * (*GetPluginFunctionPtr)();
+typedef MObject * (*GetPluginFunctionPtr)(JSContextRef ctx);
 
 class MCruxPluginManager
 {
-	JSObjectRef mcruxObject;
-	list<MCruxPlugin *> plugins;
+	bool pluginDllsLoaded;
+	list<wstring> pluginNames;
+	map<string, MObject *> plugins;
 
-	void AddMCruxDefaultPlugins();
+	bool AddPlugin(const wstring & pluginName, JSContextRef ctx);
+	void loadExtensionPlugins(JSContextRef ctx);
 
-	bool AddPlugin(const wstring & pluginName);
-	void AddExtensionPlugins(const list<wstring> extensionPluginNames);
-	JSObjectRef getMCruxJSObject(IWebView* webView, JSContextRef context);
-
+	MObject * getMCruxJSObject(JSContextRef ctx);
 public:
 
 	MCruxPluginManager(const list<wstring> extensionPluginNames);

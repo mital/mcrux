@@ -28,10 +28,14 @@
 
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
-: mcruxObject(NULL)
+: pluginDllsLoaded(false)
 {
-	AddMCruxDefaultPlugins();
-	AddExtensionPlugins(extensionPluginNames);
+	for(list<wstring>::const_iterator oIter = extensionPluginNames.begin();
+		oIter != extensionPluginNames.end();
+		oIter++)
+	{
+		pluginNames.push_back(*oIter);
+	}
 }
 
 MCruxPluginManager::~MCruxPluginManager()
@@ -39,13 +43,7 @@ MCruxPluginManager::~MCruxPluginManager()
 }
 
 
-void MCruxPluginManager::AddMCruxDefaultPlugins()
-{
-	// TODO: refine this
-	//plugins.push_back(new MCruxJSObject());
-}
-
-bool MCruxPluginManager::AddPlugin(const wstring & pluginName)
+bool MCruxPluginManager::AddPlugin(const wstring & pluginName, JSContextRef ctx)
 {
 	wstring pluginDll = TEXT("plugins/");
 	pluginDll += pluginName;
@@ -62,62 +60,64 @@ bool MCruxPluginManager::AddPlugin(const wstring & pluginName)
 		//throw(std::exception("Entry point not found"));
 		return false;
 	}
-	plugins.push_back(myFunction());
-	return true;
-}
-
-void MCruxPluginManager::AddExtensionPlugins(const list<wstring> extensionPluginNames)
-{
-	// TODO: search for the dlls from specific path and add those as extension plugins.
-	// might have to take the path also from user so "const list<string>"  will be changed to "const list<pair<string, string> >"
-	for (list<wstring>::const_iterator
-		oIter = extensionPluginNames.begin();
-		oIter != extensionPluginNames.end();
-	oIter++)
+	MObject * pluginObject = myFunction(ctx);
+	if (pluginObject)
 	{
-		AddPlugin(*oIter);
+		// TODO: get the name of the plugin from mcruxspec file.
+		std::string strName = ((MJSCoreObject*)pluginObject)->getClassName();
+		plugins[strName] = pluginObject;
+		return true;
 	}
-
+	return false;
+	
 }
 
+void MCruxPluginManager::loadExtensionPlugins(JSContextRef ctx)
+{
+	if(!pluginDllsLoaded)
+	{
+		// TODO: search for the dlls from specific path and add those as extension plugins.
+		// might have to take the path also from user so "const list<string>"  will be changed to "const list<pair<string, string> >"
+		for (list<wstring>::const_iterator
+			oIter = pluginNames.begin();
+			oIter != pluginNames.end();
+		oIter++)
+		{
+			AddPlugin(*oIter, ctx);
+		}
+		pluginDllsLoaded = true;
+	}
+}
+
+
+MObject* MCruxPluginManager::getMCruxJSObject(JSContextRef ctx)
+{
+	MCruxJSObject * mcruxObject = new MCruxJSObject(ctx);
+
+	for(map<string, MObject*>::iterator oIter = plugins.begin();
+		oIter != plugins.end();
+		oIter++)
+	{
+		mcruxObject->setProperty(oIter->first, oIter->second);
+	}
+	return mcruxObject;
+}
 
 HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSContextRef context,
 										  JSObjectRef windowScriptObject)
 {
+	loadExtensionPlugins(context);
 	//MCruxWindow * mcruxWindow = MCruxWindow::getMCruxWindowFrom(webView);
 	//MCruxWebView * mcruxWebView = mcruxWindow->getMCruxWebView();
 
-	//JSObjectRef globalObject = JSContextGetGlobalObject(context);
-	//JSStringRef name = JSStringCreateWithUTF8CString("mcrux");
-	//JSObjectSetProperty(context,
-	//	globalObject,
-	//	name,
-	//	getMCruxJSObject(webView, context), 0, 0);
+	MJSCoreObject * globalObject = new MJSCoreObject(context, JSContextGetGlobalObject(context));
+
+	MObject * mcruxObject = getMCruxJSObject(context);
+	std::string strName = ((MJSCoreObject*)mcruxObject)->getClassName();
+	globalObject->setProperty(strName, mcruxObject);
 
 	// TODO: inject a new object called currentWindow
 	// this object will be responsible for handling various events of currentwindow.
-
-	MJSCoreObject * globalObject = new MJSCoreObject(context, JSContextGetGlobalObject(context));
-	MCruxJSObject * myobj = new MCruxJSObject(context);
-	globalObject->setProperty("myobj", myobj);
-
 	return S_OK;
-}
-
-
-JSObjectRef MCruxPluginManager::getMCruxJSObject(IWebView* webView, JSContextRef context)
-{
-	if(!mcruxObject)
-	{
-		mcruxObject = JSObjectMake(context, NULL, NULL);
-		for(list<MCruxPlugin *>::const_iterator
-			oIter = plugins.begin();
-			oIter != plugins.end();
-		oIter++)
-		{
-			(*oIter)->injectPlugin(context, webView, mcruxObject);
-		}
-	}
-	return mcruxObject;
 }

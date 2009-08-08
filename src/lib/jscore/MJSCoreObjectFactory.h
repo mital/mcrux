@@ -20,13 +20,15 @@
 
 #pragma once
 
+#include <abstract/MCruxExport.h>
+
 #include "jscore/MJSCoreObject.h"
 #include "jscore/MJSCoreNumber.h"
 #include "jscore/MJSCoreString.h"
 #include "jscore/MJSCoreBool.h"
 
 
-class MJSCoreObjectFactory
+class MCRUX_API MJSCoreObjectFactory
 {
 public:
 	MJSCoreObjectFactory();

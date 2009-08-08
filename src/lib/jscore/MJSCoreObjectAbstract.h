@@ -37,7 +37,7 @@ enum JSOBJECTTYPE_en
 	TYPE_JSBOOL,
 };
 
-class MJSCoreObjectAbstract
+class MCRUX_API MJSCoreObjectAbstract
 	: public MObject
 {
 protected:

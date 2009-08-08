@@ -31,7 +31,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
 	UNREFERENCED_PARAMETER(nCmdShow);
 
 	MCrux mcrux;
-	string appConfigFileWithFullPath = "C:\\mcrux\\window\\window_create.mcruxspec";
+	string appConfigFileWithFullPath = "C:\\mcrux\\newapi\\window_create.mcruxspec";
 	mcrux.InitializeAndRunWith(appConfigFileWithFullPath);
 
 	return 0;

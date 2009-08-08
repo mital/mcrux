@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 
-#include "mcrux/JSStringUtils.h"
+#include <jscore/JSStringUtils.h>
 
 #include "LIBXMLSAXJSObject.h"
 
