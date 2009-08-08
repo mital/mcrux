@@ -34,5 +34,7 @@ public:
 	~MObjectArray();
 
 	void setAt(size_t index, MObject* object);
-	MObject* getAt(size_t index);
+	MObject* getAt(size_t index) const;
+
+	size_t size() const;
 };

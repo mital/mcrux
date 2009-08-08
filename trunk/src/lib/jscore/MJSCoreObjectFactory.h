@@ -30,16 +30,18 @@
 
 class MCRUX_API MJSCoreObjectFactory
 {
+private:
+	static JSContextRef context;
+
 public:
-	MJSCoreObjectFactory();
-	virtual ~MJSCoreObjectFactory();
+	static void Initialize(JSContextRef _context);
 
-	static MJSCoreObjectAbstract * getMObject(JSContextRef _context);
-	static MJSCoreObjectAbstract * getMObject(JSContextRef _context, JSObjectRef _object);
-	static MJSCoreObjectAbstract * getMObject(JSContextRef _context, double number);
-	static MJSCoreObjectAbstract * getMObject(JSContextRef _context, const std::string & _str);
-	static MJSCoreObjectAbstract * getMObject(JSContextRef _context, bool bValue);
-	static MJSCoreObjectAbstract * getMObject(JSContextRef context, MCruxMethodCallback * method);
+	static MJSCoreObjectAbstract * getMObject();
+	static MJSCoreObjectAbstract * getMObject(JSObjectRef _object);
+	static MJSCoreObjectAbstract * getMObject(double number);
+	static MJSCoreObjectAbstract * getMObject(const std::string & _str);
+	static MJSCoreObjectAbstract * getMObject(bool bValue);
+	static MJSCoreObjectAbstract * getMObject(MCruxMethodCallback * _method);
 
-	static MJSCoreObjectAbstract * getMObject(JSContextRef _context, JSValueRef _value);
+	static MJSCoreObjectAbstract * getMObject(JSValueRef _value);
 };

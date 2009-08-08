@@ -20,6 +20,7 @@
 #include <stdafx.h>
 #include <comdef.h>
 
+#include <jscore/MJSCoreObjectFactory.h>
 #include "MCruxDelegatesHandler.h"
 #include "windowsnative/MCruxWindowManager.h"
 
@@ -47,6 +48,7 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::windowScriptObjectAvailable(
         JSContextRef context,
         JSObjectRef windowScriptObject)
 {
+	MJSCoreObjectFactory::Initialize(context);
 	return pluginManager->injectPlugins(webView, context, windowScriptObject);
 }
 
@@ -68,7 +70,10 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::didClearWindowObject(
         JSObjectRef windowScriptObject,
         IWebFrame *frame)
 {
+	// TODO: this method is not getting called. 
+	// Ideally this method is replacement of Windowscriptobjectavailable method.
 	::MessageBoxA(0, "did clear", "test", MB_OK);
+	MJSCoreObjectFactory::Initialize(context);
 	return pluginManager->injectPlugins(webView, context, windowScriptObject);
 
 	//return S_OK;

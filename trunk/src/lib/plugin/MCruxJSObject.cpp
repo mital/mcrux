@@ -26,6 +26,7 @@ using namespace std;
 MCruxJSObject::MCruxJSObject(JSContextRef context)
 : MJSCoreObject(context, "mcrux")
 {
+	//setProperty(context, "my_some_function", &MCruxJSObject::myFunction);
 }
 
 MCruxJSObject::~MCruxJSObject()

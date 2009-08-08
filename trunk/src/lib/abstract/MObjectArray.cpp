@@ -44,11 +44,16 @@ void MObjectArray::setAt(size_t index, MObject* object)
 }
 
 
-MObject* MObjectArray::getAt(size_t index)
+MObject* MObjectArray::getAt(size_t index) const
 {
 	if (mArray.size() > index)
 	{
 		return mArray[index];
 	}
 	return NULL;
+}
+
+size_t MObjectArray::size() const
+{
+	return mArray.size();
 }
