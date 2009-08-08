@@ -19,43 +19,19 @@
 
 #pragma once
 
-#include "jscore/MJSCoreObject.h"
+#include <jscore/MJSCoreObject.h>
 
 
 class FileSystemJSObject
 	: public MJSCoreObject
 {
-	//static JSValueRef copyFile(JSContextRef ctx,
-	//	JSObjectRef function,
-	//	JSObjectRef thisObject,
-	//	size_t argumentCount,
-	//	const JSValueRef arguments[],
-	//	JSValueRef *exception);
-
-	//static JSValueRef FileSystemJSObject::readDir(JSContextRef ctx,
-	//	JSObjectRef function,
-	//	JSObjectRef thisObject,
-	//	size_t argumentCount,
-	//	const JSValueRef arguments[],
-	//	JSValueRef *exception);
-
-	//static JSValueRef getFileInfo(JSContextRef ctx,
-	//	JSObjectRef function,
-	//	JSObjectRef thisObject,
-	//	size_t argumentCount,
-	//	const JSValueRef arguments[],
-	//	JSValueRef *exception);
-
-	//static JSValueRef readFile(JSContextRef ctx,
-	//	JSObjectRef function,
-	//	JSObjectRef thisObject,
-	//	size_t argumentCount,
-	//	const JSValueRef arguments[],
-	//	JSValueRef *exception);
+	void copyFile(const MObjectArray& args, MObject * result);
+	void readDir(const MObjectArray& args, MObject * result);
+	void getFileInfo(const MObjectArray& args, MObject * result);
+	void readFile(const MObjectArray& args, MObject * result);
 
 public:
 	FileSystemJSObject(JSContextRef ctx);
 	virtual ~FileSystemJSObject();
 
-	//virtual JSStaticFunction * getStaticFunctions() const;
 };
