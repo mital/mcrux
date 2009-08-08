@@ -25,7 +25,7 @@ using namespace std;
 #include "jscore/MJSCoreObjectAbstract.h"
 
 
-class MJSCoreString
+class MCRUX_API MJSCoreString
 	: public MJSCoreObjectAbstract
 {
 protected:

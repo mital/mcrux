@@ -27,8 +27,7 @@ using namespace std;
 #include <WebKit/WebKit.h>
 #include <JavaScriptCore/JSContextRef.h>
 
-#include "MCruxExport.h"
-
+#include <abstract/MCruxExport.h>
 
 class MCRUX_API MCruxPlugin
 {

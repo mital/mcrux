@@ -5,7 +5,7 @@
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSRetainPtr.h>
 #include <JavaScriptCore/JSStringRefCF.h>
-#include "mcrux/JSStringUtils.h"
+#include <jscore/JSStringUtils.h>
 
 
 list<SocketJSObject *> SocketJSObject::socketObjects;

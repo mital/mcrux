@@ -25,7 +25,7 @@ using namespace std;
 #include "MObject.h"
 
 
-class MObjectArray
+class MCRUX_API MObjectArray
 {
 	vector <MObject *> mArray;
 public:

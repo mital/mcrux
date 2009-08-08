@@ -24,7 +24,7 @@
 
 using namespace std;
 
-#include "MCruxExport.h"
+#include <abstract/MCruxExport.h>
 
 
 class MCRUX_API MCrux

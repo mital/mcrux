@@ -25,10 +25,12 @@
 #include "MJSCoreObjectFactory.h"
 
 
-MJSCoreObject::MJSCoreObject(JSContextRef _ctx)
-: MJSCoreObjectAbstract(_ctx, TYPE_JSOBJECT)
+MJSCoreObject::MJSCoreObject(JSContextRef _ctx, const std::string & _className)
+: MJSCoreObjectAbstract(_ctx, TYPE_JSOBJECT),
+  className(_className)
 {
 	JSClassDefinition oNameSpace = kJSClassDefinitionEmpty;
+	oNameSpace.className = getClassName();
 	JSClassRef classRef = JSClassCreate(&oNameSpace);
 	object = JSObjectMake(ctx, classRef, this);
 }
@@ -108,4 +110,9 @@ JSValueRef MJSCoreObject::getJSValue()
 JSObjectRef MJSCoreObject::getJSObject()
 {
 	return object;
+}
+
+const char * MJSCoreObject::getClassName() const
+{
+	return className.c_str();
 }

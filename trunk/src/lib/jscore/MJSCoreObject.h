@@ -26,15 +26,16 @@
 #include "jscore/MJSCoreMethod.h"
 
 
-class MJSCoreObject
+class MCRUX_API MJSCoreObject
 	: public MJSCoreObjectAbstract
 {
 protected:
 	JSObjectRef object;
+	std::string className;
 
 public:
 
-	MJSCoreObject(JSContextRef _ctx);
+	MJSCoreObject(JSContextRef _ctx, const std::string & _className = "MJSCoreObject");
 	MJSCoreObject(JSContextRef _ctx, JSObjectRef _object);
 	virtual ~MJSCoreObject();
 
@@ -45,6 +46,8 @@ public:
 
 	virtual JSValueRef getJSValue();
 	virtual JSObjectRef getJSObject();
+
+	const char * getClassName() const;
 
 	template <typename T>
 	void setProperty(JSContextRef _ctx, const char *name, void (T::*method)(const MObjectArray&, MObject *))
