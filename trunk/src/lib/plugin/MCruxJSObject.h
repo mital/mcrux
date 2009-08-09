@@ -30,5 +30,5 @@ public:
 	MCruxJSObject(JSContextRef context);
 	virtual ~MCruxJSObject();
 
-	void myFunction(const MObjectArray& args, MObject * result);
+	void myFunction(const MObjectArray& args, MObjectContainer& resultContainer);
 };

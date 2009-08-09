@@ -22,6 +22,8 @@
 #include "FileUtils.h"
 #include "FileSystemJSObject.h"
 
+#include <abstract/MObjectContainer.h>
+
 #include <jscore/MJSCoreObjectFactory.h>
 
 
@@ -38,7 +40,7 @@ FileSystemJSObject::~FileSystemJSObject()
 {
 }
 
-void FileSystemJSObject::copyFile(const MObjectArray& args, MObject * result)
+void FileSystemJSObject::copyFile(const MObjectArray& args, MObjectContainer& resultContainer)
 {
 	::MessageBoxA(0, "filesystem.copyFile called.", "test", MB_OK);
 	if (args.size() == 2)
@@ -51,15 +53,15 @@ void FileSystemJSObject::copyFile(const MObjectArray& args, MObject * result)
 		{
 			if(FileUtils::Copy(srcFileString->getString(), destFileString->getString()))
 			{
-				result = MJSCoreObjectFactory::getMObject(true);
+				resultContainer.set(MJSCoreObjectFactory::getMObject(true));
 			}
 		}
 	}
-	result = MJSCoreObjectFactory::getMObject(false);
+	resultContainer.set(MJSCoreObjectFactory::getMObject(false));
 }
 
 
-void FileSystemJSObject::readDir(const MObjectArray& args, MObject * result)
+void FileSystemJSObject::readDir(const MObjectArray& args, MObjectContainer& resultContainer)
 {
 	if (args.size() == 1)
 	{
@@ -115,7 +117,7 @@ void FileSystemJSObject::readDir(const MObjectArray& args, MObject * result)
 	}
 }
 
-void FileSystemJSObject::getFileInfo(const MObjectArray& args, MObject * result)
+void FileSystemJSObject::getFileInfo(const MObjectArray& args, MObjectContainer& resultContainer)
 {
 	::MessageBoxA(0, "filesystem.getFileInfo called.", "test", MB_OK);
 	if (args.size() == 1)
@@ -128,27 +130,24 @@ void FileSystemJSObject::getFileInfo(const MObjectArray& args, MObject * result)
 			string fileName = fileString->getString();
 			FileInfo * info = FileUtils::getFileInfo(fileName);
 
-			int arraySize = 4;
-			// TODO:
-			//JSValueRef * fileJSStrings = new JSValueRef[arraySize];
-
-			//string fileType = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
-			//fileJSStrings[0] = JSValueMakeString(ctx,
-			//	JSStringCreateWithUTF8CString(fileType.c_str()));
-
-			//fileJSStrings[1] = JSValueMakeNumber(ctx, info->fileSize);
-			//fileJSStrings[2] = JSValueMakeNumber(ctx, (double)info->lastModifiedTime);
-			//fileJSStrings[3] = JSValueMakeNumber(ctx, (double)info->permissionMode);
-
+			string fileType = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
+			double fileSize = info->fileSize;
+			double lastModifiedTime = info->lastModifiedTime;
+			double permissionMode = info->permissionMode;
 			delete info;
 
-			//return JSObjectMakeArray(ctx, arraySize, fileJSStrings, NULL);
+			MJSCoreObject * fileProps = dynamic_cast<MJSCoreObject *>(MJSCoreObjectFactory::getMObject());
+			fileProps->setProperty("type", MJSCoreObjectFactory::getMObject(fileType));
+			fileProps->setProperty("size", MJSCoreObjectFactory::getMObject(fileSize));
+			fileProps->setProperty("last_modified_time", MJSCoreObjectFactory::getMObject(lastModifiedTime));
+			fileProps->setProperty("permission_mode", MJSCoreObjectFactory::getMObject(permissionMode));
+			resultContainer.set(fileProps);
 		}
 	}
 }
 
 
-void FileSystemJSObject::readFile(const MObjectArray& args, MObject * result)
+void FileSystemJSObject::readFile(const MObjectArray& args, MObjectContainer& resultContainer)
 {
 	::MessageBoxA(0, "filesystem.ReadFile called.", "test", MB_OK);
 	if (args.size() == 1)
@@ -163,7 +162,7 @@ void FileSystemJSObject::readFile(const MObjectArray& args, MObject * result)
 
 			if(FileUtils::ReadFile(fileName, fileString))
 			{
-				result = MJSCoreObjectFactory::getMObject(fileString);
+				resultContainer.set(MJSCoreObjectFactory::getMObject(fileString));
 			}
 		}
 	}

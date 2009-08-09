@@ -24,8 +24,9 @@
 
 class MObject;
 class MObjectArray;
+class MObjectContainer;
 
-typedef Callback2<const MObjectArray&, MObject *>::Type MCruxMethodCallback;
+typedef Callback2<const MObjectArray&, MObjectContainer &>::Type MCruxMethodCallback;
 
 
 class MCRUX_API MObject

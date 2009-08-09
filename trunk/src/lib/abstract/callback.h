@@ -183,6 +183,11 @@ public:
 		RunWithParams(Params(a, b));
 	}
 
+	template <typename Arg1, typename Arg2>
+	inline void Run(const Arg1& a, Arg2& b) {
+		RunWithParams(Params(a, b));
+	}
+
 	template <typename Arg1, typename Arg2, typename Arg3>
 	inline void Run(const Arg1& a, const Arg2& b, const Arg3& c) {
 		RunWithParams(Params(a, b, c));
