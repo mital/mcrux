@@ -25,10 +25,10 @@
 class FileSystemJSObject
 	: public MJSCoreObject
 {
-	void copyFile(const MObjectArray& args, MObject * result);
-	void readDir(const MObjectArray& args, MObject * result);
-	void getFileInfo(const MObjectArray& args, MObject * result);
-	void readFile(const MObjectArray& args, MObject * result);
+	void copyFile(const MObjectArray& args, MObjectContainer& resultContainer);
+	void readDir(const MObjectArray& args, MObjectContainer& resultContainer);
+	void getFileInfo(const MObjectArray& args, MObjectContainer& resultContainer);
+	void readFile(const MObjectArray& args, MObjectContainer& resultContainer);
 
 public:
 	FileSystemJSObject(JSContextRef ctx);

@@ -1,5 +1,5 @@
 /**
-* copyright (C) 2008 Mital Vora. All rights reserved.
+* copyright (C) 2009 Mital Vora. All rights reserved.
 *
 * Redistribution and use in source and binary forms, with or without
 * modification, are permitted provided that the following conditions
@@ -17,22 +17,18 @@
 * @author: Mital Vora.
 **/
 
-#include "StdAfx.h"
-#include "MCruxJSObject.h"
+#pragma once
 
-#include <list>
-using namespace std;
+#include <abstract/MObject.h>
 
-MCruxJSObject::MCruxJSObject(JSContextRef context)
-: MJSCoreObject(context, "mcrux")
+
+class MCRUX_API MObjectContainer
 {
-	setProperty(context, "my_some_function", &MCruxJSObject::myFunction);
-}
+	MObject * obj;
+public:
+	MObjectContainer();
+	virtual ~MObjectContainer();
 
-MCruxJSObject::~MCruxJSObject()
-{
-}
-
-void MCruxJSObject::myFunction(const MObjectArray& args, MObjectContainer& resultContainer)
-{
-}
+	void set(MObject * _obj);
+	MObject * get() const;
+};

@@ -22,7 +22,7 @@
 
 #include "MJSCoreUtils.h"
 #include "MJSCoreMethod.h"
-
+#include <abstract/MObjectContainer.h>
 
 
 MJSCoreMethod::MJSCoreMethod(JSContextRef _ctx, MCruxMethodCallback * _method)
@@ -55,7 +55,7 @@ MCruxMethodCallback * MJSCoreMethod::getMethod()
 
 MJSCoreObjectAbstract * MJSCoreMethod::invoke(const MObjectArray& args)
 {
-	MJSCoreObjectAbstract * result = NULL;
-	method->Run(args, result);
-	return result;
+	MObjectContainer resultContainer;
+	method->Run(args, resultContainer);
+	return dynamic_cast<MJSCoreObjectAbstract *>(resultContainer.get());
 }

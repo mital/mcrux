@@ -50,9 +50,9 @@ public:
 	const char * getClassName() const;
 
 	template <typename T>
-	void setProperty(JSContextRef _ctx, const char *name, void (T::*method)(const MObjectArray&, MObject *))
+	void setProperty(JSContextRef _ctx, const char *name, void (T::*method)(const MObjectArray&, MObjectContainer&))
 	{
-		MCruxMethodCallback* callback = NewCallback<T, const MObjectArray&, MObject *>(static_cast<T*>(this), method);
+		MCruxMethodCallback* callback = NewCallback<T, const MObjectArray&, MObjectContainer&>(static_cast<T*>(this), method);
 		this->setProperty(name, new MJSCoreMethod(_ctx, callback));
 	}
 };
