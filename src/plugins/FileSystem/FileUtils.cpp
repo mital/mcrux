@@ -91,10 +91,6 @@ bool FileUtils::Copy(const string& sourceFileName, const string& destFileName)
 		if(sourceFileInfo
 			&& sourceFileInfo->fileType != FILETYPE_DIRECTORY && destFileInfo == NULL)
 		{
-			int dstFileHandle = -1;
-			_sopen_s(&dstFileHandle, destFileName.c_str(), _O_CREAT | _O_BINARY, 0, sourceFileInfo->permissionMode);
-			_close(dstFileHandle);
-
 			buffer = new char[sourceFileInfo->fileSize];
 
 			ifstream srcFileStream(sourceFileName.c_str(), ios::in|ios::binary);

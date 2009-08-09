@@ -52,6 +52,7 @@ void FileSystemJSObject::copyFile(const MObjectArray& args, MObjectContainer& re
 			if(FileUtils::Copy(srcFileString->getString(), destFileString->getString()))
 			{
 				resultContainer.set(MJSCoreObjectFactory::getMObject(true));
+				return;
 			}
 		}
 	}
@@ -71,35 +72,31 @@ void FileSystemJSObject::readDir(const MObjectArray& args, MObjectContainer& res
 			FileInfo * info = FileUtils::getFileInfo(dir);
 			if(info)
 			{
-				if(info->fileType != FILETYPE_DIRECTORY)
+				if(info->fileType == FILETYPE_DIRECTORY)
 				{
+					delete info;
 					vector<string> files;
-					FileUtils::readDirectory(dir, files);
-
-					if(files.size() > 0)
+					if (FileUtils::readDirectory(dir, files) && (files.size() > 0))
 					{
 						vector<MJSCoreObject *> jsFiles;
-						for(unsigned int i = 0; i < files.size(); i++)
+						for (size_t i = 0; i < files.size(); i++)
 						{
 							info = FileUtils::getFileInfo(dir + files[i]);
 							if(info)
 							{
 								MJSCoreObject * fileProps = getFilePropertyObject(info);
-								if(fileProps)
-								{
-									resultContainer.set(fileProps);
-								}
 								delete info;
 								jsFiles.push_back(fileProps);
 							}
 						}
-						MObject * result = MJSCoreObjectFactory::getMObject(jsFiles);
-						resultContainer.set(result);
+						resultContainer.set(MJSCoreObjectFactory::getMObject(jsFiles));
 					}
 				}
-				delete info;
+				else
+				{
+					delete info;
+				}
 			}
-			
 		}
 	}
 }
