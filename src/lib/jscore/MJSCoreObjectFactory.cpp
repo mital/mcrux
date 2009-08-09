@@ -91,6 +91,15 @@ MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(MCruxMethodCallback * _
 	return NULL;
 }
 
+MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(const std::vector<MJSCoreObject *>& files)
+{
+	if (context)
+	{
+		return new MJSCoreObjectArray(context, files);
+	}
+	return NULL;
+}
+
 MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSValueRef _value)
 {
 	// TODO: handle custom JavaScript object.

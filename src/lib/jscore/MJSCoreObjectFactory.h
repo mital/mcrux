@@ -22,10 +22,11 @@
 
 #include <abstract/MCruxExport.h>
 
-#include "jscore/MJSCoreObject.h"
-#include "jscore/MJSCoreNumber.h"
-#include "jscore/MJSCoreString.h"
-#include "jscore/MJSCoreBool.h"
+#include <jscore/MJSCoreBool.h>
+#include <jscore/MJSCoreObject.h>
+#include <jscore/MJSCoreNumber.h>
+#include <jscore/MJSCoreString.h>
+#include <jscore/MJSCoreObjectArray.h>
 
 
 class MCRUX_API MJSCoreObjectFactory
@@ -42,6 +43,7 @@ public:
 	static MJSCoreObjectAbstract * getMObject(const std::string & _str);
 	static MJSCoreObjectAbstract * getMObject(bool bValue);
 	static MJSCoreObjectAbstract * getMObject(MCruxMethodCallback * _method);
+	static MJSCoreObjectAbstract * getMObject(const std::vector<MJSCoreObject *>& files);
 
 	static MJSCoreObjectAbstract * getMObject(JSValueRef _value);
 };

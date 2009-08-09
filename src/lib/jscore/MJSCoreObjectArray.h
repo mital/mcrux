@@ -19,22 +19,24 @@
 
 #pragma once
 
-#include <jscore/MJSCoreObject.h>
+#include <set>
+#include <string>
+#include <vector>
 
-#include "FileUtils.h"
+#include "jscore/MJSCoreObject.h"
 
-class FileSystemJSObject
-	: public MJSCoreObject
+
+class MCRUX_API MJSCoreObjectArray
+	: public MJSCoreObjectAbstract
 {
-	void copyFile(const MObjectArray& args, MObjectContainer& resultContainer);
-	void readDir(const MObjectArray& args, MObjectContainer& resultContainer);
-	void getFileInfo(const MObjectArray& args, MObjectContainer& resultContainer);
-	void readFile(const MObjectArray& args, MObjectContainer& resultContainer);
-
-	MJSCoreObject * getFilePropertyObject(FileInfo * info) const;
+protected:
+	JSObjectRef object;
 
 public:
-	FileSystemJSObject(JSContextRef ctx);
-	virtual ~FileSystemJSObject();
 
+	MJSCoreObjectArray(JSContextRef _ctx, const std::vector<MJSCoreObject *>& files);
+	virtual ~MJSCoreObjectArray();
+
+	virtual JSValueRef getJSValue();
+	virtual JSObjectRef getJSObject();
 };

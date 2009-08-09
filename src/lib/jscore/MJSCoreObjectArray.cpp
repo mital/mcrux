@@ -17,24 +17,39 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#include <stdafx.h>
 
-#include <jscore/MJSCoreObject.h>
+#include "JSStringUtils.h"
+#include "MJSCoreUtils.h"
+#include "MJSCoreObjectArray.h"
+#include "MJSCoreObjectFactory.h"
 
-#include "FileUtils.h"
 
-class FileSystemJSObject
-	: public MJSCoreObject
+MJSCoreObjectArray::MJSCoreObjectArray(JSContextRef _ctx, const std::vector<MJSCoreObject *>& files)
+: MJSCoreObjectAbstract(_ctx, TYPE_JSOBJECT_ARRAY)
 {
-	void copyFile(const MObjectArray& args, MObjectContainer& resultContainer);
-	void readDir(const MObjectArray& args, MObjectContainer& resultContainer);
-	void getFileInfo(const MObjectArray& args, MObjectContainer& resultContainer);
-	void readFile(const MObjectArray& args, MObjectContainer& resultContainer);
+	JSObjectRef * fileJSStrings = new JSObjectRef[files.size()];
+	for (int i=0; i < files.size(); i++)
+	{
+		fileJSStrings[i] = files[i]->getJSObject();
+	}
 
-	MJSCoreObject * getFilePropertyObject(FileInfo * info) const;
+	object = JSObjectMakeArray(ctx, files.size(), fileJSStrings, NULL);
+}
 
-public:
-	FileSystemJSObject(JSContextRef ctx);
-	virtual ~FileSystemJSObject();
 
-};
+MJSCoreObjectArray::~MJSCoreObjectArray()
+{
+}
+
+
+JSValueRef MJSCoreObjectArray::getJSValue()
+{
+	return object;
+}
+
+
+JSObjectRef MJSCoreObjectArray::getJSObject()
+{
+	return object;
+}

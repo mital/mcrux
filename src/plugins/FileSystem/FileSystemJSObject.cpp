@@ -17,14 +17,12 @@
  * @author: Mital Vora.
  **/
 
-
 #include "StdAfx.h"
-#include "FileUtils.h"
-#include "FileSystemJSObject.h"
 
 #include <abstract/MObjectContainer.h>
-
 #include <jscore/MJSCoreObjectFactory.h>
+
+#include "FileSystemJSObject.h"
 
 
 FileSystemJSObject::FileSystemJSObject(JSContextRef ctx)
@@ -75,44 +73,33 @@ void FileSystemJSObject::readDir(const MObjectArray& args, MObjectContainer& res
 			{
 				if(info->fileType != FILETYPE_DIRECTORY)
 				{
-					delete info;
 					vector<string> files;
 					FileUtils::readDirectory(dir, files);
 
 					if(files.size() > 0)
 					{
-						// TODO: create a new return type array :P
-
-						//JSObjectRef * fileJSStrings = new JSObjectRef[files.size()];
-						//for(unsigned int i = 0; i < files.size(); i++)
-						//{
-						//	fileJSStrings[i] = JSObjectMake(ctx, NULL, NULL);
-
-						//	JSStringRef fileNameTag = JSStringCreateWithUTF8CString((const char *)"name");
-						//	JSStringRef fileName = JSStringCreateWithUTF8CString(files[i].c_str());
-						//	JSObjectSetProperty(ctx, fileJSStrings[i], fileNameTag, JSValueMakeString(ctx, fileName), 0, 0);
-
-						//	info = FileUtils::getFileInfo(dir + files[i]);
-						//	if(info)
-						//	{
-						//		string fileTypeStr = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
-						//		JSStringRef fileTypeTag = JSStringCreateWithUTF8CString((const char *)"type");
-						//		JSStringRef fileType = JSStringCreateWithUTF8CString(fileTypeStr.c_str());
-						//		JSObjectSetProperty(ctx, fileJSStrings[i], fileTypeTag, JSValueMakeString(ctx, fileType), 0, 0);
-
-						//		JSStringRef fileSizeTag = JSStringCreateWithUTF8CString((const char *)"size");
-						//		JSObjectSetProperty(ctx, fileJSStrings[i], fileSizeTag, JSValueMakeNumber(ctx, info->fileSize), 0, 0);
-
-						//		JSStringRef fileModTimeTag = JSStringCreateWithUTF8CString((const char *)"last_modified_time");
-						//		JSObjectSetProperty(ctx, fileJSStrings[i], fileModTimeTag, JSValueMakeNumber(ctx, (double)info->lastModifiedTime), 0, 0);
-						//	}
-						//	delete info;
-						//}
-						//return JSObjectMakeArray(ctx, files.size(), fileJSStrings, NULL);
+						vector<MJSCoreObject *> jsFiles;
+						for(unsigned int i = 0; i < files.size(); i++)
+						{
+							info = FileUtils::getFileInfo(dir + files[i]);
+							if(info)
+							{
+								MJSCoreObject * fileProps = getFilePropertyObject(info);
+								if(fileProps)
+								{
+									resultContainer.set(fileProps);
+								}
+								delete info;
+								jsFiles.push_back(fileProps);
+							}
+						}
+						MObject * result = MJSCoreObjectFactory::getMObject(jsFiles);
+						resultContainer.set(result);
 					}
 				}
+				delete info;
 			}
-			delete info;
+			
 		}
 	}
 }
@@ -129,19 +116,15 @@ void FileSystemJSObject::getFileInfo(const MObjectArray& args, MObjectContainer&
 		{
 			string fileName = fileString->getString();
 			FileInfo * info = FileUtils::getFileInfo(fileName);
-
-			string fileType = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
-			double fileSize = info->fileSize;
-			double lastModifiedTime = info->lastModifiedTime;
-			double permissionMode = info->permissionMode;
-			delete info;
-
-			MJSCoreObject * fileProps = dynamic_cast<MJSCoreObject *>(MJSCoreObjectFactory::getMObject());
-			fileProps->setProperty("type", MJSCoreObjectFactory::getMObject(fileType));
-			fileProps->setProperty("size", MJSCoreObjectFactory::getMObject(fileSize));
-			fileProps->setProperty("last_modified_time", MJSCoreObjectFactory::getMObject(lastModifiedTime));
-			fileProps->setProperty("permission_mode", MJSCoreObjectFactory::getMObject(permissionMode));
-			resultContainer.set(fileProps);
+			if (info)
+			{
+				MJSCoreObject * fileProps = getFilePropertyObject(info);
+				if(fileProps)
+				{
+					resultContainer.set(fileProps);
+				}
+				delete info;
+			}
 		}
 	}
 }
@@ -166,4 +149,19 @@ void FileSystemJSObject::readFile(const MObjectArray& args, MObjectContainer& re
 			}
 		}
 	}
+}
+
+MJSCoreObject * FileSystemJSObject::getFilePropertyObject(FileInfo * info) const
+{
+	string fileType = (info->fileType == FILETYPE_FILE) ? "file" : "dir";
+	double fileSize = info->fileSize;
+	double lastModifiedTime = info->lastModifiedTime;
+	double permissionMode = info->permissionMode;
+
+	MJSCoreObject * fileProps = dynamic_cast<MJSCoreObject *>(MJSCoreObjectFactory::getMObject());
+	fileProps->setProperty("type", MJSCoreObjectFactory::getMObject(fileType));
+	fileProps->setProperty("size", MJSCoreObjectFactory::getMObject(fileSize));
+	fileProps->setProperty("last_modified_time", MJSCoreObjectFactory::getMObject(lastModifiedTime));
+	fileProps->setProperty("permission_mode", MJSCoreObjectFactory::getMObject(permissionMode));
+	return fileProps;
 }
