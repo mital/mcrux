@@ -36,6 +36,9 @@ private:
 
 public:
 	static void Initialize(JSContextRef _context);
+	static void Uninitialize();
+
+	static JSContextRef getJSContext();
 
 	static MJSCoreObjectAbstract * getMObject();
 	static MJSCoreObjectAbstract * getMObject(JSObjectRef _object);
