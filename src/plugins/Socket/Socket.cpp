@@ -22,8 +22,8 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 #endif
 
 
-__declspec(dllexport) MCruxPlugin * getMCruxPlugin()
+__declspec(dllexport) MObject * getMCruxPlugin(JSContextRef context)
 {
-	return new SocketJSObject();
+	return new SocketJSObject(context);
 }
 

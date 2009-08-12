@@ -26,9 +26,24 @@
 
 JSContextRef MJSCoreObjectFactory::context = NULL;
 
+JSContextRef MJSCoreObjectFactory::getJSContext()
+{
+	return context;
+}
+
 void MJSCoreObjectFactory::Initialize(JSContextRef _context)
 {
 	context = _context;
+	//JSGlobalContextRetain(context);
+}
+
+void MJSCoreObjectFactory::Uninitialize()
+{
+	if (context)
+	{
+		//JSGlobalContextRelease(context);
+		context = NULL;
+	}
 }
 
 

@@ -33,9 +33,20 @@ protected:
 	JSObjectRef object;
 	std::string className;
 
+	static JSObjectRef ConstructorCallback(JSContextRef ctx,
+		JSObjectRef constructor,
+		size_t argumentCount,
+		const JSValueRef arguments[],
+		JSValueRef* exception);
+
+	virtual void construct(const MObjectArray& args, MObjectContainer& resultContainer);
+
 public:
 
-	MJSCoreObject(JSContextRef _ctx, const std::string & _className = "MJSCoreObject");
+	MJSCoreObject(JSContextRef _ctx,
+		const std::string & _className = "MJSCoreObject",
+		const bool _hasConstructor = false);
+
 	MJSCoreObject(JSContextRef _ctx, JSObjectRef _object);
 	virtual ~MJSCoreObject();
 
@@ -48,6 +59,7 @@ public:
 	virtual JSObjectRef getJSObject();
 
 	const char * getClassName() const;
+	JSObjectCallAsConstructorCallback getConstructor() const;
 
 	template <typename T>
 	void setProperty(JSContextRef _ctx, const char *name, void (T::*method)(const MObjectArray&, MObjectContainer&))

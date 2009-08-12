@@ -24,13 +24,21 @@
 #include "MJSCoreObject.h"
 #include "MJSCoreObjectFactory.h"
 
+#include "abstract/MObjectContainer.h"
 
-MJSCoreObject::MJSCoreObject(JSContextRef _ctx, const std::string & _className)
+
+MJSCoreObject::MJSCoreObject(JSContextRef _ctx,
+							 const std::string & _className,
+							 const bool _hasConstructor)
 : MJSCoreObjectAbstract(_ctx, TYPE_JSOBJECT),
   className(_className)
 {
 	JSClassDefinition oNameSpace = kJSClassDefinitionEmpty;
 	oNameSpace.className = getClassName();
+	if(_hasConstructor)
+	{
+		oNameSpace.callAsConstructor = MJSCoreObject::ConstructorCallback;
+	}
 	JSClassRef classRef = JSClassCreate(&oNameSpace);
 	object = JSObjectMake(ctx, classRef, this);
 }
@@ -44,6 +52,53 @@ MJSCoreObject::MJSCoreObject(JSContextRef _ctx, JSObjectRef _object)
 MJSCoreObject::~MJSCoreObject()
 {
 }
+
+
+JSObjectRef MJSCoreObject::ConstructorCallback(JSContextRef ctx,
+											  JSObjectRef constructor,
+											  size_t argumentCount,
+											  const JSValueRef arguments[],
+											  JSValueRef* exception)
+{
+	MJSCoreObject* mJSCoreObject = static_cast<MJSCoreObject*>(JSObjectGetPrivate(constructor));
+	if (mJSCoreObject)
+	{
+		MObjectArray args;
+		MObjectContainer resultContainer;
+		for (size_t i = 0; i < argumentCount; i++)
+		{
+			args.setAt(i, MJSCoreObjectFactory::getMObject(arguments[i]));
+		}
+
+		try
+		{
+			mJSCoreObject->construct(args, resultContainer);
+		}
+		catch (const std::exception &e)
+		{
+			string error = e.what();
+			// TODO: throw error.
+		}
+		catch (...)
+		{
+			string error = "Unknown Exception";
+			// TODO: throw error.
+		}
+		MJSCoreObject * res = dynamic_cast<MJSCoreObject *>(resultContainer.get());
+		if (res)
+		{
+			return res->getJSObject();
+		}
+	}
+
+	// TODO: throw exception.
+	//return NULL;
+}
+
+void MJSCoreObject::construct(const MObjectArray& args, MObjectContainer& resultContainer)
+{
+}
+
 
 void MJSCoreObject::getPropertyNames(set<string> & properties)
 {
