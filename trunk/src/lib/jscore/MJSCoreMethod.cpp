@@ -20,6 +20,8 @@
 
 #include <stdafx.h>
 
+#include <string>
+
 #include "MJSCoreUtils.h"
 #include "MJSCoreMethod.h"
 #include <abstract/MObjectContainer.h>
@@ -46,6 +48,12 @@ JSValueRef MJSCoreMethod::getJSValue()
 JSObjectRef MJSCoreMethod::getJSObject()
 {
 	return ::JSValueToObject(ctx, getJSValue(), 0);
+}
+
+const char * MJSCoreMethod::toString()
+{
+	std::string str;
+	return str.c_str();
 }
 
 MCruxMethodCallback * MJSCoreMethod::getMethod()

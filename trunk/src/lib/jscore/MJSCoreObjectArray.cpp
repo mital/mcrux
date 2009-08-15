@@ -53,3 +53,10 @@ JSObjectRef MJSCoreObjectArray::getJSObject()
 {
 	return object;
 }
+
+
+const char * MJSCoreObjectArray::toString()
+{
+	std::string str;
+	return str.c_str();
+}

@@ -39,5 +39,5 @@ public:
 	virtual JSValueRef getJSValue();
 	virtual JSObjectRef getJSObject();
 
-	const char * getString() const;
+	const char * toString();
 };

@@ -51,15 +51,6 @@ public:
 	virtual ~MJSCoreObject();
 
 	void setProperty(const std::string & name, MObject * obj);
-	MObject * getProperty(const std::string & name);
-	bool hasProperty(const std::string & name);
-	void getPropertyNames(set<string> & properties);
-
-	virtual JSValueRef getJSValue();
-	virtual JSObjectRef getJSObject();
-
-	const char * getClassName() const;
-	JSObjectCallAsConstructorCallback getConstructor() const;
 
 	template <typename T>
 	void setProperty(JSContextRef _ctx, const char *name, void (T::*method)(const MObjectArray&, MObjectContainer&))
@@ -67,4 +58,17 @@ public:
 		MCruxMethodCallback* callback = NewCallback<T, const MObjectArray&, MObjectContainer&>(static_cast<T*>(this), method);
 		this->setProperty(name, new MJSCoreMethod(_ctx, callback));
 	}
+
+	MObject * getProperty(const std::string & name);
+	bool hasProperty(const std::string & name);
+	void getPropertyNames(set<string> & properties);
+
+	virtual JSValueRef getJSValue();
+	virtual JSObjectRef getJSObject();
+	const char * toString();
+	const char * getClassName() const;
+	JSObjectCallAsConstructorCallback getConstructor() const;
+
+	void protect();
+	void unprotect();
 };
