@@ -34,6 +34,7 @@ public:
 
 	JSValueRef getJSValue();
 	JSObjectRef getJSObject();
+	const char * toString();
 
 	MCruxMethodCallback * getMethod();
 

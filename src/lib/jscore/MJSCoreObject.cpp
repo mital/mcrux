@@ -19,6 +19,8 @@
 
 #include <stdafx.h>
 
+#include <string>
+
 #include "JSStringUtils.h"
 #include "MJSCoreUtils.h"
 #include "MJSCoreObject.h"
@@ -45,7 +47,8 @@ MJSCoreObject::MJSCoreObject(JSContextRef _ctx,
 
 MJSCoreObject::MJSCoreObject(JSContextRef _ctx, JSObjectRef _object)
 : MJSCoreObjectAbstract(_ctx),
-  object(_object)
+  object(_object),
+  className("") // TODO: get class name from JSObjectRef
 {
 }
 
@@ -93,6 +96,12 @@ JSObjectRef MJSCoreObject::ConstructorCallback(JSContextRef ctx,
 
 	// TODO: throw exception.
 	//return NULL;
+}
+
+const char * MJSCoreObject::toString()
+{
+	std::string str;
+	return str.c_str();
 }
 
 void MJSCoreObject::construct(const MObjectArray& args, MObjectContainer& resultContainer)
@@ -170,4 +179,16 @@ JSObjectRef MJSCoreObject::getJSObject()
 const char * MJSCoreObject::getClassName() const
 {
 	return className.c_str();
+}
+
+
+void MJSCoreObject::protect()
+{
+	JSValueProtect(ctx, object);
+}
+
+
+void MJSCoreObject::unprotect()
+{
+	JSValueUnprotect(ctx, object);
 }

@@ -59,6 +59,7 @@ public:
 
 	virtual JSValueRef getJSValue()=0;
 	virtual JSObjectRef getJSObject()=0;
+	virtual const char * toString()=0;
 
 	bool isObject() const;
 	bool isMethod() const;

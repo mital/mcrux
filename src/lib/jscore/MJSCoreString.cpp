@@ -20,6 +20,8 @@
 
 #include <stdafx.h>
 
+#include <string>
+
 #include "MJSCoreString.h"
 
 
@@ -45,7 +47,7 @@ JSObjectRef MJSCoreString::getJSObject()
 	return ::JSValueToObject(ctx, getJSValue(), 0);
 }
 
-const char * MJSCoreString::getString() const
+const char * MJSCoreString::toString()
 {
 	return str.c_str();
 }

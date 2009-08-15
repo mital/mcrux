@@ -43,13 +43,11 @@ void FileSystemJSObject::copyFile(const MObjectArray& args, MObjectContainer& re
 	::MessageBoxA(0, "filesystem.copyFile called.", "test", MB_OK);
 	if (args.size() == 2)
 	{
-		MObject * srcFileObj = args.getAt(0);
-		MObject * destFileObj = args.getAt(1);
-		MJSCoreString * srcFileString = dynamic_cast<MJSCoreString *>(srcFileObj);
-		MJSCoreString * destFileString = dynamic_cast<MJSCoreString *>(destFileObj);
+		MJSCoreObjectAbstract* srcFileString = dynamic_cast<MJSCoreObjectAbstract*>(args.getAt(0));
+		MJSCoreObjectAbstract* destFileString = dynamic_cast<MJSCoreObjectAbstract *>(args.getAt(1));
 		if (srcFileString && destFileString)
 		{
-			if(FileUtils::Copy(srcFileString->getString(), destFileString->getString()))
+			if(FileUtils::Copy(srcFileString->toString(), destFileString->toString()))
 			{
 				resultContainer.set(MJSCoreObjectFactory::getMObject(true));
 				return;
@@ -64,11 +62,10 @@ void FileSystemJSObject::readDir(const MObjectArray& args, MObjectContainer& res
 {
 	if (args.size() == 1)
 	{
-		MObject * srcFileObj = args.getAt(0);
-		MJSCoreString * srcFileString = dynamic_cast<MJSCoreString *>(srcFileObj);
+		MJSCoreObjectAbstract* srcFileString = dynamic_cast<MJSCoreObjectAbstract*>(args.getAt(0));
 		if (srcFileString)
 		{
-			string dir = srcFileString->getString();
+			string dir = srcFileString->toString();
 			FileInfo * info = FileUtils::getFileInfo(dir);
 			if(info)
 			{
@@ -106,12 +103,11 @@ void FileSystemJSObject::getFileInfo(const MObjectArray& args, MObjectContainer&
 	::MessageBoxA(0, "filesystem.getFileInfo called.", "test", MB_OK);
 	if (args.size() == 1)
 	{
-		MObject * fileObj = args.getAt(0);
-		MJSCoreString * fileString = dynamic_cast<MJSCoreString *>(fileObj);
+		MJSCoreObjectAbstract * fileString = dynamic_cast<MJSCoreObjectAbstract *>(args.getAt(0));
 
 		if (fileString)
 		{
-			string fileName = fileString->getString();
+			string fileName = fileString->toString();
 			FileInfo * info = FileUtils::getFileInfo(fileName);
 			if (info)
 			{
@@ -132,12 +128,11 @@ void FileSystemJSObject::readFile(const MObjectArray& args, MObjectContainer& re
 	::MessageBoxA(0, "filesystem.ReadFile called.", "test", MB_OK);
 	if (args.size() == 1)
 	{
-		MObject * fileObj = args.getAt(0);
-		MJSCoreString * fileStr = dynamic_cast<MJSCoreString *>(fileObj);
+		MJSCoreObjectAbstract* fileStr = dynamic_cast<MJSCoreObjectAbstract*>(args.getAt(0));
 
 		if (fileStr)
 		{
-			string fileName = fileStr->getString();
+			string fileName = fileStr->toString();
 			string fileString;
 
 			if(FileUtils::ReadFile(fileName, fileString))

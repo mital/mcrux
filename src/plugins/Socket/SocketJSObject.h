@@ -19,7 +19,7 @@ using namespace std;
 class SocketJSObject
 	: public MJSCoreObject
 {
-	map<string, JSObjectRef> eventMap;
+	map<string, MJSCoreObject *> eventMap;
 	Socket socket;
 
 	void addEventListener(const MObjectArray& args, MObjectContainer& resultContainer);
@@ -29,9 +29,9 @@ class SocketJSObject
 	void Send(const MObjectArray& args, MObjectContainer& resultContainer);
 
 	// event listener related methods
-	bool addEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler);
-	bool removeEventListener(JSContextRef ctx, const string & eventName, JSObjectRef eventHandler);
-	JSObjectRef getEventListener(const string & eventName) const;
+	bool AddEventListener(const string & eventName, MJSCoreObject * eventHandler);
+	bool RemoveEventListener(const string & eventName, MJSCoreObject * eventHandler);
+	MJSCoreObject * GetEventListener(const string & eventName) const;
 
 	bool Connect(const string & hostname, const string & port);
 	bool Disconnect();

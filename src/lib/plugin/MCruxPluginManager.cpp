@@ -19,12 +19,13 @@
 
 
 #include "StdAfx.h"
-#include <JavaScriptCore/JSStringRef.h>
 
 #include "windowsnative/MCruxWindow.h"
 
 #include "MCruxJSObject.h"
-#include "jscore/MJSCoreObject.h"
+
+#include <jscore/MJSCoreObject.h>
+#include <jscore/MJSCoreObjectFactory.h>
 
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
@@ -108,16 +109,19 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 										  JSObjectRef windowScriptObject)
 {
 	loadExtensionPlugins(context);
-	//MCruxWindow * mcruxWindow = MCruxWindow::getMCruxWindowFrom(webView);
-	//MCruxWebView * mcruxWebView = mcruxWindow->getMCruxWebView();
 
+	MJSCoreObjectFactory::Initialize(context);
 	MJSCoreObject * globalObject = new MJSCoreObject(context, JSContextGetGlobalObject(context));
 
 	MObject * mcruxObject = getMCruxJSObject(context);
 	std::string strName = ((MJSCoreObject*)mcruxObject)->getClassName();
 	globalObject->setProperty(strName, mcruxObject);
 
+	return S_OK;
+
+	//MCruxWindow * mcruxWindow = MCruxWindow::getMCruxWindowFrom(webView);
+	//MCruxWebView * mcruxWebView = mcruxWindow->getMCruxWebView();
+
 	// TODO: inject a new object called currentWindow
 	// this object will be responsible for handling various events of currentwindow.
-	return S_OK;
 }

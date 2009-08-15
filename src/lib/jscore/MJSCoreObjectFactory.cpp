@@ -141,6 +141,10 @@ MJSCoreObjectAbstract * MJSCoreObjectFactory::getMObject(JSValueRef _value)
 		{
 			mObj = getMObject(JSValueToObject(context, _value, 0));
 		}
+		else if (JSObjectIsFunction(context, JSValueToObject(context, _value, 0)))
+		{
+			mObj = getMObject(JSValueToObject(context, _value, 0));
+		}
 		else
 		{
 			mObj = NULL;

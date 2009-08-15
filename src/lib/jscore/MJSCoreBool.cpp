@@ -20,6 +20,8 @@
 
 #include <stdafx.h>
 
+#include <string>
+
 #include "MJSCoreBool.h"
 
 
@@ -42,4 +44,10 @@ JSValueRef MJSCoreBool::getJSValue()
 JSObjectRef MJSCoreBool::getJSObject()
 {
 	return ::JSValueToObject(ctx, getJSValue(), 0);
+}
+
+const char * MJSCoreBool::toString()
+{
+	std::string str;
+	return str.c_str();
 }

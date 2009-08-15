@@ -20,6 +20,8 @@
 
 #include <stdafx.h>
 
+#include <string>
+
 #include "MJSCoreNumber.h"
 
 
@@ -42,4 +44,10 @@ JSValueRef MJSCoreNumber::getJSValue()
 JSObjectRef MJSCoreNumber::getJSObject()
 {
 	return ::JSValueToObject(ctx, JSValueMakeNumber(ctx, number), 0);
+}
+
+const char * MJSCoreNumber::toString()
+{
+	std::string str;
+	return str.c_str();
 }
