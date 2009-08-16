@@ -2,7 +2,6 @@
 #include <process.h>
 
 #include "SocketJSObject.h"
-#include <jscore/JSStringUtils.h>
 
 
 SocketJSObject::SocketJSObject(JSContextRef ctx, const bool hasConstructor)
