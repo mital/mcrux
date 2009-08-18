@@ -22,7 +22,8 @@
 
 #include "MJSCoreUtils.h"
 #include "MJSCoreObjectFactory.h"
-#include "JSStringUtils.h"
+
+#include <jscore/JSStringUtils.h>
 
 JSContextRef MJSCoreObjectFactory::context = NULL;
 

@@ -2,17 +2,20 @@
 #include <process.h>
 
 #include "SocketJSObject.h"
-#include <JavaScriptCore/JSContextRef.h>
-#include <JavaScriptCore/JSRetainPtr.h>
-#include <JavaScriptCore/JSStringRefCF.h>
-#include <jscore/JSStringUtils.h>
 
 
-list<SocketJSObject *> SocketJSObject::socketObjects;
-
-SocketJSObject::SocketJSObject()
-: socket(this)
+SocketJSObject::SocketJSObject(JSContextRef ctx, const bool hasConstructor)
+: MJSCoreObject(ctx, "socket", hasConstructor),
+  socket(this)
 {
+	if(!hasConstructor)
+	{
+		setProperty(ctx, "addEventListener", &SocketJSObject::addEventListener);
+		setProperty(ctx, "removeEventListener", &SocketJSObject::removeEventListener);
+		setProperty(ctx, "connect", &SocketJSObject::Connect);
+		setProperty(ctx, "disconnect", &SocketJSObject::Disconnect);
+		setProperty(ctx, "send", &SocketJSObject::Send);
+	}
 }
 
 
@@ -21,205 +24,88 @@ SocketJSObject::~SocketJSObject()
 }
 
 
-SocketJSObject::SocketJSObject(JSContextRef ctx,
-						   JSObjectRef constructor,
-						   size_t argumentCount,
-						   const JSValueRef arguments[],
-						   JSValueRef* exception)
-						   : socket(this)
+void SocketJSObject::construct(const MObjectArray& args, MObjectContainer& resultContainer)
 {
-}
-
-
-const char * SocketJSObject::getName() const
-{
-	static string name = "openssl_socket";
-	return name.c_str();
-}
-
-JSObjectCallAsConstructorCallback SocketJSObject::getConstructor() const
-{
-	return SocketJSObject::ConstructorCallback;
-}
-
-
-
-JSStaticFunction * SocketJSObject::getStaticFunctions() const
-{
-	static JSStaticFunction JSDefaultFunctions[]
-	= {
-		{0, 0, 0}
-	};
-	return JSDefaultFunctions;
-}
-
-
-JSStaticFunction * SocketJSObject::getJSObjectFunctions() const
-{
-	static JSStaticFunction JSDefaultFunctions[]
-	= {
-		{"addEventListener", SocketJSObject::addEventListener, 0},
-		{"removeEventListener", SocketJSObject::removeEventListener, 0},
-		{"connect", SocketJSObject::Connect, 0},
-		{"disconnect", SocketJSObject::Disconnect, 0},
-		{"send", SocketJSObject::Send, 0},
-		{"startTLS", SocketJSObject::startTLS, 0},
-		{0, 0, 0}
-	};
-	return JSDefaultFunctions;
-}
-
-
-JSObjectRef SocketJSObject::ConstructorCallback(JSContextRef ctx,
-											  JSObjectRef constructor,
-											  size_t argumentCount,
-											  const JSValueRef arguments[],
-											  JSValueRef* exception)
-{
-	::MessageBoxA(0, "socket constructor called", "test", MB_OK);
 	// check for required arguments before creating the object
-	if(argumentCount == 0)
+	if(args.size() == 0)
 	{
-		SocketJSObject * newObj
-			= new SocketJSObject(ctx, constructor, argumentCount, arguments, exception);
-		socketObjects.push_back(newObj);
-		return newObj->createJSObject(ctx);
+		JSContextRef context = MJSCoreObjectFactory::getJSContext();
+		bool hasConstructor = false;
+		resultContainer.set(new SocketJSObject(ctx, hasConstructor));
 	}
 	// TODO: throw exception.
-	return JSValueToObject(ctx, JSValueMakeUndefined(ctx), exception);
 }
 
-
-JSValueRef SocketJSObject::addEventListener(JSContextRef ctx,
-													JSObjectRef function,
-													JSObjectRef thisObject,
-													size_t argumentCount,
-													const JSValueRef arguments[],
-													JSValueRef *exception)
+void SocketJSObject::addEventListener(const MObjectArray& args, MObjectContainer& resultContainer)
 {
-	if(argumentCount == 2) // eventName, eventHandlerFunction
+	if (args.size() == 2) // eventName, eventHandlerFunction
 	{
-		SocketJSObject * saxObj = (SocketJSObject*) JSObjectGetPrivate(thisObject);
-		if(saxObj)
+		MJSCoreObjectAbstract * eventName = dynamic_cast<MJSCoreObjectAbstract* >(args.getAt(0));
+		MJSCoreObject * eventHandler = dynamic_cast<MJSCoreObject *>(args.getAt(1));
+		if (eventName && eventHandler)
 		{
-			string eventName = getStringValueFrom(ctx, arguments[0]);
-			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
-			bool bRet = saxObj->addEventListener(eventName, eventHandler);
-			return JSValueMakeBoolean(ctx, bRet);
+			bool bRet = AddEventListener(eventName->toString(), eventHandler);
+			resultContainer.set(MJSCoreObjectFactory::getMObject(bRet));
 		}
 	}
-	return JSValueMakeBoolean(ctx, false);
+	resultContainer.set(MJSCoreObjectFactory::getMObject(false));
 }
 
 
-JSValueRef SocketJSObject::removeEventListener(JSContextRef ctx,
-													JSObjectRef function,
-													JSObjectRef thisObject,
-													size_t argumentCount,
-													const JSValueRef arguments[],
-													JSValueRef *exception)
+void SocketJSObject::removeEventListener(const MObjectArray& args, MObjectContainer& resultContainer)
 {
-	if(argumentCount == 2) // eventName, eventHandlerFunction
+	if (args.size() == 2) // eventName, eventHandlerFunction
 	{
-		SocketJSObject * saxObj = (SocketJSObject*) JSObjectGetPrivate(thisObject);
-		if(saxObj)
+		MJSCoreObjectAbstract * eventName = dynamic_cast<MJSCoreObjectAbstract* >(args.getAt(0));
+		MJSCoreObject * eventHandler = dynamic_cast<MJSCoreObject *>(args.getAt(1));
+		if (eventName && eventHandler)
 		{
-			string eventName = getStringValueFrom(ctx, arguments[0]);
-			JSObjectRef eventHandler = JSValueToObject(ctx, arguments[1], exception);
-			bool bRet = saxObj->removeEventListener(eventName, eventHandler);
-			return JSValueMakeBoolean(ctx, bRet);
+			bool bRet = RemoveEventListener(eventName->toString(), eventHandler);
+			resultContainer.set(MJSCoreObjectFactory::getMObject(bRet));
 		}
 	}
-	return JSValueMakeBoolean(ctx, false);
+	resultContainer.set(MJSCoreObjectFactory::getMObject(false));
 }
 
 
-JSValueRef SocketJSObject::Connect(JSContextRef ctx,
-								 JSObjectRef function,
-								 JSObjectRef thisObject,
-								 size_t argumentCount,
-								 const JSValueRef arguments[],
-								 JSValueRef *exception)
+void SocketJSObject::Connect(const MObjectArray& args, MObjectContainer& resultContainer)
 {
-	::MessageBoxA(0, "SocketJSObject.Connect called.", "test", MB_OK);
-	if(argumentCount == 2) // server, port
+	if (args.size() == 2) // server, port
 	{
-		string server = getStringValueFrom(ctx, arguments[0]);
-		string port = getStringValueFrom(ctx, arguments[1]);
-		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
-		if(socketObj)
-		{
-			bool bResult = socketObj->Connect(server, port);
-			return JSValueMakeBoolean(ctx, bResult);
-		}
+		MJSCoreObjectAbstract* serverObj = dynamic_cast<MJSCoreObjectAbstract* >(args.getAt(0));
+		MJSCoreObjectAbstract* portObj = dynamic_cast<MJSCoreObjectAbstract* >(args.getAt(1));
+		string server = serverObj->toString();
+		string port = portObj->toString();
+
+		bool bResult = Connect(server, port);
+		resultContainer.set(MJSCoreObjectFactory::getMObject(bResult));
 	}
-	return JSValueMakeBoolean(ctx, false);
+	resultContainer.set(MJSCoreObjectFactory::getMObject(false));
 }
 
-
-JSValueRef SocketJSObject::Disconnect(JSContextRef ctx,
-									JSObjectRef function,
-									JSObjectRef thisObject,
-									size_t argumentCount,
-									const JSValueRef arguments[],
-									JSValueRef *exception)
+void SocketJSObject::Disconnect(const MObjectArray& args, MObjectContainer& resultContainer)
 {
 	::MessageBoxA(0, "SocketJSObject.Disconnect called.", "test", MB_OK);
-	if(argumentCount == 0) // No Arguments
+	bool bResult = false;
+	if (args.size() == 0) // No Arguments
 	{
-		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
-		if(socketObj)
-		{
-			bool bResult = socketObj->Disconnect();
-			return JSValueMakeBoolean(ctx, bResult);
-		}
+		bResult = Disconnect();
 	}
-	return JSValueMakeBoolean(ctx, false);
+	resultContainer.set(MJSCoreObjectFactory::getMObject(bResult));
 }
 
 
-JSValueRef SocketJSObject::Send(JSContextRef ctx,
-							  JSObjectRef function,
-							  JSObjectRef thisObject,
-							  size_t argumentCount,
-							  const JSValueRef arguments[],
-							  JSValueRef *exception)
+void SocketJSObject::Send(const MObjectArray& args, MObjectContainer& resultContainer)
 {
 	bool bResult = false;
-	::MessageBoxA(0, "SocketJSObject.Send called.", "test", MB_OK);
-	if(argumentCount == 1) // data
+	if(args.size() == 1) // data
 	{
-		string data = getStringValueFrom(ctx, arguments[0]);
-		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
-		if(socketObj)
-		{
-			bResult = socketObj->Send(data);
-		}
+		MJSCoreObjectAbstract* dataObj = dynamic_cast<MJSCoreObjectAbstract* >(args.getAt(0));
+		string data = dataObj->toString();
+		bResult = Send(data);
 	}
-	return JSValueMakeBoolean(ctx, bResult);
+	resultContainer.set(MJSCoreObjectFactory::getMObject(bResult));
 }
-
-
-JSValueRef SocketJSObject::startTLS(JSContextRef ctx,
-							  JSObjectRef function,
-							  JSObjectRef thisObject,
-							  size_t argumentCount,
-							  const JSValueRef arguments[],
-							  JSValueRef *exception)
-{
-	::MessageBoxA(0, "SocketJSObject.startTLS called.", "test", MB_OK);
-	if(argumentCount == 0) // data
-	{
-		SocketJSObject * socketObj = (SocketJSObject *) JSObjectGetPrivate(thisObject);
-		if(socketObj)
-		{
-			bool bResult = socketObj->startTLS();
-			return JSValueMakeBoolean(ctx, bResult);
-		}
-	}
-	return JSValueMakeBoolean(ctx, false);
-}
-
 
 bool SocketJSObject::Connect(const string & hostname, const string & port)
 {
@@ -232,7 +118,7 @@ bool SocketJSObject::Connect(const string & hostname, const string & port)
 
 bool SocketJSObject::Disconnect()
 {
-	//socket.disconnect();
+	socket.Disconnect();
 	return false;
 }
 
@@ -243,22 +129,17 @@ bool SocketJSObject::Send(const string & data)
 }
 
 
-bool SocketJSObject::startTLS()
-{
-	return socket.startTLS();
-}
-
-
-bool SocketJSObject::addEventListener(const string & eventName, JSObjectRef eventHandler)
+bool SocketJSObject::AddEventListener(const string & eventName, MJSCoreObject * eventHandler)
 {
 	eventMap[eventName] = eventHandler;
+	eventMap[eventName]->protect();
 	return true;
 }
 
 
-JSObjectRef SocketJSObject::getEventListener(const string & eventName) const
+MJSCoreObject * SocketJSObject::GetEventListener(const string & eventName) const
 {
-	map<string, JSObjectRef>::const_iterator iter = eventMap.find(eventName);
+	map<string, MJSCoreObject *>::const_iterator iter = eventMap.find(eventName);
 	if (iter != eventMap.end())
 	{
 		return iter->second;
@@ -267,11 +148,13 @@ JSObjectRef SocketJSObject::getEventListener(const string & eventName) const
 }
 
 
-bool SocketJSObject::removeEventListener(const string & eventName, JSObjectRef eventHandler)
+bool SocketJSObject::RemoveEventListener(const string & eventName, MJSCoreObject * eventHandler)
 {
-	map<string, JSObjectRef>::iterator iter = eventMap.find(eventName);
+	map<string, MJSCoreObject *>::iterator iter = eventMap.find(eventName);
 	if (iter != eventMap.end() && iter->second == eventHandler)
 	{
+		iter->second->unprotect();
+		delete iter->second;
 		eventMap.erase(iter);
 		return true;
 	}
@@ -281,69 +164,33 @@ bool SocketJSObject::removeEventListener(const string & eventName, JSObjectRef e
 
 void SocketJSObject::handleReadData(const string &data)
 {
-	if (!MCruxPlugin::webView)
-	{
-		::MessageBoxA(0, "endElementHandler webview not set", "saxparser", MB_OK);
-		// TODO: return error
-		return;
-	}
-	IWebFrame * frame;
-	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
-	if(SUCCEEDED(hr))
-	{
-		JSContextRef ctx = frame->globalContext();
-		if(ctx)
-		{
-			JSObjectRef global = JSContextGetGlobalObject(ctx);
-			JSObjectRef endElement = JSObjectMake(ctx, NULL, NULL);
-			JSStringRef tagName = JSStringCreateWithUTF8CString((const char *)data.c_str());
-			JSStringRef tag = JSStringCreateWithUTF8CString("data");
-			JSObjectSetProperty(ctx, endElement, tag, JSValueMakeString(ctx, tagName), 0, 0);
+	JSContextRef ctx = MJSCoreObjectFactory::getJSContext();
+	JSObjectRef global = JSContextGetGlobalObject(ctx);
+	MJSCoreObject * eventObj = dynamic_cast<MJSCoreObject *>(MJSCoreObjectFactory::getMObject());
+	eventObj->setProperty("data", MJSCoreObjectFactory::getMObject(data));
 
-			JSObjectRef handler = getEventListener(READ_DATA_EVENT_NAME);
-			if(handler)
-			{
-				JSObjectCallAsFunction(ctx, handler, global, 1, &endElement, 0);
-			}
-		}
+	MJSCoreObject * handler = GetEventListener(READ_DATA_EVENT_NAME);
+	if (handler)
+	{
+		JSValueRef eventObject = eventObj->getJSValue();
+		JSObjectCallAsFunction(ctx, handler->getJSObject(), global, 1, &eventObject, 0);
 	}
 }
 
 
 void SocketJSObject::onConnectComplete(const string & hostname, const string & port, bool bConnected)
 {
-	if (!MCruxPlugin::webView)
+	JSContextRef ctx = MJSCoreObjectFactory::getJSContext();
+	JSObjectRef global = JSContextGetGlobalObject(ctx);
+	MJSCoreObject * eventObj = dynamic_cast<MJSCoreObject *>(MJSCoreObjectFactory::getMObject());
+	eventObj->setProperty("hostname", MJSCoreObjectFactory::getMObject(hostname));
+	eventObj->setProperty("port", MJSCoreObjectFactory::getMObject(port));
+	eventObj->setProperty("connected", MJSCoreObjectFactory::getMObject(bConnected));
+
+	MJSCoreObject * handler = GetEventListener(CONNECTED_EVENT_NAME);
+	if (handler)
 	{
-		::MessageBoxA(0, "endElementHandler webview not set", "saxparser", MB_OK);
-		// TODO: return error
-		return;
-	}
-	IWebFrame * frame;
-	HRESULT hr = MCruxPlugin::webView->mainFrame(&frame);
-	if(SUCCEEDED(hr))
-	{
-		JSContextRef ctx = frame->globalContext();
-		if(ctx)
-		{
-			JSObjectRef global = JSContextGetGlobalObject(ctx);
-			JSObjectRef eventObj = JSObjectMake(ctx, NULL, NULL);
-
-			JSStringRef hostName = JSStringCreateWithUTF8CString((const char *)hostname.c_str());
-			JSStringRef host = JSStringCreateWithUTF8CString("hostname");
-
-			JSStringRef portName = JSStringCreateWithUTF8CString((const char *)port.c_str());
-			JSStringRef portStr = JSStringCreateWithUTF8CString("port");
-			JSStringRef connected = JSStringCreateWithUTF8CString("connected");
-
-			JSObjectSetProperty(ctx, eventObj, host, JSValueMakeString(ctx, hostName), 0, 0);
-			JSObjectSetProperty(ctx, eventObj, portStr, JSValueMakeNumber(ctx, atof(port.c_str())), 0, 0);
-			JSObjectSetProperty(ctx, eventObj, connected, JSValueMakeBoolean(ctx, bConnected), 0, 0);
-
-			JSObjectRef handler = getEventListener(CONNECTED_EVENT_NAME);
-			if(handler)
-			{
-				JSObjectCallAsFunction(ctx, handler, global, 1, &eventObj, 0);
-			}
-		}
+		JSValueRef eventObject = eventObj->getJSValue();
+		JSObjectCallAsFunction(ctx, handler->getJSObject(), global, 1, &eventObject, 0);
 	}
 }

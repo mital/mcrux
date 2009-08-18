@@ -18,9 +18,9 @@
  **/
 
 #include "stdafx.h"
-#include "jscore/JSStringUtils.h"
-#include "jscore/MJSCoreUtils.h"
-#include "jscore/MJSCoreObjectFactory.h"
+#include <jscore/JSStringUtils.h>
+#include <jscore/MJSCoreUtils.h>
+#include <jscore/MJSCoreObjectFactory.h>
 
 /*
  * Copyright 2008 Google Inc.

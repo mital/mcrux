@@ -3,13 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSystem", "plugins\FileSystem.vcproj", "{267D131E-6E4B-42F6-BEAC-33EA134E82F7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LIBXMLSAXParser", "plugins\LIBXMLSAXParser.vcproj", "{8A619D01-90C3-4492-B151-90900EE4B799}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenSSLSocket", "plugins\OpenSSLSocket.vcproj", "{C84D31A1-1A84-4CC7-8608-3E8C29101259}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Socket", "plugins\Socket.vcproj", "{7916DE92-D5C0-4E9F-B984-DE4053FDBFBE}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLiteDatabase", "plugins\SQLiteDatabase.vcproj", "{8F887506-950F-41F5-9967-AA641760400B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +17,6 @@ Global
 		{267D131E-6E4B-42F6-BEAC-33EA134E82F7}.Debug|Win32.Build.0 = Debug|Win32
 		{267D131E-6E4B-42F6-BEAC-33EA134E82F7}.Release|Win32.ActiveCfg = Release|Win32
 		{267D131E-6E4B-42F6-BEAC-33EA134E82F7}.Release|Win32.Build.0 = Release|Win32
-		{8A619D01-90C3-4492-B151-90900EE4B799}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8A619D01-90C3-4492-B151-90900EE4B799}.Debug|Win32.Build.0 = Debug|Win32
-		{8A619D01-90C3-4492-B151-90900EE4B799}.Release|Win32.ActiveCfg = Release|Win32
-		{8A619D01-90C3-4492-B151-90900EE4B799}.Release|Win32.Build.0 = Release|Win32
 		{C84D31A1-1A84-4CC7-8608-3E8C29101259}.Debug|Win32.ActiveCfg = Debug|Win32
 		{C84D31A1-1A84-4CC7-8608-3E8C29101259}.Debug|Win32.Build.0 = Debug|Win32
 		{C84D31A1-1A84-4CC7-8608-3E8C29101259}.Release|Win32.ActiveCfg = Release|Win32
@@ -33,10 +25,6 @@ Global
 		{7916DE92-D5C0-4E9F-B984-DE4053FDBFBE}.Debug|Win32.Build.0 = Debug|Win32
 		{7916DE92-D5C0-4E9F-B984-DE4053FDBFBE}.Release|Win32.ActiveCfg = Release|Win32
 		{7916DE92-D5C0-4E9F-B984-DE4053FDBFBE}.Release|Win32.Build.0 = Release|Win32
-		{8F887506-950F-41F5-9967-AA641760400B}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8F887506-950F-41F5-9967-AA641760400B}.Debug|Win32.Build.0 = Debug|Win32
-		{8F887506-950F-41F5-9967-AA641760400B}.Release|Win32.ActiveCfg = Release|Win32
-		{8F887506-950F-41F5-9967-AA641760400B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
