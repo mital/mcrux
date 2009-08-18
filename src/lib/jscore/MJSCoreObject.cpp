@@ -21,7 +21,7 @@
 
 #include <string>
 
-#include "JSStringUtils.h"
+#include <jscore/JSStringUtils.h>
 #include "MJSCoreUtils.h"
 #include "MJSCoreObject.h"
 #include "MJSCoreObjectFactory.h"
@@ -95,7 +95,7 @@ JSObjectRef MJSCoreObject::ConstructorCallback(JSContextRef ctx,
 	}
 
 	// TODO: throw exception.
-	//return NULL;
+	return NULL;
 }
 
 const char * MJSCoreObject::toString()

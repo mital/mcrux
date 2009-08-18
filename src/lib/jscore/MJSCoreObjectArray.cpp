@@ -19,7 +19,6 @@
 
 #include <stdafx.h>
 
-#include "JSStringUtils.h"
 #include "MJSCoreUtils.h"
 #include "MJSCoreObjectArray.h"
 #include "MJSCoreObjectFactory.h"
@@ -29,7 +28,7 @@ MJSCoreObjectArray::MJSCoreObjectArray(JSContextRef _ctx, const std::vector<MJSC
 : MJSCoreObjectAbstract(_ctx, TYPE_JSOBJECT_ARRAY)
 {
 	JSObjectRef * fileJSStrings = new JSObjectRef[files.size()];
-	for (int i=0; i < files.size(); i++)
+	for (size_t i=0; i < files.size(); i++)
 	{
 		fileJSStrings[i] = files[i]->getJSObject();
 	}
