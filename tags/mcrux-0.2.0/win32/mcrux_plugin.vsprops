@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="mcrux_plugin"
+	OutputDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin\Plugins&quot;"
+	IntermediateDirectory="&quot;$(MCruxOutputDir)\$(ConfigurationName)\obj\Plugins\$(ProjectName)&quot;"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalIncludeDirectories="&quot;$(MCruxOutputDir)\$(ConfigurationName)\include&quot;;&quot;$(SolutionDir)../MCruxLibraries/include&quot;;&quot;$(ProjectDir)\..&quot;;&quot;$(ProjectDir)&quot;;&quot;$(IntDir)\include&quot;"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalDependencies="MCrux.lib WebKit.lib"
+		AdditionalLibraryDirectories="&quot;$(WebKitOutputDir)\lib&quot;;&quot;$(MCruxOutputDir)\$(ConfigurationName)\bin&quot;;&quot;$(SolutionDir)../MCruxLibraries/lib&quot;"
+		ModuleDefinitionFile="$(ProjectName).def"
+	/>
+</VisualStudioPropertySheet>

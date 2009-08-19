@@ -1,0 +1,5 @@
+; FileSystem.def : Declares the module parameters.
+LIBRARY	"FileSystem"
+
+EXPORTS
+	getMCruxPlugin		PRIVATE

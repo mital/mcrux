@@ -1,0 +1,6 @@
+; Socket.def : Declares the module parameters.
+
+LIBRARY	"Socket"
+
+EXPORTS
+	getMCruxPlugin		PRIVATE
