@@ -1,5 +1,5 @@
 #summary This page describes how to use MCrux as an application development framework.
-#labels Phase-Design
+#labels Phase-Design,Featured
 
 == Getting Started ==
 
@@ -11,12 +11,7 @@ This article describes step by step procedure for getting started with MCrux.
 
 you can get the binaries of MCrux in the featured download section shown on the Right corner of the "Project Home" page.
 
-also various plugin binaries available in the same section.
-
-you have to get the "WebKit zip" and "MCrux.zip" files and extract it to one folder.
-
-There are various plugins available in the download section. for plugins create a directory named "plugins" as a subfolder and place the dlls in that directory.
-
+Extract MCrux_VersionNumber.zip to a directory.
 
 == Creating MCruxSpec File ==
 
@@ -24,7 +19,7 @@ for creating an application the very first thing you need to do is to create a M
 
 checkout [http://code.google.com/p/mcrux/wiki/MCruxSpecFile mcruxspec File] section for more details on ".mcruxspec" files.
 
-*Important*: for the current version of MCrux Binaries assumes that the ".mcruxspec" file is available as [c:\mcrux\myApplication.mcruxspec]. In future versions this dependency will be removed.
+*Important*: for the current version of MCrux Binaries assumes that the ".mcruxspec" file is available as [c:\mcrux\myapplication.mcruxspec]. In future versions this dependency will be removed.
 
 == Getting Various Plugins ==
 for MCrux users we have developed a set of plugins you can download them and use it in your application.
