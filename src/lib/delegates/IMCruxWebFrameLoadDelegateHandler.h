@@ -93,5 +93,5 @@ public:
         /* [in] */ IWebView *webView,
         /* [in] */ JSContextRef context,
         /* [in] */ JSObjectRef windowScriptObject,
-		/* [in] */ IWebFrame *frame) { ::MessageBoxA(0, "did clearhahah ", "test", MB_OK); return E_NOTIMPL; }
+		/* [in] */ IWebFrame *frame) { return E_NOTIMPL; }
 };

@@ -22,7 +22,7 @@
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 
 class MCruxWebFrameLoadDelegate
-	: public IWebFrameLoadDelegate2
+	: public IWebFrameLoadDelegate
 {
     ULONG m_refCount;
 	IMCruxWebFrameLoadDelegateHandler * handler;

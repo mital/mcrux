@@ -40,11 +40,6 @@ public:
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR message);
 
-	HRESULT STDMETHODCALLTYPE windowScriptObjectAvailable( 
-		/* [in] */ IWebView *webView,
-		/* [in] */ JSContextRef context,
-		/* [in] */ JSObjectRef windowScriptObject);
-
 	HRESULT STDMETHODCALLTYPE didClearWindowObject( 
         /* [in] */ IWebView *webView,
         /* [in] */ JSContextRef context,
