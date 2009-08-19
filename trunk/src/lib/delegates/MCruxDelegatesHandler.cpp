@@ -43,15 +43,6 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::runJavaScriptAlertPanelWithMess
 	return S_OK;
 }
 
-HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::windowScriptObjectAvailable( 
-        IWebView *webView,
-        JSContextRef context,
-        JSObjectRef windowScriptObject)
-{
-	MJSCoreObjectFactory::Initialize(context);
-	return pluginManager->injectPlugins(webView, context, windowScriptObject);
-}
-
 
 void MCruxDelegatesHandler::setPluginManager(MCruxPluginManager * _pluginManager)
 {
@@ -70,13 +61,8 @@ HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::didClearWindowObject(
         JSObjectRef windowScriptObject,
         IWebFrame *frame)
 {
-	// TODO: this method is not getting called. 
-	// Ideally this method is replacement of Windowscriptobjectavailable method.
-	::MessageBoxA(0, "did clear", "test", MB_OK);
 	MJSCoreObjectFactory::Initialize(context);
 	return pluginManager->injectPlugins(webView, context, windowScriptObject);
-
-	//return S_OK;
 }
 
 HRESULT STDMETHODCALLTYPE MCruxDelegatesHandler::createWebViewWithRequest( 

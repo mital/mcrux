@@ -85,28 +85,28 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewShow(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewClose( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewClose( 
 		/* [in] */ IWebView *sender)
 {
 	return handler->webViewClose(sender);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFocus( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewFocus( 
 		/* [in] */ IWebView *sender)
 {
 	return handler->webViewFocus(sender);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewUnfocus( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewUnfocus( 
 		/* [in] */ IWebView *sender)
 {
 	return handler->webViewUnfocus(sender);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFirstResponder( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewFirstResponder( 
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ OLE_HANDLE *responderHWnd)
 {
@@ -114,7 +114,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFirstResponder(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: makeFirstResponder( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::makeFirstResponder( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ OLE_HANDLE responderHWnd)
 {
@@ -122,7 +122,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: makeFirstResponder(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setStatusText( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setStatusText( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR text)
 {
@@ -130,7 +130,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setStatusText(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewStatusText( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewStatusText( 
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BSTR *text)
 {
@@ -138,7 +138,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewStatusText(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewAreToolbarsVisible( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewAreToolbarsVisible(
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BOOL *visible)
 {
@@ -146,7 +146,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewAreToolbarsVisible(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setToolbarsVisible( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setToolbarsVisible( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL visible)
 {
@@ -154,7 +154,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setToolbarsVisible(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewIsStatusBarVisible( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewIsStatusBarVisible( 
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BOOL *visible)
 {
@@ -162,7 +162,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewIsStatusBarVisible(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setStatusBarVisible( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setStatusBarVisible( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL visible)
 {
@@ -170,7 +170,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setStatusBarVisible(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewIsResizable( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewIsResizable( 
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ BOOL *resizable)
 {
@@ -178,7 +178,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewIsResizable(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setResizable( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setResizable( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL resizable)
 {
@@ -186,7 +186,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setResizable(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setFrame( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setFrame( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ RECT *frame)
 {
@@ -194,7 +194,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setFrame(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFrame( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewFrame( 
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ RECT *frame)
 {
@@ -202,7 +202,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewFrame(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setContentRect( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setContentRect( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ RECT *contentRect)
 {
@@ -210,7 +210,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setContentRect(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewContentRect( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewContentRect( 
 		/* [in] */ IWebView *sender,
 		/* [retval][out] */ RECT *contentRect)
 {
@@ -218,7 +218,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: webViewContentRect(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptAlertPanelWithMessage( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runJavaScriptAlertPanelWithMessage( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR message)
 {
@@ -226,7 +226,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptAlertPanelWithMessag
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptConfirmPanelWithMessage( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runJavaScriptConfirmPanelWithMessage( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR message,
 		/* [retval][out] */ BOOL *result)
@@ -235,7 +235,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptConfirmPanelWithMess
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptTextInputPanelWithPrompt( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runJavaScriptTextInputPanelWithPrompt( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR message,
 		/* [in] */ BSTR defaultText,
@@ -245,7 +245,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runJavaScriptTextInputPanelWithPr
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runBeforeUnloadConfirmPanelWithMessage( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runBeforeUnloadConfirmPanelWithMessage( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BSTR message,
 		/* [in] */ IWebFrame *initiatedByFrame,
@@ -255,7 +255,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runBeforeUnloadConfirmPanelWithMe
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runOpenPanelForFileButtonWithResultListener( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runOpenPanelForFileButtonWithResultListener( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ IWebOpenPanelResultListener *resultListener)
 {
@@ -263,7 +263,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: runOpenPanelForFileButtonWithResu
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: mouseDidMoveOverElement( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::mouseDidMoveOverElement( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ IPropertyBag *elementInformation,
 		/* [in] */ UINT modifierFlags)
@@ -272,7 +272,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: mouseDidMoveOverElement(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: contextMenuItemsForElement( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::contextMenuItemsForElement( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ IPropertyBag *element,
 		/* [in] */ OLE_HANDLE defaultItemsHMenu,
@@ -282,7 +282,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: contextMenuItemsForElement(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: validateUserInterfaceItem( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::validateUserInterfaceItem( 
 		/* [in] */ IWebView *webView,
 		/* [in] */ UINT itemCommandID,
 		/* [in] */ BOOL defaultValidation,
@@ -292,7 +292,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: validateUserInterfaceItem(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: shouldPerformAction( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::shouldPerformAction( 
 		/* [in] */ IWebView *webView,
 		/* [in] */ UINT itemCommandID,
 		/* [in] */ UINT sender)
@@ -301,7 +301,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: shouldPerformAction(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: dragDestinationActionMaskForDraggingInfo( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::dragDestinationActionMaskForDraggingInfo( 
 		/* [in] */ IWebView *webView,
 		/* [in] */ IDataObject *draggingInfo,
 		/* [retval][out] */ WebDragDestinationAction *action)
@@ -310,7 +310,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: dragDestinationActionMaskForDragg
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragDestinationAction( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::willPerformDragDestinationAction( 
 		/* [in] */ IWebView *webView,
 		/* [in] */ WebDragDestinationAction action,
 		/* [in] */ IDataObject *draggingInfo)
@@ -319,7 +319,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragDestinationAction(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: dragSourceActionMaskForPoint( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::dragSourceActionMaskForPoint( 
 		/* [in] */ IWebView *webView,
 		/* [in] */ LPPOINT point,
 		/* [retval][out] */ WebDragSourceAction *action)
@@ -328,17 +328,19 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: dragSourceActionMaskForPoint(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragSourceAction( 
-		/* [in] */ IWebView *webView,
-		/* [in] */ WebDragSourceAction action,
-		/* [in] */ LPPOINT point,
-		/* [in] */ IDataObject *pasteboard)
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::willPerformDragSourceAction( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ WebDragSourceAction action,
+        /* [in] */ LPPOINT point,
+        /* [in] */ IDataObject *pasteboard,
+        /* [retval][out] */ IDataObject **newPasteboard)
 {
-	return handler->willPerformDragSourceAction(webView, action, point, pasteboard);
+	return handler->willPerformDragSourceAction(webView, action, point, pasteboard, newPasteboard);
 }
 
 
-/* [local] */ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: contextMenuItemSelected( 
+/* [local] */ 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::contextMenuItemSelected( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ void *item,
 		/* [in] */ IPropertyBag *element)
@@ -347,7 +349,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: willPerformDragSourceAction(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: hasCustomMenuImplementation( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::hasCustomMenuImplementation( 
 		/* [retval][out] */ BOOL *hasCustomMenus)
 {
 	return handler->hasCustomMenuImplementation(hasCustomMenus);
@@ -371,7 +373,8 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: trackCustomPopupMenu(
 }
 
 
-/* [local] */ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: drawCustomMenuItem( 
+/* [local] */ 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::drawCustomMenuItem( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ void *drawItem)
 {
@@ -379,7 +382,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: trackCustomPopupMenu(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: addCustomMenuDrawingData( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::addCustomMenuDrawingData( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ OLE_HANDLE hMenu)
 {
@@ -387,7 +390,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: addCustomMenuDrawingData(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: cleanUpCustomMenuDrawingData( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::cleanUpCustomMenuDrawingData( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ OLE_HANDLE hMenu)
 {
@@ -395,7 +398,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: cleanUpCustomMenuDrawingData(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: canTakeFocus( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::canTakeFocus( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL forward,
 		/* [out] */ BOOL *result)
@@ -404,7 +407,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: canTakeFocus(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: takeFocus( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::takeFocus( 
 		/* [in] */ IWebView *sender,
 		/* [in] */ BOOL forward)
 {
@@ -412,7 +415,7 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: takeFocus(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: registerUndoWithTarget( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::registerUndoWithTarget( 
 		/* [in] */ IWebUndoTarget *target,
 		/* [in] */ BSTR actionName,
 		/* [in] */ IUnknown *actionArg)
@@ -421,41 +424,162 @@ HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: registerUndoWithTarget(
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: removeAllActionsWithTarget( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::removeAllActionsWithTarget( 
 		/* [in] */ IWebUndoTarget *target)
 {
 	return handler->removeAllActionsWithTarget(target);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: setActionTitle( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setActionTitle( 
 		/* [in] */ BSTR actionTitle)
 {
 	return handler->setActionTitle(actionTitle);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: undo()
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::undo()
 {
 	return handler->undo();
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: redo()
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::redo()
 {
 	return handler->redo();
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate:: canUndo( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::canUndo(
 		/* [retval][out] */ BOOL *result)
 {
 	return handler->canUndo(result);
 }
 
 
-HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::canRedo( 
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::canRedo(
 		/* [retval][out] */ BOOL *result)
 {
 	return handler->canRedo(result);
+}
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::printFrame(
+    /* [in] */ IWebView *webView,
+    /* [in] */ IWebFrame *frame)
+{
+	return handler->printFrame(webView, frame);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::ftpDirectoryTemplatePath(
+    /* [in] */ IWebView *webView,
+    /* [retval][out] */ BSTR *path)
+{
+	return handler->ftpDirectoryTemplatePath(webView, path);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewHeaderHeight(
+    /* [in] */ IWebView *webView,
+    /* [retval][out] */ float *result)
+{
+	return handler->webViewHeaderHeight(webView, result);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewFooterHeight(
+    /* [in] */ IWebView *webView,
+    /* [retval][out] */ float *result)
+{
+	return handler->webViewFooterHeight(webView, result);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::drawHeaderInRect(
+    /* [in] */ IWebView *webView,
+    /* [in] */ RECT *rect,
+    /* [in] */ OLE_HANDLE drawingContext)
+{
+	return handler->drawHeaderInRect(webView, rect, drawingContext);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::drawFooterInRect(
+    /* [in] */ IWebView *webView,
+    /* [in] */ RECT *rect,
+    /* [in] */ OLE_HANDLE drawingContext,
+    /* [in] */ UINT pageIndex,
+    /* [in] */ UINT pageCount)
+{
+	return handler->drawFooterInRect(webView, rect, drawingContext, pageIndex, pageCount);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::webViewPrintingMarginRect(
+    /* [in] */ IWebView *webView,
+    /* [retval][out] */ RECT *rect)
+{
+	return handler->webViewPrintingMarginRect(webView, rect);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::canRunModal(
+    /* [in] */ IWebView *webView,
+    /* [retval][out] */ BOOL *canRunBoolean)
+{
+	return handler->canRunModal(webView, canRunBoolean);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::createModalDialog(
+    /* [in] */ IWebView *sender,
+    /* [in] */ IWebURLRequest *request,
+    /* [retval][out] */ IWebView **newWebView)
+{
+	return handler->createModalDialog(sender, request, newWebView);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runModal(
+    /* [in] */ IWebView *webView)
+{
+	return handler->runModal(webView);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::isMenuBarVisible(
+    /* [in] */ IWebView *webView,
+    /* [retval][out] */ BOOL *visible)
+{
+	return handler->isMenuBarVisible(webView, visible);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::setMenuBarVisible(
+    /* [in] */ IWebView *webView,
+    /* [in] */ BOOL visible)
+{
+	return handler->setMenuBarVisible(webView, visible);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::runDatabaseSizeLimitPrompt(
+    /* [in] */ IWebView *webView,
+    /* [in] */ BSTR displayName,
+    /* [in] */ IWebFrame *initiatedByFrame,
+    /* [retval][out] */ BOOL *allowed)
+{
+	return handler->runDatabaseSizeLimitPrompt(webView, displayName, initiatedByFrame, allowed);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::paintCustomScrollbar(
+    /* [in] */ IWebView *webView,
+    /* [in] */ HDC hDC,
+    /* [in] */ RECT rect,
+    /* [in] */ WebScrollBarControlSize size,
+    /* [in] */ WebScrollbarControlState state,
+    /* [in] */ WebScrollbarControlPart pressedPart,
+    /* [in] */ BOOL vertical,
+    /* [in] */ float value,
+    /* [in] */ float proportion,
+    /* [in] */ WebScrollbarControlPartMask parts)
+{
+	return handler->paintCustomScrollbar(webView, hDC, rect, size, state,
+		pressedPart, vertical, value,
+		proportion, parts);
+}
+
+HRESULT STDMETHODCALLTYPE MCruxWebUIDelegate::paintCustomScrollCorner(
+    /* [in] */ IWebView *webView,
+    /* [in] */ HDC hDC,
+    /* [in] */ RECT rect)
+{
+	return handler->paintCustomScrollCorner(webView, hDC, rect);
 }

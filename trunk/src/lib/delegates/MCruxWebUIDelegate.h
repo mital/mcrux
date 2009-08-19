@@ -176,11 +176,12 @@ public:
 		/* [in] */ LPPOINT point,
 		/* [retval][out] */ WebDragSourceAction *action);
 
-	virtual HRESULT STDMETHODCALLTYPE willPerformDragSourceAction( 
-		/* [in] */ IWebView *webView,
-		/* [in] */ WebDragSourceAction action,
-		/* [in] */ LPPOINT point,
-		/* [in] */ IDataObject *pasteboard);
+    virtual HRESULT STDMETHODCALLTYPE willPerformDragSourceAction( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ WebDragSourceAction action,
+        /* [in] */ LPPOINT point,
+        /* [in] */ IDataObject *pasteboard,
+        /* [retval][out] */ IDataObject **newPasteboard);
 
 	virtual /* [local] */ HRESULT STDMETHODCALLTYPE contextMenuItemSelected( 
 		/* [in] */ IWebView *sender,
@@ -241,4 +242,78 @@ public:
 	virtual HRESULT STDMETHODCALLTYPE canRedo( 
 		/* [retval][out] */ BOOL *result);
 
+    virtual HRESULT STDMETHODCALLTYPE printFrame( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ IWebFrame *frame);
+    
+    virtual HRESULT STDMETHODCALLTYPE ftpDirectoryTemplatePath( 
+        /* [in] */ IWebView *webView,
+        /* [retval][out] */ BSTR *path);
+    
+    virtual HRESULT STDMETHODCALLTYPE webViewHeaderHeight( 
+        /* [in] */ IWebView *webView,
+        /* [retval][out] */ float *result);
+    
+    virtual HRESULT STDMETHODCALLTYPE webViewFooterHeight( 
+        /* [in] */ IWebView *webView,
+        /* [retval][out] */ float *result);
+    
+    virtual HRESULT STDMETHODCALLTYPE drawHeaderInRect( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ RECT *rect,
+        /* [in] */ OLE_HANDLE drawingContext);
+    
+    virtual HRESULT STDMETHODCALLTYPE drawFooterInRect( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ RECT *rect,
+        /* [in] */ OLE_HANDLE drawingContext,
+        /* [in] */ UINT pageIndex,
+        /* [in] */ UINT pageCount);
+    
+    virtual HRESULT STDMETHODCALLTYPE webViewPrintingMarginRect( 
+        /* [in] */ IWebView *webView,
+        /* [retval][out] */ RECT *rect);
+    
+    virtual HRESULT STDMETHODCALLTYPE canRunModal( 
+        /* [in] */ IWebView *webView,
+        /* [retval][out] */ BOOL *canRunBoolean);
+    
+    virtual HRESULT STDMETHODCALLTYPE createModalDialog( 
+        /* [in] */ IWebView *sender,
+        /* [in] */ IWebURLRequest *request,
+        /* [retval][out] */ IWebView **newWebView);
+    
+    virtual HRESULT STDMETHODCALLTYPE runModal( 
+        /* [in] */ IWebView *webView);
+    
+    virtual HRESULT STDMETHODCALLTYPE isMenuBarVisible( 
+        /* [in] */ IWebView *webView,
+        /* [retval][out] */ BOOL *visible);
+    
+    virtual HRESULT STDMETHODCALLTYPE setMenuBarVisible( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ BOOL visible);
+    
+    virtual HRESULT STDMETHODCALLTYPE runDatabaseSizeLimitPrompt( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ BSTR displayName,
+        /* [in] */ IWebFrame *initiatedByFrame,
+        /* [retval][out] */ BOOL *allowed);
+    
+    virtual HRESULT STDMETHODCALLTYPE paintCustomScrollbar( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ HDC hDC,
+        /* [in] */ RECT rect,
+        /* [in] */ WebScrollBarControlSize size,
+        /* [in] */ WebScrollbarControlState state,
+        /* [in] */ WebScrollbarControlPart pressedPart,
+        /* [in] */ BOOL vertical,
+        /* [in] */ float value,
+        /* [in] */ float proportion,
+        /* [in] */ WebScrollbarControlPartMask parts);
+    
+    virtual HRESULT STDMETHODCALLTYPE paintCustomScrollCorner( 
+        /* [in] */ IWebView *webView,
+        /* [in] */ HDC hDC,
+        /* [in] */ RECT rect);
 };
