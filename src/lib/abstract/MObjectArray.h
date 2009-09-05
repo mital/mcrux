@@ -16,7 +16,8 @@
 *
 * @author: Mital Vora.
 **/
-#pragma once
+#ifndef _MOBJECT_ARRAY_H_
+#define _MOBJECT_ARRAY_H_
 
 #include <vector>
 
@@ -38,3 +39,5 @@ public:
 
 	size_t size() const;
 };
+
+#endif // _MOBJECT_ARRAY_H_

@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _IMCRUXWEBFRAMELOADDELEGATEHANDLER_H_
+#define _IMCRUXWEBFRAMELOADDELEGATEHANDLER_H_
 
 #include <WebKit/WebKit.h>
 
@@ -95,3 +96,5 @@ public:
         /* [in] */ JSObjectRef windowScriptObject,
 		/* [in] */ IWebFrame *frame) { return E_NOTIMPL; }
 };
+
+#endif // _IMCRUXWEBFRAMELOADDELEGATEHANDLER_H_

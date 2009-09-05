@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXSPECPARSER_H_
+#define _MCRUXSPECPARSER_H_
 
 #define MCRUXSPEC_ROOT_NAME "mcrux"
 #define MCRUXSPEC_PLUGINS_NAME "plugins"
@@ -79,3 +80,5 @@ public:
 	bool getWindowConfigList(list <MCruxWindowConfiguration *> & mcruxWindowConfigs) const;
 	bool getPlugins(list <wstring> & _plugins) const;
 };
+
+#endif // _MCRUXSPECPARSER_H_

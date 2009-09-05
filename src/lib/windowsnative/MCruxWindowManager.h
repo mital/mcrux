@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXWINDOWMANAGER_H_
+#define _MCRUXWINDOWMANAGER_H_
 
 #include "windowsnative/MCruxWindow.h"
 #include "windowsnative/MCruxWindowConfiguration.h"
@@ -40,3 +41,5 @@ public:
 
 	void showWindow(IWebView * sender);
 };
+
+#endif // _MCRUXWINDOWMANAGER_H_

@@ -17,7 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MCRUXJSOBJECT_H_
+#define _MCRUXJSOBJECT_H_
 
 #include "jscore/MJSCoreObject.h"
 
@@ -32,3 +33,5 @@ public:
 
 	void myFunction(const MObjectArray& args, MObjectContainer& resultContainer);
 };
+
+#endif // _MCRUXJSOBJECT_H_

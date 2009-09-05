@@ -233,10 +233,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\lib\MCruxExport.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\lib\MCruxSpecParser.h"
 				>
 			</File>
@@ -318,10 +314,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\lib\plugin\MCruxPlugin.h"
-					>
-				</File>
-				<File
 					RelativePath="..\..\src\lib\plugin\MCruxPluginManager.h"
 					>
 				</File>
@@ -331,10 +323,6 @@
 				>
 				<File
 					RelativePath="..\..\src\lib\plugin\MCruxJSObject.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\lib\plugin\MCruxPlugin.cpp"
 					>
 				</File>
 				<File
@@ -387,6 +375,10 @@
 				>
 				<File
 					RelativePath="..\..\src\lib\abstract\callback.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\abstract\MCruxExport.h"
 					>
 				</File>
 				<File

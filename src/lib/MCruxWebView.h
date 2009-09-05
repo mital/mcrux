@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXWEBVIEW_H_
+#define _MCRUXWEBVIEW_H_
 
 #include <iostream>
 
@@ -57,3 +58,5 @@ public:
 	bool navigateTo(IWebURLRequest *request);
 	IWebView * getWebView();
 };
+
+#endif // _MCRUXWEBVIEW_H_

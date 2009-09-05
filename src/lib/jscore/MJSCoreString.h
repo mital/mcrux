@@ -17,7 +17,9 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MJSCORESTRING_H_
+#define _MJSCORESTRING_H_
+
 #include <iostream>
 
 using namespace std;
@@ -41,3 +43,5 @@ public:
 
 	const char * toString();
 };
+
+#endif // _MJSCORESTRING_H_

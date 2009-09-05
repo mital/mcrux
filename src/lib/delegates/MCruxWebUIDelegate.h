@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXWEBUIDELEGATE_H_
+#define _MCRUXWEBUIDELEGATE_H_
 
 #include "IMCruxWebUIDelegateHandler.h"
 
@@ -317,3 +318,5 @@ public:
         /* [in] */ HDC hDC,
         /* [in] */ RECT rect);
 };
+
+#endif // _MCRUXWEBUIDELEGATE_H_

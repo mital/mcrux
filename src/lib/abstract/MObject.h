@@ -17,7 +17,9 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MOBJECT_H_
+#define _MOBJECT_H_
+
 
 #include "abstract/callback.h"
 #include <abstract/MCruxExport.h>
@@ -35,3 +37,5 @@ public:
 	MObject();
 	virtual ~MObject();
 };
+
+#endif // _MOBJECT_H_

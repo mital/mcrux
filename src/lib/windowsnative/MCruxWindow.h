@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXWINDOW_H_
+#define _MCRUXWINDOW_H_
 
 #include <map>
 #include <iostream>
@@ -71,3 +72,5 @@ public:
 	static void unInitWindowClass(HINSTANCE hInstance);
 	static MCruxWindow * getMCruxWindowFrom(IWebView * webView);
 };
+
+#endif // _MCRUXWINDOW_H_

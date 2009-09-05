@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXDELEGATEHANDLER_H_
+#define _MCRUXDELEGATEHANDLER_H_
 
 #include "plugin/MCruxPluginManager.h"
 #include "IMCruxWebUIDelegateHandler.h"
@@ -58,3 +59,5 @@ public:
 
 	void setWindowManager(MCruxWindowManager * _windowManager);
 };
+
+#endif // _MCRUXDELEGATEHANDLER_H_

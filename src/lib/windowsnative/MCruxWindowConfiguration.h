@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXWINDOWCONFIG_H_
+#define _MCRUXWINDOWCONFIG_H_
 
 #include <iostream>
 
@@ -52,3 +53,5 @@ public:
 	wstring getWindowTitle() const;
 	IWebURLRequest *getRequest() const;
 };
+
+#endif // _MCRUXWINDOWCONFIG_H_

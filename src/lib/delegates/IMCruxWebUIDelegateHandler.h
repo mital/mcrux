@@ -17,7 +17,9 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _IMCRUXWEBUIDELEGATEHANDLER_H_
+#define _IMCRUXWEBUIDELEGATEHANDLER_H_
+
 
 #include <WebKit/WebKit.h>
 
@@ -306,3 +308,5 @@ public:
         /* [in] */ HDC hDC,
         /* [in] */ RECT rect) { return E_NOTIMPL; }
 };
+
+#endif // _IMCRUXWEBUIDELEGATEHANDLER_H_

@@ -17,7 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MJSCOREMETHOD_H_
+#define _MJSCOREMETHOD_H_
 
 #include "jscore/MJSCoreObjectAbstract.h"
 
@@ -40,3 +41,5 @@ public:
 
 	MJSCoreObjectAbstract * invoke(const MObjectArray& args);
 };
+
+#endif // _MJSCOREMETHOD_H_
