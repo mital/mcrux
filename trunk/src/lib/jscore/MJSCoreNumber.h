@@ -17,7 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MJSCORENUMBER_H_
+#define _MJSCORENUMBER_H_
 
 #include "jscore/MJSCoreObjectAbstract.h"
 
@@ -38,3 +39,5 @@ public:
 
 	const char * toString();
 };
+
+#endif // _MJSCORENUMBER_H_

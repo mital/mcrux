@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MCRUXWEBFRAMELOADDELEGATE_H_
+#define _MCRUXWEBFRAMELOADDELEGATE_H_
 
 #include "IMCruxWebFrameLoadDelegateHandler.h"
 
@@ -106,3 +107,5 @@ public:
         /* [in] */ IWebFrame *frame);
 
 };
+
+#endif // _MCRUXWEBFRAMELOADDELEGATE_H_

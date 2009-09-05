@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MJSCOREOBJECTARRAY_H_
+#define _MJSCOREOBJECTARRAY_H_
 
 #include <set>
 #include <string>
@@ -41,3 +42,5 @@ public:
 	virtual JSObjectRef getJSObject();
 	const char * toString();
 };
+
+#endif // _MJSCOREOBJECTARRAY_H_

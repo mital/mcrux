@@ -17,7 +17,9 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _JSSTRINGUTILS_H_
+#define _JSSTRINGUTILS_H_
+
 
 #include <iostream>
 
@@ -31,3 +33,5 @@ using namespace std;
 MCRUX_API char * getStringValueFrom(JSContextRef ctx, JSValueRef strValue);
 MCRUX_API char * getStringValueFrom(JSContextRef ctx, JSStringRef strValue);
 MCRUX_API double getDoubleValueFrom(JSContextRef ctx, JSValueRef strValue);
+
+#endif // _JSSTRINGUTILS_H_

@@ -18,7 +18,8 @@
  **/
 
 
-#pragma once
+#ifndef _MCRUXPLUGINMANAGER_H_
+#define _MCRUXPLUGINMANAGER_H_
 
 #include <map>
 #include <list>
@@ -28,9 +29,9 @@
 
 using namespace std;
 
-#include "MCrux.h"
-#include "MCruxPlugin.h"
+#include <WebKit/WebKit.h>
 
+#include "MCrux.h"
 #include "MCruxJSObject.h"
 
 class MCruxWindow;
@@ -57,3 +58,5 @@ public:
         JSContextRef context,
         JSObjectRef windowScriptObject);
 };
+
+#endif // _MCRUXPLUGINMANAGER_H_

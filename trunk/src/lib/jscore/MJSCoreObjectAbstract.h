@@ -17,7 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MJSCOREOBJECTABSTRACT_H_
+#define _MJSCOREOBJECTABSTRACT_H_
 
 #include <vector>
 
@@ -67,3 +68,5 @@ public:
 	bool isString() const;
 	bool isBool() const;
 };
+
+#endif // _MJSCOREOBJECTABSTRACT_H_

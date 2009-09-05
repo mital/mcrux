@@ -16,7 +16,9 @@
 *
 * @author: Mital Vora.
 **/
-#pragma once
+
+#ifndef _MJSCOREUTILS_H_
+#define _MJSCOREUTILS_H_
 
 #include "MJSCoreMethod.h"
 
@@ -25,3 +27,5 @@ static JSClassRef method_class = NULL;
 JSValueRef GetFunctionPrototype(JSContextRef jsContext, JSValueRef* exception) ;
 
 JSValueRef toJSValue(JSContextRef context, MJSCoreMethod * method_obj);
+
+#endif // _MJSCOREUTILS_H_

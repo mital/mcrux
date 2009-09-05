@@ -17,8 +17,8 @@
  * @author: Mital Vora.
  **/
 
-
-#pragma once
+#ifndef _MJSCOREOBJECTFACTORY_H_
+#define _MJSCOREOBJECTFACTORY_H_
 
 #include <abstract/MCruxExport.h>
 
@@ -50,3 +50,5 @@ public:
 
 	static MJSCoreObjectAbstract * getMObject(JSValueRef _value);
 };
+
+#endif // _MJSCOREOBJECTFACTORY_H_

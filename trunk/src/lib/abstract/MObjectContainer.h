@@ -17,7 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MOBJECT_CONTAINER_H_
+#define _MOBJECT_CONTAINER_H_
 
 #include <abstract/MObject.h>
 
@@ -32,3 +33,5 @@ public:
 	void set(MObject * _obj);
 	MObject * get() const;
 };
+
+#endif // _MOBJECT_CONTAINER_H_

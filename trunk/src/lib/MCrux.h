@@ -18,7 +18,8 @@
  **/
 
 
-#pragma once
+#ifndef _MCRUX_H_
+#define _MCRUX_H_
 
 #include <iostream>
 
@@ -40,3 +41,5 @@ public:
 
 	bool InitializeAndRunWith(const string & mcruxAppConfigFileName);
 };
+
+#endif // _MCRUX_H_

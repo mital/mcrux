@@ -17,7 +17,8 @@
  * @author: Mital Vora.
  **/
 
-#pragma once
+#ifndef _MJSCOREOBJECT_H_
+#define _MJSCOREOBJECT_H_
 
 #include <set>
 #include <string>
@@ -72,3 +73,5 @@ public:
 	void protect();
 	void unprotect();
 };
+
+#endif // _MJSCOREOBJECT_H_

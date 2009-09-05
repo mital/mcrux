@@ -17,7 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#pragma once
+#ifndef _MJSCOREBOOL_H_
+#define _MJSCOREBOOL_H_
 
 #include "jscore/MJSCoreObjectAbstract.h"
 
@@ -37,3 +38,5 @@ public:
 	virtual JSObjectRef getJSObject();
 	const char * toString();
 };
+
+#endif // _MJSCOREBOOL_H_
