@@ -22,10 +22,10 @@ fi ], [
 
 AC_DEFINE_UNQUOTED(KERNEL, "$KERNEL")
 
-CXXFLAGS="$CXXFLAGS -Wall"
+CXXFLAGS="$CXXFLAGS -Wall -I/usr/include/libxml2 -I/usr/include/webkit-1.0 -I /usr/include/glib-2.0 -I /usr/lib/glib-2.0/include -I/usr/include/gtk-2.0"
 
-SUBDIRS="bin"
-#SUBDIRS="$SUBDIRS linux"
+SUBDIRS="lib"
+SUBDIRS="$SUBDIRS bin"
 LDADDS=""
 AC_SUBST(SUBDIRS)
 AC_SUBST(LDADDS)
@@ -40,8 +40,12 @@ AM_PROG_LIBTOOL
 
 dnl Checks for libraries.
 AC_CHECK_LIB(c,main)
-AC_CHECK_LIB(pthread,pthread_create,,AC_MSG_ERROR(glibc-devel not installed))
-AC_CHECK_LIB(dl,dlopen,,AC_MSG_ERROR(glibc-devel not installed))
+AC_CHECK_LIB(pthread,pthread_create,,AC_MSG_ERROR(glibc-dev not installed))
+AC_CHECK_LIB(dl,dlopen,,AC_MSG_ERROR(glibc-dev not installed))
+AC_CHECK_LIB(glib-2.0,g_free,,AC_MSG_ERROR(libglib2.0-dev not installed))
+AC_CHECK_LIB(gtk-x11-2.0,gtk_init,,AC_MSG_ERROR(libgtk-x11-2.0-dev not installed))
+AC_CHECK_LIB(xml2,xmlGetPredefinedEntity,,AC_MSG_ERROR(libxml2-dev is not installed))
+AC_CHECK_LIB(webkit-1.0,webkit_web_view_set_zoom_level,,AC_MSG_ERROR(webkit-1.0 is not installed))
 
 dnl Checks for header files.
 AC_HEADER_STDC
@@ -54,4 +58,6 @@ dnl Checks for library functions.
 AC_FUNC_STRFTIME
 AC_CHECK_FUNCS(socket strdup)
 
-AC_OUTPUT(bin/Makefile Makefile)
+AC_OUTPUT(lib/Makefile
+bin/Makefile
+Makefile)

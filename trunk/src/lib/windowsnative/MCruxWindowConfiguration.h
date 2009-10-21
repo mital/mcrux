@@ -24,8 +24,9 @@
 
 using namespace std;
 
-#include <WebKit/WebKit.h>
-
+#ifdef WIN32
+#include <webkit/webkit.h>
+#endif
 
 class MCruxWindowConfiguration
 {
@@ -33,17 +34,21 @@ class MCruxWindowConfiguration
 	const unsigned int width;
 	const unsigned int height;
 	const wstring url;
+#ifdef WIN32
 	IWebURLRequest *request;
+#endif
 public:
 	MCruxWindowConfiguration(const wstring _windowTitle,
 		unsigned int _width,
 		unsigned int _height,
 		const wstring & _url);
 
+#ifdef WIN32
 	MCruxWindowConfiguration(const wstring _windowTitle,
 		unsigned int _width,
 		unsigned int _height,
 		IWebURLRequest *_request);
+#endif
 
 	~MCruxWindowConfiguration();
 
@@ -51,7 +56,9 @@ public:
 	unsigned int getWidth() const;
 	unsigned int getHeight() const;
 	wstring getWindowTitle() const;
+#ifdef WIN32
 	IWebURLRequest *getRequest() const;
+#endif
 };
 
 #endif // _MCRUXWINDOWCONFIG_H_

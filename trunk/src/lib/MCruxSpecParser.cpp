@@ -17,9 +17,16 @@
  * @author: Mital Vora.
  **/
 
+#ifdef WIN32
 #include "StdAfx.h"
+#endif
 #include "MCruxSpecParser.h"
 #include <algorithm>
+
+#ifndef CW_USEDEFAULT
+//todo: find proper default height width
+#define CW_USEDEFAULT 500
+#endif
 
 bool XMLParser::getProperties(_xmlAttr * properties, map<wstring, wstring> & attrMap)
 {
