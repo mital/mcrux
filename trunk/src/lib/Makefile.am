@@ -2,7 +2,7 @@
 
 INCLUDES = -I@top_srcdir@/lib -I@top_srcdir@/include
 
-SUBDIRS = window
+SUBDIRS = abstract window
 
 noinst_HEADERS=MCruxSpecParser.h
 

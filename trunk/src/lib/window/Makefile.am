@@ -6,11 +6,13 @@ SUBDIRS = .
 
 noinst_HEADERS = \
 	MCruxWindowConfiguration.h \
+	MCruxGTKWindow.h \
 	MCruxWindowManager.h
 
 lib_LTLIBRARIES = libmcrux_window.la
 
 libmcrux_window_la_SOURCES = \
 	MCruxWindowConfiguration.cpp \
+	MCruxGTKWindow.cpp \
 	MCruxWindowManager.cpp
 

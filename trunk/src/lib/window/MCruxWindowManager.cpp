@@ -17,7 +17,12 @@
  * @author: Mital Vora.
  **/
 #include "MCruxWindowManager.h"
+
+#ifdef WIN32
 #include <window/MCruxWin32Window.h>
+#else
+#include <window/MCruxGTKWindow.h>
+#endif
 
 MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations
 #ifdef WIN32
@@ -35,14 +40,17 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 		oIter++)
 		{
 			MCruxWindowConfiguration * mainWindowConfig = *oIter;
+      MCruxWindow * newWindow = NULL;
+
 #ifdef WIN32
-			MCruxWindow * newWindow = new MCruxWin32Window(mainWindowConfig, pluginManager, this);
+			newWindow = new MCruxWin32Window(mainWindowConfig, pluginManager, this);
+#else
+			newWindow = new MCruxGTKWindow(mainWindowConfig);
+#endif
+
 			newWindow->ShowWindow();
 			newWindow->UpdateWindow();
 			windows.push_back(newWindow);
-#else
-			//MCruxWindow * newWindow = 
-#endif
 		}
 	}
 }

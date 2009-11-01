@@ -2,8 +2,11 @@
 
 using namespace std;
 
+#include<mcrux/MCrux.h>
+
 int main(int argc, char **argv)
 {
-	cout << "Hello World !!" << endl;
+  MCrux mcrux;
+  mcrux.InitializeAndRunWith("/home/mital/test.mcruxspec", argc, argv);
 	return 0;
 }
