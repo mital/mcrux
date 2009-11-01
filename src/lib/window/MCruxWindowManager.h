@@ -22,7 +22,7 @@
 
 #include <list>
 #ifdef WIN32
-#include "window/MCruxWindow.h"
+#include "abstract/MCruxWindow.h"
 #endif
 #include "window/MCruxWindowConfiguration.h"
 

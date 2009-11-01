@@ -16,7 +16,7 @@
  *
  * @author: Mital Vora.
  **/
-#include "window/MCruxWindow.h"
+#include "abstract/MCruxWindow.h"
 
 #include "MCruxJSObject.h"
 
