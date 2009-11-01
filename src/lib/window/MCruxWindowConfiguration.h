@@ -24,9 +24,7 @@
 
 using namespace std;
 
-#ifdef WIN32
 #include <webkit/webkit.h>
-#endif
 
 class MCruxWindowConfiguration
 {
