@@ -27,7 +27,8 @@ CXXFLAGS="$CXXFLAGS -Wall -I/usr/include/libxml2 -I/usr/include/webkit-1.0 -I /u
 SUBDIRS="lib"
 SUBDIRS="$SUBDIRS include"
 SUBDIRS="$SUBDIRS bin"
-LDADDS=""
+LDADDS="../lib/libmcrux_common.la"
+LDADDS="$LDADDS ../lib/window/libmcrux_window.la"
 AC_SUBST(SUBDIRS)
 AC_SUBST(LDADDS)
 dnl Checks for programs.
@@ -62,5 +63,6 @@ AC_CHECK_FUNCS(socket strdup)
 AC_OUTPUT(include/Makefile
 include/mcrux/Makefile
 lib/Makefile
+lib/window/Makefile
 bin/Makefile
 Makefile)
