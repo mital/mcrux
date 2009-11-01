@@ -16,7 +16,6 @@
  *
  * @author: Mital Vora.
  **/
-#include <tchar.h>
 
 #include "MCruxWindowConfiguration.h"
 
@@ -43,7 +42,7 @@ MCruxWindowConfiguration::MCruxWindowConfiguration(const wstring _windowTitle,
 : windowTitle(_windowTitle),
   width(_width),
   height(_height),
-  url(_T("")),
+  url(L""),
   request(_request)
 {
 }
