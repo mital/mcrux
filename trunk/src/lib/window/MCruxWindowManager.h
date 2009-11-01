@@ -27,19 +27,25 @@
 class MCruxWindowManager
 {
 	const list<MCruxWindowConfiguration*> windowConfigurations;
+#ifdef WIN32
 	MCruxPluginManager * pluginManager;
+#endif
+
 	list<MCruxWindow *> windows;
 
 public:
 
 	MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations,
-		MCruxPluginManager * _pluginManager);
+#ifdef WIN32
+		MCruxPluginManager * _pluginManager
+#endif
+		);
 
 	~MCruxWindowManager();
 
+#ifdef WIN32
 	IWebView * createWindow(IWebURLRequest *request);
-
-	void showWindow(IWebView * sender);
+#endif
 };
 
 #endif // _MCRUXWINDOWMANAGER_H_
