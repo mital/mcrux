@@ -29,6 +29,7 @@ SUBDIRS="$SUBDIRS include"
 SUBDIRS="$SUBDIRS bin"
 LDADDS="../lib/libmcrux_common.la"
 LDADDS="$LDADDS ../lib/window/libmcrux_window.la"
+LDADDS="$LDADDS ../lib/abstract/libmcrux_abstract.la"
 AC_SUBST(SUBDIRS)
 AC_SUBST(LDADDS)
 dnl Checks for programs.
@@ -65,6 +66,7 @@ AC_CHECK_FUNCS(socket strdup)
 AC_OUTPUT(include/Makefile
 include/mcrux/Makefile
 lib/Makefile
+lib/abstract/Makefile
 lib/window/Makefile
 bin/Makefile
 Makefile)

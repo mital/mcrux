@@ -30,32 +30,33 @@
 #include <shlwapi.h>
 #include <wininet.h>
 
-#include "window/MCruxWin32Window.h"
-
 #ifdef _MANAGED
 #pragma managed(push, off)
 #endif
 
 BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-					 )
+    DWORD  ul_reason_for_call,
+    LPVOID lpReserved
+    )
 {
-	switch (ul_reason_for_call)
-	{
-	case DLL_PROCESS_ATTACH:
-	case DLL_THREAD_ATTACH:
-	case DLL_THREAD_DETACH:
-	case DLL_PROCESS_DETACH:
-		break;
-	}
-    return TRUE;
+  switch (ul_reason_for_call)
+  {
+    case DLL_PROCESS_ATTACH:
+    case DLL_THREAD_ATTACH:
+    case DLL_THREAD_DETACH:
+    case DLL_PROCESS_DETACH:
+      break;
+  }
+  return TRUE;
 }
 
 #ifdef _MANAGED
 #pragma managed(pop)
 #endif
 
+
+#else // for linux
+#include <gtk/gtk.h>
 #endif
 
 MCrux::MCrux()
@@ -65,83 +66,109 @@ MCrux::MCrux()
 
 MCrux::~MCrux()
 {
-	return;
 }
 
-void MCrux::Initialize()
+void MCrux::Initialize(
+#ifndef WIN32
+    int argc, char **argv
+#endif
+    )
 {
 #ifdef WIN32
-	// Initialize Common controls
-    INITCOMMONCONTROLSEX InitCtrlEx;
+  // Initialize Common controls
+  INITCOMMONCONTROLSEX InitCtrlEx;
 
-    InitCtrlEx.dwSize = sizeof(INITCOMMONCONTROLSEX);
-    InitCtrlEx.dwICC  = 0x00004000; //ICC_STANDARD_CLASSES;
-    InitCommonControlsEx(&InitCtrlEx);
+  InitCtrlEx.dwSize = sizeof(INITCOMMONCONTROLSEX);
+  InitCtrlEx.dwICC  = 0x00004000; //ICC_STANDARD_CLASSES;
+  InitCommonControlsEx(&InitCtrlEx);
 
-	MCruxWin32Window::initWindowClass(GetModuleHandle(NULL));
+  MCruxWindow::initWindowClass(GetModuleHandle(NULL));
 
-	// Init COM
-    OleInitialize(NULL);
+  // Init COM
+  OleInitialize(NULL);
+#else
+  gtk_init (&argc, &argv);
+  if (!g_thread_supported ())
+    g_thread_init (NULL);
+
 #endif
 }
 
 void MCrux::UnInitialize()
 {
 #ifdef WIN32
-    // Shut down COM.
-    OleUninitialize();
-	MCruxWin32Window::unInitWindowClass(GetModuleHandle(NULL));
+  // Shut down COM.
+  OleUninitialize();
+  MCruxWindow::unInitWindowClass(GetModuleHandle(NULL));
 #endif
 }
 
 
-bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
+
+bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName
+#ifndef WIN32
+    , int argc, char **argv
+#endif
+    )
 {
-	bool bRet = false;
-	Initialize();
+  bool bRet = false;
+  Initialize(
+#ifndef WIN32
+    argc, argv
+#endif
+  );
 
-	// parse the given configuration file
-	MCruxSpecParser parser;
-	parser.parse(mcruxAppConfigFileName);
+  // parse the given configuration file
+  MCruxSpecParser parser;
+  parser.parse(mcruxAppConfigFileName);
 
-	list<MCruxWindowConfiguration*> mcruxWindowConfigs;
-	parser.getWindowConfigList(mcruxWindowConfigs);
+  list<MCruxWindowConfiguration*> mcruxWindowConfigs;
+  parser.getWindowConfigList(mcruxWindowConfigs);
 
-	list<wstring> plugins;
-	parser.getPlugins(plugins);
+  list<wstring> plugins;
+  parser.getPlugins(plugins);
+
 #ifdef WIN32
-	MCruxPluginManager pluginManager(plugins);
-	MCruxWindowManager windowManager(mcruxWindowConfigs, &pluginManager);
+  MCruxPluginManager pluginManager(plugins);
 #endif
 
-	if(mcruxWindowConfigs.size())
-	{
+  MCruxWindowManager windowManager(mcruxWindowConfigs
 #ifdef WIN32
-		HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
-
-		MSG msg;
-		// Main message loop:
-		while (GetMessage(&msg, NULL, 0, 0))
-		{
-			if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-			{
-				TranslateMessage(&msg);
-				DispatchMessage(&msg);
-			}
-		}
-		bRet = true;
+      , &pluginManager
 #endif
-	}
-	else
-	{
+      );
+
+  if(mcruxWindowConfigs.size())
+  {
 #ifdef WIN32
-		::MessageBoxA(0, "mcruxspec file does not have any windows\n you can refer documentation at http://code.google.com/p/mcrux/wiki/MCruxSpecFile", "error", MB_OK);
+    HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
+
+    MSG msg;
+    // Main message loop:
+    while (GetMessage(&msg, NULL, 0, 0))
+    {
+      if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+      {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+      }
+    }
+    bRet = true;
+#else // for linux
+    gtk_main();
+
+#endif
+  }
+  else
+  {
+#ifdef WIN32
+    ::MessageBoxA(0, "mcruxspec file does not have any windows\n you can refer documentation at http://code.google.com/p/mcrux/wiki/MCruxSpecFile", "error", MB_OK);
 #else
-		cout << "error: mcruxspec file does not have any windows" << endl 
+    cout << "error: mcruxspec file does not have any windows" << endl 
       << "you can refer documentation at http://code.google.com/p/mcrux/wiki/MCruxSpecFile" << endl;
 #endif
-	}
+  }
 
-	UnInitialize();
-	return bRet;
+  UnInitialize();
+  return bRet;
 }

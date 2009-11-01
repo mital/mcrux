@@ -34,16 +34,24 @@ using namespace std;
 
 class MCRUX_API MCrux
 {
-	void Initialize();
+  void Initialize(
+#ifndef WIN32
+      int argc, char **argv
+#endif
+      );
 
-	void UnInitialize();
+  void UnInitialize();
 
-public:
+  public:
 
-	MCrux();
-	~MCrux();
+  MCrux();
+  ~MCrux();
 
-	bool InitializeAndRunWith(const string & mcruxAppConfigFileName);
+  bool InitializeAndRunWith(const string & mcruxAppConfigFileName
+#ifndef WIN32
+      , int argc, char **argv
+#endif
+      );
 };
 
 #endif // _MCRUX_H_

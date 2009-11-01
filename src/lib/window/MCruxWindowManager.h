@@ -22,7 +22,10 @@
 
 #include <list>
 #include <abstract/MCruxWindow.h>
+
+#ifdef WIN32
 #include <plugin/MCruxPluginManager.h>
+#endif
 
 class MCruxWindowManager
 {
