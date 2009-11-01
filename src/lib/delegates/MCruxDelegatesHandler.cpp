@@ -21,7 +21,7 @@
 
 #include <jscore/MJSCoreObjectFactory.h>
 #include "MCruxDelegatesHandler.h"
-#include "windowsnative/MCruxWindowManager.h"
+#include "window/MCruxWindowManager.h"
 
 MCruxDelegatesHandler::MCruxDelegatesHandler()
 	: pluginManager(NULL),
