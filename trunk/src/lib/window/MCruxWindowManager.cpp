@@ -35,6 +35,7 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 		oIter++)
 		{
 			MCruxWindowConfiguration * mainWindowConfig = *oIter;
+#ifdef WIN32
 			MCruxWindow * newWindow = new MCruxWindow(mainWindowConfig,
 #ifdef WIN32
 				pluginManager,
@@ -43,6 +44,7 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 			newWindow->ShowWindow();
 			newWindow->UpdateWindow();
 			windows.push_back(newWindow);
+#endif
 		}
 	}
 }
