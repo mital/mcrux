@@ -19,13 +19,14 @@
 
 // MCrux.cpp : Defines the entry point for the DLL application.
 //
-
-#include "stdafx.h"
-
+#ifdef WIN32
+#include "../win32/stdafx.h"
 #include <commctrl.h>
 #include <objbase.h>
 #include <shlwapi.h>
 #include <wininet.h>
+#endif
+
 
 #include "MCrux.h"
 #include "MCruxSpecParser.h"

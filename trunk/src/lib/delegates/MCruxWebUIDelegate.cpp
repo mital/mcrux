@@ -17,8 +17,6 @@
  * @author: Mital Vora.
  **/
 
-#include "StdAfx.h"
-
 #include "MCruxWebUIDelegate.h"
 
 #include <comdef.h>

@@ -16,8 +16,6 @@
  *
  * @author: Mital Vora.
  **/
-
-#include "stdafx.h"
 #include <jscore/JSStringUtils.h>
 #include <jscore/MJSCoreUtils.h>
 #include <jscore/MJSCoreObjectFactory.h>

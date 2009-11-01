@@ -16,10 +16,6 @@
 *
 * @author: Mital Vora.
 **/
-
-
-#include <stdafx.h>
-
 #include "MObject.h"
 
 MObject::MObject()

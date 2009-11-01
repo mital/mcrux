@@ -16,10 +16,6 @@
 *
 * @author: Mital Vora.
 **/
-
-
-#include <stdafx.h>
-
 #include "MObjectContainer.h"
 
 MObjectContainer::MObjectContainer()

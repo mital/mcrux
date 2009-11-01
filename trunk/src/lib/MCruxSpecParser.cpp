@@ -17,9 +17,6 @@
  * @author: Mital Vora.
  **/
 
-#ifdef WIN32
-#include "StdAfx.h"
-#endif
 #include "MCruxSpecParser.h"
 #include <algorithm>
 

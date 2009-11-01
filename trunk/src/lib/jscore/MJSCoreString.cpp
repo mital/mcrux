@@ -16,10 +16,6 @@
 *
 * @author: Mital Vora.
 **/
-
-
-#include <stdafx.h>
-
 #include <string>
 
 #include "MJSCoreString.h"

@@ -16,7 +16,7 @@
 *
 * @author: Mital Vora.
 **/
-#include "stdafx.h"
+
 #include "MObjectArray.h"
 
 MObjectArray::MObjectArray()

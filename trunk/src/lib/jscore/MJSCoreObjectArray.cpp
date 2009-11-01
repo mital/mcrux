@@ -16,9 +16,6 @@
  *
  * @author: Mital Vora.
  **/
-
-#include <stdafx.h>
-
 #include "MJSCoreUtils.h"
 #include "MJSCoreObjectArray.h"
 #include "MJSCoreObjectFactory.h"

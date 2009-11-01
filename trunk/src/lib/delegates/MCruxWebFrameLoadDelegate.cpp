@@ -17,7 +17,7 @@
  * @author: Mital Vora.
  **/
 
-#include "StdAfx.h"
+
 #include "MCruxWebFrameLoadDelegate.h"
 
 #include <JavaScriptCore/JSContextRef.h>

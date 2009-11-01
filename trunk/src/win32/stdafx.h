@@ -22,8 +22,8 @@
 // are changed infrequently
 //
 
-#pragma once
-
+#ifndef _STDAFX_H_
+#define _STDAFX_H_
 // Modify the following defines if you have to target a platform prior to the ones specified below.
 // Refer to MSDN for the latest info on corresponding values for different platforms.
 #ifndef WINVER				// Allow use of features specific to Windows XP or later.
@@ -49,3 +49,5 @@
 
 // TODO: move this in separate file.
 #define MAX_LOADSTRING 128
+
+#endif
