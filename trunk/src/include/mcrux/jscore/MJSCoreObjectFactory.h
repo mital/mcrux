@@ -20,7 +20,9 @@
 #ifndef _MJSCOREOBJECTFACTORY_H_
 #define _MJSCOREOBJECTFACTORY_H_
 
-#include <abstract/MCruxExport.h>
+#ifdef WIN32
+#include <win32/MCruxExport.h>
+#endif
 
 #include <jscore/MJSCoreBool.h>
 #include <jscore/MJSCoreObject.h>

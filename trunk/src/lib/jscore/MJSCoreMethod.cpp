@@ -18,9 +18,9 @@
 **/
 #include <string>
 
-#include "MJSCoreUtils.h"
-#include "MJSCoreMethod.h"
-#include <abstract/MObjectContainer.h>
+#include <jscore/MJSCoreUtils.h>
+#include <jscore/MJSCoreMethod.h>
+#include <mcrux/abstract/MObjectContainer.h>
 
 
 MJSCoreMethod::MJSCoreMethod(JSContextRef _ctx, MCruxMethodCallback * _method)

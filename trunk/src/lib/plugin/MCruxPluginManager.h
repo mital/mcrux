@@ -31,7 +31,7 @@ using namespace std;
 
 #include <WebKit/WebKit.h>
 
-#include "MCrux.h"
+#include <mcrux/MCrux.h>
 #include "MCruxJSObject.h"
 
 class MCruxWindow;

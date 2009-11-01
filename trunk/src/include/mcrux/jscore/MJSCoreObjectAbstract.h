@@ -25,8 +25,8 @@
 #include <JavaScriptCore/JSContextRef.h>
 #include <JavaScriptCore/JSStringRef.h>
 
-#include "abstract/MObject.h"
-#include "abstract/MObjectArray.h"
+#include <mcrux/abstract/MObject.h>
+#include <mcrux/abstract/MObjectArray.h>
 
 enum JSOBJECTTYPE_en
 {

@@ -16,7 +16,7 @@
  *
  * @author: Mital Vora.
  **/
-#ifdef WIN32
+
 #include "../win32/stdafx.h"
 
 // C RunTime Header Files
@@ -24,7 +24,6 @@
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
-#endif
 
 #include <MCrux/MCrux.h>
 

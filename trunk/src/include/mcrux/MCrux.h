@@ -17,21 +17,31 @@
  * @author: Mital Vora.
  **/
 
-#ifndef _JSSTRINGUTILS_H_
-#define _JSSTRINGUTILS_H_
 
+#ifndef _MCRUX_H_
+#define _MCRUX_H_
 
 #include <iostream>
 
 using namespace std;
 
-#include <JavaScriptCore/JSStringRef.h>
+#ifdef WIN32
+#include <win32/MCruxExport.h>
+#endif
 
-#include <abstract/MCruxExport.h>
 
+class MCRUX_API MCrux
+{
+	void Initialize();
 
-MCRUX_API char * getStringValueFrom(JSContextRef ctx, JSValueRef strValue);
-MCRUX_API char * getStringValueFrom(JSContextRef ctx, JSStringRef strValue);
-MCRUX_API double getDoubleValueFrom(JSContextRef ctx, JSValueRef strValue);
+	void UnInitialize();
 
-#endif // _JSSTRINGUTILS_H_
+public:
+
+	MCrux();
+	~MCrux();
+
+	bool InitializeAndRunWith(const string & mcruxAppConfigFileName);
+};
+
+#endif // _MCRUX_H_

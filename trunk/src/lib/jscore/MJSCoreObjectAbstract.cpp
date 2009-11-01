@@ -16,8 +16,8 @@
 *
 * @author: Mital Vora.
 **/
-#include "MJSCoreUtils.h"
-#include "MJSCoreObjectAbstract.h"
+#include <jscore/MJSCoreUtils.h>
+#include <jscore/MJSCoreObjectAbstract.h>
 
 
 MJSCoreObjectAbstract::MJSCoreObjectAbstract(JSContextRef _ctx, JSOBJECTTYPE_en _type)

@@ -18,7 +18,7 @@
 **/
 #include <string>
 
-#include "MJSCoreString.h"
+#include <jscore/MJSCoreString.h>
 
 
 MJSCoreString::MJSCoreString(JSContextRef _ctx, const std::string & _str)

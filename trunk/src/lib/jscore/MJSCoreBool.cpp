@@ -18,7 +18,7 @@
 **/
 #include <string>
 
-#include "MJSCoreBool.h"
+#include <jscore/MJSCoreBool.h>
 
 
 MJSCoreBool::MJSCoreBool(JSContextRef _ctx, bool _bValue)
