@@ -17,7 +17,7 @@
  * @author: Mital Vora.
  **/
 #include "MCruxWindowManager.h"
-
+#include <window/MCruxWin32Window.h>
 
 MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations
 #ifdef WIN32
@@ -36,14 +36,12 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 		{
 			MCruxWindowConfiguration * mainWindowConfig = *oIter;
 #ifdef WIN32
-			MCruxWindow * newWindow = new MCruxWindow(mainWindowConfig,
-#ifdef WIN32
-				pluginManager,
-#endif
-				this);
+			MCruxWindow * newWindow = new MCruxWin32Window(mainWindowConfig, pluginManager, this);
 			newWindow->ShowWindow();
 			newWindow->UpdateWindow();
 			windows.push_back(newWindow);
+#else
+			//MCruxWindow * newWindow = 
 #endif
 		}
 	}
@@ -59,10 +57,10 @@ MCruxWindowManager::~MCruxWindowManager()
 IWebView * MCruxWindowManager::createWindow(IWebURLRequest *request)
 {
 	MCruxWindowConfiguration * mainWindowConfig = new MCruxWindowConfiguration(L"title", 200, 200, request);
-	MCruxWindow * newWindow = new MCruxWindow(mainWindowConfig, pluginManager, this);
+	MCruxWindow * newWindow = new MCruxWin32Window(mainWindowConfig, pluginManager, this);
 	//newWindow->ShowWindow();
 	//newWindow->UpdateWindow();
 	windows.push_back(newWindow);
-	return newWindow->getMCruxWebView()->getWebView();
+	return ((MCruxWin32Window*)(newWindow))->getMCruxWebView()->getWebView();
 }
 #endif

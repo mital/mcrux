@@ -21,6 +21,7 @@
 //
 #include <mcrux/MCrux.h>
 #include "MCruxSpecParser.h"
+#include <window/MCruxWindowManager.h>
 
 #ifdef WIN32
 #include "../win32/stdafx.h"
@@ -29,7 +30,7 @@
 #include <shlwapi.h>
 #include <wininet.h>
 
-#include "window/MCruxWindowManager.h"
+#include "window/MCruxWin32Window.h"
 
 #ifdef _MANAGED
 #pragma managed(push, off)
@@ -77,7 +78,7 @@ void MCrux::Initialize()
     InitCtrlEx.dwICC  = 0x00004000; //ICC_STANDARD_CLASSES;
     InitCommonControlsEx(&InitCtrlEx);
 
-	MCruxWindow::initWindowClass(GetModuleHandle(NULL));
+	MCruxWin32Window::initWindowClass(GetModuleHandle(NULL));
 
 	// Init COM
     OleInitialize(NULL);
@@ -89,7 +90,7 @@ void MCrux::UnInitialize()
 #ifdef WIN32
     // Shut down COM.
     OleUninitialize();
-	MCruxWindow::unInitWindowClass(GetModuleHandle(NULL));
+	MCruxWin32Window::unInitWindowClass(GetModuleHandle(NULL));
 #endif
 }
 
