@@ -4,7 +4,9 @@ INCLUDES = -I@top_srcdir@/lib
 
 SUBDIRS = .
 
+noinst_HEADERS=MCruxSpecParser.h
+
 lib_LTLIBRARIES = libmcrux_common.la
 
 libmcrux_common_la_SOURCES = \
-	MCruxSpecParser.h MCruxSpecParser.cpp
+	MCruxSpecParser.cpp
