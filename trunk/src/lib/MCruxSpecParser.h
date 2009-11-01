@@ -39,7 +39,7 @@ using namespace std;
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include "windowsnative/MCruxWindowConfiguration.h"
+#include "window/MCruxWindowConfiguration.h"
 
 namespace XMLParser
 {

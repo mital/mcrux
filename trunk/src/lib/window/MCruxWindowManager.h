@@ -20,8 +20,8 @@
 #ifndef _MCRUXWINDOWMANAGER_H_
 #define _MCRUXWINDOWMANAGER_H_
 
-#include "windowsnative/MCruxWindow.h"
-#include "windowsnative/MCruxWindowConfiguration.h"
+#include "window/MCruxWindow.h"
+#include "window/MCruxWindowConfiguration.h"
 
 
 class MCruxWindowManager

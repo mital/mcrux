@@ -316,21 +316,43 @@
 			</Filter>
 		</Filter>
 		<Filter
-			Name="windowsnative"
+			Name="window"
 			>
 			<Filter
 				Name="Header Files"
 				>
 				<File
-					RelativePath="..\..\src\lib\windowsnative\MCruxWindow.h"
+					RelativePath="..\..\src\lib\window\MCruxWindow.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\lib\windowsnative\MCruxWindowConfiguration.h"
+					RelativePath="..\..\src\lib\window\MCruxWindowConfiguration.cpp"
+					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\src\lib\window\MCruxWindowConfiguration.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\lib\windowsnative\MCruxWindowManager.h"
+					RelativePath="..\..\src\lib\window\MCruxWindowManager.h"
 					>
 				</File>
 			</Filter>
@@ -338,16 +360,48 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath="..\..\src\lib\windowsnative\MCruxWindow.cpp"
+					RelativePath="..\..\src\lib\window\MCruxWindow.cpp"
 					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
 				</File>
 				<File
-					RelativePath="..\..\src\lib\windowsnative\MCruxWindowConfiguration.cpp"
+					RelativePath="..\..\src\lib\window\MCruxWindowManager.cpp"
 					>
-				</File>
-				<File
-					RelativePath="..\..\src\lib\windowsnative\MCruxWindowManager.cpp"
-					>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							ObjectFile="$(IntDir)\$(InputName)1.obj"
+							XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+						/>
+					</FileConfiguration>
 				</File>
 			</Filter>
 		</Filter>

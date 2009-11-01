@@ -31,7 +31,7 @@
 #include <mcrux/MCrux.h>
 #include "MCruxSpecParser.h"
 
-#include "windowsnative/MCruxWindowManager.h"
+#include "window/MCruxWindowManager.h"
 
 
 #ifdef _MANAGED
