@@ -20,7 +20,10 @@
 #ifndef _MCRUXWINDOWMANAGER_H_
 #define _MCRUXWINDOWMANAGER_H_
 
+#include <list>
+#ifdef WIN32
 #include "window/MCruxWindow.h"
+#endif
 #include "window/MCruxWindowConfiguration.h"
 
 
@@ -31,13 +34,14 @@ class MCruxWindowManager
 	MCruxPluginManager * pluginManager;
 #endif
 
+#ifdef WIN32
 	list<MCruxWindow *> windows;
-
+#endif
 public:
 
-	MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations,
+	MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations
 #ifdef WIN32
-		MCruxPluginManager * _pluginManager
+		,MCruxPluginManager * _pluginManager
 #endif
 		);
 

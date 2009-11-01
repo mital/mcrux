@@ -4,9 +4,13 @@ INCLUDES = -I@top_srcdir@/lib
 
 SUBDIRS = .
 
-noinst_HEADERS=MCruxWindowConfiguration.h
+noinst_HEADERS = \
+	MCruxWindowConfiguration.h \
+	MCruxWindowManager.h
 
 lib_LTLIBRARIES = libmcrux_window.la
 
 libmcrux_window_la_SOURCES = \
-	MCruxWindowConfiguration.cpp
+	MCruxWindowConfiguration.cpp \
+	MCruxWindowManager.cpp
+
