@@ -27,6 +27,8 @@ using namespace std;
 
 #ifdef WIN32
 #include <win32/MCruxExport.h>
+#else
+#define MCRUX_API
 #endif
 
 

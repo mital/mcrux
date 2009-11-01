@@ -146,7 +146,6 @@ bool MCruxSpecParser::parsePluginsElement(xmlNode *pluginsNode)
 bool MCruxSpecParser::parseMCruxSpecXMLNSVersion1(xmlNode *root_child)
 {
 	const xmlChar * mCruxSpecWindowsName = xmlCharStrdup(MCRUXSPEC_WINDOWS_NAME);
-	const xmlChar * mCruxSpecWindowName = xmlCharStrdup(MCRUXSPEC_WINDOW_NAME);
 	const xmlChar * mCruxSpecPluginsName = xmlCharStrdup(MCRUXSPEC_PLUGINS_NAME);
 
 	for (xmlNode *cur_node = root_child;

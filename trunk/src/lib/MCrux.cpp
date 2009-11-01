@@ -19,20 +19,17 @@
 
 // MCrux.cpp : Defines the entry point for the DLL application.
 //
+#include <mcrux/MCrux.h>
+#include "MCruxSpecParser.h"
+
 #ifdef WIN32
 #include "../win32/stdafx.h"
 #include <commctrl.h>
 #include <objbase.h>
 #include <shlwapi.h>
 #include <wininet.h>
-#endif
-
-
-#include <mcrux/MCrux.h>
-#include "MCruxSpecParser.h"
 
 #include "window/MCruxWindowManager.h"
-
 
 #ifdef _MANAGED
 #pragma managed(push, off)
@@ -58,6 +55,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 #pragma managed(pop)
 #endif
 
+#endif
 
 MCrux::MCrux()
 {
@@ -71,6 +69,7 @@ MCrux::~MCrux()
 
 void MCrux::Initialize()
 {
+#ifdef WIN32
 	// Initialize Common controls
     INITCOMMONCONTROLSEX InitCtrlEx;
 
@@ -82,13 +81,16 @@ void MCrux::Initialize()
 
 	// Init COM
     OleInitialize(NULL);
+#endif
 }
 
 void MCrux::UnInitialize()
 {
+#ifdef WIN32
     // Shut down COM.
     OleUninitialize();
 	MCruxWindow::unInitWindowClass(GetModuleHandle(NULL));
+#endif
 }
 
 
@@ -106,12 +108,14 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 
 	list<wstring> plugins;
 	parser.getPlugins(plugins);
-
+#ifdef WIN32
 	MCruxPluginManager pluginManager(plugins);
 	MCruxWindowManager windowManager(mcruxWindowConfigs, &pluginManager);
+#endif
 
 	if(mcruxWindowConfigs.size())
 	{
+#ifdef WIN32
 		HACCEL hAccelTable = NULL;// LoadAccelerators(::GetModuleHandle(NULL), MAKEINTRESOURCE(IDC_blah));
 
 		MSG msg;
@@ -125,10 +129,16 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName)
 			}
 		}
 		bRet = true;
+#endif
 	}
 	else
 	{
+#ifdef WIN32
 		::MessageBoxA(0, "mcruxspec file does not have any windows\n you can refer documentation at http://code.google.com/p/mcrux/wiki/MCruxSpecFile", "error", MB_OK);
+#else
+		cout << "error: mcruxspec file does not have any windows" << endl 
+      << "you can refer documentation at http://code.google.com/p/mcrux/wiki/MCruxSpecFile" << endl;
+#endif
 	}
 
 	UnInitialize();
