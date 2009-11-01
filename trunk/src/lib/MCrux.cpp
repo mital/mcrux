@@ -24,6 +24,7 @@
 #include <window/MCruxWindowManager.h>
 
 #ifdef WIN32
+#include "window/MCruxWin32Window.h"
 #include "../win32/stdafx.h"
 #include <commctrl.h>
 #include <objbase.h>
@@ -82,7 +83,7 @@ void MCrux::Initialize(
   InitCtrlEx.dwICC  = 0x00004000; //ICC_STANDARD_CLASSES;
   InitCommonControlsEx(&InitCtrlEx);
 
-  MCruxWindow::initWindowClass(GetModuleHandle(NULL));
+  MCruxWin32Window::initWindowClass(GetModuleHandle(NULL));
 
   // Init COM
   OleInitialize(NULL);
@@ -99,7 +100,7 @@ void MCrux::UnInitialize()
 #ifdef WIN32
   // Shut down COM.
   OleUninitialize();
-  MCruxWindow::unInitWindowClass(GetModuleHandle(NULL));
+  MCruxWin32Window::unInitWindowClass(GetModuleHandle(NULL));
 #endif
 }
 
