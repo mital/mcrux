@@ -26,51 +26,20 @@
 using namespace std;
 
 #include <window/MCruxWindowConfiguration.h>
-#include "MCruxWebView.h"
-
-#include "plugin/MCruxPluginManager.h"
-
-#include "delegates/MCruxDelegatesHandler.h"
-#include "delegates/MCruxWebUIDelegate.h"
-#include "delegates/MCruxWebFrameLoadDelegate.h"
-
-class MCruxWindowManager;
 
 class MCruxWindow
 {
-	HINSTANCE hInstance;
-	HWND hWnd;
+protected:
 	const MCruxWindowConfiguration * config;
 
-	// webView
-	MCruxWebView webView;
-
-	// delegates
-	MCruxWebUIDelegate webUIDelegate;
-	MCruxWebFrameLoadDelegate webFrameLoadDelegate;
-	MCruxDelegatesHandler delegatesHandler;
-
-	static TCHAR * getWindowClassName();
-	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-
-	static map<HWND, MCruxWindow *> mcruxWindows;
-	static map<IWebView *, MCruxWindow *> mcruxWindowsFromViews;
-
 public:
-	MCruxWindow(const MCruxWindowConfiguration * _config,
-		MCruxPluginManager * pluginManager,
-		MCruxWindowManager * windowManager);
-	~MCruxWindow();
+	MCruxWindow(const MCruxWindowConfiguration * _config);
+	virtual ~MCruxWindow();
 
-	int ShowWindow() const;
-	int HideWindow() const;
-	int UpdateWindow() const;
-	void resize() const;
-	MCruxWebView * getMCruxWebView();
-
-	static void initWindowClass(HINSTANCE hInstance);
-	static void unInitWindowClass(HINSTANCE hInstance);
-	static MCruxWindow * getMCruxWindowFrom(IWebView * webView);
+	virtual int ShowWindow() const=0;
+	virtual int HideWindow() const=0;
+	virtual int UpdateWindow() const=0;
+	virtual void resize() const=0;
 };
 
 #endif // _MCRUXWINDOW_H_

@@ -322,7 +322,7 @@
 				Name="Header Files"
 				>
 				<File
-					RelativePath="..\..\src\lib\window\MCruxWindow.h"
+					RelativePath="..\..\src\lib\window\MCruxWin32Window.h"
 					>
 				</File>
 				<File
@@ -338,7 +338,7 @@
 				Name="Source Files"
 				>
 				<File
-					RelativePath="..\..\src\lib\window\MCruxWindow.cpp"
+					RelativePath="..\..\src\lib\window\MCruxWin32Window.cpp"
 					>
 				</File>
 				<File
@@ -362,6 +362,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\src\lib\abstract\MCruxWindow.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\src\include\mcrux\abstract\MObject.h"
 					>
 				</File>
@@ -377,6 +381,10 @@
 			<Filter
 				Name="Source files"
 				>
+				<File
+					RelativePath="..\..\src\lib\abstract\MCruxWindow.cpp"
+					>
+				</File>
 				<File
 					RelativePath="..\..\src\lib\abstract\MObject.cpp"
 					>

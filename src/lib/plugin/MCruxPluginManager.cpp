@@ -19,6 +19,7 @@
 #include "abstract/MCruxWindow.h"
 
 #include "MCruxJSObject.h"
+#include "MCruxPluginManager.h"
 
 #include <jscore/MJSCoreObject.h>
 #include <jscore/MJSCoreObjectFactory.h>
