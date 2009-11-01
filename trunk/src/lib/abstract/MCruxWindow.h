@@ -25,7 +25,7 @@
 
 using namespace std;
 
-#include "MCruxWindowConfiguration.h"
+#include <window/MCruxWindowConfiguration.h>
 #include "MCruxWebView.h"
 
 #include "plugin/MCruxPluginManager.h"
