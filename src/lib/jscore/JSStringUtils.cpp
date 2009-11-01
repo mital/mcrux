@@ -16,7 +16,7 @@
  *
  * @author: Mital Vora.
  **/
-#include "JSStringUtils.h"
+#include <jscore/JSStringUtils.h>
 
 
 char * getStringValueFrom(JSContextRef ctx, JSValueRef strValue)

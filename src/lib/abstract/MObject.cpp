@@ -16,7 +16,7 @@
 *
 * @author: Mital Vora.
 **/
-#include "MObject.h"
+#include <mcrux/abstract/MObject.h>
 
 MObject::MObject()
 {

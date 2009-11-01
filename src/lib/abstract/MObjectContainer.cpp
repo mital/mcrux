@@ -16,7 +16,7 @@
 *
 * @author: Mital Vora.
 **/
-#include "MObjectContainer.h"
+#include <mcrux/abstract/MObjectContainer.h>
 
 MObjectContainer::MObjectContainer()
   : obj(NULL)

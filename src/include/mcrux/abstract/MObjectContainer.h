@@ -17,25 +17,24 @@
 * @author: Mital Vora.
 **/
 
-#ifndef _MOBJECT_H_
-#define _MOBJECT_H_
+#ifndef _MOBJECT_CONTAINER_H_
+#define _MOBJECT_CONTAINER_H_
 
+#include <mcrux/abstract/MObject.h>
 
-#include "abstract/callback.h"
-#include <abstract/MCruxExport.h>
+#ifdef WIN32
+#include "../win32/stdafx.h"
+#endif
 
-class MObject;
-class MObjectArray;
-class MObjectContainer;
-
-typedef Callback2<const MObjectArray&, MObjectContainer &>::Type MCruxMethodCallback;
-
-
-class MCRUX_API MObject
+class MCRUX_API MObjectContainer
 {
+	MObject * obj;
 public:
-	MObject();
-	virtual ~MObject();
+	MObjectContainer();
+	virtual ~MObjectContainer();
+
+	void set(MObject * _obj);
+	MObject * get() const;
 };
 
-#endif // _MOBJECT_H_
+#endif // _MOBJECT_CONTAINER_H_

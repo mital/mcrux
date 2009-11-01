@@ -16,9 +16,9 @@
  *
  * @author: Mital Vora.
  **/
-#include "MJSCoreUtils.h"
-#include "MJSCoreObjectArray.h"
-#include "MJSCoreObjectFactory.h"
+#include <jscore/MJSCoreUtils.h>
+#include <jscore/MJSCoreObjectArray.h>
+#include <jscore/MJSCoreObjectFactory.h>
 
 
 MJSCoreObjectArray::MJSCoreObjectArray(JSContextRef _ctx, const std::vector<MJSCoreObject *>& files)

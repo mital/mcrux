@@ -18,7 +18,7 @@
 **/
 #include <string>
 
-#include "MJSCoreNumber.h"
+#include <jscore/MJSCoreNumber.h>
 
 
 MJSCoreNumber::MJSCoreNumber(JSContextRef _ctx, double _number)

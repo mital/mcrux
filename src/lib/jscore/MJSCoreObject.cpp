@@ -19,11 +19,11 @@
 #include <string>
 
 #include <jscore/JSStringUtils.h>
-#include "MJSCoreUtils.h"
-#include "MJSCoreObject.h"
-#include "MJSCoreObjectFactory.h"
+#include <jscore/MJSCoreUtils.h>
+#include <jscore/MJSCoreObject.h>
+#include <jscore/MJSCoreObjectFactory.h>
 
-#include "abstract/MObjectContainer.h"
+#include <mcrux/abstract/MObjectContainer.h>
 
 
 MJSCoreObject::MJSCoreObject(JSContextRef _ctx,

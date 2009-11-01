@@ -16,8 +16,8 @@
  *
  * @author: Mital Vora.
  **/
-#include "MJSCoreUtils.h"
-#include "MJSCoreObjectFactory.h"
+#include <jscore/MJSCoreUtils.h>
+#include <jscore/MJSCoreObjectFactory.h>
 
 #include <jscore/JSStringUtils.h>
 

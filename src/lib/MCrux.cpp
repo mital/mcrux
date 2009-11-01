@@ -28,7 +28,7 @@
 #endif
 
 
-#include "MCrux.h"
+#include <mcrux/MCrux.h>
 #include "MCruxSpecParser.h"
 
 #include "windowsnative/MCruxWindowManager.h"
