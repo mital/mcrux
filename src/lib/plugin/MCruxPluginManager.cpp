@@ -16,10 +16,6 @@
  *
  * @author: Mital Vora.
  **/
-
-
-#include "StdAfx.h"
-
 #include "windowsnative/MCruxWindow.h"
 
 #include "MCruxJSObject.h"

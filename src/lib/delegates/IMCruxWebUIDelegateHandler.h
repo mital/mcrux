@@ -20,6 +20,9 @@
 #ifndef _IMCRUXWEBUIDELEGATEHANDLER_H_
 #define _IMCRUXWEBUIDELEGATEHANDLER_H_
 
+#ifdef WIN32
+#include "../win32/stdafx.h"
+#endif
 
 #include <WebKit/WebKit.h>
 

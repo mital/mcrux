@@ -16,8 +16,6 @@
  *
  * @author: Mital Vora.
  **/
-
-#include "StdAfx.h"
 #include <shlwapi.h>
 #include <wininet.h>
 

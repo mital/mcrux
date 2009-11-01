@@ -16,8 +16,16 @@
  *
  * @author: Mital Vora.
  **/
+#ifdef WIN32
+#include "../win32/stdafx.h"
 
-#include "stdafx.h"
+// C RunTime Header Files
+#include <stdlib.h>
+#include <malloc.h>
+#include <memory.h>
+#include <tchar.h>
+#endif
+
 #include <MCrux/MCrux.h>
 
 int APIENTRY _tWinMain(HINSTANCE hInstance,

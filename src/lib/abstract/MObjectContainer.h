@@ -22,6 +22,9 @@
 
 #include <abstract/MObject.h>
 
+#ifdef WIN32
+#include "../win32/stdafx.h"
+#endif
 
 class MCRUX_API MObjectContainer
 {

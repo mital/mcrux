@@ -16,8 +16,6 @@
  *
  * @author: Mital Vora.
  **/
-
-#include "StdAfx.h"
 #include <tchar.h>
 
 #include "MCruxWindowConfiguration.h"

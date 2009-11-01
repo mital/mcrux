@@ -20,6 +20,10 @@
 #ifndef _IMCRUXWEBFRAMELOADDELEGATEHANDLER_H_
 #define _IMCRUXWEBFRAMELOADDELEGATEHANDLER_H_
 
+#ifdef WIN32
+#include "../win32/stdafx.h"
+#endif
+
 #include <WebKit/WebKit.h>
 
 
