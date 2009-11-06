@@ -24,8 +24,11 @@
 
 using namespace std;
 
+#ifdef WIN32
 #include <webkit/webkit.h>
-
+#else
+#include <QtWebKit/QtWebKit>
+#endif
 class MCruxWindowConfiguration
 {
 	const wstring windowTitle;
