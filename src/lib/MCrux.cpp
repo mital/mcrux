@@ -57,7 +57,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
 
 
 #else // for linux
-#include <gtk/gtk.h>
+#include <QtGui/QtGui>
 #endif
 
 MCrux::MCrux()
@@ -88,9 +88,9 @@ void MCrux::Initialize(
   // Init COM
   OleInitialize(NULL);
 #else
-  gtk_init (&argc, &argv);
-  if (!g_thread_supported ())
-    g_thread_init (NULL);
+  //gtk_init (&argc, &argv);
+  //if (!g_thread_supported ())
+    //g_thread_init (NULL);
 
 #endif
 }
@@ -113,11 +113,11 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName
     )
 {
   bool bRet = false;
-  Initialize(
-#ifndef WIN32
-    argc, argv
+#ifdef WIN32
+  Initialize();
+#else
+  QApplication app(argc, argv);
 #endif
-  );
 
   // parse the given configuration file
   MCruxSpecParser parser;
@@ -156,8 +156,9 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName
     }
     bRet = true;
 #else // for linux
-    gtk_main();
+  //  gtk_main();
 
+    return app.exec();
 #endif
   }
   else
@@ -170,6 +171,8 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName
 #endif
   }
 
+#ifdef WIN32
   UnInitialize();
+#endif
   return bRet;
 }
