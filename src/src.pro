@@ -5,6 +5,7 @@
 TEMPLATE = app
 TARGET = mcrux.bin
 LIBS += -lxml2
+QT += webkit
 DEPENDPATH += . \
               /usr/include/libxml2 \
               bin \
@@ -27,6 +28,7 @@ HEADERS += lib/MCruxSpecParser.h \
 SOURCES += bin/mcrux_linux.cpp \
            lib/MCrux.cpp \
            lib/MCruxSpecParser.cpp \
+           lib/MCruxWebView.cpp \
            lib/abstract/MCruxWindow.cpp \
            lib/window/MCruxQTWindow.cpp \
            lib/window/MCruxWindowConfiguration.cpp \

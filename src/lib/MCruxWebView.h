@@ -24,39 +24,59 @@
 
 using namespace std;
 
+#ifdef WIN32
 #include <WebKit/WebKit.h>
 
 #include "delegates/MCruxWebUIDelegate.h"
 #include "delegates/MCruxWebFrameLoadDelegate.h"
 
+#else // for linux
+#include <QtGui>
+
+class QWebView;
+class MCruxQTWindow;
+#endif
 
 class MCruxWebView
 {
+#ifdef WIN32
 	HWND hParentWindow;
 	IWebView* webView;
 	HWND hWebViewWindow;
 	const BSTR httpGetMethod;
-
 	bool initWithHostWindow(HWND hWnd);
+
+#else // for linux
+  QWebView* webView;
+  MCruxQTWindow * parentWindow;
+#endif
+
 	bool loadPage(const wstring & defaultPageText) const;
 	bool storeViewWindowHandle();
 
 public:
-	MCruxWebView();
+	MCruxWebView(
+#ifndef WIN32 // for linux
+      MCruxQTWindow * _parentWindow
+#endif
+      );
 	~MCruxWebView();
 
 	bool createWebView();
+	bool navigateTo(const wstring & url);
+
+#ifdef WIN32
 	bool setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate);
 	bool setWebUIDelegate(MCruxWebUIDelegate * webUIDelegate);
-	void resizeSubView() const;
 
+	void resizeSubView() const;
 	bool loadPageInWindow(HWND hWnd, const wstring & defaultPageText);
 	bool loadURLInWindow(HWND hWnd, const wstring & url);
 	bool loadURLRequestInWindow(HWND hWnd, IWebURLRequest *request);
 
-	bool navigateTo(const wstring & url);
 	bool navigateTo(IWebURLRequest *request);
 	IWebView * getWebView();
+#endif
 };
 
 #endif // _MCRUXWEBVIEW_H_

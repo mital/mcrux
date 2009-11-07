@@ -95,25 +95,25 @@ MCruxWin32Window::~MCruxWin32Window()
 	delete config;
 }
 
-int MCruxWin32Window::ShowWindow() const
+int MCruxWin32Window::ShowWindow()
 {
 	return ::ShowWindow(hWnd, SW_SHOW);
 }
 
 
-int MCruxWin32Window::HideWindow() const
+int MCruxWin32Window::HideWindow()
 {
 	return ::ShowWindow(hWnd, SW_HIDE);
 }
 
 
-int MCruxWin32Window::UpdateWindow() const
+int MCruxWin32Window::UpdateWindow()
 {
 	return ::UpdateWindow(hWnd);
 }
 
 
-void MCruxWin32Window::resize() const
+void MCruxWin32Window::resize()
 {
 	webView.resizeSubView();
 }
@@ -192,8 +192,8 @@ LRESULT CALLBACK MCruxWin32Window::WndProc(HWND hWnd, UINT message, WPARAM wPara
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
-    case WM_SIZE:
-		if(MCruxWin32Window::mcruxWindows[hWnd])
+  case WM_SIZE:
+		if(MCruxWin32Window::mcruxWindows[hWnd]
 		{
 			MCruxWin32Window::mcruxWindows[hWnd]->resize();
 		}
@@ -213,4 +213,4 @@ MCruxWebView * MCruxWin32Window::getMCruxWebView()
 MCruxWin32Window * MCruxWin32Window::getMCruxWindowFrom(IWebView * webView)
 {
 	return MCruxWin32Window::mcruxWindowsFromViews[webView];
-}
+  }

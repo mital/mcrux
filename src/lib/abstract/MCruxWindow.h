@@ -36,10 +36,10 @@ public:
 	MCruxWindow(const MCruxWindowConfiguration * _config);
 	virtual ~MCruxWindow();
 
-	virtual int ShowWindow() const=0;
-	virtual int HideWindow() const=0;
-	virtual int UpdateWindow() const=0;
-	virtual void resize() const=0;
+	virtual int ShowWindow()=0;
+	virtual int HideWindow()=0;
+	virtual int UpdateWindow()=0;
+	virtual void resize()=0;
 };
 
 #endif // _MCRUXWINDOW_H_

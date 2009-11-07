@@ -24,8 +24,15 @@ using namespace std;
 
 MCruxQTWindow::MCruxQTWindow(const MCruxWindowConfiguration * _config)
 	: MCruxWindow(_config)
+#ifndef WIN32 // for linux
+    , webView(this)
+#endif
 {
-  this->show();
+  webView.createWebView();
+  if(!webView.navigateTo(config->getURL()))
+  {
+    cerr << "Error navigating to url:" << endl;
+  }
 }
 
 
@@ -33,24 +40,25 @@ MCruxQTWindow::~MCruxQTWindow()
 {
 }
 
-int MCruxQTWindow::ShowWindow() const
+int MCruxQTWindow::ShowWindow()
+{
+  this->show();
+	return 0;
+}
+
+
+int MCruxQTWindow::HideWindow()
 {
 	return -1;
 }
 
 
-int MCruxQTWindow::HideWindow() const
+int MCruxQTWindow::UpdateWindow()
 {
 	return -1;
 }
 
 
-int MCruxQTWindow::UpdateWindow() const
-{
-	return -1;
-}
-
-
-void MCruxQTWindow::resize() const
+void MCruxQTWindow::resize()
 {
 }

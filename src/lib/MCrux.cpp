@@ -69,13 +69,9 @@ MCrux::~MCrux()
 {
 }
 
-void MCrux::Initialize(
-#ifndef WIN32
-    int argc, char **argv
-#endif
-    )
-{
 #ifdef WIN32
+void MCrux::Initialize()
+{
   // Initialize Common controls
   INITCOMMONCONTROLSEX InitCtrlEx;
 
@@ -87,22 +83,17 @@ void MCrux::Initialize(
 
   // Init COM
   OleInitialize(NULL);
-#else
-  //gtk_init (&argc, &argv);
-  //if (!g_thread_supported ())
-    //g_thread_init (NULL);
-
-#endif
 }
+#endif
 
+#ifdef WIN32
 void MCrux::UnInitialize()
 {
-#ifdef WIN32
   // Shut down COM.
   OleUninitialize();
   MCruxWin32Window::unInitWindowClass(GetModuleHandle(NULL));
-#endif
 }
+#endif
 
 
 
@@ -156,9 +147,7 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName
     }
     bRet = true;
 #else // for linux
-  //  gtk_main();
-
-    return app.exec();
+    bRet = app.exec();
 #endif
   }
   else

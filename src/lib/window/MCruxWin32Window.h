@@ -52,10 +52,10 @@ public:
 		MCruxWindowManager * windowManager);
 	~MCruxWin32Window();
 
-	virtual int ShowWindow() const;
-	virtual int HideWindow() const;
-	virtual int UpdateWindow() const;
-	virtual void resize() const;
+	virtual int ShowWindow();
+	virtual int HideWindow();
+	virtual int UpdateWindow();
+	virtual void resize();
 
 	MCruxWebView * getMCruxWebView();
 	static void initWindowClass(HINSTANCE hInstance);
