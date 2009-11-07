@@ -24,33 +24,30 @@
 #include <abstract/MCruxWindow.h>
 #include <window/MCruxWindowConfiguration.h>
 
-//#include "MCruxWebView.h"
+#include "MCruxWebView.h"
 //#include "plugin/MCruxPluginManager.h"
 
 
 class MCruxQTWindow
-  : public QWidget,
+  : public QMainWindow,
   public MCruxWindow
 {
-#ifdef WIN32
-private:
-	// webView
-	MCruxWebView webView;
-#else
+#ifndef WIN32
   Q_OBJECT
-
-  // TODO: Add Qwebview class
 #endif
+
+private:
+	MCruxWebView webView;
 
 public:
 
 	MCruxQTWindow(const MCruxWindowConfiguration * _config);
 	virtual ~MCruxQTWindow();
 
-	virtual int ShowWindow() const;
-	virtual int HideWindow() const;
-	virtual int UpdateWindow() const;
-	virtual void resize() const;
+	virtual int ShowWindow();
+	virtual int HideWindow();
+	virtual int UpdateWindow();
+	virtual void resize();
 };
 
 #endif // _MCRUXQTWINDOW_H_

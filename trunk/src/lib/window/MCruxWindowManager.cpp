@@ -39,13 +39,13 @@ MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _
 			oIter != _windowConfigurations.end();
 		oIter++)
 		{
-			MCruxWindowConfiguration * mainWindowConfig = *oIter;
+			MCruxWindowConfiguration *windowConfig = *oIter;
       MCruxWindow * newWindow = NULL;
 
 #ifdef WIN32
-			newWindow = new MCruxWin32Window(mainWindowConfig, pluginManager, this);
+			newWindow = new MCruxWin32Window(windowConfig, pluginManager, this);
 #else
-			newWindow = new MCruxQTWindow(mainWindowConfig);
+			newWindow = new MCruxQTWindow(windowConfig);
 #endif
 
 			newWindow->ShowWindow();

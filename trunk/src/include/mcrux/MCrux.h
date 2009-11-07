@@ -34,13 +34,10 @@ using namespace std;
 
 class MCRUX_API MCrux
 {
-  void Initialize(
 #ifndef WIN32
-      int argc, char **argv
-#endif
-      );
-
+  void Initialize();
   void UnInitialize();
+#endif
 
   public:
 
