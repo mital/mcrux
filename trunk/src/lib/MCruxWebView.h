@@ -60,8 +60,17 @@ public:
       MCruxQTWindow * _parentWindow
 #endif
       );
-	~MCruxWebView();
+#ifndef WIN32 // for linux
+	virtual
+#endif
+    ~MCruxWebView();
 
+#ifndef WIN32 // for linux
+  QWebView * getWebView() const
+  {
+    return webView;
+  }
+#endif
 	bool createWebView();
 	bool navigateTo(const wstring & url);
 

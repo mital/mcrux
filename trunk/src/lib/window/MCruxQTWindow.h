@@ -32,15 +32,15 @@ class MCruxQTWindow
   : public QMainWindow,
   public MCruxWindow
 {
-#ifndef WIN32
   Q_OBJECT
-#endif
 
 private:
 	MCruxWebView webView;
 
-public:
+public slots:
+  void javaScriptWindowObjectCleared();
 
+public:
 	MCruxQTWindow(const MCruxWindowConfiguration * _config);
 	virtual ~MCruxQTWindow();
 

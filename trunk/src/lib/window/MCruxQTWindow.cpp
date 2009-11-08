@@ -33,6 +33,9 @@ MCruxQTWindow::MCruxQTWindow(const MCruxWindowConfiguration * _config)
   {
     cerr << "Error navigating to url:" << endl;
   }
+  connect(webView.getWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(javaScriptWindowObjectCleared()));
+  // get the mainFrame and call addToJavaScriptWindowObject
+  //webView->page()->mainFrame();
 }
 
 
@@ -40,22 +43,30 @@ MCruxQTWindow::~MCruxQTWindow()
 {
 }
 
+
+void MCruxQTWindow::javaScriptWindowObjectCleared()
+{
+  cout << "window object cleared" << endl;
+  //webView.getWebView()->page()->mainFrame()->addToJavaScriptWindowObject("mcrux", this);
+}
+
+
 int MCruxQTWindow::ShowWindow()
 {
   this->show();
-	return 0;
+  return 0;
 }
 
 
 int MCruxQTWindow::HideWindow()
 {
-	return -1;
+  return -1;
 }
 
 
 int MCruxQTWindow::UpdateWindow()
 {
-	return -1;
+  return -1;
 }
 
 
