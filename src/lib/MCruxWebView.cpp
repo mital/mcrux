@@ -70,11 +70,9 @@ bool MCruxWebView::createWebView()
 
   webView = new QWebView(parentWindow);
   parentWindow->setCentralWidget(webView);
-  //webView->show();
 #endif
   return false;
 }
-
 
 #ifdef WIN32
 bool MCruxWebView::setFrameLoadDelegate(MCruxWebFrameLoadDelegate * frameLoadDelegate)
