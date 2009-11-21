@@ -27,6 +27,17 @@
 #include "MCruxWebView.h"
 //#include "plugin/MCruxPluginManager.h"
 
+class MyObject :public QObject
+{
+  Q_OBJECT
+
+public slots:
+    void myFunction(){
+      cout << "Hello World" << endl;
+    }
+  public:
+  MyObject() { }
+};
 
 class MCruxQTWindow
   : public QMainWindow,

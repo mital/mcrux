@@ -25,12 +25,8 @@
 #endif
 
 MCruxWindowManager::MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations
-#ifdef WIN32
 									   , MCruxPluginManager * _pluginManager)
 									   : pluginManager(_pluginManager)
-#else
-									   )
-#endif
 {
 	if(_windowConfigurations.size())
 	{

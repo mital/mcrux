@@ -22,26 +22,17 @@
 
 #include <list>
 #include <abstract/MCruxWindow.h>
-
-#ifdef WIN32
 #include <plugin/MCruxPluginManager.h>
-#endif
 
 class MCruxWindowManager
 {
 	const list<MCruxWindowConfiguration*> windowConfigurations;
-#ifdef WIN32
 	MCruxPluginManager * pluginManager;
-#endif
 	list<MCruxWindow *> windows;
 
 public:
 
-	MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations
-#ifdef WIN32
-		,MCruxPluginManager * _pluginManager
-#endif
-		);
+	MCruxWindowManager(const list<MCruxWindowConfiguration*> & _windowConfigurations, MCruxPluginManager * _pluginManager);
 
 	~MCruxWindowManager();
 

@@ -65,12 +65,6 @@ public:
 #endif
     ~MCruxWebView();
 
-#ifndef WIN32 // for linux
-  QWebView * getWebView() const
-  {
-    return webView;
-  }
-#endif
 	bool createWebView();
 	bool navigateTo(const wstring & url);
 
@@ -85,6 +79,13 @@ public:
 
 	bool navigateTo(IWebURLRequest *request);
 	IWebView * getWebView();
+
+#else // for linux
+
+  QWebView * getWebView() const
+  {
+    return webView;
+  }
 #endif
 };
 

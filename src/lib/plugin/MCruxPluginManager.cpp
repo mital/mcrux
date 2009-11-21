@@ -18,12 +18,13 @@
  **/
 #include "abstract/MCruxWindow.h"
 
-#include "MCruxJSObject.h"
 #include "MCruxPluginManager.h"
 
+#ifdef WIN32
+#include "MCruxJSObject.h"
 #include <jscore/MJSCoreObject.h>
 #include <jscore/MJSCoreObjectFactory.h>
-
+#endif
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
 : pluginDllsLoaded(false)
@@ -40,7 +41,7 @@ MCruxPluginManager::~MCruxPluginManager()
 {
 }
 
-
+#ifdef WIN32
 bool MCruxPluginManager::AddPlugin(const wstring & pluginName, JSContextRef ctx)
 {
 	wstring pluginDll = TEXT("plugins/");
@@ -122,3 +123,4 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 	// TODO: inject a new object called currentWindow
 	// this object will be responsible for handling various events of currentwindow.
 }
+#endif
