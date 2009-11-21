@@ -62,16 +62,16 @@ bool MCruxWebView::createWebView()
   hWebViewWindow = NULL;
 
   HRESULT hr = WebKitCreateInstance(CLSID_WebView, 0, IID_IWebView, (void**)&webView);
-  if (SUCCEEDED(hr))
+  if (FAILED(hr))
   {
-    return true;
+    return false;
   }
 #else // for linux
 
   webView = new QWebView(parentWindow);
   parentWindow->setCentralWidget(webView);
 #endif
-  return false;
+  return true;
 }
 
 #ifdef WIN32

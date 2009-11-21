@@ -29,34 +29,42 @@
 
 using namespace std;
 
+#ifdef WIN32
 #include <WebKit/WebKit.h>
+#include "MCruxJSObject.h"
+#endif
 
 #include <mcrux/MCrux.h>
-#include "MCruxJSObject.h"
 
 class MCruxWindow;
 
+#ifdef WIN32
 typedef MObject * (*GetPluginFunctionPtr)(JSContextRef ctx);
+#endif
 
 class MCruxPluginManager
 {
 	bool pluginDllsLoaded;
 	list<wstring> pluginNames;
+#ifdef WIN32
 	map<string, MObject *> plugins;
 
 	bool AddPlugin(const wstring & pluginName, JSContextRef ctx);
 	void loadExtensionPlugins(JSContextRef ctx);
-
 	MObject * getMCruxJSObject(JSContextRef ctx);
+#endif
+
 public:
 
 	MCruxPluginManager(const list<wstring> extensionPluginNames);
 
 	~MCruxPluginManager();
 
+#ifdef WIN32
 	HRESULT injectPlugins(IWebView *webView,
         JSContextRef context,
         JSObjectRef windowScriptObject);
+#endif
 };
 
 #endif // _MCRUXPLUGINMANAGER_H_

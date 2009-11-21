@@ -20,11 +20,13 @@ INCLUDEPATH += . \
 HEADERS += lib/MCruxSpecParser.h \
            lib/MCruxWebView.h \
            include/mcrux/MCrux.h \
+           include/mcrux/abstract/callback.h \
            lib/abstract/MCruxWindow.h \
            lib/window/MCruxQTWindow.h \
            lib/window/MCruxWindowConfiguration.h \
            lib/window/MCruxWindowManager.h \
-           include/mcrux/abstract/callback.h
+           lib/plugin/MCruxPluginManager.h
+
 SOURCES += bin/mcrux_linux.cpp \
            lib/MCrux.cpp \
            lib/MCruxSpecParser.cpp \
@@ -32,4 +34,5 @@ SOURCES += bin/mcrux_linux.cpp \
            lib/abstract/MCruxWindow.cpp \
            lib/window/MCruxQTWindow.cpp \
            lib/window/MCruxWindowConfiguration.cpp \
-           lib/window/MCruxWindowManager.cpp
+           lib/window/MCruxWindowManager.cpp \
+           lib/plugin/MCruxPluginManager.cpp

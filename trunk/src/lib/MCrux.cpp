@@ -22,6 +22,7 @@
 #include <mcrux/MCrux.h>
 #include "MCruxSpecParser.h"
 #include <window/MCruxWindowManager.h>
+#include <plugin/MCruxPluginManager.h>
 
 #ifdef WIN32
 #include "window/MCruxWin32Window.h"
@@ -120,15 +121,8 @@ bool MCrux::InitializeAndRunWith(const string & mcruxAppConfigFileName
   list<wstring> plugins;
   parser.getPlugins(plugins);
 
-#ifdef WIN32
   MCruxPluginManager pluginManager(plugins);
-#endif
-
-  MCruxWindowManager windowManager(mcruxWindowConfigs
-#ifdef WIN32
-      , &pluginManager
-#endif
-      );
+  MCruxWindowManager windowManager(mcruxWindowConfigs, &pluginManager);
 
   if(mcruxWindowConfigs.size())
   {
