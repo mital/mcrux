@@ -32,6 +32,8 @@ using namespace std;
 #ifdef WIN32
 #include <WebKit/WebKit.h>
 #include "MCruxJSObject.h"
+#else // for linux
+#include <mcrux/qt/MQtModule.h>
 #endif
 
 #include <mcrux/MCrux.h>
@@ -46,9 +48,9 @@ class MCruxPluginManager
 {
 	bool pluginDllsLoaded;
 	list<wstring> pluginNames;
-#ifdef WIN32
 	map<string, MObject *> plugins;
 
+#ifdef WIN32
 	bool AddPlugin(const wstring & pluginName, JSContextRef ctx);
 	void loadExtensionPlugins(JSContextRef ctx);
 	MObject * getMCruxJSObject(JSContextRef ctx);
@@ -64,6 +66,8 @@ public:
 	HRESULT injectPlugins(IWebView *webView,
         JSContextRef context,
         JSObjectRef windowScriptObject);
+#else // for linux
+  bool injectPlugins(QWebView * webView);
 #endif
 };
 

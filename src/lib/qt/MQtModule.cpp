@@ -17,31 +17,14 @@
 * @author: Mital Vora.
 **/
 
-#ifndef _MOBJECT_H_
-#define _MOBJECT_H_
+#include <mcrux/qt/MQtModule.h>
 
 
-#ifdef WIN32
-#include <mcrux/abstract/callback.h>
-#include <win32/MCruxExport.h>
-
-class MObject;
-class MObjectArray;
-class MObjectContainer;
-
-typedef Callback2<const MObjectArray&, MObjectContainer &>::Type MCruxMethodCallback;
-
-#else // for linux
-
-#define MCRUX_API
-
-#endif
-
-class MCRUX_API MObject
+MQtModule::MQtModule(const string& _name)
 {
-public:
-	MObject();
-	virtual ~MObject();
-};
+  this->setObjectName(_name.c_str());
+}
 
-#endif // _MOBJECT_H_
+MQtModule::~MQtModule()
+{
+}

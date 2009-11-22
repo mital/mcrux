@@ -22,11 +22,10 @@ using namespace std;
 #include "MCruxQTWindow.h"
 
 
-MCruxQTWindow::MCruxQTWindow(const MCruxWindowConfiguration * _config)
-	: MCruxWindow(_config)
-#ifndef WIN32 // for linux
-    , webView(this)
-#endif
+MCruxQTWindow::MCruxQTWindow(const MCruxWindowConfiguration * config,
+      MCruxPluginManager * pluginManager, MCruxWindowManager * windowManager)
+	: MCruxWindow(config),
+    webView(this)
 {
   webView.createWebView();
   if(!webView.navigateTo(config->getURL()))
@@ -34,8 +33,8 @@ MCruxQTWindow::MCruxQTWindow(const MCruxWindowConfiguration * _config)
     cerr << "Error navigating to url:" << endl;
   }
   connect(webView.getWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(javaScriptWindowObjectCleared()));
-  // get the mainFrame and call addToJavaScriptWindowObject
-  //webView->page()->mainFrame();
+
+  pluginManager->injectPlugins(webView.getWebView());
 }
 
 
