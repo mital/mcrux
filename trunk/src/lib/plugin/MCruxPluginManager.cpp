@@ -123,4 +123,14 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 	// TODO: inject a new object called currentWindow
 	// this object will be responsible for handling various events of currentwindow.
 }
+#else // for linux
+
+
+bool MCruxPluginManager::injectPlugins(QWebView * webView)
+{
+  MQtModule * mcrux = new MQtModule("mcrux");
+  webView->page()->mainFrame()->addToJavaScriptWindowObject(mcrux->objectName(), mcrux);
+  return true;
+}
+
 #endif

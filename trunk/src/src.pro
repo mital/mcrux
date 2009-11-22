@@ -6,6 +6,8 @@ TEMPLATE = app
 TARGET = mcrux.bin
 LIBS += -lxml2
 QT += webkit
+OBJECTS_DIR = ./obj
+MOC_DIR = ./obj
 DEPENDPATH += . \
               /usr/include/libxml2 \
               bin \
@@ -20,7 +22,8 @@ INCLUDEPATH += . \
 HEADERS += lib/MCruxSpecParser.h \
            lib/MCruxWebView.h \
            include/mcrux/MCrux.h \
-           include/mcrux/abstract/callback.h \
+           include/mcrux/abstract/MObject.h \
+           include/mcrux/qt/MQtModule.h \
            lib/abstract/MCruxWindow.h \
            lib/window/MCruxQTWindow.h \
            lib/window/MCruxWindowConfiguration.h \
@@ -31,8 +34,10 @@ SOURCES += bin/mcrux_linux.cpp \
            lib/MCrux.cpp \
            lib/MCruxSpecParser.cpp \
            lib/MCruxWebView.cpp \
+           lib/abstract/MObject.cpp \
            lib/abstract/MCruxWindow.cpp \
            lib/window/MCruxQTWindow.cpp \
            lib/window/MCruxWindowConfiguration.cpp \
            lib/window/MCruxWindowManager.cpp \
+           lib/qt/MQtModule.cpp \
            lib/plugin/MCruxPluginManager.cpp

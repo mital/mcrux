@@ -17,31 +17,28 @@
 * @author: Mital Vora.
 **/
 
-#ifndef _MOBJECT_H_
-#define _MOBJECT_H_
+#ifndef _MJSCOREOBJECTABSTRACT_H_
+#define _MJSCOREOBJECTABSTRACT_H_
 
+#include <iostream>
 
-#ifdef WIN32
-#include <mcrux/abstract/callback.h>
-#include <win32/MCruxExport.h>
+using namespace std;
 
-class MObject;
-class MObjectArray;
-class MObjectContainer;
+#include <QtGui/QtGui>
 
-typedef Callback2<const MObjectArray&, MObjectContainer &>::Type MCruxMethodCallback;
+#include <mcrux/abstract/MObject.h>
+//#include <mcrux/abstract/MObjectArray.h>
 
-#else // for linux
-
-#define MCRUX_API
-
-#endif
-
-class MCRUX_API MObject
+class MQtModule
+	: public QObject,
+  public MObject
 {
+  Q_OBJECT
+
 public:
-	MObject();
-	virtual ~MObject();
+
+	MQtModule(const string & _name = "MQtModule");
+	virtual ~MQtModule();
 };
 
-#endif // _MOBJECT_H_
+#endif // _MJSCOREOBJECTABSTRACT_H_

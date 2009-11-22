@@ -22,22 +22,12 @@
 
 #include <QtGui/QtGui>
 #include <abstract/MCruxWindow.h>
+#include <plugin/MCruxPluginManager.h>
 #include <window/MCruxWindowConfiguration.h>
 
 #include "MCruxWebView.h"
-//#include "plugin/MCruxPluginManager.h"
 
-class MyObject :public QObject
-{
-  Q_OBJECT
-
-public slots:
-    void myFunction(){
-      cout << "Hello World" << endl;
-    }
-  public:
-  MyObject() { }
-};
+class MCruxWindowManager;
 
 class MCruxQTWindow
   : public QMainWindow,
@@ -52,7 +42,9 @@ public slots:
   void javaScriptWindowObjectCleared();
 
 public:
-	MCruxQTWindow(const MCruxWindowConfiguration * _config);
+	MCruxQTWindow(const MCruxWindowConfiguration * config,
+      MCruxPluginManager * pluginManager,
+      MCruxWindowManager * windowManager);
 	virtual ~MCruxQTWindow();
 
 	virtual int ShowWindow();
