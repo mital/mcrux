@@ -1,4 +1,0 @@
-TOMAKE_OPTIONS=foreign
-SUBDIRS=@SUBDIRS@
-
-EXTRA_DIST = autoconf.sh
