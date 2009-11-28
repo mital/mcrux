@@ -24,6 +24,10 @@
 #include "MCruxJSObject.h"
 #include <jscore/MJSCoreObject.h>
 #include <jscore/MJSCoreObjectFactory.h>
+
+#else // for linux
+
+#include <plugins/FileSystem/FileSystemQtModule.h>
 #endif
 
 MCruxPluginManager::MCruxPluginManager(const list<wstring> extensionPluginNames)
@@ -129,6 +133,13 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 bool MCruxPluginManager::injectPlugins(QWebView * webView)
 {
   MQtModule * mcrux = new MQtModule("mcrux");
+//  FileSystemQtModule * fs = new FileSystemQtModule();
+//  QVariant v = (*fs);
+
+  QVariant v = qVariantFromValue(new FileSystemQtModule());
+  mcrux->setProperty("fileSystem", v);
+  QVariant v1(1);// = new Integer(1);
+  mcrux->setProperty("inte", v1);
   webView->page()->mainFrame()->addToJavaScriptWindowObject(mcrux->objectName(), mcrux);
   return true;
 }

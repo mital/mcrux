@@ -17,8 +17,8 @@
 * @author: Mital Vora.
 **/
 
-#ifndef _MQTMODULE_H_
-#define _MQTMODULE_H_
+#ifndef _FILESYSTEMQTMODULE_H_
+#define _FILESYSTEMQTMODULE_H_
 
 #include <iostream>
 
@@ -26,18 +26,26 @@ using namespace std;
 
 #include <QtGui/QtGui>
 
-#include <mcrux/abstract/MObject.h>
+#include <mcrux/qt/MQtModule.h>
 
-class MQtModule
-	: public QObject,
-  public MObject
+class FileSystemQtModule
+	: public MQtModule
 {
   Q_OBJECT
+public slots:
 
+  QString *readFile(const QString &filePath)
+  {
+    qDebug() << "Param: " << filePath;
+    return NULL;
+  }
 public:
 
-	MQtModule(const string & _name = "MQtModule");
-	virtual ~MQtModule();
+	FileSystemQtModule();
+	virtual ~FileSystemQtModule();
 };
 
-#endif // _MQTMODULE_H_
+
+Q_DECLARE_METATYPE(FileSystemQtModule*)
+
+#endif // _FILESYSTEMQTMODULE_H_

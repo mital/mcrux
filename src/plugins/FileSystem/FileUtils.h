@@ -27,25 +27,25 @@ using namespace std;
 
 enum FileType_en
 {
-	FILETYPE_FILE = 0,
-	FILETYPE_DIRECTORY,
+  FILETYPE_FILE = 0,
+  FILETYPE_DIRECTORY,
 };
 
 
 struct FileInfo
 {
-	FileType_en fileType;
-	long fileSize;
-	time_t lastModifiedTime;
-	unsigned short permissionMode;
+  FileType_en fileType;
+  long fileSize;
+  time_t lastModifiedTime;
+  unsigned short permissionMode;
 };
 
 
 namespace FileUtils
 {
-	bool readDirectory(const string& dirName, vector<string>& files);
-	FileInfo * getFileInfo(const string& fileName);
-	bool Copy(const string& sourceFileName, const string& destFileName);
-    bool ReadFile(const string& filename, string& str);
+  bool readDirectory(const string& dirName, vector<string>& files);
+  FileInfo * getFileInfo(const string& fileName);
+  bool Copy(const string& sourceFileName, const string& destFileName);
+  bool ReadFile(const string& filename, string& str);
 
 };
