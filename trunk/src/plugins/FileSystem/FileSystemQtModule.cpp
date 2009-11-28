@@ -17,27 +17,15 @@
 * @author: Mital Vora.
 **/
 
-#ifndef _MQTMODULE_H_
-#define _MQTMODULE_H_
+#include "FileSystemQtModule.h"
 
-#include <iostream>
+static int myTypeID = qRegisterMetaType<FileSystemQtModule*>();
 
-using namespace std;
-
-#include <QtGui/QtGui>
-
-#include <mcrux/abstract/MObject.h>
-
-class MQtModule
-	: public QObject,
-  public MObject
+FileSystemQtModule::FileSystemQtModule()
 {
-  Q_OBJECT
+  this->setObjectName("fileSystem");
+}
 
-public:
-
-	MQtModule(const string & _name = "MQtModule");
-	virtual ~MQtModule();
-};
-
-#endif // _MQTMODULE_H_
+FileSystemQtModule::~FileSystemQtModule()
+{
+}
