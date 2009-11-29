@@ -17,19 +17,24 @@
 * @author: Mital Vora.
 **/
 
+#ifdef WIN32
 #include "StdAfx.h"
 
-#include "FileUtils.h"
 #include <io.h>
-#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 
 #include "dirent.h"
 #include <errno.h>
+#else // for linux
 
+#include <dirent.h>
+#endif
+
+#include <fcntl.h>
 #include <fstream>
 
+#include "FileUtils.h"
 
 bool FileUtils::readDirectory(const string& dirName, vector<string>& files)
 {
@@ -55,15 +60,10 @@ bool FileUtils::readDirectory(const string& dirName, vector<string>& files)
 
 FileInfo * FileUtils::getFileInfo(const string& fileName)
 {
-	if (_access(fileName.c_str(), 0) != 0)
-	{
-		return NULL;
-	}
+	FileInfo * info = new FileInfo();
 
 	struct stat status;
 	stat(fileName.c_str(), &status);
-
-	FileInfo * info = new FileInfo();
 
 	info->fileType = FILETYPE_FILE;
 	info->fileSize = status.st_size;
@@ -74,13 +74,14 @@ FileInfo * FileUtils::getFileInfo(const string& fileName)
 	{
 		info->fileType = FILETYPE_DIRECTORY;
 	}
-
 	return info;
 }
 
 
 bool FileUtils::Copy(const string& sourceFileName, const string& destFileName)
 {
+
+  std::cout << "copy: "<< sourceFileName.c_str() << " to " << destFileName.c_str() << std::endl;
 	bool bRet = false;
 	char *buffer = NULL;
 
@@ -137,6 +138,7 @@ bool FileUtils::Copy(const string& sourceFileName, const string& destFileName)
 	}
 	catch (...)
 	{
+    std::cout << "caught exception" << std::endl;
 		if (NULL != buffer)
 		{
 			delete [] buffer;

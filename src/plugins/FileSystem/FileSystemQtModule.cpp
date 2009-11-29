@@ -18,6 +18,7 @@
 **/
 
 #include "FileSystemQtModule.h"
+#include "FileUtils.h"
 
 static int myTypeID = qRegisterMetaType<FileSystemQtModule*>();
 
@@ -28,4 +29,48 @@ FileSystemQtModule::FileSystemQtModule()
 
 FileSystemQtModule::~FileSystemQtModule()
 {
+}
+
+QString FileSystemQtModule::readFile(const QString &filePath)
+{
+  qDebug() << "FileSystemQtModule::readFile: " << filePath;
+  std::string filedata;
+  if (FileUtils::ReadFile(filePath.toStdString(), filedata))
+  {
+    return QString(filedata.c_str());
+  }
+  // TODO: throw exception
+  return QString("");
+}
+
+//  bool readDirectory(const string& dirName, vector<string>& files);
+/*QList<QString> FileSystemQtModule::readDirectory(const QString& dirName)
+{
+  QList<QString> files;
+  vector<string> stdFiles;
+  if (FileUtils::readDirectory(dirName.toStdString(), stdFiles))
+  {
+    for(vector<string>::const_iterator
+        oIter = stdFiles.begin();
+        oIter != stdFiles.end();
+        oIter++)
+    {
+      files.push_back(QString(oIter->c_str()));
+    }
+    return files;
+  }
+  // TODO: throw Exception
+  return files;
+}
+
+QScriptValue FileSystemQtModule::getFileInfo(const QString& fileName)
+{
+  FileInfo * info = FileUtils::getFileInfo(fileName.toStdString());
+  FileProps prop(info);
+  return NULL;
+}
+  */
+bool FileSystemQtModule::copy(const QString& sourceFileName, const QString& destFileName)
+{
+  return FileUtils::Copy(sourceFileName.toStdString(), destFileName.toStdString());
 }
