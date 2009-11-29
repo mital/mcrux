@@ -30,7 +30,9 @@ HEADERS += lib/MCruxSpecParser.h \
            lib/window/MCruxWindowManager.h \
            lib/plugin/MCruxPluginManager.h
 
-HEADERS += plugins/FileSystem/FileSystemQtModule.h
+HEADERS += plugins/FileSystem/FileSystemQtModule.h \
+           plugins/FileSystem/FileProps.h \
+           plugins/FileSystem/FileUtils.h
 
 SOURCES += bin/mcrux_linux.cpp \
            lib/MCrux.cpp \
@@ -44,4 +46,6 @@ SOURCES += bin/mcrux_linux.cpp \
            lib/qt/MQtModule.cpp \
            lib/plugin/MCruxPluginManager.cpp
 
-SOURCES += plugins/FileSystem/FileSystemQtModule.cpp
+SOURCES += plugins/FileSystem/FileSystemQtModule.cpp \
+           plugins/FileSystem/FileProps.cpp \
+           plugins/FileSystem/FileUtils.cpp

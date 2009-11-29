@@ -133,14 +133,16 @@ HRESULT MCruxPluginManager::injectPlugins(IWebView *webView,
 bool MCruxPluginManager::injectPlugins(QWebView * webView)
 {
   MQtModule * mcrux = new MQtModule("mcrux");
-//  FileSystemQtModule * fs = new FileSystemQtModule();
 //  QVariant v = (*fs);
+  //QVariant v = qVariantFromValue(new FileSystemQtModule());
+ // mcrux->setProperty("fileSystem", v);
 
-  QVariant v = qVariantFromValue(new FileSystemQtModule());
-  mcrux->setProperty("fileSystem", v);
   QVariant v1(1);// = new Integer(1);
   mcrux->setProperty("inte", v1);
   webView->page()->mainFrame()->addToJavaScriptWindowObject(mcrux->objectName(), mcrux);
+
+  FileSystemQtModule * fs = new FileSystemQtModule();
+  webView->page()->mainFrame()->addToJavaScriptWindowObject(fs->objectName(), fs);
   return true;
 }
 

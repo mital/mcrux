@@ -17,33 +17,37 @@
  * @author: Mital Vora.
  **/
 
-#ifndef _FILESYSTEMQTMODULE_H_
-#define _FILESYSTEMQTMODULE_H_
+#ifndef _FILEPROPS_H_
+#define _FILEPROPS_H_
 
-#include <QList>
+#include <iostream>
 
-#include "FileProps.h"
+using namespace std;
 
+#include <QtGui/QtGui>
 
-class FileSystemQtModule
+#include <mcrux/qt/MQtModule.h>
+
+#include "FileUtils.h"
+
+class FileProps
 : public MQtModule
 {
   Q_OBJECT
 
-public slots:
-
-  QString readFile(const QString &filePath);
-  bool copy(const QString& sourceFileName, const QString& destFileName);
-//  QList<QString> readDirectory(const QString& dirName);
-//  FileProps getFileInfo(const QString& fileName);
-
 public:
 
-  FileSystemQtModule();
-  virtual ~FileSystemQtModule();
+  FileProps(const FileInfo * _info);
+  FileProps(const FileProps & props);
+  virtual ~FileProps();
+
+private:
+  const FileInfo * info;
+
+  void setProperties();
 };
 
 
-Q_DECLARE_METATYPE(FileSystemQtModule*)
+Q_DECLARE_METATYPE(FileProps*)
 
-#endif // _FILESYSTEMQTMODULE_H_
+#endif // _FILEPROPS_H_
