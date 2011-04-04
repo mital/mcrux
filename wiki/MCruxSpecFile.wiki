@@ -1,5 +1,5 @@
 #summary MCruxspec file is a technical specification of the GUI of any application.
-#labels mcruxspec,Phase-Design
+#labels mcruxspec,Phase-Design,Featured
 
 == Introduction ==
 
